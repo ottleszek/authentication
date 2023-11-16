@@ -17,6 +17,16 @@
 </UserIdentificationComponent>
 
 @code {
-    [CascadingParameter] private UserIdentificationData? UserIdentificationData { get; set; }
+    private UserIdentificationData? UserIdentificationData;
+
+    [Inject] IUserIdentificaitonProvider? UserIdentificaitonProvider { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (UserIdentificaitonProvider is not null)
+        {
+            UserIdentificationData = await UserIdentificaitonProvider.GetUserIdentificationData();
+        }
+    }
 
 }
