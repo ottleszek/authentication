@@ -5,7 +5,8 @@
             <span>
                 @if (UserIdentificationData is not null && UserIdentificationData.IsAuthenticated)
                 {
-                    @UserIdentificationData.UserDisplayedName
+                    @UserIdentificationData.UserDisplayedName<br />
+                    @UserIdentificationData.UserRole
                 }
             </span>
         </Authorized>
