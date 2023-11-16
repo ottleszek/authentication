@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\authentication-library\AuthenticationLibrary\AuthenticationLibrary.csproj" />
     <ProjectReference Include="..\..\..\library-blazor-client\LibraryBlazorClient\LibraryBlazorClient.csproj" />
   </ItemGroup>
 

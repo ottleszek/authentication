@@ -57,6 +57,7 @@ namespace AuthenticationLibrary.Extensions
 
             // Authentication State Provider
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+            services.AddScoped<IUserIdentificaitonProvider,UserIdentificaitonProvider>();
 
             // Custom http handlrer
             services.AddScoped<CustomHttpHandler>();

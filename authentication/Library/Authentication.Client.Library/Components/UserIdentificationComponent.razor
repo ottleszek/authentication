@@ -4,13 +4,9 @@
 {
     <p>Betöltés...</p>
 }
-else if (!userIdentificationData.IsLoaded)
-{
-    <p>Felhasználói adatok betöltés alatt...</p>
-}
 else
 {
-    <CascadingValue Value="@info"  IsFixed="false">@ChildContent</CascadingValue>
+    <CascadingValue Value="@Info">@ChildContent</CascadingValue>
 }
 
 @code {
@@ -19,7 +15,7 @@ else
 
 
     private UserIdentificationData? userIdentificationData = new UserIdentificationData();
-    private string info = "info";
+    private string Info { get; set; } = "info";
     // 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
@@ -35,7 +31,6 @@ else
                 userIdentificationData = new UserIdentificationData();
                 userIdentificationData.IsAuthenticated = true;
                 RefreshUserIdentificationDataFrom(user.Claims.ToList());
-                userIdentificationData.IsLoaded = true;
             }
             else
             {
@@ -52,6 +47,7 @@ else
         {
             userIdentificationData.UserDisplayedName = UserDisplayNameFrom(claims);
             userIdentificationData.UserRole = UserRoleFrom(claims);
+
         }
 
     }
@@ -85,12 +81,15 @@ else
     private string DebugDataFrom(List<Claim> claims)
     {
         string debugData = string.Empty;
+        debugData = "<table>";
         foreach(Claim claim in claims)
         {
+            debugData = $"{debugData}<tr>";
             if (debugData.Any())
-                debugData = $"{debugData};({claim.ValueType} - {claim.Issuer} - {claim.Value}";
+                debugData = $"{debugData}; <td>({claim.ValueType}</td> <td> {claim.Issuer}</td><td> {claim.Value}</td>";
             else
-                debugData = $"({claim.ValueType} - {claim.Issuer} - {claim.Value}";
+                debugData = $"<td>({claim.ValueType} </td><td> {claim.Issuer}</td> <td> {claim.Value}</td>";
+            debugData = $"{debugData}</tr>";
         }
         return debugData;
     }

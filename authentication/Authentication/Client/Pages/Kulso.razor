@@ -1,10 +1,41 @@
-﻿<h3>Kulso</h3>
+﻿@using AuthenticationLibrary.Provider;
+@using AuthenticationLibrary.Provider.UserIdentification;
+<h3>Kulso</h3>
 
-<CascadingValue Value="@Nev">
-    <Belso>
-    </Belso>
+
+
+<CascadingValue Value="@UserIdentificationData" IsFixed="false">
+    @ChildContent
 </CascadingValue>
 
 @code {
-    private string Nev { get; set; } = "Megjöttem...";
+    private UserIdentificationData? UserIdentificationData { get; set; } = new UserIdentificationData();
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Inject] IUserIdentificaitonProvider? UserIdentificaitonProvider { get; set; }
+
+    //public EventHandler NevValtozottEsemeny;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        await Refresh();
+        await base.OnInitializedAsync();        
+    }
+
+    private async Task Refresh()
+    {
+        if (UserIdentificaitonProvider is not null)
+        {
+            UserIdentificationData = await UserIdentificaitonProvider.GetUserIdentificationData();
+        }
+        /*
+        await InvokeAsync(async () =>
+        {
+            StateHasChanged();
+        });
+        */
+    }
 }

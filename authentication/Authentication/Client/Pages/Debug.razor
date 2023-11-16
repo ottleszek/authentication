@@ -1,0 +1,41 @@
+﻿@page "/debug"
+@using AuthenticationLibrary.Provider.UserIdentification;
+@using AuthenticationLibrary.Provider;
+<h3>Debug</h3>
+
+@if (UserIdentificationData is not null)
+{
+    <p>@UserIdentificationData.UserDisplayedName</p>
+
+    <p>@debugHtml</p>
+}
+else
+{
+    <span>Nincs adat</span>
+}
+
+
+@code {
+    private MarkupString debugHtml;
+    private UserIdentificationData? UserIdentificationData;
+
+    [Inject] IUserIdentificaitonProvider? UserIdentificaitonProvider { get; set; }
+    
+    
+
+
+    //https://stackoverflow.com/questions/70217279/blazor-layout-with-cascadingparameter-initialized-after-component
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (UserIdentificaitonProvider is not null)
+        {
+            UserIdentificationData = await UserIdentificaitonProvider.GetUserIdentificationData();
+            if (UserIdentificationData is not null)
+            {
+                debugHtml = (MarkupString)UserIdentificationData.Debug;
+            }
+        }
+        await base.OnInitializedAsync();
+    }
+}

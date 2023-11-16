@@ -37,16 +37,20 @@
     </div>
 </UILoader>
 
+    @if (Info is not null)
+    {
+        <span>@Info</span>
+    }
+    else
+    {
+        <p>Cascading paraméter nem történt meg</p>
+    }
+
+
+
 </UserIdentificationComponent>
 
-@if (Info is not null)
-{
-    <span>@Info</span>
-}
-else
-{
-    <p>Cascading paraméter nem történt meg</p>
-}
+
 
 
 
@@ -54,5 +58,5 @@ else
     // <span> @UserDisplayName(context.User.Claims.ToList()) </span>
 
     //[CascadingParameter] public UserIdentificationData? UserIdentificationData { get; set; }
-    [CascadingParameter] public string? Info { get; set; }
+    [CascadingParameter] string? Info { get; set; }
 }

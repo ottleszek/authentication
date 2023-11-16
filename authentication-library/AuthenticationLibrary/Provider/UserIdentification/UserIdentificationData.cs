@@ -1,4 +1,4 @@
-﻿namespace Authentication.Client.Library.UserIdentification
+﻿namespace AuthenticationLibrary.Provider.UserIdentification
 {
     public class UserIdentificationData
     {
@@ -6,6 +6,5 @@
         public string UserDisplayedName = string.Empty;
         public string UserRole = string.Empty;
         public string Debug = string.Empty;
-        public bool IsLoaded = false;
     }
 }

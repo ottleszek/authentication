@@ -1,4 +1,4 @@
-﻿namespace Authentication.Client.Library.Components.UserIdentification
+﻿namespace AuthenticationLibrary.Provider.UserIdentification
 {
     public class UserDataFromClaim
     {
