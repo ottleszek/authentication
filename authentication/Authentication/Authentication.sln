@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryDataBroker", "..\..\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryBlazorClient", "..\..\library-blazor-client\LibraryBlazorClient\LibraryBlazorClient.csproj", "{CFC78BF7-EF72-4B2B-A381-58C3A9E1F2A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication.Client.Library", "..\Library\Authentication.Client.Library\Authentication.Client.Library.csproj", "{FD1835A3-2F04-45C5-8436-F0D1375FE600}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authentication.Client.Library", "..\Library\Authentication.Client.Library\Authentication.Client.Library.csproj", "{FD1835A3-2F04-45C5-8436-F0D1375FE600}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

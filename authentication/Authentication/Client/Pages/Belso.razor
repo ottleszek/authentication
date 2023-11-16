@@ -1,0 +1,17 @@
+﻿<h3>Belso</h3>
+
+@if (Adat is not null)
+{
+    <span>@Adat</span>
+}
+else
+{
+    <span>Nincs adat</span>
+}
+
+@code {
+
+    [CascadingParameter] string? Adat { get; set; }
+
+
+}
