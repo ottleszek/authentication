@@ -5,6 +5,8 @@ using System.Security.Claims;
 
 namespace AuthenticationLibrary.Provider
 {
+    public enum AuthenticationStateType { LoggedIn, LoggedOut }
+
     public class CustomAuthenticationStateProvider : AuthenticationStateProvider
     {
         private readonly HttpClient _httpClient;
@@ -17,6 +19,8 @@ namespace AuthenticationLibrary.Provider
             _httpClient = client;
             _anonymous = new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
         }
+
+        public EventHandler? AuthenticationChanged { get; set; }
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
@@ -31,12 +35,20 @@ namespace AuthenticationLibrary.Provider
         {
             var authenticatedUser = new ClaimsPrincipal(new ClaimsIdentity(JwtParser.ParseClaimsFromJwt(token), "bearer"));
             var authState = Task.FromResult(new AuthenticationState(authenticatedUser));
+
             NotifyAuthenticationStateChanged(authState);
+            OnAuthenticationChanged(AuthenticationStateType.LoggedIn);
         }
         public void NotifyUserLogout()
         {
             var authState = Task.FromResult(_anonymous);
             NotifyAuthenticationStateChanged(authState);
+            OnAuthenticationChanged(AuthenticationStateType.LoggedOut);
+        }
+
+        private void OnAuthenticationChanged(AuthenticationStateType authenticationState)
+        {
+            AuthenticationChanged?.Invoke(this, new EventArgs());
         }
     }
 }

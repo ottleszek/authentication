@@ -6,12 +6,14 @@ namespace AuthenticationLibrary.Provider
 {
     public class UserIdentificaitonProvider : IUserIdentificaitonProvider
     {
-        private AuthenticationStateProvider? _authenticationStateProvider;
+        private CustomAuthenticationStateProvider? _authenticationStateProvider;
         
-
         public UserIdentificaitonProvider(AuthenticationStateProvider? stateProvider)
         {
-            _authenticationStateProvider = stateProvider;
+            if (stateProvider is not null)
+            {
+                _authenticationStateProvider = (CustomAuthenticationStateProvider)stateProvider;
+            }
         }
 
         public UserIdentificationData? UserIdentificationData { get; set; } = null;
