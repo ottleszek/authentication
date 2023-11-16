@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.11" PrivateAssets="all" />
+    <PackageReference Include="FluentValidation" Version="11.7.1" />
+    <PackageReference Include="MudBlazor" Version="6.11.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Serilog.Sinks.BrowserConsole" Version="1.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\authentication-library\AuthenticationLibrary\AuthenticationLibrary.csproj" />
+    <ProjectReference Include="..\..\..\library-blazor-client\LibraryBlazorClient\LibraryBlazorClient.csproj" />
+    <ProjectReference Include="..\..\..\library-core\LibraryCore\LibraryCore.csproj" />
+    <ProjectReference Include="..\..\..\library-logging\LibraryLogging\LibraryLogging.csproj" />
+    <ProjectReference Include="..\..\Library\Authentication.Client.Library\Authentication.Client.Library.csproj" />
+    <ProjectReference Include="..\Shared\Authentication.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+  </ItemGroup>
+
+</Project>

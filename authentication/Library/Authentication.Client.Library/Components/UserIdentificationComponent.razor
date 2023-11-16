@@ -1,0 +1,97 @@
+﻿@inject AuthenticationStateProvider? AuthenticationStateProvider
+
+@if (userIdentificationData is null)
+{
+    <p>Betöltés...</p>
+}
+else if (!userIdentificationData.IsLoaded)
+{
+    <p>Felhasználói adatok betöltés alatt...</p>
+}
+else
+{
+    <CascadingValue Value="@info"  IsFixed="false">@ChildContent</CascadingValue>
+}
+
+@code {
+
+    //Value="@userIdentificationData"
+
+
+    private UserIdentificationData? userIdentificationData = new UserIdentificationData();
+    private string info = "info";
+    // 
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        if (AuthenticationStateProvider is not null)
+        {
+            AuthenticationState authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            ClaimsPrincipal user = authState.User;
+            if (user.Identity is not null && user.Identity.IsAuthenticated)
+            {
+                userIdentificationData = new UserIdentificationData();
+                userIdentificationData.IsAuthenticated = true;
+                RefreshUserIdentificationDataFrom(user.Claims.ToList());
+                userIdentificationData.IsLoaded = true;
+            }
+            else
+            {
+                userIdentificationData = new UserIdentificationData();
+                userIdentificationData.IsAuthenticated = true;
+            }
+        }
+        await base.OnInitializedAsync();
+    }
+
+    private void RefreshUserIdentificationDataFrom(List<Claim> claims)
+    {
+        if (userIdentificationData is not null)
+        {
+            userIdentificationData.UserDisplayedName = UserDisplayNameFrom(claims);
+            userIdentificationData.UserRole = UserRoleFrom(claims);
+        }
+
+    }
+
+    private string UserDisplayNameFrom(List<Claim> claims)
+    {
+        string? firstName = claims.Where(claim => claim.Type == "FirstName").Select(claim => claim.Value).FirstOrDefault();
+        string? lastName = claims.Where(claim => claim.Type == "LastName").Select(claim => claim.Value).FirstOrDefault();        
+        if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName))
+        {
+            string? email = claims.Where(claim => claim.Type == "Email").Select(claim => claim.Value).FirstOrDefault();
+            if (string.IsNullOrEmpty(email))
+            {
+                return string.Empty;
+            }
+            return email;
+        }
+        return $"{lastName} {firstName}";
+    }
+
+    private string UserRoleFrom(List<Claim> claims)
+    {
+        string? role = claims.Where(claim => claim.Type == "UserRole").Select(claim => claim.Value).FirstOrDefault();
+        if (string.IsNullOrEmpty(role))
+        {
+            return string.Empty;
+        }
+        return role;
+    }
+
+    private string DebugDataFrom(List<Claim> claims)
+    {
+        string debugData = string.Empty;
+        foreach(Claim claim in claims)
+        {
+            if (debugData.Any())
+                debugData = $"{debugData};({claim.ValueType} - {claim.Issuer} - {claim.Value}";
+            else
+                debugData = $"({claim.ValueType} - {claim.Issuer} - {claim.Value}";
+        }
+        return debugData;
+    }
+}

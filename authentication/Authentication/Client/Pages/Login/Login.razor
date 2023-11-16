@@ -1,0 +1,54 @@
+﻿@page "/login"
+@namespace Authentication.Client.Pages.Login
+
+<div class="d-flex justify-content-center">
+    <MudChip Class="pt-2" Color="Color.Primary">
+        <h3>Login</h3>
+    </MudChip>
+</div>
+
+<div class="d-flex justify-content-center">
+    <MudCard Width="500px">
+        @if (LoginViewModel is not null && validation is not null)
+        {
+            <MudForm Model="LoginViewModel" @ref="_form" Validation="validation.ValidateValue">
+                @if (ErrorString.HasError)
+                {
+                    <MudChip Class="pt-2 d-flex justify-content-center" Color="Color.Error">
+                        <p>@ErrorString.Error</p>
+                    </MudChip>
+                }
+                <MudCardContent>
+                    <MudTextField
+                        @bind-Value="LoginViewModel.Email"
+                        For="@( () => LoginViewModel.Email)"
+                        Immediate="true"
+                        Required="true"
+                        InputType="InputType.Email"
+                        RequiredError="Az email cím szükséges!"
+                        Label="Email"
+                    />
+                    <MudTextField
+                        @bind-Value="LoginViewModel.Password"
+                        For="@( () => LoginViewModel.Password)"
+                        Immediate="true"
+                        Required="true"
+                        RequiredError="A jelszó szükséges!"
+                        InputType="InputType.Password"
+                        Label="Jelszó"
+                        />
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton
+                        Variant="Variant.Filled"
+                        Color="Color.Primary"
+                        Class="ml-auto"
+                        OnClick="LoginAsync"
+                        >
+                        Bejelentkezés
+                    </MudButton>
+                </MudCardActions>
+            </MudForm>
+        }        
+    </MudCard>
+</div>

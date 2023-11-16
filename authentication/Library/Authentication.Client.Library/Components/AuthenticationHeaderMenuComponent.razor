@@ -1,0 +1,22 @@
+﻿<UserIdentificationComponent>
+    <AuthorizeView>
+        <Authorized>
+            <MudLink Color="Color.Inherit" Underline="Underline.None" Class="mr-2" Href="/logout">Kijelentkezés</MudLink>
+            <span>
+                @if (UserIdentificationData is not null && UserIdentificationData.IsAuthenticated)
+                {
+                    @UserIdentificationData.UserDisplayedName
+                }
+            </span>
+        </Authorized>
+        <NotAuthorized>
+            <MudLink Color="Color.Inherit" Underline="Underline.None" Class="mr-2" Href="/login">Bejelentkezés</MudLink>
+            <MudLink Color="Color.Inherit" Underline="Underline.None" Href="/registration">Regisztráció</MudLink>
+        </NotAuthorized>
+    </AuthorizeView>
+</UserIdentificationComponent>
+
+@code {
+    [CascadingParameter] private UserIdentificationData? UserIdentificationData { get; set; }
+
+}

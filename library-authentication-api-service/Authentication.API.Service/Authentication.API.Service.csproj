@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\authentication\Authentication.API\Authentication.API.csproj" />
+    <ProjectReference Include="..\..\library-core\LibraryCore\LibraryCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Account\" />
+  </ItemGroup>
+
+</Project>

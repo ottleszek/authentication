@@ -1,0 +1,53 @@
+﻿@using System.Security.Claims;
+@inherits LayoutComponentBase
+
+<MudThemeProvider/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
+
+<MudLayout>
+    <MudAppBar Color="Color.Primary" Fixed="false" Dense="true">        
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer"></MudIconButton>
+        <MudSpacer />
+        <AuthenticationHeaderMenuComponent />
+    </MudAppBar>
+    <MudDrawer @bind-Open="_drawerOpen" Elevation="0">
+        <MudDrawerHeader>
+            <MudLink Typo="Typo.h4" Color="Color.Inherit" Underline="Underline.None" Href="/">MyApp</MudLink>
+        </MudDrawerHeader>
+        <MudPaper Width="250px" Class="d-inline-flex py-3" Elevation="0">
+            <MudNavMenu Margin="Margin.Dense" Rounded="true" Color="Color.Info">
+                <MudText Typo="Typo.h6" Class="px-4">Felhasználónév</MudText>
+                <MudText Typo="Typo.body2" Class="px-4 mud-text-secondary">Szerep</MudText>
+                <MudDivider Class="my-2" />
+                <MudNavLink Href="/dashboard" Icon="@Icons.Material.Filled.Dashboard">Vezérlőpult</MudNavLink>
+
+                <AuthenticationMenuComponent></AuthenticationMenuComponent>
+
+                <MudSpacer />
+                <AuthorizeView>
+                    <Authorized>
+                        <MudLink Color="Color.Inherit" Underline="Underline.None" Class="ml-2" Href="/fetchdata">Fetch data</MudLink>
+                    </Authorized>
+                </AuthorizeView>
+                
+                
+            </MudNavMenu>
+        </MudPaper>
+    </MudDrawer>
+    <MudMainContent Class="pt-2">
+        <MudContainer Class="m-2">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+
+
+@code {
+    private bool _drawerOpen=true;
+
+    public void ToggleDrawer()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+}

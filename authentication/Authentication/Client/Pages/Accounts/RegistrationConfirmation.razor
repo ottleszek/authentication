@@ -1,0 +1,10 @@
+﻿@page "/registration-confirmation"
+<h3>Regisztráció ellenörzés</h3>
+
+@code {
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        LibraryLogging.LoggingBroker.LogInformation("registration-confirmation");
+    }
+}

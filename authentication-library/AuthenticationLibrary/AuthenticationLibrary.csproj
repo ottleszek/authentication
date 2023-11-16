@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.7.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="7.0.13" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Blazored.LocalStorage" Version="4.4.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\authentication\Authentication\Shared\Authentication.Shared.csproj" />
+    <ProjectReference Include="..\..\library-client-service-template\LibraryClientServiceTemplate\LibraryClientServiceTemplate.csproj" />
+    <ProjectReference Include="..\..\library-core\LibraryCore\LibraryCore.csproj" />
+    <ProjectReference Include="..\..\library-logging\LibraryLogging\LibraryLogging.csproj" />
+  </ItemGroup>
+
+</Project>
