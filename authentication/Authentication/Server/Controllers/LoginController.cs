@@ -1,5 +1,6 @@
 ﻿using Authentication.Server.Services;
 using AuthenticationLibrary.Shared.Dtos;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Authentication.Server.Controllers
@@ -10,10 +11,11 @@ namespace Authentication.Server.Controllers
     {
         private readonly ILoginService? _loginService;
 
-        public LoginController(ILoginService loginService)
+        public LoginController(ILoginService loginService, UserManager<IdentityUser> userManager)
         {
             _loginService = loginService;
         }
+
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginDto loginPlayload)

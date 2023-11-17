@@ -1,8 +1,6 @@
 ﻿using Authentication.Server.Services;
 using AuthenticationLibrary.Shared.Dtos;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Authentication.Server.Controllers
 {
@@ -12,8 +10,6 @@ namespace Authentication.Server.Controllers
     {
         private readonly IRegistrationService _registrationService;
        
-
-
         public RegistrationController(IRegistrationService registationService)
         {
             _registrationService = registationService;
