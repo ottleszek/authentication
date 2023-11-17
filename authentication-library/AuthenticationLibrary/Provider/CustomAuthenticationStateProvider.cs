@@ -7,6 +7,11 @@ namespace AuthenticationLibrary.Provider
 {
     public enum AuthenticationStateType { LoggedIn, LoggedOut }
 
+    class AuthenticationEventArgs : EventArgs
+    {
+        public AuthenticationStateType AuthenticationState { get; set; }
+    }
+
     public class CustomAuthenticationStateProvider : AuthenticationStateProvider
     {
         private readonly HttpClient _httpClient;
@@ -20,7 +25,7 @@ namespace AuthenticationLibrary.Provider
             _anonymous = new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
         }
 
-        public EventHandler? AuthenticationChanged { get; set; }
+        public event EventHandler? AuthenticationChanged;
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
@@ -48,7 +53,7 @@ namespace AuthenticationLibrary.Provider
 
         private void OnAuthenticationChanged(AuthenticationStateType authenticationState)
         {
-            AuthenticationChanged?.Invoke(this, new EventArgs());
+            AuthenticationChanged?.Invoke(this, new AuthenticationEventArgs { AuthenticationState = authenticationState});
         }
     }
 }

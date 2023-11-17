@@ -4,7 +4,7 @@ using System.Security.Claims;
 
 namespace AuthenticationLibrary.Provider
 {
-    public class UserIdentificaitonProvider : IUserIdentificaitonProvider
+    public class UserIdentificaitonProvider : IUserIdentificaitonProvider, IDisposable
     {
         private CustomAuthenticationStateProvider? _authenticationStateProvider;
         
@@ -13,8 +13,12 @@ namespace AuthenticationLibrary.Provider
             if (stateProvider is not null)
             {
                 _authenticationStateProvider = (CustomAuthenticationStateProvider)stateProvider;
+                stateProvider.AuthenticationStateChanged += OnAuthenticationStateChanged;
+
             }
         }
+
+        public event EventHandler? UserIdentificationDataChanged;
 
         public UserIdentificationData? UserIdentificationData { get; set; } = null;
         public bool IsLoaded => UserIdentificationData is not null;
@@ -47,6 +51,22 @@ namespace AuthenticationLibrary.Provider
                 }
             }
             return UserIdentificationData;
+        }
+
+        public void Dispose()
+        {
+            if (_authenticationStateProvider is not null)
+            {
+                _authenticationStateProvider.AuthenticationStateChanged -= OnAuthenticationStateChanged;
+            }
+        }
+
+        private void OnAuthenticationStateChanged(Task<AuthenticationState> task)
+        {
+            if (UserIdentificationDataChanged is not null)
+            {
+                UserIdentificationDataChanged.Invoke(this, new EventArgs());
+            }
         }
 
         private void RefreshUserIdentificationDataFrom(List<Claim> claims)
@@ -99,6 +119,6 @@ namespace AuthenticationLibrary.Provider
                 debugData = $"{debugData}</tr>";
             }
             return debugData;
-        }
+        }         
     }
 }
