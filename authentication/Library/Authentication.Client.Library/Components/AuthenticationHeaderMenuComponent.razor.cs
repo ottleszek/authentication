@@ -29,16 +29,19 @@ namespace Authentication.Client.Library.Components
 
         private async void OnUserIdentificationDataChanged(object? sender, EventArgs e)
         {
+            await InvokeAsync(async () =>
+            {
+                await Refresh();
+                StateHasChanged();
+            });
+        }
+
+        private async Task Refresh()
+        {
             if (UserIdentificaitonProvider is not null)
             {
                 UserIdentificationData = await UserIdentificaitonProvider.GetUserIdentificationData();
-                Refresh();
             }
-        }
-
-        private void Refresh()
-        {
-            StateHasChanged();
         }
     }
 }
