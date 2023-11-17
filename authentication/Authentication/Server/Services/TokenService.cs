@@ -108,7 +108,7 @@ namespace Authentication.Server.Services
         private async Task<List<Claim>> GetClaims(User user, IdentityUser identityUser, string userRoleEnglishName)
         {
             List<Claim> claims = GetClaims(user);
-            claims.Add(new Claim("UserRole", userRoleEnglishName));
+            claims.Add(new Claim("Szerep", userRoleEnglishName));
 
             if (_userManager != null)
             {

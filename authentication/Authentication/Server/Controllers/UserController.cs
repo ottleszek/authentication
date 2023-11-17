@@ -8,7 +8,7 @@ namespace Authentication.Server.Controllers
 {
     [ApiController]    
     [Route("api/[controller]")]
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "Administrator")]
     public class UserController : ListController<User>
     {
         public UserController(IListDataBroker repoList) : base(repoList)
