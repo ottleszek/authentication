@@ -1,11 +1,10 @@
 ﻿using AuthenticationLibrary.Provider.UserIdentification;
 using AuthenticationLibrary.Provider;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
 
 namespace Authentication.Client.Library.Components
 {
-    public partial class AuthenticationHeaderMenuComponent : IDisposable
+    public partial class UserDataComponent : IDisposable
     {
         private UserIdentificationData? UserIdentificationData;
 
@@ -23,8 +22,6 @@ namespace Authentication.Client.Library.Components
                 UserIdentificationData = await UserIdentificaitonProvider.GetUserIdentificationData();
                 UserIdentificaitonProvider.UserIdentificationDataChanged += OnUserIdentificationDataChanged;
             }
-
-
         }
 
         private async void OnUserIdentificationDataChanged(object? sender, EventArgs e)

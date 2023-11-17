@@ -8,21 +8,24 @@
     <MudAppBar Color="Color.Primary" Fixed="false" Dense="true">        
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer"></MudIconButton>
         <MudSpacer />
-        <AuthenticationHeaderMenuComponent />
+        <UserHeaderMenu />
     </MudAppBar>
     <MudDrawer @bind-Open="_drawerOpen" Elevation="0">
         <MudDrawerHeader>
-            <MudLink Typo="Typo.h4" Color="Color.Inherit" Underline="Underline.None" Href="/">MyApp</MudLink>
+            <MudGrid>
+                <MudItem>
+                    <MudLink Typo="Typo.h4" Color="Color.Inherit" Underline="Underline.None" Href="/">MyApp</MudLink>
+                </MudItem>
+                 <MudItem>
+                    <UserDataComponent />
+                </MudItem>
+            </MudGrid>
         </MudDrawerHeader>
         <MudPaper Width="250px" Class="d-inline-flex py-3" Elevation="0">
-            <MudNavMenu Margin="Margin.Dense" Rounded="true" Color="Color.Info">
-                <MudText Typo="Typo.h6" Class="px-4">Felhasználónév</MudText>
-                <MudText Typo="Typo.body2" Class="px-4 mud-text-secondary">Szerep</MudText>
+            <MudNavMenu Margin="Margin.Dense" Rounded="true" Color="Color.Info">                            
                 <MudDivider Class="my-2" />
                 <MudNavLink Href="/dashboard" Icon="@Icons.Material.Filled.Dashboard">Vezérlőpult</MudNavLink>
-
                 <AuthenticationMenuComponent></AuthenticationMenuComponent>
-
                 <MudSpacer />
                 <AuthorizeView>
                     <Authorized>

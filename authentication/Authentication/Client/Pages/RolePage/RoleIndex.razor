@@ -8,8 +8,6 @@
 
 <h3 class="ml-6">Felhasználók kezelése</h3>
 
-<UserIdentificationComponent>
-
 <UILoader State="_state">
     <div class="d-flex ml-2">
         @if (ViewModel is not null && !ViewModel.HasItems)
@@ -36,8 +34,3 @@
         }
     </div>
 </UILoader>
-</UserIdentificationComponent>
-
-@code {
-    [CascadingParameter] string? Info { get; set; }
-}
