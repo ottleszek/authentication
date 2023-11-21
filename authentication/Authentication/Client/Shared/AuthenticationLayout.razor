@@ -1,16 +1,16 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider/>
+<MudThemeProvider Theme="@_currentTheme"/>
 <MudDialogProvider/>
 <MudSnackbarProvider/>
 
 <MudLayout>
-    <MudAppBar Color="Color.Primary" Fixed="false" Dense="true">        
+    <MudAppBar Elevation="1" Color="Color.Primary" Dense="true">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer"></MudIconButton>
         <MudSpacer />
         <UserHeaderMenu />
     </MudAppBar>
-    <MudDrawer @bind-Open="_drawerOpen" Elevation="0">
+    <MudDrawer @bind-Open="_drawerOpen" Elevation="1">
         <MudDrawerHeader>
             <MudGrid>
                 <MudItem>
@@ -21,7 +21,7 @@
                 </MudItem>
             </MudGrid>
         </MudDrawerHeader>
-        <MudPaper Width="250px" Class="d-inline-flex py-3" Elevation="0">
+        <MudPaper Width="250px" Class="d-inline-flex">
             <MudNavMenu Margin="Margin.Dense" Rounded="true" Color="Color.Info">                            
                 <MudDivider Class="my-2" />
                 <MudNavLink Href="/dashboard" Icon="@Icons.Material.Filled.Dashboard">Vezérlőpult</MudNavLink>
@@ -35,19 +35,11 @@
             </MudNavMenu>
         </MudPaper>
     </MudDrawer>
-    <MudMainContent Class="pt-2">
-        <MudContainer Class="m-2">
+    <MudMainContent Class="pt-16 px-16">
+        <MudContainer Class="mt-6">
             @Body
         </MudContainer>
     </MudMainContent>
 </MudLayout>
 
-
-@code {
-    private bool _drawerOpen=true;
-
-    public void ToggleDrawer()
-    {
-        _drawerOpen = !_drawerOpen;
-    }
-}
+                
