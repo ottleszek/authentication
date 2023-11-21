@@ -42,7 +42,10 @@ namespace Authentication.Client.Shared
                     Background = "#2a5289",
                     BackgroundGrey = "#68686a",
                     DrawerBackground = "#656c45",
-                    Surface = "#156ca6"
+                    Surface = "#156ca6",
+                    ActionDefault="#FFFFFF",
+                    ActionDisabled="#000000",
+                    TextDisabled="#FFFFFF"
                 }
             };
         }
