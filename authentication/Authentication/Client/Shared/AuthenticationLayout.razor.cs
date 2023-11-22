@@ -39,20 +39,26 @@ namespace Authentication.Client.Shared
             {
                 Palette = new PaletteDark
                 {
-                    AppbarBackground = "#1f830b",
-                    AppbarText = "#fafae3",
-                    Primary = "#275d49",
-                    Secondary = "#355b4c",
-                    TextPrimary = "#f9f6eb",
-                    TextSecondary = "#fdeff4 ",
-                    DrawerText = "#feffd9",
-                    Background = "#2a5289",
-                    BackgroundGrey = "#68686a",
-                    DrawerBackground = "#656c45",
-                    Surface = "#156ca6",
-                    ActionDefault="#FFFFFF",
-                    ActionDisabled="#000000",
-                    TextDisabled="#FFFFFF"
+                    AppbarBackground = "#0097FF",
+                    AppbarText = "#FFFFFF",
+
+                    Background = "#001524",
+
+                    Primary = "#007CD1",
+                    Secondary = "#117CE1",
+                    Tertiary = "#107C51",
+
+
+                    TextPrimary = "#FFFFFF",
+                    TextSecondary = "#FEFEFE",
+
+                    DrawerBackground = "#093958",
+                    DrawerText = "#FFFFFF",
+                    Surface = "#093958",
+
+                    ActionDefault="#0097FF",
+                    ActionDisabled="#2F678C",
+                    TextDisabled="#B0B0B0"
                 }
             };
         }
@@ -63,20 +69,25 @@ namespace Authentication.Client.Shared
             {
                 Palette = new PaletteLight
                 {
-                    AppbarBackground = "#cdcec6",
-                    AppbarText = "#f8fffe",
-                    Primary = "#e0e6e1",
-                    Secondary = "#b0b0b5",
-                    TextPrimary = "#101011",
-                    TextSecondary = "#112113",
-                    DrawerText = "#feffd9",
-                    Background = "#2a5289",
-                    BackgroundGrey = "#68686a",
-                    DrawerBackground = "#656c45",
-                    Surface = "#156ca6",
-                    ActionDefault = "#FFFFFF",
-                    ActionDisabled = "#000000",
-                    TextDisabled = "#FFFFFF"
+                    AppbarBackground = "#0097FF",
+                    AppbarText = "#FFFFFF",
+
+                    Background = "#F4FDFF",
+
+                    Primary = "#007CD1",
+                    Secondary = "#117CE1",
+                    Tertiary = "#107C51",
+
+                    TextPrimary = "#0C1217",
+                    TextSecondary = "#0C1217",
+
+                    DrawerBackground = "#C5E5FF",
+                    DrawerText = "#0C1217",
+                    Surface = "#E4FAFF",
+
+                    ActionDefault = "#0C1217",
+                    ActionDisabled = "#2F678C",
+                    TextDisabled = "#676767"
                 }
             };
         }

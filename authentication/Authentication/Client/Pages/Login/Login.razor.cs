@@ -19,7 +19,7 @@ namespace Authentication.Client.Pages.Login
         private LoginValidation? validation;
 
         private ErrorStore ErrorString = new();
-        private MudForm _form=new();
+        private MudForm _form = new();
 
         protected override Task OnParametersSetAsync()
         {
@@ -47,8 +47,8 @@ namespace Authentication.Client.Pages.Login
             await _form.Validate();
             if (LoginViewModel is not null && AuthenticationService is not null && _form.IsValid)
             {
-                UserLoginDto userLoginDto= LoginViewModel.ConvertToUserLoginDto;
-                
+                UserLoginDto userLoginDto = LoginViewModel.ConvertToUserLoginDto;
+
                 ErrorStore logingErrorStore = new();
                 try
                 {
@@ -64,12 +64,21 @@ namespace Authentication.Client.Pages.Login
                             NavigationManager.NavigateTo("/");
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     LibraryLogging.LoggingBroker.LogError(ex.Message);
                     ErrorString.ClearAndAddError("Bejelentkezés nem lehetséges");
-                }                                    
+                }
             }
+        }
+
+        private void GoToRegister()
+        {
+            if (NavigationManager is not null)
+            {
+                NavigationManager.NavigateTo("/registration");
+            }
+
         }
     }
 }
