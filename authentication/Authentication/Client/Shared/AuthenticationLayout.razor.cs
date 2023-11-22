@@ -39,12 +39,12 @@ namespace Authentication.Client.Shared
             {
                 Palette = new PaletteDark
                 {
-                    AppbarBackground = "#4d8e66",
-                    AppbarText = "#e8fffe",
-                    Primary = "#005631",
-                    Secondary = "#010545",
-                    TextPrimary = "#f0f0ff",
-                    TextSecondary = "#ffeffc",
+                    AppbarBackground = "#1f830b",
+                    AppbarText = "#fafae3",
+                    Primary = "#275d49",
+                    Secondary = "#355b4c",
+                    TextPrimary = "#f9f6eb",
+                    TextSecondary = "#fdeff4 ",
                     DrawerText = "#feffd9",
                     Background = "#2a5289",
                     BackgroundGrey = "#68686a",

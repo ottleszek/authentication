@@ -9,7 +9,7 @@
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer"></MudIconButton>
         <MudSpacer />
         <UserHeaderMenu />
-        <MudIconButton Icon="@Icons.Filled.ColorLens" OnClick="ChangeThemeAsync" />
+        <MudIconButton Icon="@Icons.Material.Filled.ColorLens" OnClick="ChangeThemeAsync" />
     </MudAppBar>
     <MudDrawer @bind-Open="_drawerOpen" Elevation="1">
         <MudDrawerHeader>
@@ -23,14 +23,15 @@
             </MudGrid>
         </MudDrawerHeader>
         <MudPaper Width="250px" Class="d-inline-flex">
-            <MudNavMenu Margin="Margin.Dense" Rounded="true" Color="Color.Info">                            
-                <MudDivider Class="my-2" />
+            <MudNavMenu Margin="Margin.Dense" Rounded="true" Color="Color.Secondary" Dense="true">                            
                 <MudNavLink Href="/dashboard" Icon="@Icons.Material.Filled.Dashboard">Vezérlőpult</MudNavLink>
+                <MudDivider Class="my-2" />
                 <AuthenticationMenuComponent></AuthenticationMenuComponent>
                 <MudSpacer />
+                <MudDivider Class="my-2" />
                 <AuthorizeView>
                     <Authorized>
-                        <MudLink Color="Color.Inherit" Underline="Underline.None" Class="ml-2" Href="/fetchdata">Fetch data</MudLink>
+                        <MudNavLink Class="ml-2" Href="/fetchdata">Fetch data</MudNavLink>
                     </Authorized>
                 </AuthorizeView>
             </MudNavMenu>
