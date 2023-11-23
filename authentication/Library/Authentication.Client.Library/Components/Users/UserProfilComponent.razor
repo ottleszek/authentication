@@ -1,0 +1,17 @@
+﻿@namespace Authentication.Client.Library.Components
+
+@inherits UserIdentificationBase
+
+@((MarkupString) debug)
+
+
+@code {
+    private string debug = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        debug = await GetUserDebugData();
+        await base.OnInitializedAsync();
+    }
+
+}

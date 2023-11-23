@@ -1,4 +1,4 @@
-﻿@inject AuthenticationStateProvider? AuthenticationStateProvider
+﻿@inherits UserIdentificationBase
 
 @if (userIdentificationData is null)
 {
@@ -6,87 +6,25 @@
 }
 else
 {
-    <CascadingValue Value="@Info">@ChildContent</CascadingValue>
+    <CascadingValue Value="@userIdentificationData">@ChildContent</CascadingValue>
 }
 
 @code {
-    private UserIdentificationData? userIdentificationData = new UserIdentificationData();
-    private string Info { get; set; } = "info";
-    // 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
     protected async override Task OnInitializedAsync()
     {
-        if (AuthenticationStateProvider is not null)
-        {
-            AuthenticationState authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-            ClaimsPrincipal user = authState.User;
-            if (user.Identity is not null && user.Identity.IsAuthenticated)
-            {
-                userIdentificationData = new UserIdentificationData();
-                userIdentificationData.IsAuthenticated = true;
-                RefreshUserIdentificationDataFrom(user.Claims.ToList());
-            }
-            else
-            {
-                userIdentificationData = new UserIdentificationData();
-                userIdentificationData.IsAuthenticated = true;
-            }
-        }
         await base.OnInitializedAsync();
+        await RefreshUserIdentificationDataFrom();
     }
 
-    private void RefreshUserIdentificationDataFrom(List<Claim> claims)
+    private async Task RefreshUserIdentificationDataFrom()
     {
         if (userIdentificationData is not null)
         {
-            userIdentificationData.UserDisplayedName = UserDisplayNameFrom(claims);
-            userIdentificationData.UserRole = UserRoleFrom(claims);
-
+            userIdentificationData.UserDisplayedName = await GetUserDisplayName();
+            userIdentificationData.UserRole = await GetUserRole();            
         }
-
-    }
-
-    private string UserDisplayNameFrom(List<Claim> claims)
-    {
-        string? firstName = claims.Where(claim => claim.Type == "FirstName").Select(claim => claim.Value).FirstOrDefault();
-        string? lastName = claims.Where(claim => claim.Type == "LastName").Select(claim => claim.Value).FirstOrDefault();        
-        if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName))
-        {
-            string? email = claims.Where(claim => claim.Type == "Email").Select(claim => claim.Value).FirstOrDefault();
-            if (string.IsNullOrEmpty(email))
-            {
-                return string.Empty;
-            }
-            return email;
-        }
-        return $"{lastName} {firstName}";
-    }
-
-    private string UserRoleFrom(List<Claim> claims)
-    {
-        string? role = claims.Where(claim => claim.Type == "UserRole").Select(claim => claim.Value).FirstOrDefault();
-        if (string.IsNullOrEmpty(role))
-        {
-            return string.Empty;
-        }
-        return role;
-    }
-
-    private string DebugDataFrom(List<Claim> claims)
-    {
-        string debugData = string.Empty;
-        debugData = "<table>";
-        foreach(Claim claim in claims)
-        {
-            debugData = $"{debugData}<tr>";
-            if (debugData.Any())
-                debugData = $"{debugData}; <td>({claim.ValueType}</td> <td> {claim.Issuer}</td><td> {claim.Value}</td>";
-            else
-                debugData = $"<td>({claim.ValueType} </td><td> {claim.Issuer}</td> <td> {claim.Value}</td>";
-            debugData = $"{debugData}</tr>";
-        }
-        return debugData;
     }
 }
