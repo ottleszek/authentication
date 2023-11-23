@@ -26,6 +26,10 @@
                 Loading="@_loading" 
                 LoadingProgressColor="Color.Info"
             >
+                <ToolBarContent>
+                    <MudSpacer />
+                    <MudTextField T="string" Placeholder="Keresés..." Adornment="Adornment.Start" Adornment.Icon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0" />
+                </ToolBarContent>
                 <HeaderContent>
                     <MudTh>Vezetéknév</MudTh>
                     <MudTh>Keresztnév</MudTh>
@@ -35,6 +39,9 @@
                     <MudTd DataLabel="Vezetéknév">@context.LastName</MudTd>
                     <MudTd DataLabel="Keresztnév">@context.FirstName</MudTd>
                     <MudTd DataLabel="Email">@context.Email</MudTd>
+                    <MudIconButton Icon="@Icons.Material.Filled.Preview" Color="Color.Success"></MudIconButton>
+                    <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Default"></MudIconButton>
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error"></MudIconButton>
                 </RowTemplate>
             </MudTable>
         }
