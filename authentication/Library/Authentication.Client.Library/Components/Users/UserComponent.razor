@@ -1,0 +1,34 @@
+﻿@namespace Authentication.Client.Library.Components
+
+@inherits TableGridViewSelector
+
+<MudBreadcrumbs Items="_items" Separator=">"></MudBreadcrumbs>
+
+<MudIconButton Icon="@Icons.Material.Filled.TableView" Disabled="_isTableViewDisabled" OnClick="SetTableView"></MudIconButton>
+<MudIconButton Icon="@Icons.Material.Filled.GridView" Disabled="_isGridViewDisabled" OnClick="SetGridView"></MudIconButton>
+
+
+@if (_isTableView)
+{
+    <UserTableViewComponent />
+}
+else
+{
+    <UserGridViewComponent />
+}
+
+@code {
+    protected override Task OnParametersSetAsync()
+    {
+        _isTableView = false;
+        return base.OnParametersSetAsync();
+    }
+
+
+    private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
+    {
+        new BreadcrumbItem("Home", href: "#"),
+        new BreadcrumbItem("Felhasználók", href: null, disabled: true)
+    };
+}
+}

@@ -3,44 +3,4 @@
 
 @attribute [Authorize(Roles ="admin")]
 
-@namespace Authentication.Client.Pages.UserPage
-
-
-@inherits ListViewComponentBase<User>
-
-<h3 class="ml-6">Felhasználók kezelése</h3>
-
-<UILoader State="_state">
-    <div class="d-flex ml-2">
-        @if (ViewModel is not null && !ViewModel.HasItems)
-        {
-            <p>Nincs esemény az adatbázisban!</p>
-        }    
-        else if (ViewModel is not null && ViewModel.HasItems)
-        {
-            <MudTable 
-                Items="@ViewModel.Items" 
-                T="User"
-                Hover="true" 
-                Breakpoint="Breakpoint.Sm" 
-                Loading="@_loading" 
-                LoadingProgressColor="Color.Info"
-            >
-                <HeaderContent>
-                    <MudTh>Vezetéknév</MudTh>
-                    <MudTh>Keresztnév</MudTh>
-                    <MudTh>Email</MudTh>
-                </HeaderContent>
-                <RowTemplate>
-                    <MudTd DataLabel="Vezetéknév">@context.LastName</MudTd>
-                    <MudTd DataLabel="Keresztnév">@context.FirstName</MudTd>
-                    <MudTd DataLabel="Email">@context.Email</MudTd>
-                </RowTemplate>
-            </MudTable>
-        }
-    </div>
-</UILoader>
-
-<Kulso>
-
-</Kulso>
+<UserComponent></UserComponent>

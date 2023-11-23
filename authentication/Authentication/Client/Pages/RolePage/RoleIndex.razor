@@ -2,35 +2,8 @@
 @page "/userrole/index"
 
 @attribute [Authorize(Roles = "admin")]
-@namespace Authentication.Client.Pages.RolePage
 
-@inherits ListViewComponentBase<UserRole>
+<UserRoleComponent></UserRoleComponent>
 
-<h3 class="ml-6">Felhasználók kezelése</h3>
 
-<UILoader State="_state">
-    <div class="d-flex ml-2">
-        @if (ViewModel is not null && !ViewModel.HasItems)
-        {
-            <p>Nincs felhasználói szerep az adatbázisban!</p>
-        }
-        else if (ViewModel is not null && ViewModel.HasItems)
-        {
-            <MudTable Items="@ViewModel.Items"
-                      T="UserRole"
-                      Hover="true"
-                      Breakpoint="Breakpoint.Sm"
-                      Loading="@_loading"
-                      LoadingProgressColor="Color.Info">
-                <HeaderContent>
-                    <MudTh>Szerep angol neve</MudTh>
-                    <MudTh>Szerep neve</MudTh>
-                </HeaderContent>
-                <RowTemplate>
-                    <MudTd DataLabel="Vezetéknév">@context.EnglishName</MudTd>
-                    <MudTd DataLabel="Keresztnév">@context.Name</MudTd>
-                </RowTemplate>
-            </MudTable>
-        }
-    </div>
-</UILoader>
+
