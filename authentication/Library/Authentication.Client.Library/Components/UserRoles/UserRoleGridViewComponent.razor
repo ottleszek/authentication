@@ -1,7 +1,12 @@
 ﻿@namespace Authentication.Client.Library.Components
 
-<h3>UserRoleGridViewComponent</h3>
+<MudBreadcrumbs Items="_items"></MudBreadcrumbs>
 
 @code {
-
+    private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
+    {
+        new BreadcrumbItem("Home", href: "#", icon: Icons.Material.Filled.Home),
+        new BreadcrumbItem("Felhasználói szerepek", href: null, disabled: true, icon: Icons.Material.Filled.GridView)
+    };
 }
+
