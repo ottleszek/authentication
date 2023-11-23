@@ -1,0 +1,25 @@
+﻿@namespace Authentication.Client.Library.Components
+
+@inherits TableGridViewSelector
+
+<MudText Typo="Typo.h4" class="ml-6">Felhasználók kezelése</MudText>
+<MudIconButton Icon="@Icons.Material.Filled.TableView" Disabled="_isTableViewDisabled" OnClick="SetTableView"></MudIconButton>
+<MudIconButton Icon="@Icons.Material.Filled.GridView" Disabled="_isGridViewDisabled" OnClick="SetGridView"></MudIconButton>
+
+
+@if (_isTableView)
+{
+    <UserTableViewComponent />
+}
+else
+{
+    <UserGridViewComponent />
+}
+
+@code {
+    protected override Task OnParametersSetAsync()
+    {
+        _isTableView = false;
+        return base.OnParametersSetAsync();
+    }
+}
