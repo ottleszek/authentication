@@ -1,12 +1,11 @@
-﻿<UserIdentificationComponent>
-    <div class="d-flex m-2">
-        @if (UserIdentificationData is not null && UserIdentificationData.IsAuthenticated)
-        {
-            <span>Név:@UserIdentificationData.UserDisplayedName</span>
+﻿<div class="d-flex m-2">
+    @if (UserIdentificationData is not null && UserIdentificationData.IsAuthenticated)
+    {
+        <span>Név:@UserIdentificationData.UserDisplayedName</span>
 
-            <br />
-            @UserIdentificationData.UserRole
-        }
-    </div>
-</UserIdentificationComponent>
+        <br />
+        @UserIdentificationData.UserRole
+    }
+</div>
+
 
