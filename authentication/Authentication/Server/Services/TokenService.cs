@@ -96,7 +96,6 @@ namespace Authentication.Server.Services
         {
             List<Claim> cliams = new()
             {
-                new Claim("Id", user.Id.ToString()),
                 new Claim("FirstName", user.FirstName),
                 new Claim("LastName", user.LastName),
                 new Claim("Email", user.Email)
