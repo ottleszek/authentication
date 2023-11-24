@@ -12,6 +12,6 @@ namespace Authentication.Server.Repos
 
         public bool UserAddToRole(Guid userId, string roleEnglishName);
 
-        public Task<RepositoryResponse> Save(User user);
+        public Task<RepositoryResponse> SaveNewUser(User user);
     }
 }

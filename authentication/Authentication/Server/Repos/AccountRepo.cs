@@ -70,7 +70,7 @@ namespace Authentication.Server.Repos
             return null;
         }
 
-        public async Task<RepositoryResponse> Save(User user)
+        public async Task<RepositoryResponse> SaveNewUser(User user)
         {
             RepositoryResponse response = new RepositoryResponse();
 

@@ -50,7 +50,7 @@ namespace Authentication.Server.Services
                     newUser.UserRoleId = (Guid) viewerRoleId;
                     string password = PasswordExtension.HashPassword(registrationPlayload.Password);
                     
-                    RepositoryResponse saveUserResponse = await _accountRepo.Save(newUser);                    
+                    RepositoryResponse saveUserResponse = await _accountRepo.SaveNewUser(newUser);                    
                     if (saveUserResponse.HasError )
                     {
                         return new AuthenticationResponseDto
@@ -58,7 +58,7 @@ namespace Authentication.Server.Services
                             Error = saveUserResponse.Error
                         };
                     }
-                    RepositoryResponse savePasswordResponse = await _userIdentificationRepo.Save(newUser.Id, password);
+                    RepositoryResponse savePasswordResponse = await _userIdentificationRepo.SaveNewUserPassword(newUser.Id, password);
                     if (savePasswordResponse.HasError)
                     {
                         return new AuthenticationResponseDto

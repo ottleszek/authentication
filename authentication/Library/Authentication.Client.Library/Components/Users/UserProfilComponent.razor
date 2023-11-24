@@ -2,16 +2,14 @@
 
 @inherits UserIdentificationBase
 
-@((MarkupString) debug)
-
+<p>@email</p>
 
 @code {
-    private string debug = string.Empty;
+    private string email = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
-        debug = await GetUserDebugData();
+        email = await GetUserEmail();
         await base.OnInitializedAsync();
     }
-
 }
