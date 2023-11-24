@@ -1,16 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using LibaryDatabase.Model;
 using Authentication.Shared.Models;
+using Authentication.Server.Repos.Base;
 
 namespace Authentication.Server.Repos
 {
-    public class AccountRepo<TDbContext> :  IAccountRepo where TDbContext : DbContext
+    public class AccountRepo<TDbContext> : UserGetRepoBase<TDbContext>,  IAccountRepo where TDbContext : DbContext
     {
         private readonly DbSet<User>? _userSet;
         private readonly DbSet<UserRole>? _userRole;
         private readonly TDbContext _dbContext;
 
         public AccountRepo(IDbContextFactory<TDbContext> dbContextFactory)
+            : base(dbContextFactory)
         {
 
             TDbContext dbContext = dbContextFactory.CreateDbContext();
@@ -35,31 +37,7 @@ namespace Authentication.Server.Repos
 
         }
 
-        public bool UserAddToRole(Guid userId, string roleEnglishName)
-        {
-            return false;
-        }
 
-        public bool IsUserExsist(string email)
-        {
-            if (_userSet is not null)
-            {
-                if (_userSet.Any(user => user.Email.ToLower() == email.ToLower()))
-                    return true;
-                else
-                    return false;
-            }
-            return false;
-        }
-
-        public User? GetUserBy(string email)
-        {            
-            if (_userSet is not null)
-            {
-                return _userSet.Where(user => user.Email.ToLower()==email.ToLower()).FirstOrDefault();                
-            }
-            return null;
-        }
 
         public User? GetUserBy(Guid userId)
         {
