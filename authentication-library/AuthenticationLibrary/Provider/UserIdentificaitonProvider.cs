@@ -14,7 +14,6 @@ namespace AuthenticationLibrary.Provider
             {
                 _authenticationStateProvider = (CustomAuthenticationStateProvider)stateProvider;
                 stateProvider.AuthenticationStateChanged += OnAuthenticationStateChanged;
-
             }
         }
 
@@ -97,7 +96,7 @@ namespace AuthenticationLibrary.Provider
 
         private string UserRoleFrom(List<Claim> claims)
         {
-            string? role = claims.Where(claim => claim.Type == "UserRole").Select(claim => claim.Value).FirstOrDefault();
+            string? role = claims.Where(claim => claim.Type == "Szerep").Select(claim => claim.Value).FirstOrDefault();
             if (string.IsNullOrEmpty(role))
             {
                 return string.Empty;

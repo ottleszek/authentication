@@ -12,7 +12,6 @@ namespace Authentication.Client.Library.Components
 
         public void Dispose()
         {
-
         }
 
         protected override async Task OnInitializedAsync()

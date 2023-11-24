@@ -94,9 +94,9 @@ namespace Authentication.Client.Library.Components
                 {
                     debugData = $"{debugData}<tr>";
                     if (debugData.Any())
-                        debugData = $"{debugData}; <td>({claim.ValueType}</td> <td> {claim.Issuer}</td><td> {claim.Value}</td>";
+                        debugData = $"{debugData}<td>Type:{claim.Type}</td> <td> {claim.Issuer}</td><td>Value: {claim.Value}</td>";
                     else
-                        debugData = $"<td>({claim.ValueType} </td><td> {claim.Issuer}</td> <td> {claim.Value}</td>";
+                        debugData = $"<td>Type: {claim.Type} </td><td> {claim.Issuer}</td> <td>Value: {claim.Value}</td>";
                     debugData = $"{debugData}</tr>";
                 }
                 return debugData;
