@@ -1,6 +1,6 @@
 ﻿using Authentication.Server.Repos.Base;
 using Authentication.Shared.Models;
-using LibaryDatabase.Model;
+using LibraryDatabase.Model;
 
 namespace Authentication.Server.Repos
 {

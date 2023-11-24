@@ -1,4 +1,4 @@
-﻿using LibaryDatabase.Model;
+﻿using LibraryDatabase.Model;
 using LibraryCore.Model;
 using Microsoft.EntityFrameworkCore;
 

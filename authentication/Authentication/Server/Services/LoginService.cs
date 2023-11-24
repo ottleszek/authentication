@@ -162,7 +162,6 @@ namespace Authentication.Server.Services
 
             };
             return userRefreshToken;
-
         }
 
         private async Task<bool> SaveRefreshToken(UserRefreshToken token)

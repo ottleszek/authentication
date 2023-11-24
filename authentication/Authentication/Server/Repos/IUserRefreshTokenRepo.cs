@@ -1,6 +1,6 @@
 ﻿using Authentication.Server.Datas.Entities;
 using AuthenticationLibrary.Shared.Dtos;
-using LibaryDatabase.Model;
+using LibraryDatabase.Model;
 
 namespace Authentication.Server.Repos
 {

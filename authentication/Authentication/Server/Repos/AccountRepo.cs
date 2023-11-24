@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using LibaryDatabase.Model;
+using LibraryDatabase.Model;
 using Authentication.Shared.Models;
 using Authentication.Server.Repos.Base;
 

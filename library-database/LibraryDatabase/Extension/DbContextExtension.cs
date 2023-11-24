@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
-namespace LibaryDatabase.Model
+namespace LibraryDatabase.Model
 {
     public static class DbContextExtension
     {

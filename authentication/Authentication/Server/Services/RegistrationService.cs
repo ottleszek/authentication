@@ -1,7 +1,7 @@
 ﻿using Authentication.Server.Repos;
 using Authentication.Shared.Models;
 using AuthenticationLibrary.Shared.Dtos;
-using LibaryDatabase.Model;
+using LibraryDatabase.Model;
 
 using LibraryPassword;
 using Microsoft.AspNetCore.Identity;

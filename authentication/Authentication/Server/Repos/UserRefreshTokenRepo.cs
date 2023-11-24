@@ -1,6 +1,6 @@
 ﻿using Authentication.Server.Datas.Entities;
 using AuthenticationLibrary.Shared.Dtos;
-using LibaryDatabase.Model;
+using LibraryDatabase.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Authentication.Server.Repos
