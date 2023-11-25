@@ -1,6 +1,5 @@
 ﻿using Authentication.Shared.Models;
 using LibraryDatabase.Model;
-using LibraryDatabase.Model;
 
 namespace Authentication.Server.Services
 {

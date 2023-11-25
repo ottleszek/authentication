@@ -1,5 +1,4 @@
 ﻿using Authentication.Shared.Models;
-using LibraryDatabase.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Authentication.Server.Repos.Base

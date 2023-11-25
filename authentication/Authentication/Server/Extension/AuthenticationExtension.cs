@@ -63,12 +63,13 @@ namespace Authentication.Server.Extension
 
         public static void ConfigureAuthenticationInMemoryRepos(this IServiceCollection services)
         {  
-            services.AddSingleton<IAccountRepo, AccountInMemoryRepoDataBroker>();
-            services.AddSingleton<IUserRefreshTokenRepo, UserRefreshTokenRepoDataBroker>();
-            services.AddSingleton<IUserRoleRepo, UserRoleRepoInMemoryDataBroker>();
-            services.AddSingleton<IUserIdentificationRepo, UserIdentificationRepoInMemoryDataBroker>();
+            services.AddScoped<IAccountRepo, AccountInMemoryRepoDataBroker>();
+            services.AddScoped<IUserRefreshTokenRepo, UserRefreshTokenRepoDataBroker>();
+            services.AddScoped<IUserRoleRepo, UserRoleRepoInMemoryDataBroker>();
+            services.AddScoped<IUserIdentificationRepo, UserIdentificationRepoInMemoryDataBroker>();
+            services.AddScoped<IProfilRepo, ProfilRepoInMemoryDataBroker>();
 
-            services.AddSingleton<IListDataBroker, ListInMemoryDataBroker>();
+            services.AddScoped<IListDataBroker, ListInMemoryDataBroker>();
 
 
 
@@ -87,6 +88,7 @@ namespace Authentication.Server.Extension
             services.AddScoped<IRegistrationService, RegistrationService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IProfilService, ProfilService>();
             
             LoggingBroker.LogInformation("Service-ek létrehozva!");
         }
