@@ -1,6 +1,7 @@
 ﻿using Authentication.Server.Repos;
 using Authentication.Shared.Models;
 using LibraryDatabase.Model;
+using LibraryLogging;
 
 namespace Authentication.Server.Services
 {
@@ -13,11 +14,11 @@ namespace Authentication.Server.Services
             _profilRepo = profilRepo;
         }
 
-        public User GetUserBy(string email)
+        public async Task<User> GetUserBy(string email)
         {
             User? result=null;
             if (_profilRepo is not null)
-                 result=_profilRepo.GetUserBy(email);
+                 result=await _profilRepo.GetUserBy(email);
             if (result is not null)
                 return result;
             return new User();
@@ -29,7 +30,7 @@ namespace Authentication.Server.Services
             ServiceResponse response = new ServiceResponse();
             if (_profilRepo is null)
             {
-                response.ClearAndAddError("A profil frissítése nem lehetséges");
+                response.ClearAndAddError("A felhasználó profil frissítése nem lehetséges!");
                 return response;
             }
             if (!user.IsValidUser)
@@ -42,13 +43,12 @@ namespace Authentication.Server.Services
                 RepositoryResponse repoResponse = await _profilRepo.UpdateProfil(user);
                 if (response.HasError)
                 {
-                    // hiba loggolása
-
+                    LoggingBroker.LogError(response.Error);
+                    response.ClearAndAddError("A felhasználó profil frissítés nem lehetséges!");
+                    return response;
                 }
-
             }
             return response;
-
         }
     }
 }

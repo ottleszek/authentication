@@ -50,7 +50,7 @@ namespace Authentication.Server.Services
             if (_accountRepo is not null && _userRoleRepo is not null)
             {
 
-                User? user = _accountRepo.GetUserBy(loginPlayload.Email);
+                User? user = await _accountRepo.GetUserBy(loginPlayload.Email);
                 if (user == null)
                 {
                     response.ClearAndAddError("Evvel az email címmel nem található felhasználó!");

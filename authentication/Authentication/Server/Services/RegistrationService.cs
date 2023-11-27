@@ -27,7 +27,7 @@ namespace Authentication.Server.Services
         {
             AuthenticationResponseDto responseDto = new ();
 
-            if (_accountRepo.IsUserExsist(registrationPlayload.Email))
+            if (await _accountRepo.IsUserExsist(registrationPlayload.Email))
             {
                 responseDto.ClearAndAddError($"{registrationPlayload.Email} emailcímmel már regisztráltak felhasználót!");
                 return responseDto;
@@ -96,9 +96,9 @@ namespace Authentication.Server.Services
             return responseDto;
         }        
 
-        public bool ChaeckUniqueUserEmail(string email)
+        public async Task<bool> ChaeckUniqueUserEmail(string email)
         {
-            bool userAlredyExsist = _accountRepo.IsUserExsist(email);
+            bool userAlredyExsist = await _accountRepo.IsUserExsist(email);
             return !userAlredyExsist;
         }
 

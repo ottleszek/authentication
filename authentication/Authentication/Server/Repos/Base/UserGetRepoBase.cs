@@ -1,9 +1,10 @@
 ﻿using Authentication.Shared.Models;
 using Microsoft.EntityFrameworkCore;
+using LibraryDatabase.Model;
 
 namespace Authentication.Server.Repos.Base
 {
-    public class UserGetRepoBase<TDbContext> : IIUserGetRepoBase where TDbContext : DbContext
+    public abstract class UserGetRepoBase<TDbContext> : IIUserGetRepoBase where TDbContext : DbContext
     {
         private readonly DbSet<User>? _userSet;
         private readonly TDbContext _dbContext;
@@ -23,11 +24,11 @@ namespace Authentication.Server.Repos.Base
             }
         }
 
-        public bool IsUserExsist(string email)
+        public async Task<bool> IsUserExsist(string email)
         {
             if (_userSet is not null)
             {
-                if (_userSet.Any(user => user.Email.ToLower() == email.ToLower()))
+                if (await _userSet.AnyAsync(user => user.Email.ToLower() == email.ToLower()))
                     return true;
                 else
                     return false;
@@ -35,11 +36,11 @@ namespace Authentication.Server.Repos.Base
             return false;
         }
 
-        public User? GetUserBy(string email)
+        public async Task<User?> GetUserBy(string email)
         {
             if (_userSet is not null)
             {
-                return _userSet.Where(user => user.Email.ToLower() == email.ToLower()).FirstOrDefault();
+                return await _userSet.Where(user => user.Email.ToLower() == email.ToLower()).FirstOrDefaultAsync();
             }
             return null;
         }

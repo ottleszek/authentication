@@ -16,7 +16,6 @@ namespace Authentication.Server.Controllers
             _loginService = loginService;
         }
 
-
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginDto loginPlayload)
         {

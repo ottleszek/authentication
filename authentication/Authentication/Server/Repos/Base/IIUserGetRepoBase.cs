@@ -4,7 +4,7 @@ namespace Authentication.Server.Repos.Base
 {
     public interface IIUserGetRepoBase
     {
-        public bool IsUserExsist(string email);
-        public User? GetUserBy(string email);
+        public Task<bool> IsUserExsist(string email);
+        public Task<User?> GetUserBy(string email);
     }
 }

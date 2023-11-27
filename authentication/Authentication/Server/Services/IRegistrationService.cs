@@ -5,6 +5,6 @@ namespace Authentication.Server.Services
     public interface IRegistrationService
     { 
         public Task<AuthenticationResponseDto> RegisterNewUser(UserRegistrationDto registrationPlayload);
-        public bool ChaeckUniqueUserEmail(string email);
+        public Task<bool> ChaeckUniqueUserEmail(string email);
     }
 }

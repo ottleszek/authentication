@@ -5,7 +5,7 @@ namespace Authentication.Server.Services
 {
     public interface IProfilService
     {
-        public User? GetUserBy(string email);
+        public Task<User> GetUserBy(string email);
         public Task<ServiceResponse> UpdateProfil(User user);
     }
 }
