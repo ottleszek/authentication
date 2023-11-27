@@ -1,4 +1,5 @@
-﻿using Authentication.Client.Library.ViewModels.Accounts;
+﻿using Authentication.Client.Library.Services.Profil;
+using Authentication.Client.Library.ViewModels.Accounts;
 using Authentication.Client.Library.ViewModels.Login;
 using Authentication.Client.Library.ViewModels.User;
 using Authentication.Shared.Models;
@@ -33,6 +34,8 @@ namespace Authentication.Client.Library.Extensions
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<ILoginTokenStore, LoginTokenStore>();
             services.AddScoped<INofifyAuthenticationService, NofifyAuthenticationService>();
+
+            services.AddScoped<IProfilService, ProfilService>();
             // User managment
             services.AddScoped<IListViewModel<User>, ListViewModel<User>>();
             services.AddScoped<IListModelBrokerConnector<User>, ListModelBrokerConnector<User>>();

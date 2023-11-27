@@ -43,7 +43,7 @@ namespace Authentication.Shared.Services.Accounts
 
         public async Task Logout()
         {
-            if (_accessAndRefreshTokenService is not null)
+            if (_accessAndRefreshTokenService is not null && _nofifyAuthenticationService is not null)
             {
                 ErrorStore error = await _accessAndRefreshTokenService.DeleteAccessTokenAndRefreshToken();
                 _nofifyAuthenticationService.NotifyLogOut();

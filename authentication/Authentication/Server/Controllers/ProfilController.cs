@@ -1,6 +1,7 @@
 ﻿using Authentication.Server.Services;
 using Authentication.Shared.Dtos;
 using Authentication.Shared.Models;
+using LibraryCore.Responses;
 using LibraryDatabase.Model;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,19 +35,23 @@ namespace Authentication.Server.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateProfil([FromBody] ProfilDto profil)
         {
+            ControllerResponse response = new ControllerResponse();
             if (_profilService is not null)
             {
-                ServiceResponse response = await _profilService.UpdateProfil(profil);
-                if (! response.HasError)
+                ServiceResponse serviceResponse = await _profilService.UpdateProfil(profil);
+
+                if (! serviceResponse.HasError)
                 {
                     return Ok(response);
                 }
                 else
                 {
+                    response.Error = serviceResponse.Error;
                     return BadRequest(response);
                 }
             }
-            return BadRequest();
+            response.ClearAndAddError("A profil frissítés nem lehetséges!");
+            return BadRequest(response);
         }
 
     }

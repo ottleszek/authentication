@@ -4,6 +4,9 @@ namespace Authentication.Client.Library.ViewModels.User
 {
     public interface IProfilViewModel
     {
-        public ProfilDto GetProfilBy(string email);
+        public ProfilDto ProfilDto { get; set; }
+
+        public Task GetProfilBy(string email);
+        public Task UpdateProfil();
     }
 }

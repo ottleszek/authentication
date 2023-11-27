@@ -28,28 +28,20 @@ namespace Authentication.Shared.Services.Accounts
                 try
                 {
                     HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"api/Registration/register", user);
-                    if (!response.IsSuccessStatusCode)
-                    {
-                        string content = await response.Content.ReadAsStringAsync();
-                        authenticationResponse = JsonConvert.DeserializeObject<AuthenticationResponseDto>(content);
-                        if (authenticationResponse is null)
-                        {
-                            authenticationResponse = new AuthenticationResponseDto();
-                            authenticationResponse.ClearAndAddError("Hiba történt! A felhasználói adatok elérése nem lehetséges!");
-                        }
-                    }
+
+                    string content = await response.Content.ReadAsStringAsync();
+                    authenticationResponse = JsonConvert.DeserializeObject<AuthenticationResponseDto>(content);
+                    if (authenticationResponse is not null)                    
+                        return authenticationResponse;                    
                 }
                 catch (Exception ex)
                 {
                     LibraryLogging.LoggingBroker.LogError($"{ex.Message}");
-                    if (authenticationResponse is null)
-                        authenticationResponse = new AuthenticationResponseDto();
-                    authenticationResponse.ClearAndAddError("A felhasználói adatok elérése nem lehetséges!");
-                    return authenticationResponse;
                 }
-
             }
+            authenticationResponse ??= new AuthenticationResponseDto();
+            authenticationResponse.ClearAndAddError("A felhasználói adatok elérése nem lehetséges!");
             return authenticationResponse;
-        }
+        }        
     }
 }

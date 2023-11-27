@@ -9,7 +9,13 @@
 
 <div class="d-flex justify-content-center">
     <MudCard Width="500px">
-        @if (LoginViewModel is not null && validation is not null)
+        @if (LoginViewModel is null || validation is null)
+        {
+            <MudChip Class="pt-2 d-flex justify-content-center" Color="Color.Error">
+                <p>A rendszerbe való bejelentekzés nem lehetséges!</p>
+            </MudChip>
+        }
+        else
         {
             <MudForm Model="LoginViewModel" @ref="_form" Validation="validation.ValidateValue">
                 @if (ErrorString.HasError)
