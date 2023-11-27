@@ -1,4 +1,4 @@
-﻿using AuthenticationLibrary.Shared.Dtos;
+﻿using Authentication.Shared.Dtos;
 using LibraryCore.Errors;
 
 namespace AuthenticationLibrary.Services.Accounts

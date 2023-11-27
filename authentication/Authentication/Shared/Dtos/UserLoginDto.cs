@@ -1,4 +1,4 @@
-﻿namespace AuthenticationLibrary.Shared.Dtos
+﻿namespace Authentication.Shared.Dtos
 {
     public class UserLoginDto
     {

@@ -2,7 +2,7 @@
 using System.Net.Http.Json;
 using System.Text.RegularExpressions;
 
-namespace AuthenticationLibrary.ViewModels.Accounts
+namespace Authentication.Client.Library.ViewModels.Accounts
 {
     public class RegistrationValidation : AbstractValidator<RegistrationViewModel>
     {

@@ -1,6 +1,6 @@
-﻿using AuthenticationLibrary.Shared.Dtos;
+﻿using Authentication.Shared.Dtos;
 
-namespace AuthenticationLibrary.ViewModels.Login
+namespace Authentication.Client.Library.ViewModels.Login
 {
     public interface ILoginViewModel
     {

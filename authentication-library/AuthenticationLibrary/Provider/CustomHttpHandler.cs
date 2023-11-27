@@ -1,6 +1,5 @@
-﻿using AuthenticationLibrary.Services.Token;
-using AuthenticationLibrary.Shared.Dtos;
-using AuthenticationLibrary.ViewModels;
+﻿using Authentication.Shared.Dtos;
+using AuthenticationLibrary.Services.Token;
 using Blazored.LocalStorage;
 using LibraryCore.Errors;
 using Newtonsoft.Json;

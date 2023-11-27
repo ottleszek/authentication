@@ -1,6 +1,6 @@
-﻿namespace AuthenticationLibrary.Shared.Dtos
+﻿namespace Authentication.Client.Library.ViewModels
 {
-    public class RefreshTokenDto
+    public class RefreshTokenViewModel
     {
         public Guid UserId { get; set; }
         public string Token { get; set; } = string.Empty;

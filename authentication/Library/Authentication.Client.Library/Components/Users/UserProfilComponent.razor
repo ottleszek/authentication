@@ -2,14 +2,10 @@
 
 @inherits UserIdentificationBase
 
-<p>@email</p>
+<MudCard>
+    <MudForm >
+        <MudCardContent>
 
-@code {
-    private string email = string.Empty;
-
-    protected override async Task OnInitializedAsync()
-    {
-        email = await GetUserEmail();
-        await base.OnInitializedAsync();
-    }
-}
+        </MudCardContent>
+    </MudForm>
+</MudCard>

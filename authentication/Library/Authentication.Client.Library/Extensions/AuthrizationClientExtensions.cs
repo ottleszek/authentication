@@ -1,9 +1,9 @@
-﻿using Authentication.Shared.Models;
+﻿using Authentication.Client.Library.ViewModels.Accounts;
+using Authentication.Client.Library.ViewModels.Login;
+using Authentication.Shared.Models;
 using AuthenticationLibrary.Provider;
 using AuthenticationLibrary.Services.Accounts;
 using AuthenticationLibrary.Services.Token;
-using AuthenticationLibrary.ViewModels.Accounts;
-using AuthenticationLibrary.ViewModels.Login;
 using Blazored.LocalStorage;
 using LibraryClientServiceTemplate.ApiServices;
 using LibraryClientServiceTemplate.ModelBrokerConnectors;
@@ -12,7 +12,7 @@ using LibraryDataBrokerProject;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AuthenticationLibrary.Extensions
+namespace Authentication.Client.Library.Extensions
 {
     public static class AuthrizationClientExtensions
     {

@@ -1,4 +1,4 @@
-﻿using AuthenticationLibrary.Shared.Dtos;
+﻿using Authentication.Shared.Dtos;
 
 namespace AuthenticationLibrary.Services.Accounts
 {

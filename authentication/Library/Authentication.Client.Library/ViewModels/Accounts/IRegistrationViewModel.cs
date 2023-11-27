@@ -1,6 +1,6 @@
-﻿using AuthenticationLibrary.Shared.Dtos;
+﻿using Authentication.Shared.Dtos;
 
-namespace AuthenticationLibrary.ViewModels.Accounts
+namespace Authentication.Client.Library.ViewModels.Accounts
 {
     public interface IRegistrationViewModel
     {

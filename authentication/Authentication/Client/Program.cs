@@ -1,6 +1,5 @@
 using Authentication.Client;
-using AuthenticationLibrary.Extensions;
-using AuthenticationLibrary.Provider;
+using Authentication.Client.Library.Extensions;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.JSInterop;

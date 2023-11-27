@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace AuthenticationLibrary.ViewModels.Login
+namespace Authentication.Client.Library.ViewModels.Login
 {
     public class LoginValidation : AbstractValidator<LoginViewModel>
     {

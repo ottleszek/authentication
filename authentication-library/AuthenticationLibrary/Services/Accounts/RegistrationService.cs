@@ -1,4 +1,4 @@
-﻿using AuthenticationLibrary.Shared.Dtos;
+﻿using Authentication.Shared.Dtos;
 using Newtonsoft.Json;
 using System.Net.Http.Json;
 

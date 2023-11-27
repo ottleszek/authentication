@@ -1,5 +1,5 @@
-﻿using AuthenticationLibrary.Services.Token;
-using AuthenticationLibrary.Shared.Dtos;
+﻿using Authentication.Shared.Dtos;
+using AuthenticationLibrary.Services.Token;
 using LibraryCore.Errors;
 using Newtonsoft.Json;
 using System.Net.Http.Json;

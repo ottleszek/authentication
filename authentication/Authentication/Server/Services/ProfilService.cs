@@ -1,4 +1,5 @@
 ﻿using Authentication.Server.Repos;
+using Authentication.Shared.Dtos;
 using Authentication.Shared.Models;
 using LibraryDatabase.Model;
 using LibraryLogging;
@@ -14,18 +15,20 @@ namespace Authentication.Server.Services
             _profilRepo = profilRepo;
         }
 
-        public async Task<User> GetUserBy(string email)
+        public async Task<ProfilDto> GetUserBy(string email)
         {
-            User? result=null;
+            User? user=null;
             if (_profilRepo is not null)
-                 result=await _profilRepo.GetUserBy(email);
-            if (result is not null)
-                return result;
-            return new User();
+                 user=await _profilRepo.GetUserBy(email);
+            if (user is not null)
+            {
+                return ProfilDto.ConvertToProfilDto(user);
+            }
+            return new ProfilDto();
             
         }
 
-        public async Task<ServiceResponse> UpdateProfil(User user)
+        public async Task<ServiceResponse> UpdateProfil(ProfilDto profilDto)
         {
             ServiceResponse response = new ServiceResponse();
             if (_profilRepo is null)
@@ -33,13 +36,23 @@ namespace Authentication.Server.Services
                 response.ClearAndAddError("A felhasználó profil frissítése nem lehetséges!");
                 return response;
             }
-            if (!user.IsValidUser)
+            if (!profilDto.IsValidUser)
             {
-                response.ClearAndAddError("A felhasználó profil adatai hibásak, a felhasználó nem methető!");
+                response.ClearAndAddError("A felhasználó profil adatai hibásak, a profil frissítés nem lehetséges!");
                 return response;
             }
             else
             {
+                User? user = await _profilRepo.GetUserBy(profilDto.Email);
+                if (user is null)
+                {
+                    response.ClearAndAddError("A felhasználó a megadott email címmel nem található,a profil frissítés nem lehetséges!");
+                    return response;
+                }
+
+                user.FirstName = profilDto.FirstName;
+                user.LastName = profilDto.LastName;
+
                 RepositoryResponse repoResponse = await _profilRepo.UpdateProfil(user);
                 if (response.HasError)
                 {
