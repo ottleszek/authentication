@@ -1,9 +1,11 @@
 ﻿using Authentication.Client.Library.ViewModels.Accounts;
 using Authentication.Client.Library.ViewModels.Login;
+using Authentication.Client.Library.ViewModels.User;
 using Authentication.Shared.Models;
+using Authentication.Shared.Services.Accounts;
+using Authentication.Shared.Services.Token;
+using AuthenticationLibrary.LocalStorage;
 using AuthenticationLibrary.Provider;
-using AuthenticationLibrary.Services.Accounts;
-using AuthenticationLibrary.Services.Token;
 using Blazored.LocalStorage;
 using LibraryClientServiceTemplate.ApiServices;
 using LibraryClientServiceTemplate.ModelBrokerConnectors;
@@ -21,6 +23,7 @@ namespace Authentication.Client.Library.Extensions
             // ViewModel
             services.AddScoped<IRegistrationViewModel, RegistrationViewModel>();
             services.AddScoped<ILoginViewModel, LoginViewModel>();
+            services.AddScoped<IProfilViewModel, ProfilViewModel>();
         }
 
         public static void ConfigureAuthenticationServices(this IServiceCollection services)

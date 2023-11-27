@@ -1,6 +1,6 @@
 ﻿using Authentication.Shared.Dtos;
 
-namespace AuthenticationLibrary.Services.Accounts
+namespace Authentication.Shared.Services.Accounts
 {
     public interface IRegistrationService
     {

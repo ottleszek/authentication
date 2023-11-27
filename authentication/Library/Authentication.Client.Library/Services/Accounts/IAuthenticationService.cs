@@ -1,7 +1,7 @@
 ﻿using Authentication.Shared.Dtos;
 using LibraryCore.Errors;
 
-namespace AuthenticationLibrary.Services.Accounts
+namespace Authentication.Shared.Services.Accounts
 {
     public interface IAuthenticationService
     {

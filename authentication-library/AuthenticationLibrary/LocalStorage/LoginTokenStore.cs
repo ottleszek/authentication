@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Components;
 using LibraryCore.Errors;
 
-namespace AuthenticationLibrary.Services.Token
-{
+namespace AuthenticationLibrary.LocalStorage
+{ 
     public class LoginTokenStore : ILoginTokenStore
     {
     

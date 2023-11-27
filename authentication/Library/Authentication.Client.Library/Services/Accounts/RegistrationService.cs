@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using System.Net.Http.Json;
 
-namespace AuthenticationLibrary.Services.Accounts
+namespace Authentication.Shared.Services.Accounts
 {
     public class RegistrationService : IRegistrationService
     {

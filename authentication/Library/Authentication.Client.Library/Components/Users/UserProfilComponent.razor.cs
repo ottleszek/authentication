@@ -1,12 +1,19 @@
-﻿namespace Authentication.Client.Library.Components.Users
+﻿using Authentication.Client.Library.ViewModels.User;
+using Microsoft.AspNetCore.Components;
+
+namespace Authentication.Client.Library.Components.Users
 {
     public partial class UserProfilComponent : UserIdentificationBase
     {
-        private string email = string.Empty;
+        private string _userEmail = string.Empty;
+        [Inject] IProfilViewModel? ProfilViewModel {get; set;}
+
 
         protected override async Task OnInitializedAsync()
         {
-            email = await GetUserEmail();
+            _userEmail = await GetUserEmail();
+
+
             await base.OnInitializedAsync();
         }
     }

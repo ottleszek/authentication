@@ -1,7 +1,7 @@
 ﻿using LibraryCore.Errors;
 
-namespace AuthenticationLibrary.Services.Token
-{
+namespace AuthenticationLibrary.LocalStorage
+{ 
     public interface ILoginTokenStore
     {
         public Task<ErrorStore> SaveAccessTokenAndRefreshToken(string accessJwtToken, string refreshToken);

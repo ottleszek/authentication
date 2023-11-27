@@ -2,9 +2,13 @@
 
 namespace Authentication.Client.Library.ViewModels.User
 {
-    public class ProfilViewModel
+    public class ProfilViewModel : IProfilViewModel
     {
-        private ProfilDto model= new ProfilDto();
+        private ProfilDto _model= new ProfilDto();
 
+        public ProfilDto GetProfilBy(string email)
+        {
+        
+        }
     }
 }

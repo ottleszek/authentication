@@ -1,4 +1,5 @@
 ﻿using Authentication.Server.Services;
+using Authentication.Shared.Dtos;
 using Authentication.Shared.Models;
 using LibraryDatabase.Model;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +22,7 @@ namespace Authentication.Server.Controllers
         {
             if (_profilService is not null)
             {
-                User result = await _profilService.GetUserBy(email);
+                ProfilDto result = await _profilService.GetUserBy(email);
                 if (result.IsValidUser)
                 {
                     return Ok(result);
@@ -31,7 +32,7 @@ namespace Authentication.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateProfil([FromBody] User profil)
+        public async Task<IActionResult> UpdateProfil([FromBody] ProfilDto profil)
         {
             if (_profilService is not null)
             {

@@ -1,4 +1,4 @@
-﻿namespace AuthenticationLibrary.Services.Token
+﻿namespace Authentication.Shared.Services.Token
 {
     public interface INofifyAuthenticationService
     {

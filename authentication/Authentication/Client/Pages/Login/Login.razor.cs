@@ -1,6 +1,6 @@
 ﻿using Authentication.Client.Library.ViewModels.Login;
 using Authentication.Shared.Dtos;
-using AuthenticationLibrary.Services.Accounts;
+using Authentication.Shared.Services.Accounts;
 using LibraryCore.Errors;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;

@@ -1,16 +1,17 @@
 ﻿using Authentication.Shared.Dtos;
-using AuthenticationLibrary.Services.Token;
+using Authentication.Shared.Services.Token;
+using AuthenticationLibrary.LocalStorage;
 using LibraryCore.Errors;
 using Newtonsoft.Json;
 using System.Net.Http.Json;
 
-namespace AuthenticationLibrary.Services.Accounts
+namespace Authentication.Shared.Services.Accounts
 {
     public class AuthenticationService : IAuthenticationService
     {
         private readonly HttpClient _httpClient;
         private readonly ILoginTokenStore? _accessAndRefreshTokenService;
-        private readonly INofifyAuthenticationService _nofifyAuthenticationService;
+        private readonly INofifyAuthenticationService? _nofifyAuthenticationService;
 
 
         public AuthenticationService(IHttpClientFactory httpClientFactory, ILoginTokenStore loginTokenStore, INofifyAuthenticationService nofifyAuthenticationService)

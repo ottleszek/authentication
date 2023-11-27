@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.Authorization;
 using AuthenticationLibrary.Provider;
 
-namespace AuthenticationLibrary.Services.Token
+namespace Authentication.Shared.Services.Token
 {
     public class NofifyAuthenticationService : INofifyAuthenticationService
     {
