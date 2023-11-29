@@ -24,7 +24,8 @@ namespace Authentication.Client.Library.Extensions
             // ViewModel
             services.AddScoped<IRegistrationViewModel, RegistrationViewModel>();
             services.AddScoped<ILoginViewModel, LoginViewModel>();
-            services.AddScoped<IProfilViewModel, ProfilViewModel>();
+            //services.AddScoped<IProfilViewModel, ProfilViewModel>();
+            services.AddScoped<ProfilViewModel>();
         }
 
         public static void ConfigureAuthenticationServices(this IServiceCollection services)
