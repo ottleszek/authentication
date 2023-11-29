@@ -19,7 +19,12 @@ namespace Authentication.Client.Library.Services.Profil
             ProfilDto? response =new ();
             if (_httpClient is not null)
             {
-                response = await _httpClient.GetFromJsonAsync<ProfilDto>($"api/Profil/{email}");
+                try
+                {
+                    response = await _httpClient.GetFromJsonAsync<ProfilDto>($"api/Profil/{email}");
+                }
+                catch(Exception)
+                { }
                 if (response is object)
                     return response;                
             }
