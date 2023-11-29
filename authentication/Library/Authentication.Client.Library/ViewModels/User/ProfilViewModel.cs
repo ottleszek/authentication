@@ -1,10 +1,11 @@
 ﻿using Authentication.Client.Library.Services.Profil;
 using Authentication.Shared.Dtos;
+using CommunityToolkit.Mvvm.ComponentModel;
 using LibraryCore.Responses;
 
 namespace Authentication.Client.Library.ViewModels.User
 {
-    public class ProfilViewModel : IProfilViewModel
+    public partial class ProfilViewModel : ObservableObject, IProfilViewModel
     {
         private IProfilService? _profilService;
 
@@ -12,8 +13,9 @@ namespace Authentication.Client.Library.ViewModels.User
         {
             _profilService = profilService;
         }
-
-        public ProfilDto ProfilDto { get; set; } = new ProfilDto();
+        
+        [ObservableProperty]
+        public ProfilDto _profilDto = new();
 
         public async Task GetProfilBy(string email)
         {
