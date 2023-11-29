@@ -1,4 +1,8 @@
 ﻿@namespace Authentication.Client.Library.Components
+@using Authentication.Client.Library.ViewModels.User
+@using LibraryMvvm.Base
+
+@inherits MvvmComponentBase<ProfilViewModel>
 
 @if (string.IsNullOrEmpty(UserEmail))
 {
@@ -6,54 +10,54 @@
 }
 else
 {
-<MudBreadcrumbs Items="_items" Separator=">"></MudBreadcrumbs>
+    <MudBreadcrumbs Items="_items" Separator=">"></MudBreadcrumbs>
 
-<MudCard>
-    @if (ProfilViewModel is null || ! ProfilViewModel.ProfilDto.IsValidUser)
-    {
-        <MudAlert>A profil adatok megjelenítése nem lehetséges!</MudAlert>
-    }
-    else
-    {
-        <MudForm 
-            Model="ProfilViewModel"
-        >
-            <MudCardContent>
-                <MudTextField @bind-Value="ProfilViewModel.ProfilDto.LastName"                              
-                                Immediate=true
-                                Required="true"
-                                RequiredError="A vezetéknév szükséges!"
-                                Label="Vezetéknév" 
-                                ReadOnly="@_isReadOnly"
-                                />
-                <MudTextField @bind-Value="ProfilViewModel.ProfilDto.FirstName"
-                                Immediate=true
-                                Required="true"
-                                RequiredError="A keresztnév szükséges!"
-                                Label="Keresztnév"
-                                ReadOnly="@_isReadOnly"
-                                />
-                <MudTextField @bind-Value="ProfilViewModel.ProfilDto.Email"
-                                Immediate=true
-                                Required="true"
-                                Disabled="true"
-                                RequiredError="Az email cím szükséges!"
-                                InputType="InputType.Email"
-                                Label="Email" 
-                                />
-            </MudCardContent>
-            <MudCardActions>
-                @if (_isReadOnly)
-                {
-                    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="ChangeToModify">Módosítás</MudButton>
-                }
-                else
-                {
-                    <MudButton Variant="Variant.Filled" Color="Color.Primary">Mentés</MudButton>
-                    <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Secondary" OnClick="ChangeToReadonly">Mégsem</MudButton>
-                }
-            </MudCardActions>
-        </MudForm>
-    }
-</MudCard>
+    <MudCard>
+        @if (ViewModel is null || ! ViewModel.ProfilDto.IsValidUser)
+        {
+            <MudAlert>A profil adatok megjelenítése nem lehetséges!</MudAlert>
+        }
+        else
+        {
+            <MudForm 
+                Model="ViewModel"
+            >
+                <MudCardContent>
+                    <MudTextField @bind-Value="ViewModel.ProfilDto.LastName"                              
+                                    Immediate=true
+                                    Required="true"
+                                    RequiredError="A vezetéknév szükséges!"
+                                    Label="Vezetéknév" 
+                                    ReadOnly="@_isReadOnly"
+                                    />
+                    <MudTextField @bind-Value="ViewModel.ProfilDto.FirstName"
+                                    Immediate=true
+                                    Required="true"
+                                    RequiredError="A keresztnév szükséges!"
+                                    Label="Keresztnév"
+                                    ReadOnly="@_isReadOnly"
+                                    />
+                    <MudTextField @bind-Value="ViewModel.ProfilDto.Email"
+                                    Immediate=true
+                                    Required="true"
+                                    Disabled="true"
+                                    RequiredError="Az email cím szükséges!"
+                                    InputType="InputType.Email"
+                                    Label="Email" 
+                                    />
+                </MudCardContent>
+                <MudCardActions>
+                    @if (_isReadOnly)
+                    {
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="ChangeToModify">Módosítás</MudButton>
+                    }
+                    else
+                    {
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary">Mentés</MudButton>
+                        <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Secondary" OnClick="ChangeToReadonly">Mégsem</MudButton>
+                    }
+                </MudCardActions>
+            </MudForm>
+        }
+    </MudCard>
 }
