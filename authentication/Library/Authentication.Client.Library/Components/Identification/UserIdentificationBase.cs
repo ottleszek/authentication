@@ -2,7 +2,6 @@
 using AuthenticationLibrary.Provider.UserIdentification;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using System.Data;
 using System.Security.Claims;
 
 namespace Authentication.Client.Library.Components
@@ -10,29 +9,12 @@ namespace Authentication.Client.Library.Components
     public class UserIdentificationBase : ComponentBase
     {
         // Kiolvassa a felhasználói adatokat
-
         [Inject] private AuthenticationStateProvider? AuthenticationStateProvider { get; set; }
-        //[Inject] private IUserIdentificaitonProvider? UserIdentificationProvider { get; set; }
 
-        protected UserIdentificationData? userIdentificationData=null;
+        protected UserIdentificationData? userIdentificationData = null;
 
         protected override async Task OnInitializedAsync()
         {
-            /*if (AuthenticationStateProvider is not null)
-            {
-                AuthenticationState authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-                ClaimsPrincipal user = authState.User;
-                if (user.Identity is not null && user.Identity.IsAuthenticated)
-                {
-                    userIdentificationData = new();
-                    userIdentificationData.IsAuthenticated = true;
-                }
-                else
-                {
-                    userIdentificationData = new();
-                    userIdentificationData.IsAuthenticated = true;
-                }
-            }*/
             await base.OnInitializedAsync();
         }
 
@@ -40,7 +22,7 @@ namespace Authentication.Client.Library.Components
         {
             List<Claim>? claims = await GetClaims();
             if (claims is not null)
-                return UserIdentificationDataExtensions.GetUserEmail(claims) ;
+                return UserIdentificationDataExtensions.GetUserEmail(claims);
             return string.Empty;
         }
 
@@ -67,7 +49,7 @@ namespace Authentication.Client.Library.Components
             List<Claim>? claims = await GetClaims();
             if (claims is not null)
             {
-               return UserIdentificationDataExtensions.GetDebugDataFrom(claims);
+                return UserIdentificationDataExtensions.GetDebugDataFrom(claims);
             }
             return string.Empty;
         }

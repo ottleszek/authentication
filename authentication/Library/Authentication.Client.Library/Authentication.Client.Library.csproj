@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="7.0.13" />
     <PackageReference Include="MudBlazor" Version="6.11.0" />
@@ -21,6 +22,10 @@
     <ProjectReference Include="..\..\..\authentication-library\AuthenticationLibrary\AuthenticationLibrary.csproj" />
     <ProjectReference Include="..\..\..\library-blazor-client\LibraryBlazorClient\LibraryBlazorClient.csproj" />
     <ProjectReference Include="..\..\Authentication\Shared\Authentication.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\Base\" />
   </ItemGroup>
 
 </Project>

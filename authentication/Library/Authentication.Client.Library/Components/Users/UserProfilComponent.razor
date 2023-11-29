@@ -2,40 +2,27 @@
 
 @inherits UserIdentificationBase
 
-<MudBreadcrumbs Items="_items" Separator=">"></MudBreadcrumbs>
+@if (string.IsNullOrEmpty(_userEmail))
+{
+    <MudText>A felhasználó meghatározása nem sikerült!</MudText>
+}
+else
+{
+    <ShowProfiForm UserEmail="@_userEmail">
+    </ShowProfiForm>
+}
+@code {
+    private string _userEmail = string.Empty;
 
-<MudCard>
-    @if (ProfilViewModel is null)
+    protected async override Task OnInitializedAsync()
     {
-        <MudChip Class="pt-2 d-flex justify-content-center" Color="Color.Error">
-            <p>A profil adatok megjelenítése nem lehetséges!</p>
-        </MudChip>
+        _userEmail = await GetUserEmail();
+        await base.OnInitializedAsync();
     }
-    else
+
+    /*protected override async Task OnParametersSetAsync()
     {
-        <MudForm 
-            Model="ProfilViewModel"
-            ReadOnly="_isReadOnly"
-        >
-            <MudCardContent>
-                <MudTextField @bind-Value="ProfilViewModel.ProfilDto.LastName"                              
-                              Immediate=true
-                              Required="true"
-                              RequiredError="A vezetéknév szükséges!"
-                              Label="Vezetéknév" />
-                <MudTextField @bind-Value="ProfilViewModel.ProfilDto.FirstName"
-                              Immediate=true
-                              Required="true"
-                              RequiredError="A keresztnév szükséges!"
-                              Label="Keresztnév" />
-                <MudTextField @bind-Value="ProfilViewModel.ProfilDto.Email"
-                              Immediate=true
-                              Required="true"
-                              ReadOnly="true"
-                              RequiredError="Az email cím szükséges!"
-                              InputType="InputType.Email"
-                              Label="Email" />
-            </MudCardContent>
-        </MudForm>
-    }
-</MudCard>
+        _userEmail = await GetUserEmail();
+        await base.OnParametersSetAsync();
+    }*/
+}
