@@ -1,17 +1,43 @@
-﻿using Authentication.Shared.Dtos;
+﻿using Authentication.Client.Library.Validation;
+using Authentication.Shared.Dtos;
+using Authentication.Shared.Services.Accounts;
+using CommunityToolkit.Mvvm.ComponentModel;
+using LibraryCore.Errors;
+using LibraryMvvm.Base;
+using Microsoft.AspNetCore.Components;
 
 namespace Authentication.Client.Library.ViewModels.Login
 {
-    public class LoginViewModel : ILoginViewModel
+    public partial class LoginViewModel : ViewModelBase
     {
-        public string Email { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
+        [Inject] private IAuthenticationService? _authenticationService { get; set; }
 
-        public UserLoginDto ConvertToUserLoginDto => new UserLoginDto
+        [ObservableProperty]
+        private EmailValidation? validation = new();
+
+        [ObservableProperty]
+        private UserLoginDto _user = new();
+
+        [ObservableProperty]
+        private ErrorStore errorString = new();        
+
+        public async Task LoginAsync()
         {
-            Email = Email,
-            Password = Password
-        };
+            try
+            {
+                if (_authenticationService is not null)
+                {
+                    ErrorString = await _authenticationService.LoginAsync(User);
+                    return;
+                }
 
+            }
+            catch (Exception ex)
+            {
+                LibraryLogging.LoggingBroker.LogError(ex.Message);
+                
+            }
+            ErrorString.ClearAndAddError("Bejelentkezés nem lehetséges");
+        }
     }
 }

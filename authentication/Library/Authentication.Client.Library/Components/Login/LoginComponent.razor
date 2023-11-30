@@ -1,0 +1,60 @@
+﻿@namespace Authentication.Client.Library.Components
+
+@inherits MvvmComponentBase<LoginViewModel>
+
+<div class="d-flex justify-content-center">
+    <MudCard Width="500px">
+        @if (ViewModel is null)
+        {
+            {
+                <MudChip Class="pt-2 d-flex justify-content-center" Color="Color.Error">
+                    <p>A rendszerbe való bejelentekzés nem lehetséges!</p>
+                </MudChip>
+            }
+        }
+        else
+        {
+            if (ViewModel.Validation is not null)
+            {
+                <MudForm Model="ViewModel" @ref="_form" Validation="ViewModel.Validation.ValidateValue">
+                    @if (ViewModel.ErrorString.HasError)
+                    {
+                        <MudChip Class="pt-2 d-flex justify-content-center" Color="Color.Error">
+                            <p>@ViewModel.ErrorString.Error</p>
+                        </MudChip>
+                    }
+                    <MudCardContent>
+                        <MudTextField @bind-Value="ViewModel.User.Email"
+                                      For="@( () => ViewModel.User.Email)"
+                                      Immediate="true"
+                                      Required="true"
+                                      InputType="InputType.Email"
+                                      RequiredError="Az email cím szükséges!"
+                                      Label="Email" />
+                        <MudTextField @bind-Value="ViewModel.User.Password"
+                                      For="@( () => ViewModel.User.Password)"
+                                      Immediate="true"
+                                      Required="true"
+                                      RequiredError="A jelszó szükséges!"
+                                      InputType="InputType.Password"
+                                      Label="Jelszó" />
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton Variant="Variant.Filled"
+                                   Color="Color.Primary"
+                                   Class="ml-auto"
+                                   OnClick="LoginAsync">
+                            Bejelentkezés
+                        </MudButton>
+                        <MudButton Variant="Variant.Outlined"
+                                   Color="Color.Secondary"
+                                   Class="ml-auto"
+                                   OnClick="GoToRegister">
+                            Regisztráció
+                        </MudButton>
+                </MudCardActions>
+                </MudForm>
+            }
+        }
+    </MudCard>
+</div>
