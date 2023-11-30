@@ -15,16 +15,12 @@ namespace Authentication.Client.Library.ViewModels.User
         {
             _profilService = profilService;
         }
+
+        public string Email { get; set; } = string.Empty;
         
         [ObservableProperty]
         public ProfilDto _profilDto = new();
-
-        public async Task GetProfilBy(string email)
-        {
-            if (_profilService is not null)
-                ProfilDto = await _profilService.GetProfilBy(email);
-        }
-        
+       
         [RelayCommand]
         public async Task UpdateProfil()
         {
@@ -35,6 +31,21 @@ namespace Authentication.Client.Library.ViewModels.User
                 {
                 }
             }
+        }
+
+        public async override Task Loading()
+        {
+            if (!string.IsNullOrEmpty(Email))
+            {
+                await GetProfil();
+                await base.Loading();
+            }
+        }
+
+        public async Task GetProfil()
+        {
+            if (_profilService is not null)
+                ProfilDto = await _profilService.GetProfilBy(Email);
         }
     }
 }

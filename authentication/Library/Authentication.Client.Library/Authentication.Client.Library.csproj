@@ -6,6 +6,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="ViewModels\Base\**" />
+    <Content Remove="ViewModels\Base\**" />
+    <EmbeddedResource Remove="ViewModels\Base\**" />
+    <None Remove="ViewModels\Base\**" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />
@@ -23,10 +30,6 @@
     <ProjectReference Include="..\..\..\library-blazor-client\LibraryBlazorClient\LibraryBlazorClient.csproj" />
     <ProjectReference Include="..\..\..\library-mvvm\LibraryMvvm\LibraryMvvm.csproj" />
     <ProjectReference Include="..\..\Authentication\Shared\Authentication.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ViewModels\Base\" />
   </ItemGroup>
 
 </Project>

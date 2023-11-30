@@ -7,13 +7,13 @@ namespace LibraryMvvm.Base
     {
         public virtual async Task OnInitializedAsync()
         {
-            await Loaded().ConfigureAwait(true);
+            await Loading().ConfigureAwait(true);
         }
 
         protected virtual void NotifyStateChanged() => OnPropertyChanged((string?)null);
 
         [RelayCommand]
-        public virtual async Task Loaded()
+        public virtual async Task Loading()
         {
             await Task.CompletedTask.ConfigureAwait(false);
         }

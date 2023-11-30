@@ -9,7 +9,6 @@ namespace Authentication.Client.Library.Components
     public partial class ShowProfiForm : MvvmComponentBase<ProfilViewModel>
     {
         [Parameter] public string? UserEmail { get; set; }
-        //[Inject] private IProfilViewModel? ProfilViewModel { get; set; }
 
         private bool _isReadOnly = true;
         private ProfilDto tempProfil = new();
@@ -24,7 +23,8 @@ namespace Authentication.Client.Library.Components
         {
             if (!string.IsNullOrEmpty(UserEmail) && ViewModel is not null)
             {
-                await ViewModel.GetProfilBy(UserEmail);
+                ViewModel.Email = UserEmail;
+                await ViewModel.Loading();
                 tempProfil = ViewModel.ProfilDto;
             }
             await base.OnParametersSetAsync();

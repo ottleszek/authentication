@@ -5,6 +5,6 @@ namespace LibraryMvvm.Base
     public interface IViewModelBase : INotifyPropertyChanged
     {
         Task OnInitializedAsync();
-        Task Loaded();
+        Task Loading();
     }
 }
