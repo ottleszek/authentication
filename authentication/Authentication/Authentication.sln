@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryBlazorClient", "..\.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authentication.Client.Library", "..\Library\Authentication.Client.Library\Authentication.Client.Library.csproj", "{FD1835A3-2F04-45C5-8436-F0D1375FE600}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryMvvm", "..\..\library-mvvm\LibraryMvvm\LibraryMvvm.csproj", "{9E2881B8-2FE0-4640-828A-65C7C4778350}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryMvvm", "..\..\library-mvvm\LibraryMvvm\LibraryMvvm.csproj", "{9E2881B8-2FE0-4640-828A-65C7C4778350}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

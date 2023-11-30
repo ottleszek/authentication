@@ -17,7 +17,7 @@ namespace Authentication.Client.Pages.Login
 
         [Inject] NavigationManager? NavigationManager { get; set; }
 
-        private LoginValidation? validation;
+        private EmailValidation? validation;
 
         private ErrorStore ErrorString = new();
         private MudForm _form = new();
@@ -25,7 +25,7 @@ namespace Authentication.Client.Pages.Login
         protected override Task OnParametersSetAsync()
         {
             if (validation == null)
-                validation = new LoginValidation();
+                validation = new EmailValidation();
             return base.OnParametersSetAsync();
         }
 
