@@ -28,14 +28,14 @@ else
                                     Required="true"
                                     RequiredError="A vezetéknév szükséges!"
                                     Label="Vezetéknév" 
-                                    ReadOnly="@_isReadOnly"
+                                    ReadOnly="@ViewModel.IsReadOnly"
                                     />
                     <MudTextField @bind-Value="ViewModel.ProfilDto.FirstName"
                                     Immediate=true
                                     Required="true"
                                     RequiredError="A keresztnév szükséges!"
                                     Label="Keresztnév"
-                                    ReadOnly="@_isReadOnly"
+                                    ReadOnly="@ViewModel.IsReadOnly"
                                     />
                     <MudTextField @bind-Value="ViewModel.ProfilDto.Email"
                                     Immediate=true
@@ -47,14 +47,14 @@ else
                                     />
                 </MudCardContent>
                 <MudCardActions>
-                    @if (_isReadOnly)
+                    @if (ViewModel.IsReadOnly)
                     {
-                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="ChangeToModify">Módosítás</MudButton>
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="ViewModel.ChangeToModify">Módosítás</MudButton>
                     }
                     else
                     {
                         <MudButton Variant="Variant.Filled" Color="Color.Primary">Mentés</MudButton>
-                        <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Secondary" OnClick="ChangeToReadonly">Mégsem</MudButton>
+                        <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Secondary" OnClick="ViewModel.ChangeToReadOnly">Mégsem</MudButton>
                     }
                 </MudCardActions>
             </MudForm>

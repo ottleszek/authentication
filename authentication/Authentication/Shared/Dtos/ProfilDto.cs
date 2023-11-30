@@ -10,6 +10,13 @@ namespace Authentication.Shared.Dtos
 
         public bool IsValidUser => !string.IsNullOrEmpty(Email);
 
+        public void Set(ProfilDto profilDto)
+        {
+            FirstName = profilDto.FirstName;
+            LastName = profilDto.LastName;
+            Email = profilDto.Email;
+        }
+
         public static ProfilDto ConvertToProfilDto(User user)
         {
             return new ProfilDto

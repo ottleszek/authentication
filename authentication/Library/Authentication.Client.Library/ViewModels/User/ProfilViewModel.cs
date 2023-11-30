@@ -10,6 +10,7 @@ namespace Authentication.Client.Library.ViewModels.User
     public partial class ProfilViewModel : ViewModelBase, IProfilViewModel
     {
         private IProfilService? _profilService;
+        private ProfilDto tempProfil = new();
 
         public ProfilViewModel(IProfilService profilService)
         {
@@ -17,9 +18,10 @@ namespace Authentication.Client.Library.ViewModels.User
         }
 
         public string Email { get; set; } = string.Empty;
-        
+        public bool IsReadOnly { get; set; } = true;
+
         [ObservableProperty]
-        public ProfilDto _profilDto = new();
+        private ProfilDto _profilDto = new();
        
         [RelayCommand]
         public async Task UpdateProfil()
@@ -31,6 +33,18 @@ namespace Authentication.Client.Library.ViewModels.User
                 {
                 }
             }
+        }
+
+        public void ChangeToModify()
+        {
+            IsReadOnly = false;
+        }
+
+        public void ChangeToReadOnly()
+        {
+            IsReadOnly = true;
+            ProfilDto.Set(tempProfil);
+
         }
 
         public async override Task Loading()
@@ -45,7 +59,12 @@ namespace Authentication.Client.Library.ViewModels.User
         public async Task GetProfil()
         {
             if (_profilService is not null)
+            {
                 ProfilDto = await _profilService.GetProfilBy(Email);
+                tempProfil.Set(ProfilDto);
+            }
         }
+
+        
     }
 }
