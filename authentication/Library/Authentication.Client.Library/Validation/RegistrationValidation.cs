@@ -1,8 +1,9 @@
-﻿using FluentValidation;
+﻿using Authentication.Client.Library.ViewModels.Accounts;
+using FluentValidation;
 using System.Net.Http.Json;
 using System.Text.RegularExpressions;
 
-namespace Authentication.Client.Library.ViewModels.Accounts
+namespace Authentication.Client.Library.Validation
 {
     public class RegistrationValidation : AbstractValidator<RegistrationViewModel>
     {
@@ -13,11 +14,11 @@ namespace Authentication.Client.Library.ViewModels.Accounts
             RuleFor(x => x.LastName)
                 .NotEmpty().WithMessage("A vezetéknév nem lehet üres!")
                 .Matches(@"^[A-ZÍÖÜÓŐÚÉÁŰ][a-zA-ZöüóőúéáűíÍÖÜÓŐÚÉÁŰ]{1,}( {1,2}[A-ZÍÖÜÓŐÚÉÁŰ][a-zA-ZöüóőúéáűíÍÖÜÓŐÚÉÁŰ]{1,}){0,}$")
-                .WithMessage("Csak szabályos vezetéknév fogadható el!");           
+                .WithMessage("Csak szabályos vezetéknév fogadható el!");
             RuleFor(x => x.FirstName)
                 .NotEmpty().WithMessage("A keresztnév nem lehet üres!")
                 .Matches(@"^[A-ZÍÖÜÓŐÚÉÁŰ][a-zA-ZöüóőúéáűíÍÖÜÓŐÚÉÁŰ]{1,}( {1,2}[A-ZÍÖÜÓŐÚÉÁŰ][a-zA-ZöüóőúéáűíÍÖÜÓŐÚÉÁŰ]{1,}){0,}$")
-                .WithMessage("Csak szabályos név fogadható el!"); 
+                .WithMessage("Csak szabályos név fogadható el!");
             RuleFor(x => x.Email)
                 .NotEmpty().WithMessage("Az email nem lehet üres!")
                 .MustAsync(async (value, CancellationToken) => await UniqueEmail(value))
@@ -32,7 +33,7 @@ namespace Authentication.Client.Library.ViewModels.Accounts
                 .Matches(@"[0-9]+").WithMessage("A jelszóban számnak lenni kell!")
                 .Matches(@"[\@\!\?\*\.\+\-\:]+").WithMessage("A jelszóban lenni kell legalább egynek a következők közül: @!?.*+-:");
             RuleFor(x => x.ConfirmPassword).Equal(_ => _.Password).WithMessage("A két jelszó meg kell egyezzen!");
-            
+
             _httpClient = httpClient;
         }
 
@@ -52,7 +53,7 @@ namespace Authentication.Client.Library.ViewModels.Accounts
                 bool result = await _httpClient.GetFromJsonAsync<bool>(url);
                 return result;
             }
-            catch(Exception)
+            catch (Exception)
             {
             }
             return true;

@@ -1,10 +1,11 @@
-﻿using FluentValidation;
+﻿using Authentication.Client.Library.ViewModels.Login;
+using FluentValidation;
 
-namespace Authentication.Client.Library.ViewModels.Login
+namespace Authentication.Client.Library.Validation
 {
     public class LoginValidation : AbstractValidator<LoginViewModel>
     {
-        public LoginValidation() 
+        public LoginValidation()
         {
             RuleFor(x => x.Email)
                 .NotEmpty().WithMessage("Az emailcím nem lehet üres!")

@@ -5,7 +5,7 @@ using MudBlazor;
 
 namespace Authentication.Client.Library.Components
 {
-    public partial class ShowProfiForm : MvvmComponentBase<ProfilViewModel>
+    public partial class ShowProfilForm : MvvmComponentBase<ProfilViewModel>
     {
         [Parameter] public string? UserEmail { get; set; }
 
