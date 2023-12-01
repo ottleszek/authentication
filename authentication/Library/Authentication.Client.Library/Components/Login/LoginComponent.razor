@@ -16,7 +16,7 @@
         {
             if (_validation is not null)
             {
-                <MudForm Model="ViewModel.User" @ref="_form" Validation="validation.ValidateValue">
+                <MudForm Model="ViewModel.User" @ref="_form" Validation="_validation.ValidateValue">
                     @if (ViewModel.ErrorString.HasError)
                     {
                         <MudChip Class="pt-2 d-flex justify-content-center" Color="Color.Error">
