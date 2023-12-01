@@ -22,11 +22,12 @@ namespace Authentication.Client.Library.Extensions
         public static void ConfigureAuthenticationViewModles(this IServiceCollection services)
         {
             // ViewModel
-            services.AddScoped<IRegistrationViewModel, RegistrationViewModel>();
+            //services.AddScoped<IRegistrationViewModel, RegistrationViewModel>();
             //services.AddScoped<ILoginViewModel, LoginViewModel>();
             //services.AddScoped<IProfilViewModel, ProfilViewModel>();
             services.AddScoped<LoginViewModel>();
             services.AddScoped<ProfilViewModel>();
+            services.AddScoped<RegistrationViewModel>();
         }
 
         public static void ConfigureAuthenticationServices(this IServiceCollection services)

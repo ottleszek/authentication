@@ -1,9 +1,13 @@
 ﻿using Authentication.Shared.Dtos;
+using LibraryMvvm.Base;
 
 namespace Authentication.Client.Library.ViewModels.Accounts
 {
-    public class RegistrationViewModel : IRegistrationViewModel
+    public class RegistrationViewModel : ViewModelBase//, IRegistrationViewModel
     {
+
+        //public RegistrationDto RegistrationDto { get; set; }=new RegistrationDto();
+        
         public string FirstName  { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
