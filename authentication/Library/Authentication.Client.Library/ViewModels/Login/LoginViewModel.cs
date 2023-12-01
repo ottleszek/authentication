@@ -11,11 +11,17 @@ namespace Authentication.Client.Library.ViewModels.Login
     {
         private readonly IAuthenticationService? _authenticationService;
 
-//        [ObservableProperty]
-//        private EmailValidation? validation = new();
+        //        [ObservableProperty]
+        //        private EmailValidation? validation = new();
+
+        //[ObservableProperty]
+        //private UserLoginDto _user = new();
 
         [ObservableProperty]
-        private UserLoginDto _user = new();
+        private string _email;
+
+        [ObservableProperty]
+        private string _password;
 
         [ObservableProperty]
         private ErrorStore errorString = new();
