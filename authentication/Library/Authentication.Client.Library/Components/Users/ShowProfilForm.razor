@@ -11,7 +11,7 @@ else
     <MudBreadcrumbs Items="_items" Separator=">"></MudBreadcrumbs>
 
     <MudCard>
-        @if (ViewModel is null || ! ViewModel.ProfilDto.IsValidUser)
+        @if (ViewModel is null || ! ViewModel.IsValidUser)
         {
             <MudAlert>A profil adatok megjelenítése nem lehetséges!</MudAlert>
         }

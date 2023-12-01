@@ -26,7 +26,7 @@ namespace Authentication.Client.Library.ViewModels.User
         public bool IsValidUser => !string.IsNullOrEmpty(Email);
         public bool IsReadOnly { get; set; } = true;
 
-        private ProfilDto _tempProfil = new ProfilDto();
+        private ProfilDto _tempProfil = new ();
 
      
         [RelayCommand]
@@ -34,7 +34,13 @@ namespace Authentication.Client.Library.ViewModels.User
         {
             if (IsValidUser && _profilService is not null)
             {
-                ControllerResponse response = await _profilService.UpdateProfil(ProfilDto);
+                ProfilDto profilDto = new ProfilDto
+                {
+                    FirstName = FirstName,
+                    LastName = LastName,
+                    Email = Email,
+                };
+                ControllerResponse response = await _profilService.UpdateProfil(profilDto);
                 if (response.HasError) 
                 {
                 }
