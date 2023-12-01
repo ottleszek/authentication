@@ -51,7 +51,7 @@ namespace Authentication.Client.Library.Components
             await _form.Validate();
             if (RegistrationService is not null && ViewModel is not null && _form.IsValid)
             {
-                UserRegistrationDto userRegistrationDto = ViewModel.ConverToUserRegistrationDto;
+                UserRegistrationDto userRegistrationDto = ViewModel.UserRegistrationDto;
 
                 AuthenticationResponseDto authenticationResponse = new();
                 try
