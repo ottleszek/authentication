@@ -10,12 +10,10 @@ namespace Authentication.Client.Library.Components
     public partial class LoginComponent : MvvmComponentBase<LoginViewModel>
     {
         [CascadingParameter] public Task<AuthenticationState>? AuthState { get; set; }
-
         [Inject] NavigationManager? NavigationManager { get; set; }
 
-
+        private EmailValidation? _validation = new();
         private MudForm _form = new();
-
 
         protected override async Task OnInitializedAsync()
         {

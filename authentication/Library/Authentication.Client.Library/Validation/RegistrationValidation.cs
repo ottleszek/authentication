@@ -22,6 +22,7 @@ namespace Authentication.Client.Library.Validation
                 .WithMessage("Csak szabályos név fogadható el!");
             RuleFor(x => x.Email)
                 .NotEmpty().WithMessage("Az email nem lehet üres!")
+                .EmailAddress().WithMessage("Helytelen email cím!")
                 .MustAsync(async (value, CancellationToken) => await UniqueEmailExtension.UniqueEmail(value, _httpClient))
                 .When(_ => !string.IsNullOrEmpty(_.Email) && Regex.IsMatch(_.Email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase), ApplyConditionTo.CurrentValidator)
                 .WithMessage("Evvel az emailcímmel már regisztrált felhasználó");

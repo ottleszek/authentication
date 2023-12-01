@@ -7,7 +7,6 @@ namespace LibraryMvvm.Base
         [Inject]
         protected TViewModel? ViewModel { get; set; }
 
-
         protected override void OnInitialized()
         {
             if (ViewModel is not null)

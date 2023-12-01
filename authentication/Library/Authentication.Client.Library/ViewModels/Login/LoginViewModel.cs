@@ -1,25 +1,29 @@
-﻿using Authentication.Client.Library.Validation;
-using Authentication.Shared.Dtos;
+﻿using Authentication.Shared.Dtos;
 using Authentication.Shared.Services.Accounts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using LibraryCore.Errors;
 using LibraryMvvm.Base;
-using Microsoft.AspNetCore.Components;
+
 
 namespace Authentication.Client.Library.ViewModels.Login
 {
     public partial class LoginViewModel : ViewModelBase
     {
-        [Inject] private IAuthenticationService? _authenticationService { get; set; }
+        private readonly IAuthenticationService? _authenticationService;
 
-        [ObservableProperty]
-        private EmailValidation? validation = new();
+//        [ObservableProperty]
+//        private EmailValidation? validation = new();
 
         [ObservableProperty]
         private UserLoginDto _user = new();
 
         [ObservableProperty]
-        private ErrorStore errorString = new();        
+        private ErrorStore errorString = new();
+
+        public LoginViewModel(IAuthenticationService? service)
+        {
+            _authenticationService = service;
+        }
 
         public async Task LoginAsync()
         {
