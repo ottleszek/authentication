@@ -3,6 +3,12 @@
 @inherits MvvmComponentBase<LoginViewModel>
 
 <div class="d-flex justify-content-center">
+    <MudChip Class="pt-2 m-4" Color="Color.Primary">
+        <h3>Login</h3>
+    </MudChip>
+</div>
+
+<div class="d-flex justify-content-center">
     <MudCard Width="500px">
         @if (ViewModel is null)
         {
@@ -16,7 +22,7 @@
         {
             if (_validation is not null)
             {
-                <MudForm Model="ViewModel.User" @ref="_form" Validation="_validation.ValidateValue">
+                <MudForm Model="ViewModel" @ref="_form" Validation="_validation.ValidateValue">
                     @if (ViewModel.ErrorString.HasError)
                     {
                         <MudChip Class="pt-2 d-flex justify-content-center" Color="Color.Error">
@@ -24,15 +30,15 @@
                         </MudChip>
                     }
                     <MudCardContent>
-                        <MudTextField @bind-Value="ViewModel.User.Email"
-                                      For="@( () => ViewModel.User.Email)"
+                        <MudTextField @bind-Value="ViewModel.Email"
+                                      For="@( () => ViewModel.Email)"
                                       Immediate="true"
                                       Required="true"
                                       InputType="InputType.Email"
                                       RequiredError="Az email cím szükséges!"
                                       Label="Email" />
-                        <MudTextField @bind-Value="ViewModel.User.Password"
-                                      For="@( () => ViewModel.User.Password)"
+                        <MudTextField @bind-Value="ViewModel.Password"
+                                      For="@( () => ViewModel.Password)"
                                       Immediate="true"
                                       Required="true"
                                       RequiredError="A jelszó szükséges!"

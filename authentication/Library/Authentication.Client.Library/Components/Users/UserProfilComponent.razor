@@ -8,8 +8,8 @@
 }
 else
 {
-    <ShowProfiForm UserEmail="@_userEmail">
-    </ShowProfiForm>
+    <ShowProfilForm UserEmail="@_userEmail">
+    </ShowProfilForm>
 }
 @code {
     private string _userEmail = string.Empty;
@@ -19,10 +19,4 @@ else
         _userEmail = await GetUserEmail();
         await base.OnInitializedAsync();
     }
-
-    /*protected override async Task OnParametersSetAsync()
-    {
-        _userEmail = await GetUserEmail();
-        await base.OnParametersSetAsync();
-    }*/
 }

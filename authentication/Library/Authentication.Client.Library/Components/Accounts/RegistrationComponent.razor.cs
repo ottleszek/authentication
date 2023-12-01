@@ -14,7 +14,7 @@ namespace Authentication.Client.Library.Components
     {
         [CascadingParameter] public Task<AuthenticationState>? AuthenticationState { get; set; }
         [Inject] private NavigationManager? NavigationManager { get; set; }
-        [Inject] private IRegistrationService? RegistrationService { get; set; }
+        
 
         [Inject] private HttpClient? HttpClient { get; set; }
 
@@ -22,7 +22,6 @@ namespace Authentication.Client.Library.Components
 
         private RegistrationValidation? _validation;
 
-        private ErrorStore ErrorString = new();
         private MudForm _form = new();
 
         protected override Task OnParametersSetAsync()
@@ -49,29 +48,15 @@ namespace Authentication.Client.Library.Components
         private async Task RegisterAsync()
         {
             await _form.Validate();
-            if (RegistrationService is not null && ViewModel is not null && _form.IsValid)
-            {                
+            if (ViewModel is not null && _form.IsValid)
+            {
                 AuthenticationResponseDto authenticationResponse = new();
-                try
+                bool registrationSucces = await ViewModel.UserRegistrationAsync();
+                if (registrationSucces)
                 {
-                    authenticationResponse = await RegistrationService.UserRgistration(ViewModel.CopyToDto());
-                }
-                catch (Exception ex)
-                {
-                    LibraryLogging.LoggingBroker.LogError(ex.Message);
-                    ErrorString.ClearAndAddError("Regisztráció nem lehetséges");
-                }
-
-                if (authenticationResponse.HasError)
-                {
-                    ErrorString.ClearAndAddError(authenticationResponse.Error);
-                }
-                else
-                {
-                    ErrorString.ClearErrorStore();
-                    //LibraryLogging.LoggingBroker.LogInformation("Sikeres regisztráció.");
                     NavigationManager?.NavigateTo("/registration-confirmation");
                 }
+
             }
         }
     }

@@ -11,17 +11,11 @@ namespace Authentication.Client.Library.ViewModels.Login
     {
         private readonly IAuthenticationService? _authenticationService;
 
-        //        [ObservableProperty]
-        //        private EmailValidation? validation = new();
-
-        //[ObservableProperty]
-        //private UserLoginDto _user = new();
+        [ObservableProperty]
+        private string _email=string.Empty;
 
         [ObservableProperty]
-        private string _email;
-
-        [ObservableProperty]
-        private string _password;
+        private string _password=string.Empty;
 
         [ObservableProperty]
         private ErrorStore errorString = new();
@@ -37,10 +31,14 @@ namespace Authentication.Client.Library.ViewModels.Login
             {
                 if (_authenticationService is not null)
                 {
-                    ErrorString = await _authenticationService.LoginAsync(User);
+                    UserLoginDto userLoginDto = new UserLoginDto
+                    {
+                        Email = Email,
+                        Password=Password
+                    };
+                    ErrorString = await _authenticationService.LoginAsync(userLoginDto);
                     return;
                 }
-
             }
             catch (Exception ex)
             {

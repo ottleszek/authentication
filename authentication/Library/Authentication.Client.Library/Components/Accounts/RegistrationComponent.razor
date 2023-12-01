@@ -3,7 +3,7 @@
 @inherits MvvmComponentBase<RegistrationViewModel>
 
 <div class="d-flex justify-content-center">
-    <MudChip Class="pt-2" Color="Color.Primary">
+    <MudChip Class="pt-2 m-4" Color="Color.Primary">
         <h3>Regisztráció</h3>
     </MudChip>
 </div>
@@ -22,10 +22,10 @@
             {
                 <MudForm Model="ViewModel" @ref="_form" Validation="_validation.ValidateValue">
                     <MudCardContent>
-                        @if (ErrorString.HasError)
+                        @if (ViewModel.ErrorString.HasError)
                         {
                             <MudChip class="pt-2 d-flex justify-content-center" Color="Color.Error">
-                                <p>@ErrorString.Error</p>
+                                <p>@ViewModel.ErrorString.Error</p>
                             </MudChip>
                         }
                         <MudTextField @bind-Value="ViewModel.LastName"
