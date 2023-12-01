@@ -20,7 +20,7 @@
         {
             if (_validation is not null)
             {
-                <MudForm Model="ViewModel" @ref="_form" Validation="_validation.ValidateValue">
+                <MudForm Model="ViewModel.UserRegistration" @ref="_form" Validation="_validation.ValidateValue">
                     <MudCardContent>
                         @if (ErrorString.HasError)
                         {
