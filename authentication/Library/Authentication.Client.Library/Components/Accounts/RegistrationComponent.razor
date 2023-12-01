@@ -28,33 +28,39 @@
                                 <p>@ErrorString.Error</p>
                             </MudChip>
                         }
-                        <MudTextField @bind-Value="ViewModel.UserRegistrationDto.LastName"
-                                      For="@( () => ViewModel.UserRegistrationDto.LastName)"
+                        <MudTextField @bind-Value="ViewModel.UserRegistration.LastName"
+                                      For="@( () => ViewModel.UserRegistration.LastName)"
                                       Immediate=true
                                       Required="true"
                                       RequiredError="A vezetéknév szükséges!"
                                       Label="Vezetéknév" />
-                        <MudTextField @bind-Value="ViewModel.UserRegistrationDto.FirstName"
-                                      For="@( () => ViewModel.UserRegistrationDto.FirstName)"
+                        <MudTextField @bind-Value="ViewModel.UserRegistration.FirstName"
+                                      For="@( () => ViewModel.UserRegistration.FirstName)"
                                       Immediate=true
                                       Required="true"
                                       RequiredError="A keresztnév szükséges!"
                                       Label="Keresztnév" />
-                        <MudTextField @bind-Value="ViewModel.UserRegistrationDto.Email"
-                                      For="@( () => ViewModel.UserRegistrationDto.Email)"
+                        <MudTextField @bind-Value="ViewModel.UserRegistration.Email"
+                                      For="@( () => ViewModel.UserRegistration.Email)"
                                       Immediate=true
                                       Required="true"
                                       RequiredError="Az email cím szükséges!"
                                       InputType="InputType.Email"
                                       Label="Email" />
-                        <MudTextField @bind-Value="ViewModel.UserRegistrationDto.Password"
-                                      For="@( () => ViewModel.UserRegistrationDto.Password)"
+                        <MudTextField @bind-Value="ViewModel.UserRegistration.Password"
+                                      For="@( () => ViewModel.UserRegistration.Password)"
                                       Immediate=true
                                       Label="Jelszó"
                                       Required="true"
                                       InputType="InputType.Password"
                                       RequiredError="A jelszó szükséges!" />
-                        
+                        <MudTextField @bind-Value="ViewModel.UserRegistration.ConfirmPassword"
+                                      For="@( () => ViewModel.UserRegistration.ConfirmPassword)"
+                                      Immediate=true
+                                      Required="true"
+                                      RequiredError="A vezetéknév szükséges"
+                                      InputType="InputType.Password"
+                                      Label="Kérem mégegyszer írja be a jelszót" />
                     </MudCardContent>
                     <MudCardActions>
                         <MudButton Variant="Variant.Filled"

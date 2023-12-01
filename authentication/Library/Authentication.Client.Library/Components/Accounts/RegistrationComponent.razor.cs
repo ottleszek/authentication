@@ -51,12 +51,18 @@ namespace Authentication.Client.Library.Components
             await _form.Validate();
             if (RegistrationService is not null && ViewModel is not null && _form.IsValid)
             {
-                UserRegistrationDto userRegistrationDto = ViewModel.UserRegistrationDto;
+                UserRegistrationDto userRegistration = new UserRegistrationDto
+                {
+                    FirstName = ViewModel.UserRegistration.FirstName,
+                    LastName = ViewModel.UserRegistration.LastName,
+                    Email = ViewModel.UserRegistration.Email,
+                    Password = ViewModel.UserRegistration.Password
+                };
 
                 AuthenticationResponseDto authenticationResponse = new();
                 try
                 {
-                    authenticationResponse = await RegistrationService.UserRgistration(userRegistrationDto);
+                    authenticationResponse = await RegistrationService.UserRgistration(userRegistration);
                 }
                 catch (Exception ex)
                 {

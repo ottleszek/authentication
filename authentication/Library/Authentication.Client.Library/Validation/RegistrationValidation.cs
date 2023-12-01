@@ -1,11 +1,12 @@
 ﻿using Authentication.Client.Library.ViewModels.Accounts;
 using Authentication.Shared.Dtos;
+using Authentication.Shared.Model;
 using FluentValidation;
 using System.Text.RegularExpressions;
 
 namespace Authentication.Client.Library.Validation
 {
-    public class RegistrationValidation : AbstractValidator<UserRegistrationDto>
+    public class RegistrationValidation : AbstractValidator<UserRegistration>
     {
         private readonly HttpClient _httpClient;
 
@@ -35,12 +36,12 @@ namespace Authentication.Client.Library.Validation
                 .Matches(@"[a-z]+").WithMessage("A jelszóban kisbetünk lenni kell!")
                 .Matches(@"[0-9]+").WithMessage("A jelszóban számnak lenni kell!")
                 .Matches(@"[\@\!\?\*\.\+\-\:]+").WithMessage("A jelszóban lenni kell legalább egynek a következők közül: @!?.*+-:");
-            //RuleFor(x => x.ConfirmPassword).Equal(_ => _.Password).WithMessage("A két jelszó meg kell egyezzen!");
+            RuleFor(x => x.ConfirmPassword).Equal(_ => _.Password).WithMessage("A két jelszó meg kell egyezzen!");
         }
 
         public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model, propertyName) =>
         {
-            var result = await ValidateAsync(ValidationContext<UserRegistrationDto>.CreateWithOptions((UserRegistrationDto)model, x => x.IncludeProperties(propertyName)));
+            var result = await ValidateAsync(ValidationContext<UserRegistration>.CreateWithOptions((UserRegistration)model, x => x.IncludeProperties(propertyName)));
             if (result.IsValid)
                 return Array.Empty<string>();
             return result.Errors.Select(e => e.ErrorMessage);
