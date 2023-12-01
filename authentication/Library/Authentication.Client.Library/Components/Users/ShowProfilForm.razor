@@ -21,21 +21,21 @@ else
                 Model="ViewModel"
             >
                 <MudCardContent>
-                    <MudTextField @bind-Value="ViewModel.ProfilDto.LastName"                              
+                    <MudTextField @bind-Value="ViewModel.LastName"                              
                                     Immediate=true
                                     Required="true"
                                     RequiredError="A vezetéknév szükséges!"
                                     Label="Vezetéknév" 
                                     ReadOnly="@ViewModel.IsReadOnly"
                                     />
-                    <MudTextField @bind-Value="ViewModel.ProfilDto.FirstName"
+                    <MudTextField @bind-Value="ViewModel.FirstName"
                                     Immediate=true
                                     Required="true"
                                     RequiredError="A keresztnév szükséges!"
                                     Label="Keresztnév"
                                     ReadOnly="@ViewModel.IsReadOnly"
                                     />
-                    <MudTextField @bind-Value="ViewModel.ProfilDto.Email"
+                    <MudTextField @bind-Value="ViewModel.Email"
                                     Immediate=true
                                     Required="true"
                                     Disabled="true"

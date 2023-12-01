@@ -11,18 +11,6 @@ namespace Authentication.Shared.Model
         public string Password { get; set; } = string.Empty;
         public string ConfirmPassword { get; set; } = string.Empty;
 
-        public UserRegistrationDto CopyToDto()
-        {
-            return new UserRegistrationDto
-            {
-                FirstName = FirstName,
-                LastName = LastName,
-                Email = Email,
-                Password = Password
-            };
-        }
-
-
         public override string ToString()
         {
             return $"{LastName} {FirstName} {Email}";

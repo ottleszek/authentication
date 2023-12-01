@@ -1,12 +1,10 @@
 ﻿using Authentication.Client.Library.ViewModels.Accounts;
-using Authentication.Shared.Dtos;
-using Authentication.Shared.Model;
 using FluentValidation;
 using System.Text.RegularExpressions;
 
 namespace Authentication.Client.Library.Validation
 {
-    public class RegistrationValidation : AbstractValidator<UserRegistration>
+    public class RegistrationValidation : AbstractValidator<RegistrationViewModel>
     {
         private readonly HttpClient _httpClient;
 
@@ -41,7 +39,7 @@ namespace Authentication.Client.Library.Validation
 
         public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model, propertyName) =>
         {
-            var result = await ValidateAsync(ValidationContext<UserRegistration>.CreateWithOptions((UserRegistration)model, x => x.IncludeProperties(propertyName)));
+            var result = await ValidateAsync(ValidationContext<RegistrationViewModel>.CreateWithOptions((RegistrationViewModel)model, x => x.IncludeProperties(propertyName)));
             if (result.IsValid)
                 return Array.Empty<string>();
             return result.Errors.Select(e => e.ErrorMessage);

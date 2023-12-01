@@ -17,7 +17,7 @@ namespace Authentication.Shared.Dtos
             Email = profilDto.Email;
         }
 
-        public static ProfilDto ConvertToProfilDto(User user)
+        public static ProfilDto ConvertToDto(User user)
         {
             return new ProfilDto
             {

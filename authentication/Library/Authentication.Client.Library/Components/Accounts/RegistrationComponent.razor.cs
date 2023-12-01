@@ -54,7 +54,7 @@ namespace Authentication.Client.Library.Components
                 AuthenticationResponseDto authenticationResponse = new();
                 try
                 {
-                    authenticationResponse = await RegistrationService.UserRgistration(ViewModel.UserRegistration.CopyToDto());
+                    authenticationResponse = await RegistrationService.UserRgistration(ViewModel.CopyToDto());
                 }
                 catch (Exception ex)
                 {

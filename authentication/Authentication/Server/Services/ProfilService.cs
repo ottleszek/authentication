@@ -22,7 +22,7 @@ namespace Authentication.Server.Services
                  user=await _profilRepo.GetUserBy(email);
             if (user is not null)
             {
-                return ProfilDto.ConvertToProfilDto(user);
+                return ProfilDto.ConvertToDto(user);
             }
             return new ProfilDto();
             
