@@ -28,8 +28,7 @@ namespace Authentication.Client.Library.ViewModels.User
 
         private ProfilDto _tempProfil = new ();
 
-     
-        [RelayCommand]
+
         public async Task UpdateProfil()
         {
             if (IsValidUser && _profilService is not null)
