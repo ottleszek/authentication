@@ -19,5 +19,10 @@ namespace LibraryClientServiceTemplate.ViewModelsTemplate
         {
             Items = await _service.SelectAllRecordAsync<TItem>();
         }
+
+        public async Task<List<TItem>> ReloadDataAsync()
+        {
+            return await _service.SelectAllRecordAsync<TItem>();
+        }
     }
 }

@@ -3,13 +3,9 @@
 
 <UILoader State="_state">
     <div class="d-flex ml-2">
-        @if (ViewModel is not null && !ViewModel.HasItems)
+        @if (ViewModel is not null)
         {
-            <p>Nincs felhasználó az adatbázisban!</p>
-        }
-        else if (ViewModel is not null && ViewModel.HasItems)
-        {
-            <MudTable Items="@ViewModel.Items"
+            <MudTable ServerData="ReloadDataAsync"
                       T="User"
                       ref="table"
                       Dense="true"

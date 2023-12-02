@@ -8,12 +8,13 @@ namespace LibraryBlazorClient.Templates
     {
         [Inject] protected IListViewModel<TItem>? ViewModel { get; set; }
 
-        protected async override Task OnParametersSetAsync()
+        protected async Task<List<TItem>> ReloadDataAsync()
         {
             if (ViewModel is not null)
             {
-                await ViewModel.GetAllDataToViewModel();
+                return await ViewModel.ReloadDataAsync();
             }
+            return new List<TItem>();
         }
     }
 }
