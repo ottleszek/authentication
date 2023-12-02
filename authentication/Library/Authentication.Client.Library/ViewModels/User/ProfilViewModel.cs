@@ -1,7 +1,7 @@
 ﻿using Authentication.Client.Library.Services.Profil;
 using Authentication.Shared.Dtos;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+using LibraryCore.Errors;
 using LibraryCore.Responses;
 using LibraryMvvm.Base;
 
@@ -29,9 +29,14 @@ namespace Authentication.Client.Library.ViewModels.User
         private ProfilDto _tempProfil = new ();
 
 
-        public async Task UpdateProfil()
+        public async Task<ErrorStore> UpdateProfil()
         {
-            if (IsValidUser && _profilService is not null)
+            if (_profilService is null)
+            {
+                ErrorStore errorStore = new ErrorStore();
+                errorStore.ClearAndAddError("A profil frissítése nem lehetséges!");
+            }
+            else
             {
                 ProfilDto profilDto = new ProfilDto
                 {
@@ -40,10 +45,14 @@ namespace Authentication.Client.Library.ViewModels.User
                     Email = Email,
                 };
                 ControllerResponse response = await _profilService.UpdateProfil(profilDto);
-                if (response.HasError) 
+                if (response.IsSuccess)
                 {
+                    await GetProfil();
+                    ChangeToReadOnly();
                 }
+                return (ErrorStore) response;
             }
+            return new ErrorStore();
         }
 
         public void ChangeToModify()
