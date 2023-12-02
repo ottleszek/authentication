@@ -1,6 +1,6 @@
 ﻿using LibraryCore.Errors;
 
-namespace LibaryDatabase.Model
+namespace LibraryDatabase.Model
 {
     public class RepositoryResponse : ErrorStore
     {

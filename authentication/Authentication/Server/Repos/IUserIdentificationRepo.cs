@@ -1,5 +1,5 @@
 ﻿using Authentication.Server.Datas.Entities;
-using LibaryDatabase.Model;
+using LibraryDatabase.Model;
 
 namespace Authentication.Server.Repos
 {
@@ -7,6 +7,6 @@ namespace Authentication.Server.Repos
     {
         public string? GetPassword(Guid id);
 
-        public Task<RepositoryResponse> Save(Guid userId, string password);
+        public Task<RepositoryResponse> SaveNewUserPassword(Guid userId, string password);
     }
 }

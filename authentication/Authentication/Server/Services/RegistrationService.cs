@@ -1,9 +1,7 @@
 ﻿using Authentication.Server.Repos;
+using Authentication.Shared.Dtos;
 using Authentication.Shared.Models;
-using AuthenticationLibrary.Shared.Dtos;
-using LibaryDatabase.Model;
-
-using LibraryPassword;
+using LibraryDatabase.Model;
 using Microsoft.AspNetCore.Identity;
 
 namespace Authentication.Server.Services
@@ -27,7 +25,7 @@ namespace Authentication.Server.Services
         {
             AuthenticationResponseDto responseDto = new ();
 
-            if (_accountRepo.IsUserExsist(registrationPlayload.Email))
+            if (await _accountRepo.IsUserExsist(registrationPlayload.Email))
             {
                 responseDto.ClearAndAddError($"{registrationPlayload.Email} emailcímmel már regisztráltak felhasználót!");
                 return responseDto;
@@ -50,7 +48,7 @@ namespace Authentication.Server.Services
                     newUser.UserRoleId = (Guid) viewerRoleId;
                     string password = PasswordExtension.HashPassword(registrationPlayload.Password);
                     
-                    RepositoryResponse saveUserResponse = await _accountRepo.Save(newUser);                    
+                    RepositoryResponse saveUserResponse = await _accountRepo.SaveNewUser(newUser);                    
                     if (saveUserResponse.HasError )
                     {
                         return new AuthenticationResponseDto
@@ -58,7 +56,7 @@ namespace Authentication.Server.Services
                             Error = saveUserResponse.Error
                         };
                     }
-                    RepositoryResponse savePasswordResponse = await _userIdentificationRepo.Save(newUser.Id, password);
+                    RepositoryResponse savePasswordResponse = await _userIdentificationRepo.SaveNewUserPassword(newUser.Id, password);
                     if (savePasswordResponse.HasError)
                     {
                         return new AuthenticationResponseDto
@@ -96,9 +94,9 @@ namespace Authentication.Server.Services
             return responseDto;
         }        
 
-        public bool ChaeckUniqueUserEmail(string email)
+        public async Task<bool> ChaeckUniqueUserEmail(string email)
         {
-            bool userAlredyExsist = _accountRepo.IsUserExsist(email);
+            bool userAlredyExsist = await _accountRepo.IsUserExsist(email);
             return !userAlredyExsist;
         }
 

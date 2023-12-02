@@ -1,5 +1,5 @@
 ﻿using Authentication.Server.Services;
-using AuthenticationLibrary.Shared.Dtos;
+using Authentication.Shared.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Authentication.Server.Controllers
@@ -28,9 +28,9 @@ namespace Authentication.Server.Controllers
         }
 
         [HttpGet("check-unique-user-email")]
-        public IActionResult ChaeckUniqueUserEmail(string email)
+        public async Task<IActionResult> ChaeckUniqueUserEmail(string email)
         {
-            bool result = _registrationService.ChaeckUniqueUserEmail(email);
+            bool result = await _registrationService.ChaeckUniqueUserEmail(email);
             return Ok(result);
         }           
     }

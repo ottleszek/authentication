@@ -1,5 +1,5 @@
 ﻿using Authentication.Server.Services;
-using AuthenticationLibrary.Shared.Dtos;
+using Authentication.Shared.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Authentication.Server.Controllers

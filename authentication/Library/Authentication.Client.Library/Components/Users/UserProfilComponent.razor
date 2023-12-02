@@ -1,0 +1,22 @@
+﻿@namespace Authentication.Client.Library.Components
+
+@inherits UserIdentificationBase
+
+@if (string.IsNullOrEmpty(_userEmail))
+{
+    <MudText>A felhasználó meghatározása folyamatban...</MudText>
+}
+else
+{
+    <ShowProfilForm UserEmail="@_userEmail">
+    </ShowProfilForm>
+}
+@code {
+    private string _userEmail = string.Empty;
+
+    protected async override Task OnInitializedAsync()
+    {
+        _userEmail = await GetUserEmail();
+        await base.OnInitializedAsync();
+    }
+}

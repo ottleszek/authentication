@@ -1,0 +1,77 @@
+﻿@namespace Authentication.Client.Library.Components
+
+@inherits MvvmComponentBase<RegistrationViewModel>
+
+<div class="d-flex justify-content-center">
+    <MudChip Class="pt-2 m-4" Color="Color.Primary">
+        <h3>Regisztráció</h3>
+    </MudChip>
+</div>
+
+<div class="d-flex justify-content-center">
+    <MudCard Width="500px">
+        @if (ViewModel is null)
+        {
+            <MudChip Class="pt-2 d-flex justify-content-center" Color="Color.Error">
+                <p>A regisztráció nem lehetséges!</p>
+            </MudChip>
+        }
+        else
+        {
+            if (_validation is not null)
+            {
+                <MudForm Model="ViewModel" @ref="_form" Validation="_validation.ValidateValue">
+                    <MudCardContent>
+                        @if (ViewModel.ErrorString.HasError)
+                        {
+                            <MudChip class="pt-2 d-flex justify-content-center" Color="Color.Error">
+                                <p>@ViewModel.ErrorString.Error</p>
+                            </MudChip>
+                        }
+                        <MudTextField @bind-Value="ViewModel.LastName"
+                                      For="@( () => ViewModel.LastName)"
+                                      Immediate=true
+                                      Required="true"
+                                      RequiredError="A vezetéknév szükséges!"
+                                      Label="Vezetéknév" />
+                        <MudTextField @bind-Value="ViewModel.FirstName"
+                                      For="@( () => ViewModel.FirstName)"
+                                      Immediate=true
+                                      Required="true"
+                                      RequiredError="A keresztnév szükséges!"
+                                      Label="Keresztnév" />
+                        <MudTextField @bind-Value="ViewModel.Email"
+                                      For="@( () => ViewModel.Email)"
+                                      Immediate=true
+                                      Required="true"
+                                      RequiredError="Az email cím szükséges!"
+                                      InputType="InputType.Email"
+                                      Label="Email" />
+                        <MudTextField @bind-Value="ViewModel.Password"
+                                      For="@( () => ViewModel.Password)"
+                                      Immediate=true
+                                      Label="Jelszó"
+                                      Required="true"
+                                      InputType="InputType.Password"
+                                      RequiredError="A jelszó szükséges!" />
+                        <MudTextField @bind-Value="ViewModel.ConfirmPassword"
+                                      For="@( () => ViewModel.ConfirmPassword)"
+                                      Immediate=true
+                                      Required="true"
+                                      RequiredError="A vezetéknév szükséges"
+                                      InputType="InputType.Password"
+                                      Label="Kérem mégegyszer írja be a jelszót" />
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton Variant="Variant.Filled"
+                                   Color="Color.Primary"
+                                   Class="ml-auto"
+                                   OnClick="RegisterAsync">
+                            Regisztráció
+                        </MudButton>
+                    </MudCardActions>
+                </MudForm>
+            }
+        }
+    </MudCard>
+</div>

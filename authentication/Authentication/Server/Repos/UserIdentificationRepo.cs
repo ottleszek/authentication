@@ -1,5 +1,5 @@
 ﻿using Authentication.Server.Datas.Entities;
-using LibaryDatabase.Model;
+using LibraryDatabase.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Authentication.Server.Repos
@@ -35,17 +35,17 @@ namespace Authentication.Server.Repos
             return password;
         }
 
-        public Task<RepositoryResponse> Save(Guid userId, string password)
+        public Task<RepositoryResponse> SaveNewUserPassword(Guid userId, string password)
         {
             UserIdentification newUserIdentification = new UserIdentification
             {
                 Id = userId,
                 Password = password
             };
-            return Save(newUserIdentification);
+            return RegisterNewUser(newUserIdentification);
         }
 
-        public async Task<RepositoryResponse> Save(UserIdentification userIdentification)
+        public async Task<RepositoryResponse> RegisterNewUser(UserIdentification userIdentification)
         {
             RepositoryResponse response = new RepositoryResponse();
             try

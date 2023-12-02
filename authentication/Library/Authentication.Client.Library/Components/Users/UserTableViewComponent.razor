@@ -5,7 +5,7 @@
     <div class="d-flex ml-2">
         @if (ViewModel is not null && !ViewModel.HasItems)
         {
-            <p>Nincs esemény az adatbázisban!</p>
+            <p>Nincs felhasználó az adatbázisban!</p>
         }
         else if (ViewModel is not null && ViewModel.HasItems)
         {
@@ -28,13 +28,13 @@
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd DataLabel="Vezetéknév">@context.LastName</MudTd>
-                        <MudTd DataLabel="Keresztnév">@context.FirstName</MudTd>
-                        <MudTd DataLabel="Email">@context.Email</MudTd>
-                        <MudIconButton Icon="@Icons.Material.Filled.Preview" Color="Color.Success"></MudIconButton>
-                        <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Default"></MudIconButton>
-                        <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error"></MudIconButton>
-                    </RowTemplate>
-                </MudTable>
+                    <MudTd DataLabel="Keresztnév">@context.FirstName</MudTd>
+                    <MudTd DataLabel="Email">@context.Email</MudTd>
+                    <MudIconButton Icon="@Icons.Material.Filled.Preview" Color="Color.Success"></MudIconButton>
+                    <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Default"></MudIconButton>
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error"></MudIconButton>
+                 </RowTemplate>
+            </MudTable>
         }
     </div>
 </UILoader>

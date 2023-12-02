@@ -17,9 +17,16 @@ namespace Authentication.Server.Controllers
         [HttpGet("{email}")]
         public async Task<IActionResult> GetUserRoles(string email)
         {
-            IdentityUser? iUser = await _userManager.FindByNameAsync(email);
-            var roles = await _userManager.GetRolesAsync(iUser);
-            return Ok(roles);
+            if (_userManager is not null)
+            {
+                IdentityUser? iUser = await _userManager.FindByNameAsync(email);
+                if (iUser is not null)
+                {
+                    var roles = await _userManager.GetRolesAsync(iUser);
+                    return Ok(roles);
+                }
+            }
+            return BadRequest();
         }
     }
 }

@@ -6,6 +6,10 @@ namespace AuthenticationLibrary.Provider
 {
     public class UserIdentificaitonProvider : IUserIdentificaitonProvider, IDisposable
     {
+        // Figyeli a felhasználói adatok változását
+        // Fel lehet iratkozni a UserIdentificationDataChanged eseményre
+        // Ha bejeletkezés után AuthenticationStateChanged történik akkor meghívja az eseményt
+
         private CustomAuthenticationStateProvider? _authenticationStateProvider;
         
         public UserIdentificaitonProvider(AuthenticationStateProvider? stateProvider)
@@ -14,7 +18,6 @@ namespace AuthenticationLibrary.Provider
             {
                 _authenticationStateProvider = (CustomAuthenticationStateProvider)stateProvider;
                 stateProvider.AuthenticationStateChanged += OnAuthenticationStateChanged;
-
             }
         }
 
@@ -73,52 +76,10 @@ namespace AuthenticationLibrary.Provider
         {
             if (UserIdentificationData is not null)
             {
-                UserIdentificationData.UserDisplayedName = UserDisplayNameFrom(claims);
-                UserIdentificationData.UserRole = UserRoleFrom(claims);
-                UserIdentificationData.Debug=DebugDataFrom(claims);
+                UserIdentificationData.UserDisplayedName = UserIdentificationDataExtensions.GetUserDisplayNameFrom(claims);
+                UserIdentificationData.UserRole = UserIdentificationDataExtensions.GetUserRoleFrom(claims);
+                UserIdentificationData.Debug= UserIdentificationDataExtensions.GetDebugDataFrom(claims);
             }
         }
-
-        private string UserDisplayNameFrom(List<Claim> claims)
-        {
-            string? firstName = claims.Where(claim => claim.Type == "FirstName").Select(claim => claim.Value).FirstOrDefault();
-            string? lastName = claims.Where(claim => claim.Type == "LastName").Select(claim => claim.Value).FirstOrDefault();
-            if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName))
-            {
-                string? email = claims.Where(claim => claim.Type == "Email").Select(claim => claim.Value).FirstOrDefault();
-                if (string.IsNullOrEmpty(email))
-                {
-                    return string.Empty;
-                }
-                return email;
-            }
-            return $"{lastName} {firstName}";
-        }
-
-        private string UserRoleFrom(List<Claim> claims)
-        {
-            string? role = claims.Where(claim => claim.Type == "UserRole").Select(claim => claim.Value).FirstOrDefault();
-            if (string.IsNullOrEmpty(role))
-            {
-                return string.Empty;
-            }
-            return role;
-        }
-
-        private string DebugDataFrom(List<Claim> claims)
-        {
-            string debugData = string.Empty;
-            debugData = "<table cellpadding=10>";
-            foreach (Claim claim in claims)
-            {
-                debugData = $"{debugData}<tr>";
-                if (debugData.Any())
-                    debugData = $"{debugData} <td>({claim.ValueType}</td> <td> {claim.Issuer}</td><td> {claim.Value}</td>";
-                else
-                    debugData = $"<td>({claim.ValueType} </td><td> {claim.Issuer}</td> <td> {claim.Value}</td>";
-                debugData = $"{debugData}</tr>";
-            }
-            return debugData;
-        }         
     }
 }

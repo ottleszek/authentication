@@ -3,7 +3,7 @@ using LibraryCore.Model;
 
 namespace LibraryClientServiceTemplate.ViewModelsTemplate
 {
-    public class ListViewModel<TItem> : ViewModel<TItem>, IListViewModel<TItem> where TItem: class, IDbRecord<TItem>, new ()
+    public class ListViewModel<TItem> : BaseViewModel<TItem>, IListViewModel<TItem> where TItem: class, IDbRecord<TItem>, new ()
     {
         private readonly IListModelBrokerConnector<TItem> _service;
 

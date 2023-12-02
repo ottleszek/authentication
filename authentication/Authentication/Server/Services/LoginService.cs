@@ -1,7 +1,7 @@
 ﻿using Authentication.Server.Datas.Entities;
 using Authentication.Server.Repos;
+using Authentication.Shared.Dtos;
 using Authentication.Shared.Models;
-using AuthenticationLibrary.Shared.Dtos;
 using LibraryPassword;
 using Microsoft.AspNetCore.Identity;
 
@@ -50,7 +50,7 @@ namespace Authentication.Server.Services
             if (_accountRepo is not null && _userRoleRepo is not null)
             {
 
-                User? user = _accountRepo.GetUserBy(loginPlayload.Email);
+                User? user = await _accountRepo.GetUserBy(loginPlayload.Email);
                 if (user == null)
                 {
                     response.ClearAndAddError("Evvel az email címmel nem található felhasználó!");
@@ -162,7 +162,6 @@ namespace Authentication.Server.Services
 
             };
             return userRefreshToken;
-
         }
 
         private async Task<bool> SaveRefreshToken(UserRefreshToken token)

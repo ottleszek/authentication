@@ -1,4 +1,4 @@
-﻿using AuthenticationLibrary.Services.Accounts;
+﻿using Authentication.Shared.Services.Accounts;
 using Microsoft.AspNetCore.Components;
 
 namespace Authentication.Client.Pages.Logout

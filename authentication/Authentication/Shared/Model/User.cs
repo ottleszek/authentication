@@ -27,5 +27,7 @@ namespace Authentication.Shared.Models
         public string LastName { get; set;}
         public string Email { get; set; }
         public Guid UserRoleId { get; set; }
+
+        public bool IsValidUser => !string.IsNullOrEmpty(Email);
     }
 }

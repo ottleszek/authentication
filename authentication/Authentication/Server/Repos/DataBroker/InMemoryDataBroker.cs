@@ -33,6 +33,13 @@ namespace Authentication.Server.Repos.DataBroker
         }
     }
 
+    public class ProfilRepoInMemoryDataBroker : ProfilRepo<AuthenticationInMemoryContext>, IProfilRepo
+    {
+        public ProfilRepoInMemoryDataBroker(IDbContextFactory<AuthenticationInMemoryContext> dbContextFactory) : base(dbContextFactory)
+        {
+        }
+    }
+
     public class ListInMemoryDataBroker : RepoList<AuthenticationInMemoryContext>, IListDataBroker
     {
         public ListInMemoryDataBroker(IDbContextFactory<AuthenticationInMemoryContext> dbContextFactory) : base(dbContextFactory)
