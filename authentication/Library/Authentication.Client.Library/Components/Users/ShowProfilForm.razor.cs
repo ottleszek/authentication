@@ -30,16 +30,17 @@ namespace Authentication.Client.Library.Components
         protected async Task UpdateProfil()
         {
 
-            if (ViewModel is not null)
+            if (ViewModel is null)
             {
                 Snackbar?.Add("A profil frissítés nem lehetséges!", Severity.Error);
+                return;
             }
             ErrorStore errorStore = await ViewModel.UpdateProfil();
             if (errorStore.HasError)
             {
                 Snackbar?.Add(errorStore.Error, Severity.Error);
             }
-            Snackbar?.Add("A profil frissítés sikerült!");
+            Snackbar?.Add("A profil frissítés sikerült!", Severity.Success);
         }
     }
 }
