@@ -30,7 +30,14 @@
                     <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Default"></MudIconButton>
                     <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error"></MudIconButton>
                  </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager PageSizeOptions="new int[] { 5, 10, 20, 50, 100, int.MaxValue }" HorizontalAlignment="HorizontalAlignment.Center" HidePageNumber="false" HidePagination="false" HideRowsPerPage="false" />
+                    </PagerContent>
             </MudTable>
         }
     </div>
 </UILoader>
+
+@code{
+     private string infoFormat = "{first_item}-{last_item}, összesen {all_items}";
+}

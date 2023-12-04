@@ -56,6 +56,11 @@ namespace Authentication.Server.Context
 
             Guid testAdminId = Guid.NewGuid();
             Guid testViewerId = Guid.NewGuid();
+            Guid testUser1= Guid.NewGuid();
+            Guid testUser2 = Guid.NewGuid();
+            Guid testUser3 = Guid.NewGuid();
+            Guid testUser4 = Guid.NewGuid();
+            Guid testUser5 = Guid.NewGuid();
 
             List<User> users = new List<User>
             {
@@ -67,7 +72,6 @@ namespace Authentication.Server.Context
                     Email = "admin@teszt.hu",
                     UserRoleId = testAdminRoleId
                 },
-
                 new User
                 {
                     Id = testViewerId,
@@ -75,7 +79,48 @@ namespace Authentication.Server.Context
                     FirstName = "Elek",
                     Email = "teszt@teszt.hu",
                     UserRoleId = testViewerRoleId
+                },
+                new User
+                {
+                    Id = testUser1,
+                    LastName = "User1",
+                    FirstName = "User1",
+                    Email = "user1@teszt.hu",
+                    UserRoleId = testViewerRoleId
+                },
+                new User
+                {
+                    Id = testUser2,
+                    LastName = "User2",
+                    FirstName = "User2",
+                    Email = "user2@teszt.hu",
+                    UserRoleId = testViewerRoleId
+                },
+                new User
+                {
+                    Id = testUser3,
+                    LastName = "User3",
+                    FirstName = "User3",
+                    Email = "user3@teszt.hu",
+                    UserRoleId = testViewerRoleId
+                },
+                new User
+                {
+                    Id = testUser4,
+                    LastName = "User4",
+                    FirstName = "User4",
+                    Email = "user4@teszt.hu",
+                    UserRoleId = testViewerRoleId
+                },
+                new User
+                {
+                    Id = testUser5,
+                    LastName = "User5",
+                    FirstName = "User5",
+                    Email = "user5@teszt.hu",
+                    UserRoleId = testViewerRoleId
                 }
+
             };
 
             modelBuilder.Entity<User>().HasData(users);
