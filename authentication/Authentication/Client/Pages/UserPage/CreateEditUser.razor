@@ -3,7 +3,7 @@
 
 @attribute [Authorize(Roles = "admin")]
 
-<UIPage Title="@(Id == Guid.Empty ? "Új felhasználó adatai": "Felhasználói adatok szerkesztése" )" BreadcrumbItems="_items">
+<UIPage Title="@Title" BreadcrumbItems="_items">
         <MudGrid>
         <MudItem lg="6" md="8" sm="12">
             <UserForm></UserForm>
@@ -13,12 +13,19 @@
 
 
 @code {
+    private string Title => Id == Guid.Empty ? "Új felhasználó adatai" : "Felhasználói adatok szerkesztése";
+    private List<BreadcrumbItem> _items = new();
 
-    private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
+
+    protected override void OnInitialized()
     {
-        new BreadcrumbItem("Home", href: "#"),
-        new BreadcrumbItem("Felhasználók", href: "/user"),
-        new BreadcrumbItem("Új felhasználó / felhasználói adatok szerkesztése", href: null, disabled: true)
-    };
+        _items = new() 
+        {
+            new BreadcrumbItem("Home", href: "#"),
+            new BreadcrumbItem("Felhasználók", href: "/user"),
+            new BreadcrumbItem(Title, href: null, disabled: true)
+        };
+        base.OnInitialized();
+    }
 
 }
