@@ -1,0 +1,24 @@
+﻿@page "/user/form"
+@page "/user/form/{id}"
+
+@attribute [Authorize(Roles = "admin")]
+
+<UIPage Title="@(Id == Guid.Empty ? "Új felhasználó adatai": "Felhasználói adatok szerkesztése" )" BreadcrumbItems="_items">
+        <MudGrid>
+        <MudItem lg="6" md="8" sm="12">
+            <UserForm></UserForm>
+        </MudItem>
+    </MudGrid>
+</UIPage>
+
+
+@code {
+
+    private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
+    {
+        new BreadcrumbItem("Home", href: "#"),
+        new BreadcrumbItem("Felhasználók", href: "/user"),
+        new BreadcrumbItem("Új felhasználó / felhasználói adatok szerkesztése", href: null, disabled: true)
+    };
+
+}
