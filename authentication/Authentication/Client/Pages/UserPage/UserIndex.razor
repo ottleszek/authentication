@@ -3,4 +3,15 @@
 
 @attribute [Authorize(Roles ="admin")]
 
-<UserComponent></UserComponent>
+<UIPage Title="Felhasználók" BreadcrumbItems="_items">
+    <UserComponent></UserComponent>
+</UIPage>
+
+
+@code {
+    private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
+    {
+        new BreadcrumbItem("Home", href: "#"),
+        new BreadcrumbItem("Felhasználók", href: null, disabled: true)
+    };     
+}

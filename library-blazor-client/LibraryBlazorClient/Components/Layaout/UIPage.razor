@@ -1,0 +1,29 @@
+﻿@namespace LibraryBlazorClient.Components
+
+<PageTitle>
+    @Title
+</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-2">
+  <MudText Typo="Typo.h4">@Title</MudText>
+  <MudBreadcrumbs Items="BreadcrumbItems">
+      <SeparatorTemplate>
+          <MudIcon Icon="@Icons.Material.Filled.ArrowForward" Size="Size.Small" />
+      </SeparatorTemplate>
+  </MudBreadcrumbs>
+
+          @ChildContent
+</MudContainer>
+
+
+
+@code {
+    [Parameter] public RenderFragment? ChildContent { get; set; } = null;
+
+    [Parameter] public string Title { get; set; } = string.Empty;
+
+    [Parameter]
+    public List<BreadcrumbItem> BreadcrumbItems { get; set; } = new();
+
+
+}
