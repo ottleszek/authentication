@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace LibraryMvvm.Base
+namespace LibraryBlazorMvvm.Base
 {
     public abstract class MvvmComponentBase<TViewModel> : ComponentBase where TViewModel : IViewModelBase
     {

@@ -2,7 +2,7 @@
 using Authentication.Shared.Services.Accounts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using LibraryCore.Errors;
-using LibraryMvvm.Base;
+using LibraryBlazorMvvm.Base;
 
 namespace Authentication.Client.Library.ViewModels.Accounts
 {

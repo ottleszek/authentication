@@ -3,7 +3,7 @@ using Authentication.Shared.Dtos;
 using CommunityToolkit.Mvvm.ComponentModel;
 using LibraryCore.Errors;
 using LibraryCore.Responses;
-using LibraryMvvm.Base;
+using LibraryBlazorMvvm.Base;
 
 namespace Authentication.Client.Library.ViewModels.User
 {

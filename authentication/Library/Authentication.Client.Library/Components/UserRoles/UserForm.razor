@@ -1,3 +1,7 @@
 ﻿@namespace Authentication.Client.Library.Components
 
-<h3>UserForm</h3>
+<MudPaper Class="py-4 px-4">
+	<EditForm Model="_model" OnValidSubmit="SubmitFormAsync">
+		<FluentValidationValidator />
+	</EditForm>
+</MudPaper>

@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace LibraryMvvm.Base
+namespace LibraryBlazorMvvm.Base
 {
     public abstract partial class ViewModelBase : ObservableObject, IViewModelBase
     {

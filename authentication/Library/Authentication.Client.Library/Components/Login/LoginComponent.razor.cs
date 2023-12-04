@@ -1,6 +1,6 @@
 ﻿using Authentication.Client.Library.Validation;
 using Authentication.Client.Library.ViewModels.Login;
-using LibraryMvvm.Base;
+using LibraryBlazorMvvm.Base;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
