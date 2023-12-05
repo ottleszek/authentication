@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace LibraryBlazorMvvm.ViewModels
 {
-    public abstract partial class MvvmViewModelBase : ObservableObject, IViewModelBase
+    public abstract partial class MvvmViewModelBase : ObservableObject, IMvvmViewModelBase
     {
         public virtual async Task OnInitializedAsync()
         {

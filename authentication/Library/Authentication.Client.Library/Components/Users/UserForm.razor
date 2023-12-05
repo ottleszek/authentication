@@ -3,7 +3,10 @@
 @inherits MvvmItemComponentBase<User, UserViewModel<User>>
 
 <MudPaper Class="py-4 px-4">
-	<EditForm Model="_model" OnValidSubmit="SubmitFormAsync">
-		<FluentValidationValidator />
-	</EditForm>
+	@if (ViewModel is not null)
+	{
+		<EditForm Model="ViewModel.SelectedItem" OnValidSubmit="SubmitFormAsync">
+			<FluentValidationValidator />
+		</EditForm>
+	}
 </MudPaper>

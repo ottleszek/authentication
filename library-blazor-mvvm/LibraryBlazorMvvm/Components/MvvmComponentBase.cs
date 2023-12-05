@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 namespace LibraryBlazorMvvm.Components
 {
     public abstract class MvvmComponentBase<TViewModel> : ComponentBase
-        where TViewModel : IViewModelBase
+        where TViewModel : IMvvmViewModelBase
     {
         [Inject]
         protected TViewModel? ViewModel { get; set; }

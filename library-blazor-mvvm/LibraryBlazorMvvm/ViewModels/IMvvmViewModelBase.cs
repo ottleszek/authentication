@@ -2,7 +2,7 @@
 
 namespace LibraryBlazorMvvm.ViewModels
 {
-    public interface IViewModelBase : INotifyPropertyChanged
+    public interface IMvvmViewModelBase : INotifyPropertyChanged
     {
         Task OnInitializedAsync();
         Task Loading();
