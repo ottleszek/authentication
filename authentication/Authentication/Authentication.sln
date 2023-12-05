@@ -31,8 +31,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryBlazorClient", "..\.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authentication.Client.Library", "..\Library\Authentication.Client.Library\Authentication.Client.Library.csproj", "{FD1835A3-2F04-45C5-8436-F0D1375FE600}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryMvvm", "..\..\library-mvvm\LibraryMvvm\LibraryMvvm.csproj", "{9E2881B8-2FE0-4640-828A-65C7C4778350}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryBlazorMvvm", "..\..\library-blazor-mvvm\LibraryBlazorMvvm\LibraryBlazorMvvm.csproj", "{40349A8F-EB8D-4EB8-A614-1253BAA8D7B0}"
 EndProject
 Global
@@ -97,10 +95,6 @@ Global
 		{FD1835A3-2F04-45C5-8436-F0D1375FE600}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD1835A3-2F04-45C5-8436-F0D1375FE600}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD1835A3-2F04-45C5-8436-F0D1375FE600}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9E2881B8-2FE0-4640-828A-65C7C4778350}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9E2881B8-2FE0-4640-828A-65C7C4778350}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9E2881B8-2FE0-4640-828A-65C7C4778350}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9E2881B8-2FE0-4640-828A-65C7C4778350}.Release|Any CPU.Build.0 = Release|Any CPU
 		{40349A8F-EB8D-4EB8-A614-1253BAA8D7B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{40349A8F-EB8D-4EB8-A614-1253BAA8D7B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40349A8F-EB8D-4EB8-A614-1253BAA8D7B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
