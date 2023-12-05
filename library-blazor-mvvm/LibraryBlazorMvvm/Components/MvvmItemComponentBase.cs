@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using LibraryBlazorMvvm.ViewModels;
+using Microsoft.AspNetCore.Components;
 
-namespace LibraryBlazorMvvm.Base
+namespace LibraryBlazorMvvm.Components
 {
-    public abstract class MvvmComponentBase<TViewModel> : ComponentBase where TViewModel : IViewModelBase
+    public class MvvmItemComponentBase<TItem,TViewModel> : ComponentBase
+        where TViewModel : IViewModelBase
+        where TItem : class, new()
     {
         [Inject]
         protected TViewModel? ViewModel { get; set; }

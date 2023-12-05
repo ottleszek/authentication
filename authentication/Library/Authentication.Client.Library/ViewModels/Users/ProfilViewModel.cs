@@ -3,11 +3,11 @@ using Authentication.Shared.Dtos;
 using CommunityToolkit.Mvvm.ComponentModel;
 using LibraryCore.Errors;
 using LibraryCore.Responses;
-using LibraryBlazorMvvm.Base;
+using LibraryBlazorMvvm.ViewModels;
 
 namespace Authentication.Client.Library.ViewModels.User
 {
-    public partial class ProfilViewModel : ViewModelBase
+    public partial class ProfilViewModel : MvvmViewModelBase
     {
         private IProfilService? _profilService;        
 

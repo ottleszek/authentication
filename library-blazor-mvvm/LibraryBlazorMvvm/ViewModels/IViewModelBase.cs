@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace LibraryBlazorMvvm.Base
+namespace LibraryBlazorMvvm.ViewModels
 {
     public interface IViewModelBase : INotifyPropertyChanged
     {

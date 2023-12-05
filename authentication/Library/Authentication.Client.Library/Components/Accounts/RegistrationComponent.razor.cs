@@ -1,7 +1,7 @@
 ﻿using Authentication.Client.Library.Validation;
 using Authentication.Client.Library.ViewModels.Accounts;
 using Authentication.Shared.Dtos;
-using LibraryBlazorMvvm.Base;
+using LibraryBlazorMvvm.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;

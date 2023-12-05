@@ -29,7 +29,6 @@
     <ProjectReference Include="..\..\..\authentication-library\AuthenticationLibrary\AuthenticationLibrary.csproj" />
     <ProjectReference Include="..\..\..\library-blazor-client\LibraryBlazorClient\LibraryBlazorClient.csproj" />
     <ProjectReference Include="..\..\..\library-blazor-mvvm\LibraryBlazorMvvm\LibraryBlazorMvvm.csproj" />
-    <ProjectReference Include="..\..\..\library-mvvm\LibraryMvvm\LibraryMvvm.csproj" />
     <ProjectReference Include="..\..\Authentication\Shared\Authentication.Shared.csproj" />
   </ItemGroup>
 

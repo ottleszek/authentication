@@ -1,6 +1,6 @@
 ﻿using Authentication.Client.Library.ViewModels.User;
 using LibraryCore.Errors;
-using LibraryBlazorMvvm.Base;
+using LibraryBlazorMvvm.Components;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 

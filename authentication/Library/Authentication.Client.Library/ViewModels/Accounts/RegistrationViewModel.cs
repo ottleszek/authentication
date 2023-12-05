@@ -1,12 +1,12 @@
 ﻿using Authentication.Shared.Dtos;
 using Authentication.Shared.Services.Accounts;
 using CommunityToolkit.Mvvm.ComponentModel;
+using LibraryBlazorMvvm.ViewModels;
 using LibraryCore.Errors;
-using LibraryBlazorMvvm.Base;
 
 namespace Authentication.Client.Library.ViewModels.Accounts
 {
-    public partial class RegistrationViewModel : ViewModelBase
+    public partial class RegistrationViewModel : MvvmViewModelBase
     {
         [ObservableProperty]
         private string _firstName =  string.Empty;
