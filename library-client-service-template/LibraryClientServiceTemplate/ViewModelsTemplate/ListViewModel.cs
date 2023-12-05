@@ -5,9 +5,9 @@ namespace LibraryClientServiceTemplate.ViewModelsTemplate
 {
     public class ListViewModel<TItem> : BaseViewModel<TItem>, IListViewModel<TItem> where TItem: class, IDbRecord<TItem>, new ()
     {
-        private readonly IListModelBrokerConnector<TItem> _service;
+        private readonly IListBrokerConnector<TItem> _service;
 
-        public ListViewModel(IListModelBrokerConnector<TItem> service)
+        public ListViewModel(IListBrokerConnector<TItem> service)
         {
             _service = service;
         }

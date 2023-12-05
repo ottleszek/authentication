@@ -41,10 +41,10 @@ namespace Authentication.Client.Library.Extensions
             services.AddScoped<IProfilService, ProfilService>();
             // User managment
             services.AddScoped<IListViewModel<User>, ListViewModel<User>>();
-            services.AddScoped<IListModelBrokerConnector<User>, ListModelBrokerConnector<User>>();
+            services.AddScoped<IListBrokerConnector<User>, ListBrokerConnector<User>>();
             // User role managment
             services.AddScoped<IListViewModel<UserRole>, ListViewModel<UserRole>>();
-            services.AddScoped<IListModelBrokerConnector<UserRole>, ListModelBrokerConnector<UserRole>>();
+            services.AddScoped<IListBrokerConnector<UserRole>, ListBrokerConnector<UserRole>>();
             // Data broker
             services.AddScoped<IListDataBroker, ListApiService>();
 
