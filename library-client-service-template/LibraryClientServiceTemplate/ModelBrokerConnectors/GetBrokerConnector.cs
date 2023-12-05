@@ -1,6 +1,5 @@
 ﻿using LibraryCore.Model;
 using LibraryDataBroker;
-using LibraryDataBrokerProject;
 
 namespace LibraryClientServiceTemplate.ModelBrokerConnectors
 {
@@ -20,7 +19,7 @@ namespace LibraryClientServiceTemplate.ModelBrokerConnectors
 
 		public async Task<TEntity> GetByAsnyc(TEntity entity)
 		{
-			return await _broker.GetByAsnyc<TEntity>(entity);
+			return await _broker.GetByAsync<TEntity>(entity);
 		}
 	}
 }

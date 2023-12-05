@@ -1,34 +1,52 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using LibraryClientServiceTemplate.ModelBrokerConnectors;
+using LibraryCore.Model;
 using LibraryDataBroker;
 
 namespace LibraryBlazorMvvm.ViewModels
 {
-    public partial class MvvmItemViewModelBase<TItem> : MvvmViewModelBase, IGetDataBroker  where TItem : class
+    public partial class MvvmItemViewModelBase<TItem> : MvvmViewModelBase, IMvvmItemViewModelBase<TItem> where TItem : class, IDbRecord<TItem>, new()
     {
 		private IGetBrokerConnector<TItem> _brokerConnector;
 
-		ctor
+        public MvvmItemViewModelBase(IGetBrokerConnector<TItem> brokerConnector)
+        {
+            _brokerConnector = brokerConnector;
+        }
+
+        [ObservableProperty]
+        private TItem _selectedItem=new();
 
 		[ObservableProperty]
-        public TItem? _selectedItem;
+		private Guid? _id = null; 
 
-
-
-		public Task<TEntity> GetByAsnyc<TEntity>(Guid id)
+		public override async Task Loading()
 		{
-			if (id!=Guid.Empty)
+			if (Id is not null)
 			{
+				await GetByIdAsnyc();
+			}
+			else
+			{
+				SelectedItem = new();
+			}
+			
+		}
 
+		private async Task GetByIdAsnyc()
+		{
+			if (Id is not null && Id != Guid.Empty)
+			{
+				SelectedItem = await _brokerConnector.GetByAsnyc(Id);
 			}
 		}
 
-		public Task<TEntity> IGetDataBroker.GetByAsnyc<TEntity>(TEntity entity)
+        private async Task GetByEntityAsnyc(TItem entity)
 		{
-            if (entity.Id!=Guid.Empty)
-            {
-                
-            }
-        }
+			if (entity.Id != Guid.Empty)
+			{
+				SelectedItem = await _brokerConnector.GetByAsnyc(entity);
+			}
+		}
 	}
 }

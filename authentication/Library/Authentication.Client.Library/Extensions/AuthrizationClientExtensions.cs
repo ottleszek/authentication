@@ -8,6 +8,7 @@ using Authentication.Shared.Services.Token;
 using AuthenticationLibrary.LocalStorage;
 using AuthenticationLibrary.Provider;
 using Blazored.LocalStorage;
+using LibraryBlazorMvvm.ViewModels;
 using LibraryClientServiceTemplate.ApiServices;
 using LibraryClientServiceTemplate.ModelBrokerConnectors;
 using LibraryClientServiceTemplate.ViewModelsTemplate;
@@ -38,7 +39,7 @@ namespace Authentication.Client.Library.Extensions
             services.AddScoped<ILoginTokenStore, LoginTokenStore>();
             services.AddScoped<INofifyAuthenticationService, NofifyAuthenticationService>();
 
-            services.AddScoped<IProfilService, ProfilService>();
+			services.AddScoped<IProfilService, ProfilService>();
             // User managment
             services.AddScoped<IListViewModel<User>, ListViewModel<User>>();
             services.AddScoped<IListBrokerConnector<User>, ListBrokerConnector<User>>();
@@ -48,9 +49,13 @@ namespace Authentication.Client.Library.Extensions
             // Data broker
             services.AddScoped<IListDataBroker, ListApiService>();
 
-        }
+            // ViewModel
+            services.AddScoped<IMvvmItemViewModelBase<User>, MvvmItemViewModelBase<User>>();
+			// Connectors
+			services.AddScoped<IGetBrokerConnector<User>, GetBrokerConnector<User>>()
+		}
 
-        public static void ConfigureAuthentication(this IServiceCollection services)
+		public static void ConfigureAuthentication(this IServiceCollection services)
         {
             //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             services.AddHttpClient("AuthenticationApi", options =>
