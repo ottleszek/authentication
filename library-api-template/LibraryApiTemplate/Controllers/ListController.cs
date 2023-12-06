@@ -1,5 +1,5 @@
 ﻿using LibraryCore.Model;
-using LibraryDataBrokerProject;
+using LibraryDataBroker;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryApiTemplate.Controllers

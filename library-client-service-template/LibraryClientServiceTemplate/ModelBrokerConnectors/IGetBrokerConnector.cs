@@ -1,4 +1,4 @@
-﻿using LibraryDataBrokerProject;
+﻿using LibraryDataBroker;
 
 namespace LibraryClientServiceTemplate.ModelBrokerConnectors
 {

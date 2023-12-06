@@ -1,17 +1,17 @@
 ﻿using LibraryClientServiceTemplate.Extensions;
 using LibraryCore.Model;
-using LibraryDataBrokerProject;
+using LibraryDataBroker;
 using System.Net.Http.Json;
 
 namespace LibraryClientServiceTemplate.HttpServices
 {
-    public class ListHttpService : IListDataBroker
+    public class ListHttpService : GetHttpService,  IListDataBroker
     {
         private readonly HttpClient? _httpClient;
         private string _relativUrl = string.Empty;
         private bool HaveUrl => _relativUrl is object && _relativUrl != string.Empty;
 
-        public ListHttpService(IHttpClientFactory httpClientFactory)
+        public ListHttpService(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
         {
             _httpClient = httpClientFactory.CreateClient("AuthenticationApi");
         }

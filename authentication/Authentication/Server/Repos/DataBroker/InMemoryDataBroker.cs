@@ -1,6 +1,6 @@
 ﻿using Authentication.Server.Context;
 using LibraryApiTemplate.Repos;
-using LibraryDataBrokerProject;
+using LibraryDataBroker;
 using Microsoft.EntityFrameworkCore;
 
 namespace Authentication.Server.Repos.DataBroker
@@ -46,6 +46,13 @@ namespace Authentication.Server.Repos.DataBroker
         {
         }
     }
+
+	public class GetInMemoryDataBroker : RepoGet<AuthenticationInMemoryContext>, IGetDataBroker
+	{
+		public GetInMemoryDataBroker(IDbContextFactory<AuthenticationInMemoryContext> dbContextFactory) : base(dbContextFactory)
+		{
+		}
+	}
 
 
 }

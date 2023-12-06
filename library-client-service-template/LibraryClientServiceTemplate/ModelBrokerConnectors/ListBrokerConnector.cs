@@ -1,6 +1,6 @@
 ﻿using LibraryCore.Model;
 using LibraryDataBroker;
-using LibraryDataBrokerProject;
+using LibraryDataBroker;
 
 namespace LibraryClientServiceTemplate.ModelBrokerConnectors
 {

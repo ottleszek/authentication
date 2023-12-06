@@ -11,7 +11,7 @@ using Blazored.LocalStorage;
 using LibraryClientServiceTemplate.HttpServices;
 using LibraryClientServiceTemplate.ModelBrokerConnectors;
 using LibraryClientServiceTemplate.ViewModelsTemplate;
-using LibraryDataBrokerProject;
+using LibraryDataBroker;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 

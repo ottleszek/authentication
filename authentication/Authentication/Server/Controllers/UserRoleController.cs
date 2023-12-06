@@ -1,6 +1,6 @@
 ﻿using Authentication.Shared.Models;
 using LibraryApiTemplate.Controllers;
-using LibraryDataBrokerProject;
+using LibraryDataBroker;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

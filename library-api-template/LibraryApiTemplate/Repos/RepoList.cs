@@ -1,10 +1,10 @@
 ﻿using LibraryCore.Model;
-using LibraryDataBrokerProject;
+using LibraryDataBroker;
 using Microsoft.EntityFrameworkCore;
 
 namespace LibraryApiTemplate.Repos
 {
-    public class RepoList<TDbContext> : RepoQueryble<TDbContext>, IListDataBroker where TDbContext : DbContext
+    public class RepoList<TDbContext> : RepoGet<TDbContext>, IListDataBroker where TDbContext : DbContext
     {
         IDbContextFactory<TDbContext> _dbContextFactory;
 
@@ -17,5 +17,5 @@ namespace LibraryApiTemplate.Repos
         {
             return await SelectAllRecord<TEntity>().ToListAsync();
         }
-    }
+	}
 }

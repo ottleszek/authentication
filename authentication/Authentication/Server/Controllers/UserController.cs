@@ -1,7 +1,6 @@
 ﻿using Authentication.Shared.Models;
 using LibraryApiTemplate.Controllers;
-using LibraryDataBrokerProject;
-using Microsoft.AspNetCore.Authorization;
+using LibraryDataBroker;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Authentication.Server.Controllers
@@ -15,4 +14,11 @@ namespace Authentication.Server.Controllers
         {
         }
     }
+
+	public class UserGetController : GetController<User>
+	{
+		public UserGetController(IGetDataBroker repo) : base(repo)
+		{
+		}
+	}
 }

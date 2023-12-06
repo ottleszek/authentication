@@ -5,13 +5,13 @@ using System.Net.Http.Json;
 
 namespace LibraryClientServiceTemplate.HttpServices
 {
-    public class GetApiService : IGetDataBroker
+    public class GetHttpService : IGetDataBroker
     {
         private readonly HttpClient? _httpClient;
         private string _relativUrl = string.Empty;
         private bool HaveUrl => _relativUrl is object && _relativUrl != string.Empty;
 
-        public GetApiService(IHttpClientFactory httpClientFactory)
+        public GetHttpService(IHttpClientFactory httpClientFactory)
         {
             _httpClient = httpClientFactory.CreateClient("AuthenticationApi");
         }
