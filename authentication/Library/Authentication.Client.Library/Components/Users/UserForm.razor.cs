@@ -7,7 +7,7 @@ namespace Authentication.Client.Library.Components
 { 
     public partial class UserForm : MvvmItemComponentBase<User, UserViewModel<User>>
     {
-        [Parameter] public Guid Id { get; set; }
+        [Parameter] public Guid Id { get; set; } = Guid.Empty;
 
         protected override Task OnParametersSetAsync()
         {

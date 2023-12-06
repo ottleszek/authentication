@@ -40,13 +40,5 @@ namespace LibraryBlazorMvvm.ViewModels
 				SelectedItem = await _brokerConnector.GetByAsnyc(Id);
 			}
 		}
-
-        private async Task GetByEntityAsnyc(TItem entity)
-		{
-			if (entity.Id != Guid.Empty)
-			{
-				SelectedItem = await _brokerConnector.GetByAsnyc(entity);
-			}
-		}
 	}
 }
