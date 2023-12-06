@@ -16,10 +16,5 @@ namespace LibraryClientServiceTemplate.ModelBrokerConnectors
 		{
 			return await _broker.GetByAsnyc<TEntity>(id);
 		}
-
-		public async Task<TEntity> GetByAsnyc(TEntity entity)
-		{
-			return await _broker.GetByAsync<TEntity>(entity);
-		}
 	}
 }

@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using LibraryClientServiceTemplate.ModelBrokerConnectors;
 using LibraryCore.Model;
-using LibraryDataBroker;
 
 namespace LibraryBlazorMvvm.ViewModels
 {
