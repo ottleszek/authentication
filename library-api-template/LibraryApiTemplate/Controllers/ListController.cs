@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace LibraryApiTemplate.Controllers
 {
     [Route("api/[controller]")]
-    public abstract class ListController<TEntity> : ControllerBase, IListController<TEntity> where TEntity : class, IDbRecord<TEntity>, new()
+    public abstract class ListController<TEntity> : GetController<TEntity>, IListController<TEntity> where TEntity : class, IDbRecord<TEntity>, new()
     {
         private readonly IListDataBroker? _repoList;
 
-        public ListController(IListDataBroker repoList)
+        public ListController(IListDataBroker repoList, IGetDataBroker repoGet) : base(repoGet) 
         {
             _repoList = repoList;
         }
