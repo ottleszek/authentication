@@ -47,8 +47,14 @@ namespace Authentication.Client.Library.Extensions
             services.AddScoped<IListBrokerConnector<UserRole>, ListBrokerConnector<UserRole>>();
             // Data broker
             services.AddScoped<IListDataBroker, ListHttpService>();
+            services.AddScoped<IGetDataBroker, GetHttpService>();
 
-        }
+
+            services.AddScoped<IGetBrokerConnector<User>, GetBrokerConnector<User>>();
+			services.AddScoped<IListBrokerConnector<User>, ListBrokerConnector<User>>();
+
+
+		}
 
         public static void ConfigureAuthentication(this IServiceCollection services)
         {
