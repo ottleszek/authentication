@@ -20,7 +20,7 @@ namespace Authentication.Client.Library.Components
 
         private async Task SubmitFormAsync()
         {
-            OnInitializedAsync();
+            //OnInitializedAsync();
         }
     }
 }

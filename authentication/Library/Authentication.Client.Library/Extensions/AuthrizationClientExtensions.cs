@@ -8,6 +8,7 @@ using Authentication.Shared.Services.Token;
 using AuthenticationLibrary.LocalStorage;
 using AuthenticationLibrary.Provider;
 using Blazored.LocalStorage;
+using LibraryBlazorMvvm.ViewModels;
 using LibraryClientServiceTemplate.HttpServices;
 using LibraryClientServiceTemplate.ModelBrokerConnectors;
 using LibraryClientServiceTemplate.ViewModelsTemplate;
@@ -28,6 +29,8 @@ namespace Authentication.Client.Library.Extensions
             services.AddScoped<LoginViewModel>();
             services.AddScoped<ProfilViewModel>();
             services.AddScoped<RegistrationViewModel>();
+
+            services.AddScoped<IMvvmItemViewModelBase<User>, MvvmItemViewModelBase<User>>();
         }
 
         public static void ConfigureAuthenticationServices(this IServiceCollection services)

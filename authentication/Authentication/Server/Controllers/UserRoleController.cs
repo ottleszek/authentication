@@ -11,7 +11,7 @@ namespace Authentication.Server.Controllers
     //[Authorize(Roles = "admin")]
     public class UserRoleController : ListController<UserRole>
     {
-        public UserRoleController(IListDataBroker repoList) : base(repoList)
+        public UserRoleController(IListDataBroker repoList, IGetDataBroker repoGet) : base(repoList,repoGet)
         {
         }
     }

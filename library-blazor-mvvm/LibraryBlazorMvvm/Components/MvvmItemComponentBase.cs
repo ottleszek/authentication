@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 namespace LibraryBlazorMvvm.Components
 {
     public abstract class MvvmItemComponentBase<TItem,TViewModel> : ComponentBase
-        where TViewModel : IMvvmViewModelBase
+        where TViewModel : IMvvmItemViewModelBase<TItem>
         where TItem : class, new()
     {
         [Inject]

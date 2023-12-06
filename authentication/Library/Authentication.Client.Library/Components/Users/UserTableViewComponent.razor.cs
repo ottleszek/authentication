@@ -1,6 +1,7 @@
 ﻿using Authentication.Shared.Models;
 using LibraryBlazorClient.Components;
 using LibraryBlazorClient.Templates;
+using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
 namespace Authentication.Client.Library.Components
@@ -10,15 +11,7 @@ namespace Authentication.Client.Library.Components
         private bool _loading = false;
         private UIComponentState _state => _loading ? UIComponentState.Loading : UIComponentState.Loaded;
 
-        // Items="@ViewModel.Items"
-
-        /*
-        @if(ViewModel is not null)
-        {
-            < p > Nincs felhasználó az adatbázisban! </ p >
-        }
-        else if 
-        */
+        [Parameter] public EventCallback<User> OnEditClick { get; set; }
 
         public async Task<TableData<User>> ReloadDataAsync(TableState state)
         {
@@ -34,5 +27,10 @@ namespace Authentication.Client.Library.Components
             }
             return new TableData<User>();
         }
+
+        /*private async EventCallback EditClicked(User user)
+        {
+            return await OnEditClick.InvokeAsync(user);
+        }*/
     }
 }
