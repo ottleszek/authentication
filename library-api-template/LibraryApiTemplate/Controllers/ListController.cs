@@ -14,18 +14,6 @@ namespace LibraryApiTemplate.Controllers
             _repoList = repoList;
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetBy(Guid id)
-        {
-            TEntity entity = new();
-            if (_repoList is not null)
-            {
-                entity = await _repoList.GetBy<TEntity>(id);
-                return Ok(entity);
-            }
-            return BadRequest("Az adatok elérhetetlenek!");
-        }
-
         [HttpGet]
         public async Task<IActionResult> SelectAllRecordToListAsync()
         {

@@ -17,10 +17,5 @@ namespace LibraryApiTemplate.Repos
         {
             return await SelectAllRecord<TEntity>().ToListAsync();
         }
-
-        public async Task<TEntity> GetBy<TEntity>(Guid id) where TEntity : class, IDbRecord<TEntity>, new()
-        {
-            return await GetById<TEntity>(id);
-        }
     }
 }

@@ -17,12 +17,12 @@ namespace LibraryClientServiceTemplate.ViewModelsTemplate
 
         public virtual async Task GetAllDataToViewModel()
         {
-            Items = await _service.SelectAllRecordAsync<TItem>();
+            Items = await _service.SelectAllRecordAsync();
         }
 
         public async Task<List<TItem>> ReloadDataAsync()
         {
-            return await _service.SelectAllRecordAsync<TItem>();
+            return await _service.SelectAllRecordAsync();
         }
     }
 }

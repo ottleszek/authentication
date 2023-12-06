@@ -1,11 +1,11 @@
-﻿using Authentication.Client.Library.ViewModels.User;
-using Authentication.Shared.Models;
+﻿using Authentication.Shared.Models;
 using LibraryBlazorMvvm.Components;
+using LibraryBlazorMvvm.ViewModels;
 using Microsoft.AspNetCore.Components;
 
 namespace Authentication.Client.Library.Components
 { 
-    public partial class UserForm : MvvmItemComponentBase<User, UserViewModel<User>>
+    public partial class UserForm : MvvmItemComponentBase<User, MvvmItemViewModelBase<User>>
     {
         [Parameter] public Guid Id { get; set; } = Guid.Empty;
 
@@ -19,6 +19,8 @@ namespace Authentication.Client.Library.Components
         }
 
         private async Task SubmitFormAsync()
-        { }
+        {
+            OnInitializedAsync();
+        }
     }
 }

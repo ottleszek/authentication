@@ -4,7 +4,7 @@ using LibraryCore.Model;
 
 namespace LibraryBlazorMvvm.ViewModels
 {
-    public partial class MvvmItemViewModelBase<TItem> : MvvmViewModelBase, IMvvmItemViewModelBase<TItem> where TItem : class, IDbRecord<TItem>, new()
+    public abstract partial class MvvmItemViewModelBase<TItem> : MvvmViewModelBase, IMvvmItemViewModelBase<TItem> where TItem : class, IDbRecord<TItem>, new()
     {
 		private IGetBrokerConnector<TItem> _brokerConnector;
 

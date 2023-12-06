@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace LibraryBlazorMvvm.Components
 {
-    public class MvvmItemComponentBase<TItem,TViewModel> : ComponentBase
+    public abstract class MvvmItemComponentBase<TItem,TViewModel> : ComponentBase
         where TViewModel : IMvvmViewModelBase
         where TItem : class, new()
     {
