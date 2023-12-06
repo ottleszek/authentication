@@ -18,11 +18,11 @@ namespace LibraryBlazorMvvm.ViewModels
         private TItem _selectedItem=new();
 
 		[ObservableProperty]
-		private Guid? _id = null; 
+		private Guid _id = Guid.Empty; 
 
 		public override async Task Loading()
 		{
-			if (Id is not null)
+			if (Id != Guid.Empty)
 			{
 				await GetByIdAsnyc();
 			}
@@ -35,7 +35,7 @@ namespace LibraryBlazorMvvm.ViewModels
 
 		private async Task GetByIdAsnyc()
 		{
-			if (Id is not null && Id != Guid.Empty)
+			if (Id != Guid.Empty)
 			{
 				SelectedItem = await _brokerConnector.GetByAsnyc(Id);
 			}
