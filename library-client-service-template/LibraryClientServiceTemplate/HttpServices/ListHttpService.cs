@@ -13,17 +13,16 @@ namespace LibraryClientServiceTemplate.HttpServices
 
         public ListHttpService(IHttpClientFactory httpClientFactory)
         {
-            // ToDO Http clieant name is ListApiService
             _httpClient = httpClientFactory.CreateClient("AuthenticationApi");
         }
 
         public async Task<List<TEntity>> SelectAllRecordAsync<TEntity>() where TEntity : class, IDbRecord<TEntity>, new()
         {
             _relativUrl = RelativeUrlExtension.SetRelativeUrl<TEntity>();
-            if (_httpClient is object && HaveUrl)
+            if (_httpClient is not null && HaveUrl)
             {
                 List<TEntity>? result = await _httpClient.GetFromJsonAsync<List<TEntity>>(_relativUrl);
-                if (result is object)
+                if (result is not null)
                     return result;
                 else
                     return new List<TEntity>();
@@ -32,19 +31,6 @@ namespace LibraryClientServiceTemplate.HttpServices
                 return new List<TEntity>();
         }
 
-        public async Task<TEntity> GetBy<TEntity>(Guid id) where TEntity : class, IDbRecord<TEntity>, new()
-        {
-            TEntity? result = new ();
-            _relativUrl = RelativeUrlExtension.SetRelativeUrl<TEntity>();
-            if (_httpClient is object && HaveUrl)
-            {
-                result = await _httpClient.GetFromJsonAsync<TEntity>($"{_relativUrl}/{id}");
-                if (result is object)
-                    return result;
-                else
-                    result = new TEntity();
-            }
-            return result;
-        }
+
     }
 }

@@ -1,12 +1,9 @@
 ﻿using LibraryCore.Model;
-using LibraryDataBroker;
 
 namespace LibraryDataBrokerProject
 {
-    public interface IListDataBroker : IGetDataBroker
+    public interface IListDataBroker 
 	{
         public Task<List<TEntity>> SelectAllRecordAsync<TEntity>() where TEntity : class, IDbRecord<TEntity>, new();
-
-
     }
 }
