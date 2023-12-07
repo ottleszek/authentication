@@ -4,15 +4,6 @@ using CommunityToolkit.Mvvm.Input;
 namespace LibraryBlazorMvvm.ViewModels
 {
 
-	public partial class MvvmUserViewModelBase : IMvvmUserViewModelBase
-	{
-
-        public MvvmUserViewModelBase()
-        {                
-        }
-	}
-
-
 	public partial class MvvmViewModelBase : ObservableObject, IMvvmViewModelBase
     {
         public virtual async Task OnInitializedAsync()

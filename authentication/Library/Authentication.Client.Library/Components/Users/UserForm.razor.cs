@@ -5,16 +5,16 @@ using Microsoft.AspNetCore.Components;
 
 namespace Authentication.Client.Library.Components
 { 
-    public partial class UserForm : MvvmItemComponentBase<User, MvvmUserViewModelBase>
+    public partial class UserForm : MvvmItemComponentBase<User, MvvmItemViewModelBase<User>>
     {
         [Parameter] public Guid Id { get; set; } = Guid.Empty;
 
         protected override Task OnParametersSetAsync()
         {
-       /*     if (ViewModel is not null)
+            if (ViewModel is not null)
             {
                 ViewModel.Id = Id;
-            }*/
+            }
             return base.OnParametersSetAsync();
         }
 

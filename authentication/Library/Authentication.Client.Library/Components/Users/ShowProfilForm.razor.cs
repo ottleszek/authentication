@@ -1,13 +1,13 @@
-﻿using Authentication.Client.Library.ViewModels.User;
-using LibraryCore.Errors;
+﻿using LibraryCore.Errors;
 using LibraryBlazorMvvm.Components;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using Authentication.Client.Library.ViewModels.User;
 
 namespace Authentication.Client.Library.Components
 {
     public partial class ShowProfilForm : MvvmComponentBase<ProfilViewModel>
-    {
+	{
         [Parameter] public string? UserEmail { get; set; }
         [Inject] ISnackbar? Snackbar { get; set; }
 
