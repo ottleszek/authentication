@@ -1,7 +1,9 @@
-﻿using Authentication.Shared.Models;
+﻿using Authentication.Client.Library.Validation;
+using Authentication.Shared.Models;
 using LibraryBlazorMvvm.Components;
 using LibraryBlazorMvvm.ViewModels;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 
 namespace Authentication.Client.Library.Components
 { 
@@ -9,13 +11,19 @@ namespace Authentication.Client.Library.Components
     {
         [Parameter] public Guid Id { get; set; } = Guid.Empty;
 
-        protected override Task OnParametersSetAsync()
+        private UserValidation? _validation;
+        private MudForm _form = new();
+
+        protected async override Task OnParametersSetAsync()
         {
             if (ViewModel is not null)
             {
                 ViewModel.Id = Id;
+                _validation = new UserValidation();
+
+                await ViewModel.Loading();
             }
-            return base.OnParametersSetAsync();
+            await base.OnParametersSetAsync();
         }
 
         private async Task SubmitFormAsync()

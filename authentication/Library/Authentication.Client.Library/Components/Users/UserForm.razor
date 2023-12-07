@@ -3,16 +3,41 @@
 @inherits MvvmItemComponentBase<User, MvvmItemViewModelBase<User>>
 
 <MudPaper Class="py-4 px-4">
-	@if (ViewModel is not null)
+	@if (ViewModel is not null && ViewModel.SelectedItem is not null && _validation is not null)
 	{
-		
+		<MudForm Model="ViewModel.SelectedItem" @ref="_form" Validation="_validation.ValidateValue">
+            <MudCardContent>
+                @if (ViewModel.ErrorString.HasError)
+                {
+                    <MudChip class="pt-2 d-flex justify-content-center" Color="Color.Error">
+                        <p>@ViewModel.ErrorString.Error</p>
+                    </MudChip>
+                }
+                <MudTextField @bind-Value="ViewModel.SelectedItem.LastName"
+                              For="@( () => ViewModel.SelectedItem.LastName)"
+                              Immediate=true
+                              Required="true"
+                              RequiredError="A vezetéknév szükséges!"
+                              Label="Vezetéknév"
+                              HelperText="Vezetéknév" />
+                <MudTextField @bind-Value="ViewModel.SelectedItem.FirstName"
+                              For="@( () => ViewModel.SelectedItem.FirstName)"
+                              Immediate=true
+                              Required="true"                              
+                              RequiredError="A keresztnév szükséges!"
+                              Label="Keresztnév"
+                              HelperText="Keresztnév" />
+                <MudTextField @bind-Value="ViewModel.SelectedItem.Email"
+                              For="@( () => ViewModel.SelectedItem.Email)"
+                              Disabled="true"
+                              ReadOnly="true"
+                              Immediate=true
+                              Required="true"
+                              RequiredError="Az email cím szükséges!"
+                              InputType="InputType.Email"
+                              Label="Email"
+                              HelperText="Email" />
+             </MudCardContent>
+		</MudForm>
 	}
 </MudPaper>
-
-@code{
-	/*
-	<EditForm Model="ViewModel.SelectedItem" OnValidSubmit="SubmitFormAsync">
-
-	</EditForm>
-	*/
-}

@@ -13,19 +13,14 @@ namespace Authentication.Client.Library.Components
         [CascadingParameter] public Task<AuthenticationState>? AuthenticationState { get; set; }
         [Inject] private NavigationManager? NavigationManager { get; set; }
         
-
         [Inject] private HttpClient? HttpClient { get; set; }
 
-        //[Inject] private IRegistrationViewModel? RegistrationViewModel { get; set; }
-
         private RegistrationValidation? _validation;
-
         private MudForm _form = new();
 
         protected override Task OnParametersSetAsync()
         {
-            if (HttpClient is not null)
-                _validation = new RegistrationValidation(HttpClient);
+            _validation = new RegistrationValidation(HttpClient);
             return base.OnParametersSetAsync();
         }
 

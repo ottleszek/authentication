@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using LibraryClientServiceTemplate.ModelBrokerConnectors;
+using LibraryCore.Errors;
 using LibraryCore.Model;
 
 namespace LibraryBlazorMvvm.ViewModels
@@ -14,12 +15,15 @@ namespace LibraryBlazorMvvm.ViewModels
         }
 
         [ObservableProperty]
+        private Guid _id = Guid.Empty;
+
+        [ObservableProperty]
         private TItem _selectedItem=new();
 
-		[ObservableProperty]
-		private Guid _id = Guid.Empty; 
+        [ObservableProperty]
+        private ErrorStore _errorString = new();
 
-		public override async Task Loading()
+        public override async Task Loading()
 		{
 			if (Id != Guid.Empty)
 			{
