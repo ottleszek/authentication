@@ -30,7 +30,8 @@ namespace Authentication.Client.Library.Extensions
             services.AddScoped<ProfilViewModel>();
             services.AddScoped<RegistrationViewModel>();
 
-            services.AddScoped<IMvvmItemViewModelBase<User>, MvvmItemViewModelBase<User>>();
+            //services.AddScoped<IMvvmViewModelBase, ProfilViewModel>();
+            services.AddScoped<IMvvmUserViewModelBase, MvvmUserViewModelBase>();
         }
 
         public static void ConfigureAuthenticationServices(this IServiceCollection services)

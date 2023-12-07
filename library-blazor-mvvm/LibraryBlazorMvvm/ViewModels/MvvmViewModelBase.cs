@@ -1,9 +1,20 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.ComponentModel;
 
 namespace LibraryBlazorMvvm.ViewModels
 {
-    public abstract partial class MvvmViewModelBase : ObservableObject, IMvvmViewModelBase
+
+	public class MvvmUserViewModelBase : IMvvmUserViewModelBase
+	{
+
+        public MvvmUserViewModelBase()
+        {                
+        }
+	}
+
+
+	public partial class MvvmViewModelBase : ObservableObject, IMvvmViewModelBase
     {
         public virtual async Task OnInitializedAsync()
         {

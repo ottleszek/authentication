@@ -1,12 +1,18 @@
 ﻿@namespace Authentication.Client.Library.Components
 
-@inherits MvvmItemComponentBase<User, MvvmItemViewModelBase<User>>
+@inherits MvvmItemComponentBase<User, MvvmUserViewModelBase>
 
 <MudPaper Class="py-4 px-4">
 	@if (ViewModel is not null)
 	{
-		<EditForm Model="ViewModel.SelectedItem" OnValidSubmit="SubmitFormAsync">
-			
-		</EditForm>
+		
 	}
 </MudPaper>
+
+@code{
+	/*
+	<EditForm Model="ViewModel.SelectedItem" OnValidSubmit="SubmitFormAsync">
+
+	</EditForm>
+	*/
+}
