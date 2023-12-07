@@ -1,11 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.ComponentModel;
 
 namespace LibraryBlazorMvvm.ViewModels
 {
 
-	public class MvvmUserViewModelBase : IMvvmUserViewModelBase
+	public partial class MvvmUserViewModelBase : IMvvmUserViewModelBase
 	{
 
         public MvvmUserViewModelBase()
