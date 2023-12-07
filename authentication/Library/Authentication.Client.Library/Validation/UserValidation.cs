@@ -1,7 +1,6 @@
 ﻿using Authentication.Shared.Models;
 using FluentValidation;
 using LibraryBlazorMvvm.ViewModels;
-using System.Text.RegularExpressions;
 
 namespace Authentication.Client.Library.Validation
 {
