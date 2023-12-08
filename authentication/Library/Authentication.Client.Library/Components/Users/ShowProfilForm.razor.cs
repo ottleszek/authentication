@@ -41,7 +41,7 @@ namespace Authentication.Client.Library.Components
                 Snackbar?.Add("A profil frissítés nem lehetséges!", Severity.Error);
                 return;
             }
-            ErrorStore errorStore = await ViewModel.UpdateProfil();
+            ErrorStore errorStore = await ViewModel.UpdateProfilAsync();
             if (errorStore.HasError)
             {
                 Snackbar?.Add(errorStore.Error, Severity.Error);

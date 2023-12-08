@@ -33,7 +33,7 @@ namespace Authentication.Client.Library.ViewModels.User
 
         private ProfilDto _tempProfil = new ();
 
-        public async Task<ErrorStore> UpdateProfil()
+        public async Task<ErrorStore> UpdateProfilAsync()
         {
             IsBusy = true;
             ErrorStore errorStore = new ErrorStore();

@@ -7,7 +7,7 @@ using MudBlazor;
 
 namespace Authentication.Client.Library.Components
 { 
-    public partial class UserForm : MvvmItemComponentBase<User, MvvmItemViewModelBase<User>>
+    public partial class UserForm : MvvmItemComponentBase<User, MvvmUpdateViewModelBase<User>>
     {
         private MudForm _form = new();
 

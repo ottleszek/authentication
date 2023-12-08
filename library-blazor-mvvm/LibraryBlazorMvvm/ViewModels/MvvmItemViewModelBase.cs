@@ -8,7 +8,8 @@ namespace LibraryBlazorMvvm.ViewModels
     public partial class MvvmItemViewModelBase<TItem> : MvvmViewModelBase, IMvvmItemViewModelBase<TItem> where TItem : class, IDbRecord<TItem>, new()
     {
 		private IGetBrokerConnector<TItem> _brokerConnector;
-		private TItem? _tempItem = null;
+		
+		protected TItem? _tempItem = null;
 
         public MvvmItemViewModelBase(IGetBrokerConnector<TItem> brokerConnector)
         {
@@ -42,21 +43,18 @@ namespace LibraryBlazorMvvm.ViewModels
 			
 		}
 
-		public void ResetData()
-		{
-			if (_tempItem is not null)
-			{
-				SelectedItem = (TItem)_tempItem.Clone();
-			}
-		}
-
-		private async Task GetByIdAsnyc()
+        protected async Task GetByIdAsnyc()
 		{
 			if (Id != Guid.Empty)
 			{
 				SelectedItem = await _brokerConnector.GetByAsnyc(Id);
-                _tempItem = (TItem)SelectedItem.Clone();
+				SaveToTempData();
             }
 		}
-	}
+
+		protected void SaveToTempData()
+		{
+            _tempItem = (TItem) SelectedItem.Clone();
+        }
+    }
 }
