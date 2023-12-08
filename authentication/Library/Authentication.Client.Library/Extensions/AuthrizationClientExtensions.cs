@@ -1,4 +1,5 @@
 ﻿using Authentication.Client.Library.Services.Profil;
+using Authentication.Client.Library.Validation;
 using Authentication.Client.Library.ViewModels.Accounts;
 using Authentication.Client.Library.ViewModels.Login;
 using Authentication.Client.Library.ViewModels.User;
@@ -26,6 +27,10 @@ namespace Authentication.Client.Library.Extensions
             //services.AddScoped<IRegistrationViewModel, RegistrationViewModel>();
             //services.AddScoped<ILoginViewModel, LoginViewModel>();
             //services.AddScoped<IProfilViewModel, ProfilViewModel>();
+
+            // Validations
+            services.AddScoped<RegistrationValidation>();
+            // ViewModels
             services.AddScoped<LoginViewModel>();
             services.AddScoped<ProfilViewModel>();
             services.AddScoped<RegistrationViewModel>();

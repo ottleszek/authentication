@@ -15,12 +15,12 @@ namespace Authentication.Client.Library.Components
         
         [Inject] private HttpClient? HttpClient { get; set; }
 
-        private RegistrationValidation? _validation;
+        [Inject] private RegistrationValidation? Validation {get; set;}
         private MudForm _form = new();
 
         protected override Task OnParametersSetAsync()
         {
-            _validation = new RegistrationValidation(HttpClient);
+            //Validation = new RegistrationValidation(HttpClient);
             return base.OnParametersSetAsync();
         }
 
