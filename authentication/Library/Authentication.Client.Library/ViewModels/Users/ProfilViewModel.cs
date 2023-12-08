@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using LibraryCore.Errors;
 using LibraryCore.Responses;
 using LibraryBlazorMvvm.ViewModels;
+using System.Xml.Linq;
 
 namespace Authentication.Client.Library.ViewModels.User
 {
@@ -24,6 +25,8 @@ namespace Authentication.Client.Library.ViewModels.User
         public string _email = string.Empty;
         [ObservableProperty]
         private ErrorStore _errorString = new();
+        [ObservableProperty]
+        private bool _isBusy = false;
 
         public bool IsValidUser => !string.IsNullOrEmpty(Email);
         public bool IsReadOnly { get; set; } = true;
@@ -32,6 +35,7 @@ namespace Authentication.Client.Library.ViewModels.User
 
         public async Task<ErrorStore> UpdateProfil()
         {
+            IsBusy = true;
             ErrorStore errorStore = new ErrorStore();
             if (_profilService is null)
             {                
@@ -49,32 +53,26 @@ namespace Authentication.Client.Library.ViewModels.User
                 if (response.IsSuccess)
                 {
                     await GetProfil();
+                    SaveProfilToTempData();
                     ChangeToReadOnly();
                 }
                 errorStore = (ErrorStore) response;
             }
             ErrorString = errorStore;
+            IsBusy = false;
             return errorStore;
         }
 
         public void ChangeToModify()
         {
             IsReadOnly = false;
-            _tempProfil = new ProfilDto
-            {
-                FirstName = FirstName,
-                LastName = LastName,
-                Email = Email
-            };
+            SaveProfilToTempData();
         }
 
         public void ChangeToReadOnly()
         {
             IsReadOnly = true;
-            FirstName = _tempProfil.FirstName;
-            LastName=_tempProfil.LastName;
-            Email = _tempProfil.Email;
-
+            RestoreProfilFromTempData();
         }
 
         public async override Task Loading()
@@ -95,6 +93,23 @@ namespace Authentication.Client.Library.ViewModels.User
                 LastName = result.LastName;
                 Email = result.Email;
             }
-        }   
+        }
+
+        private void RestoreProfilFromTempData()
+        {
+            FirstName = _tempProfil.FirstName;
+            LastName = _tempProfil.LastName;
+            Email = _tempProfil.Email;
+        }
+
+        private void SaveProfilToTempData()
+        {
+            _tempProfil = new ProfilDto
+            {
+                FirstName = FirstName,
+                LastName = LastName,
+                Email = Email
+            };
+        }
     }
 }

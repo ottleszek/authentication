@@ -46,7 +46,10 @@ namespace Authentication.Client.Library.Components
             {
                 Snackbar?.Add(errorStore.Error, Severity.Error);
             }
-            Snackbar?.Add("A profil frissítés sikerült!", Severity.Success);
+            else
+            {
+                Snackbar?.Add("A profil frissítés sikerült!", Severity.Success);
+            }
         }
     }
 }
