@@ -20,7 +20,6 @@ namespace Authentication.Client.Library.Components
 
         protected override Task OnParametersSetAsync()
         {
-            //Validation = new RegistrationValidation(HttpClient);
             return base.OnParametersSetAsync();
         }
 

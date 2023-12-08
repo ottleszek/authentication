@@ -22,18 +22,19 @@ namespace Authentication.Client.Library.ViewModels.User
         public string _lastName = string.Empty;
         [ObservableProperty]
         public string _email = string.Empty;
+        [ObservableProperty]
+        private ErrorStore _errorString = new();
 
         public bool IsValidUser => !string.IsNullOrEmpty(Email);
         public bool IsReadOnly { get; set; } = true;
 
         private ProfilDto _tempProfil = new ();
 
-
         public async Task<ErrorStore> UpdateProfil()
         {
+            ErrorStore errorStore = new ErrorStore();
             if (_profilService is null)
-            {
-                ErrorStore errorStore = new ErrorStore();
+            {                
                 errorStore.ClearAndAddError("A profil frissítése nem lehetséges!");
             }
             else
@@ -50,9 +51,10 @@ namespace Authentication.Client.Library.ViewModels.User
                     await GetProfil();
                     ChangeToReadOnly();
                 }
-                return (ErrorStore) response;
+                errorStore = (ErrorStore) response;
             }
-            return new ErrorStore();
+            ErrorString = errorStore;
+            return errorStore;
         }
 
         public void ChangeToModify()
@@ -69,7 +71,7 @@ namespace Authentication.Client.Library.ViewModels.User
         public void ChangeToReadOnly()
         {
             IsReadOnly = true;
-            Email = _tempProfil.Email;
+            FirstName = _tempProfil.FirstName;
             LastName=_tempProfil.LastName;
             Email = _tempProfil.Email;
 

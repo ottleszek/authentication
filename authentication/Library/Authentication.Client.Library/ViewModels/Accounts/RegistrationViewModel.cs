@@ -8,8 +8,15 @@ namespace Authentication.Client.Library.ViewModels.Accounts
 {
     public partial class RegistrationViewModel : MvvmViewModelBase
     {
+        private IRegistrationService? _registrationService;              
+
+        public RegistrationViewModel(IRegistrationService service)
+        {
+            _registrationService = service;
+        }
+
         [ObservableProperty]
-        private string _firstName =  string.Empty;
+        private string _firstName = string.Empty;
         [ObservableProperty]
         private string _lastName = string.Empty;
         [ObservableProperty]
@@ -17,17 +24,9 @@ namespace Authentication.Client.Library.ViewModels.Accounts
         [ObservableProperty]
         private string _password = string.Empty;
         [ObservableProperty]
-        private string _confirmPassword  = string.Empty;
-
-        private IRegistrationService? _registrationService;
-
+        private string _confirmPassword = string.Empty;
         [ObservableProperty]
         private ErrorStore _errorString = new();
-
-        public RegistrationViewModel(IRegistrationService service)
-        {
-            _registrationService = service;
-        }
 
         public async Task<bool> UserRegistrationAsync()
         {
