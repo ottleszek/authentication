@@ -9,11 +9,13 @@ namespace Authentication.Client.Library.Components
 {
     public partial class ShowProfilForm : MvvmComponentBase<ProfilViewModel>
 	{
+        private MudForm _form = new();
+
         [Parameter] public string? UserEmail { get; set; }
         [Inject] ISnackbar? Snackbar { get; set; }
 
         [Inject] private ProfilValidation? Validation { get; set; }
-        private MudForm _form = new();
+
 
         private List<BreadcrumbItem> _items = new()
         {

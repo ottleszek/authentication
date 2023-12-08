@@ -10,13 +10,14 @@ namespace Authentication.Client.Library.Components
 {
     public partial class RegistrationComponent : MvvmComponentBase<RegistrationViewModel>
     {
+        private MudForm _form = new();
+
         [CascadingParameter] public Task<AuthenticationState>? AuthenticationState { get; set; }
         [Inject] private NavigationManager? NavigationManager { get; set; }
         
         [Inject] private HttpClient? HttpClient { get; set; }
 
         [Inject] private RegistrationValidation? Validation {get; set;}
-        private MudForm _form = new();
 
         protected override Task OnParametersSetAsync()
         {

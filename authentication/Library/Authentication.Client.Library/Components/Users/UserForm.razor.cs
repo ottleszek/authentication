@@ -9,17 +9,17 @@ namespace Authentication.Client.Library.Components
 { 
     public partial class UserForm : MvvmItemComponentBase<User, MvvmItemViewModelBase<User>>
     {
-        [Parameter] public Guid Id { get; set; } = Guid.Empty;
-
-        private UserValidation? _validation;
         private MudForm _form = new();
+
+        [Parameter] public Guid Id { get; set; } = Guid.Empty;
+        [Inject] private UserValidation? Validation { get; set; }              
 
         protected async override Task OnParametersSetAsync()
         {
             if (ViewModel is not null)
             {
                 ViewModel.Id = Id;
-                _validation = new UserValidation();
+                Validation = new UserValidation();
 
                 await ViewModel.Loading();
             }
