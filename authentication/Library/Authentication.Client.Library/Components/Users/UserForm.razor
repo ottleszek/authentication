@@ -38,6 +38,11 @@
                               Label="Email"
                               HelperText="Email" />
              </MudCardContent>
+             <MudCardActions>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary"  Disabled="@ViewModel.IsBusy">Mentés</MudButton>
+                <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Secondary" Disabled="@ViewModel.IsBusy" OnClick="ViewModel.ResetData">Visszaállítás</MudButton>
+                <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Secondary" Disabled="@ViewModel.IsBusy" OnClick="GoBack">Vissza</MudButton>
+            </MudCardActions>
 		</MudForm>
 	}
 </MudPaper>

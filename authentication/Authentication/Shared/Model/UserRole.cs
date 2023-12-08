@@ -1,4 +1,5 @@
-﻿using LibraryCore.Model;
+﻿using LibraryCore.Extensions;
+using LibraryCore.Model;
 
 namespace Authentication.Shared.Models
 {
@@ -20,8 +21,11 @@ namespace Authentication.Shared.Models
 
         public Guid Id{ get; set; }
         public string EnglishName { get; set; } = string.Empty;
-        public string Name { get; set; } = string.Empty;        
+        public string Name { get; set; } = string.Empty;
 
-        
+        public object Clone()
+        {
+            return this.CloneJson<UserRole>();
+        }
     }
 }

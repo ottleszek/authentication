@@ -1,4 +1,5 @@
-﻿using LibraryCore.Model;
+﻿using LibraryCore.Extensions;
+using LibraryCore.Model;
 
 namespace Authentication.Server.Datas.Entities
 {
@@ -8,5 +9,10 @@ namespace Authentication.Server.Datas.Entities
         public Guid UserId { get; set; }
         public string Token { get; set; } = string.Empty;
         public DateTime ExpirationDate { get; set; }
+
+        public object Clone()
+        {
+            return this.CloneJson<UserRefreshToken>();
+        }
     }
 }

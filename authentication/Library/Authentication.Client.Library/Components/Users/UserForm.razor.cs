@@ -12,7 +12,9 @@ namespace Authentication.Client.Library.Components
         private MudForm _form = new();
 
         [Parameter] public Guid Id { get; set; } = Guid.Empty;
+        [Inject] private NavigationManager? Navigation { get; set; }
         [Inject] private UserValidation? Validation { get; set; }              
+
 
         protected async override Task OnParametersSetAsync()
         {
@@ -24,6 +26,12 @@ namespace Authentication.Client.Library.Components
                 await ViewModel.Loading();
             }
             await base.OnParametersSetAsync();
+        }
+
+        private void GoBack()
+        {
+            if (Navigation is not null)
+                Navigation.NavigateTo("/user");
         }
 
         private async Task SubmitFormAsync()

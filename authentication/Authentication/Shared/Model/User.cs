@@ -1,4 +1,5 @@
-﻿using LibraryCore.Model;
+﻿using LibraryCore.Extensions;
+using LibraryCore.Model;
 
 namespace Authentication.Shared.Models
 {
@@ -29,5 +30,11 @@ namespace Authentication.Shared.Models
         public Guid UserRoleId { get; set; }
 
         public bool IsValidUser => !string.IsNullOrEmpty(Email);
+
+        public object Clone()
+        {
+            return this.CloneJson<User>();
+        }
+    
     }
 }

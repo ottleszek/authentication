@@ -2,11 +2,6 @@
 
 namespace LibraryBlazorMvvm.ViewModels
 {
-    public interface IMvvmUserViewModelBase 
-    {
-    }
-
-
 	public interface IMvvmViewModelBase : INotifyPropertyChanged
     {
         Task OnInitializedAsync();
