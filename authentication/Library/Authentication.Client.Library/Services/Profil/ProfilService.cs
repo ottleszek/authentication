@@ -33,10 +33,10 @@ namespace Authentication.Client.Library.Services.Profil
 
         public async  Task<ControllerResponse> UpdateProfil(ProfilDto profil)
         {
-            ControllerResponse? response = new ();
+            ControllerResponse defaultResponse = new ();
             if (_httpClient is null)
             {
-                response.ClearAndAddError("A profil frissítés nem lehetséges!");
+                defaultResponse.ClearAndAddError("A profil frissítés nem lehetséges!");
             }
             else
             {
@@ -45,7 +45,7 @@ namespace Authentication.Client.Library.Services.Profil
                     HttpResponseMessage httpResponse = await _httpClient.PostAsJsonAsync("api/Profil/", profil);
                     
                     string content = await httpResponse.Content.ReadAsStringAsync();
-                    response = JsonConvert.DeserializeObject<ControllerResponse>(content);
+                    ControllerResponse? response= JsonConvert.DeserializeObject<ControllerResponse>(content);
                     if (response is not null)
                         return response;
                 }
@@ -54,9 +54,8 @@ namespace Authentication.Client.Library.Services.Profil
                     LibraryLogging.LoggingBroker.LogError($"{ex.Message}");
                 }
             }
-            response ??= new ControllerResponse();
-            response.ClearAndAddError("A profil frissítés nem lehetséges!");
-            return response;
+            defaultResponse.ClearAndAddError("A profil frissítés nem lehetséges!");
+            return defaultResponse;
 
         }
     }

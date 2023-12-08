@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\library-core\LibraryCore\LibraryCore.csproj" />
     <ProjectReference Include="..\..\library-data-broker\LibraryDataBroker\LibraryDataBroker.csproj" />
+    <ProjectReference Include="..\..\library-logging\LibraryLogging\LibraryLogging.csproj" />
   </ItemGroup>
 
 </Project>
