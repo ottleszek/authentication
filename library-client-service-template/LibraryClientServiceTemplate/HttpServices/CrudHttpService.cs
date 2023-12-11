@@ -7,13 +7,13 @@ using System.Net.Http.Json;
 
 namespace LibraryClientServiceTemplate.HttpServices
 {
-    public class HttpCrudService : UpdateHttpService, ICrudDataBroker
+    public class CrudHttpService : UpdateHttpService, ICrudDataBroker
     {
         private readonly HttpClient? _httpClient;
         private string _relativUrl = string.Empty;
         private bool HaveUrl => _relativUrl is object && _relativUrl != string.Empty;
 
-        public HttpCrudService(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
+        public CrudHttpService(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
         {
             _httpClient = httpClientFactory.CreateClient("AuthenticationApi");
         }

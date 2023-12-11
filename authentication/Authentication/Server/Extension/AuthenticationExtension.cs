@@ -72,6 +72,7 @@ namespace Authentication.Server.Extension
             services.AddScoped<IListDataBroker, ListInMemoryDataBroker>();
 			services.AddScoped<IGetDataBroker, GetInMemoryDataBroker>();
             services.AddScoped<IUpdateDataBroker, UpdateInMemoryDataBroker>();
+            services.AddScoped<ICrudDataBroker, CrudInMemoryDataBroker>();
 
 
             services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedEmail = true)

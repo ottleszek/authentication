@@ -8,7 +8,6 @@ namespace LibraryApiTemplate.Controllers
     [Route("api/[controller]")]
     public abstract class UpdateController<TEntity> : ControllerBase, IUpdateController<TEntity> where TEntity : class, IDbRecord<TEntity>, new()
     {
-        private readonly IGetDataBroker? _repo;
         private readonly IUpdateDataBroker? _repoUpdate;
 
         public UpdateController(IUpdateDataBroker repoUpdate)
@@ -16,6 +15,7 @@ namespace LibraryApiTemplate.Controllers
             _repoUpdate=repoUpdate;
         }
 
+        [HttpPut()]
         public async Task<ActionResult> UpdateAsync(TEntity entity)
         {
             ControllerResponse response = new ControllerResponse();

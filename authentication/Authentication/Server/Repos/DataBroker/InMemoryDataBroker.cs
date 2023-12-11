@@ -61,5 +61,12 @@ namespace Authentication.Server.Repos.DataBroker
         }
     }
 
+    public class CrudInMemoryDataBroker : RepoCrud<AuthenticationInMemoryContext>, ICrudDataBroker
+    {
+        public CrudInMemoryDataBroker(IDbContextFactory<AuthenticationInMemoryContext> dbContextFactory) : base(dbContextFactory)
+        {
+        }
+    }
+
 
 }

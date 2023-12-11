@@ -37,8 +37,9 @@ namespace Authentication.Client.Library.Extensions
             services.AddScoped<ProfilViewModel>();
             services.AddScoped<RegistrationViewModel>();
 
-            services.AddScoped<MvvmUpdateViewModelBase<User>>();
-            
+            // User managment
+            services.AddScoped<IListViewModel<User>, ListViewModel<User>>();
+            services.AddScoped<MvvmCrudViewModelBase<User>>();            
         }
 
         public static void ConfigureAuthenticationServices(this IServiceCollection services)
@@ -51,9 +52,6 @@ namespace Authentication.Client.Library.Extensions
 
             services.AddScoped<IProfilService, ProfilService>();
             
-            // User managment
-            services.AddScoped<IListViewModel<User>, ListViewModel<User>>();
-            services.AddScoped<IListBrokerConnector<User>, ListBrokerConnector<User>>();
             // User role managment
             services.AddScoped<IListViewModel<UserRole>, ListViewModel<UserRole>>();
             services.AddScoped<IListBrokerConnector<UserRole>, ListBrokerConnector<UserRole>>();
@@ -61,11 +59,13 @@ namespace Authentication.Client.Library.Extensions
             services.AddScoped<IListDataBroker, ListHttpService>();
             services.AddScoped<IGetDataBroker, GetHttpService>();
             services.AddScoped<IUpdateDataBroker, UpdateHttpService>();
-
-
+            services.AddScoped<ICrudDataBroker, CrudHttpService>();
+            //Broker connectors
+            services.AddScoped<IListBrokerConnector<User>, ListBrokerConnector<User>>();
             services.AddScoped<IUpdateBrokerConnector<User>, UpdateBrokerConnector<User>>();
             services.AddScoped<IGetBrokerConnector<User>, GetBrokerConnector<User>>();
             services.AddScoped<IListBrokerConnector<User>, ListBrokerConnector<User>>();
+            services.AddScoped<ICrudBrokerConnector<User>,CrudBrokerConnectorr<User>>();
 
 
 		}

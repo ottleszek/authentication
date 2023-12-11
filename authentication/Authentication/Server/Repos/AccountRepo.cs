@@ -62,6 +62,7 @@ namespace Authentication.Server.Repos
             }
             catch (Exception ex)
             {
+                LibraryLogging.LoggingBroker.LogError($"{nameof(AccountRepo<TDbContext>)}\nSql utasítás nem hajtható végre.\n{ex.Message}");
                 response.ClearAndAddError($"{nameof(AccountRepo<TDbContext>)}\nSQL lekérdezés nem hajtható végre!\n{ex.Message}");
             }
             return response;

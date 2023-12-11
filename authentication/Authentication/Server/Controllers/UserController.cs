@@ -24,4 +24,14 @@ namespace Authentication.Server.Controllers
         {
         }
     }
+
+    [ApiController]
+    [Route("api/user")]
+    //[Authorize(Roles = "Administrator")]
+    public class UserCrudController : CrudController<User>
+    {
+        public UserCrudController(ICrudDataBroker repoCrud, IUpdateDataBroker repoUpdate) : base(repoCrud, repoUpdate)
+        {
+        }
+    }
 }

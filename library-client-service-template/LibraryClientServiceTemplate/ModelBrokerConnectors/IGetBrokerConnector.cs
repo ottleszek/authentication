@@ -1,6 +1,4 @@
-﻿using LibraryDataBroker;
-
-namespace LibraryClientServiceTemplate.ModelBrokerConnectors
+﻿namespace LibraryClientServiceTemplate.ModelBrokerConnectors
 {
     public interface IGetBrokerConnector<TEntity>
 	{
