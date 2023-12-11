@@ -15,10 +15,11 @@ namespace Authentication.Client.Library.Components
 
         public async Task<TableData<User>> ReloadDataAsync(TableState state)
         {
+            
             if (ViewModel is not null)
             {
                 List<User> users = await ReloadDataAsync();
-                TableData<User> data = new TableData<User>
+                TableData<User> data = new()
                 {
                     Items = users,
                     TotalItems = users.Count,

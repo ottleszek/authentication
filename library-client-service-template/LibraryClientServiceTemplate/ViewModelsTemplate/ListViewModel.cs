@@ -17,6 +17,7 @@ namespace LibraryClientServiceTemplate.ViewModelsTemplate
 
         public virtual async Task GetAllDataToViewModel()
         {
+            Isb
             Items = await _service.SelectAllRecordAsync();
         }
 

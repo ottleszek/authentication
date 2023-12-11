@@ -4,5 +4,8 @@
     {
         public string GetDbSetName() => new TEntity().GetType().Name; // typeof(TEntity).Name;
         public Guid Id { get; set; }
+
+        public bool HasId => Id==Guid.Empty ? false : true;
+
     }
 }

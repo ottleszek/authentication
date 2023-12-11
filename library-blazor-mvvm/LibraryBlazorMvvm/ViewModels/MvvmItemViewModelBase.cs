@@ -25,9 +25,6 @@ namespace LibraryBlazorMvvm.ViewModels
         [ObservableProperty]
         private ErrorStore _errorString = new();
 
-		[ObservableProperty]
-		private bool _isBusy = false;
-
         public override async Task Loading()
 		{
 			IsBusy = true;
@@ -45,11 +42,13 @@ namespace LibraryBlazorMvvm.ViewModels
 
         protected async Task GetByIdAsnyc()
 		{
+			IsBusy = true;
 			if (Id != Guid.Empty)
 			{
 				SelectedItem = await _brokerConnector.GetByAsnyc(Id);
 				SaveToTempData();
             }
+			IsBusy = false;
 		}
 
 		protected void SaveToTempData()
