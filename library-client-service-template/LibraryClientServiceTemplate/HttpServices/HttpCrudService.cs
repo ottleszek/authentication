@@ -36,9 +36,9 @@ namespace LibraryClientServiceTemplate.HttpServices
                 {
                     LibraryLogging.LoggingBroker.LogError($"{ex.Message}");
                 }
-                defaultResponse.ClearAndAddError("Az adatok frissítés nem lehetséges!");
-                return defaultResponse;
             }
+            defaultResponse.ClearAndAddError("Az adatok frissítés nem lehetséges!");
+            return defaultResponse;
         }
 
         public async Task<ControllerResponse> InsertAsync<TEntity>(TEntity entity) where TEntity : class, IDbRecord<TEntity>, new ()
