@@ -17,10 +17,9 @@ namespace LibraryBlazorMvvm.ViewModels
         public async Task<ErrorStore> DeleteAsync(Guid id) 
         {
             IsBusy = true;
-            ErrorStore errorStore = new ErrorStore();
             if (_broker is null)
             {
-                errorStore.ClearAndAddError("Az adatok törlése nem lehetséges!");
+                ErrorStore.ClearAndAddError("Az adatok törlése nem lehetséges!");
             }
             else
             {
@@ -29,19 +28,18 @@ namespace LibraryBlazorMvvm.ViewModels
                 {
                     // reload
                 }
-                errorStore = (ErrorStore)response;
+                ErrorStore = (ErrorStore)response;
             }
             IsBusy = false;
-            return errorStore;
+            return ErrorStore;
         }
 
         public async Task<ErrorStore> InsertAsync(TItem entity)
         {
             IsBusy = true;
-            ErrorStore errorStore = new ErrorStore();
             if (_broker is null)
             {
-                errorStore.ClearAndAddError("Az adatok mentése nem lehetséges!");
+                ErrorStore.ClearAndAddError("Az adatok mentése nem lehetséges!");
             }
             else
             {
@@ -50,10 +48,10 @@ namespace LibraryBlazorMvvm.ViewModels
                 {
                     // reload
                 }
-                errorStore = (ErrorStore)response;
+                ErrorStore = (ErrorStore)response;
             }
             IsBusy = false;
-            return errorStore;
+            return ErrorStore;
         }
     }
 }

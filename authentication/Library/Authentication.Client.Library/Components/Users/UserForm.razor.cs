@@ -1,16 +1,13 @@
 ﻿using Authentication.Client.Library.Validation;
 using Authentication.Shared.Models;
-using CommunityToolkit.Mvvm.Input;
 using LibraryBlazorMvvm.Components;
 using LibraryBlazorMvvm.ViewModels;
-using LibraryCore.Errors;
-using LibraryCore.Responses;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
 namespace Authentication.Client.Library.Components
 { 
-    public partial class UserForm : MvvmItemComponentBase<User, MvvmUpdateViewModelBase<User>>
+    public partial class UserForm : MvvmItemComponentBase<User, MvvmCrudViewModelBase<User>>
     {
         private MudForm _form = new();
 
@@ -41,7 +38,15 @@ namespace Authentication.Client.Library.Components
         {
             if (ViewModel is not null)
             {
-                ErrorStore response = await ViewModel.UpdateAsync();
+                await ViewModel.UpdateAsync();
+            }
+        }
+        
+        private async Task DeleteAsync(User user)
+        {
+            if (ViewModel is not null)
+            {
+                await ViewModel.DeleteAsync(user.Id);
             }
         }
     }

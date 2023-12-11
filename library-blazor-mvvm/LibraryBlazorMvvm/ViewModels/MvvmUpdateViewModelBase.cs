@@ -27,10 +27,9 @@ namespace LibraryBlazorMvvm.ViewModels
         public async Task<ErrorStore> UpdateAsync()
         {
             IsBusy = true;
-            ErrorStore errorStore = new ErrorStore();
             if (_brokckerConnector is null)
             {
-                errorStore.ClearAndAddError("Az adatok frissítése nem lehetséges!");
+                ErrorStore.ClearAndAddError("Az adatok frissítése nem lehetséges!");
             }
             else
             {
@@ -40,10 +39,10 @@ namespace LibraryBlazorMvvm.ViewModels
                     await GetByIdAsnyc();
                     SaveToTempData();
                 }
-                errorStore = (ErrorStore) response;
+                ErrorStore= (ErrorStore) response;
             }
             IsBusy = false;
-            return errorStore;
+            return ErrorStore;
         }
     }
 }

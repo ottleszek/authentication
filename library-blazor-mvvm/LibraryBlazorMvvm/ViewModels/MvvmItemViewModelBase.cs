@@ -23,7 +23,7 @@ namespace LibraryBlazorMvvm.ViewModels
         private TItem _selectedItem=new();
 
         [ObservableProperty]
-        private ErrorStore _errorString = new();
+        private ErrorStore _errorStore = new();
 
         public override async Task Loading()
 		{

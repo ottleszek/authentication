@@ -1,16 +1,16 @@
 ﻿@namespace Authentication.Client.Library.Components
 
-@inherits MvvmItemComponentBase<User, MvvmUpdateViewModelBase<User>>
+@inherits MvvmItemComponentBase<User, MvvmCrudViewModelBase<User>>
 
 <MudPaper Class="py-4 px-4">
 	@if (ViewModel is not null && ViewModel.SelectedItem is not null && Validation is not null)
 	{
 		<MudForm Model="ViewModel.SelectedItem" @ref="_form" Validation="Validation.ValidateValue">
             <MudCardContent>
-                @if (ViewModel.ErrorString.HasError)
+                @if (ViewModel.ErrorStore.HasError)
                 {
                     <MudChip class="pt-2 d-flex justify-content-center" Color="Color.Error">
-                        <p>@ViewModel.ErrorString.Error</p>
+                        <p>@ViewModel.ErrorStore.Error</p>
                     </MudChip>
                 }
                 <MudTextField @bind-Value="ViewModel.SelectedItem.LastName"
@@ -40,6 +40,7 @@
              </MudCardContent>
              <MudCardActions>
                 <MudButton Variant="Variant.Filled" Color="Color.Primary"  Disabled="@ViewModel.IsBusy" OnClick="ViewModel.UpdateAsync">Mentés</MudButton>
+                <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Error" Disabled="@ViewModel.IsBusy" OnClick="@( async () => await DeleteAsync())">Visszaállítás</MudButton>
                 <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Secondary" Disabled="@ViewModel.IsBusy" OnClick="ViewModel.ResetData">Visszaállítás</MudButton>
                 <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Secondary" Disabled="@ViewModel.IsBusy" OnClick="GoBack">Vissza</MudButton>
             </MudCardActions>
