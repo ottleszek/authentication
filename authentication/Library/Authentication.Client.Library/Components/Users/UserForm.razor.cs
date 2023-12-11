@@ -1,7 +1,10 @@
 ﻿using Authentication.Client.Library.Validation;
 using Authentication.Shared.Models;
+using CommunityToolkit.Mvvm.Input;
 using LibraryBlazorMvvm.Components;
 using LibraryBlazorMvvm.ViewModels;
+using LibraryCore.Errors;
+using LibraryCore.Responses;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
@@ -34,9 +37,12 @@ namespace Authentication.Client.Library.Components
                 Navigation.NavigateTo("/user");
         }
 
-        private async Task SubmitFormAsync()
+        private async Task UpdateAsync()
         {
-            //OnInitializedAsync();
+            if (ViewModel is not null)
+            {
+                ErrorStore response = await ViewModel.UpdateAsync();
+            }
         }
     }
 }

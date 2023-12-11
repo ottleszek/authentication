@@ -37,7 +37,8 @@ namespace Authentication.Client.Library.Extensions
             services.AddScoped<ProfilViewModel>();
             services.AddScoped<RegistrationViewModel>();
 
-            services.AddScoped<MvvmItemViewModelBase<User>>();
+            services.AddScoped<MvvmUpdateViewModelBase<User>>();
+            
         }
 
         public static void ConfigureAuthenticationServices(this IServiceCollection services)
@@ -49,6 +50,7 @@ namespace Authentication.Client.Library.Extensions
             services.AddScoped<INofifyAuthenticationService, NofifyAuthenticationService>();
 
             services.AddScoped<IProfilService, ProfilService>();
+            
             // User managment
             services.AddScoped<IListViewModel<User>, ListViewModel<User>>();
             services.AddScoped<IListBrokerConnector<User>, ListBrokerConnector<User>>();
@@ -58,10 +60,12 @@ namespace Authentication.Client.Library.Extensions
             // Data broker
             services.AddScoped<IListDataBroker, ListHttpService>();
             services.AddScoped<IGetDataBroker, GetHttpService>();
+            services.AddScoped<IUpdateDataBroker, UpdateHttpService>();
 
 
+            services.AddScoped<IUpdateBrokerConnector<User>, UpdateBrokerConnector<User>>();
             services.AddScoped<IGetBrokerConnector<User>, GetBrokerConnector<User>>();
-			services.AddScoped<IListBrokerConnector<User>, ListBrokerConnector<User>>();
+            services.AddScoped<IListBrokerConnector<User>, ListBrokerConnector<User>>();
 
 
 		}

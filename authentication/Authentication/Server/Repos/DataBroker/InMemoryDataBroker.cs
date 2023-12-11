@@ -54,5 +54,12 @@ namespace Authentication.Server.Repos.DataBroker
 		}
 	}
 
+    public class UpdateInMemoryDataBroker : RepoUpdate<AuthenticationInMemoryContext>, IUpdateDataBroker
+    { 
+        public UpdateInMemoryDataBroker(IDbContextFactory<AuthenticationInMemoryContext> dbContextFactory) : base(dbContextFactory)
+        {
+        }
+    }
+
 
 }

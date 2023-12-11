@@ -14,4 +14,14 @@ namespace Authentication.Server.Controllers
 		{
 		}
 	}
+
+    [ApiController]
+    [Route("api/user")]
+    //[Authorize(Roles = "Administrator")]
+    public class UserUpdateController : UpdateController<User>
+    {
+        public UserUpdateController(IUpdateDataBroker repoUpdate) : base(repoUpdate)
+        {
+        }
+    }
 }

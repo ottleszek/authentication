@@ -16,6 +16,7 @@ namespace LibraryClientServiceTemplate.HttpServices
         public UpdateHttpService(IHttpClientFactory httpClientFactory) 
             :base(httpClientFactory)
         {
+            _httpClient = httpClientFactory.CreateClient("AuthenticationApi");
         }
 
         public async Task<ControllerResponse> UpdateAsync<TEntity>(TEntity entity) where TEntity : class, IDbRecord<TEntity>, new()
