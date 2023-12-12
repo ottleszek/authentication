@@ -40,7 +40,7 @@
              </MudCardContent>
              <MudCardActions>
                 <MudButton Variant="Variant.Filled" Color="Color.Primary"  Disabled="@ViewModel.IsBusy" OnClick="ViewModel.UpdateAsync">Mentés</MudButton>
-                <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Error" Disabled="@ViewModel.IsBusy" OnClick="@( async () => await DeleteAsync())">Visszaállítás</MudButton>
+                <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Error" Disabled="@ViewModel.IsBusy" OnClick="ViewModel.DeleteAsync">Törlés</MudButton>
                 <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Secondary" Disabled="@ViewModel.IsBusy" OnClick="ViewModel.ResetData">Visszaállítás</MudButton>
                 <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Secondary" Disabled="@ViewModel.IsBusy" OnClick="GoBack">Vissza</MudButton>
             </MudCardActions>

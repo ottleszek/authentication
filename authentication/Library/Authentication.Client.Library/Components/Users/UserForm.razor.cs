@@ -33,21 +33,6 @@ namespace Authentication.Client.Library.Components
             if (Navigation is not null)
                 Navigation.NavigateTo("/user");
         }
-
-        private async Task UpdateAsync()
-        {
-            if (ViewModel is not null)
-            {
-                await ViewModel.UpdateAsync();
-            }
-        }
-        
-        private async Task DeleteAsync(User user)
-        {
-            if (ViewModel is not null)
-            {
-                await ViewModel.DeleteAsync(user.Id);
-            }
-        }
+      
     }
 }

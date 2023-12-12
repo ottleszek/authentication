@@ -14,27 +14,17 @@ namespace LibraryBlazorMvvm.ViewModels
             _broker=broker;
         }
 
-        public async Task<ErrorStore> DeleteAsync(Guid id) 
+        public async Task InsertAsync()
         {
-            IsBusy = true;
-            if (_broker is null)
-            {
-                ErrorStore.ClearAndAddError("Az adatok törlése nem lehetséges!");
-            }
-            else
-            {
-                ControllerResponse response = await _broker.DeleteAsync(id);
-                if (response.IsSuccess)
-                {
-                    // reload
-                }
-                ErrorStore = (ErrorStore)response;
-            }
-            IsBusy = false;
-            return ErrorStore;
+            await InsertAsync(SelectedItem);
         }
 
-        public async Task<ErrorStore> InsertAsync(TItem entity)
+        public async Task DeleteAsync()
+        {
+                await DeleteAsync(SelectedItem.Id);
+        }
+
+        private async Task<ErrorStore> InsertAsync(TItem entity)
         {
             IsBusy = true;
             if (_broker is null)
@@ -53,5 +43,25 @@ namespace LibraryBlazorMvvm.ViewModels
             IsBusy = false;
             return ErrorStore;
         }
+
+        private async Task<ErrorStore> DeleteAsync(Guid id) 
+        {
+            IsBusy = true;
+            if (_broker is null)
+            {
+                ErrorStore.ClearAndAddError("Az adatok törlése nem lehetséges!");
+            }
+            else
+            {
+                ControllerResponse response = await _broker.DeleteAsync(id);
+                if (response.IsSuccess)
+                {
+                    // reload
+                }
+                ErrorStore = (ErrorStore)response;
+            }
+            IsBusy = false;
+            return ErrorStore;
+        }       
     }
 }
