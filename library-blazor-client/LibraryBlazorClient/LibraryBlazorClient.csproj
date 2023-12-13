@@ -10,6 +10,10 @@
     <Compile Remove="Identification\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Base\TableGridViewSelector.razor.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />
@@ -24,6 +28,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\library-client-service-template\LibraryClientServiceTemplate\LibraryClientServiceTemplate.csproj" />
     <ProjectReference Include="..\..\library-core\LibraryCore\LibraryCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Base\" />
   </ItemGroup>
 
 </Project>

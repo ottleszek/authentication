@@ -1,0 +1,12 @@
+﻿@foreach (UIViewSelectorTab tabPage in ViewTabs)
+{
+    @ViewTabs(tabPage)
+    
+}
+
+
+@code {
+    [Parameter] public RenderFragment? TableContet { get; set; }
+    [Parameter] public RenderFragment? GridContent { get; set; }
+
+}

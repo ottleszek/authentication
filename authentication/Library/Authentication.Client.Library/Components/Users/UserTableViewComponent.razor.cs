@@ -29,9 +29,9 @@ namespace Authentication.Client.Library.Components
             return new TableData<User>();
         }
 
-        /*private async EventCallback EditClicked(User user)
+        public async Task DeleteAsync()
         {
-            return await OnEditClick.InvokeAsync(user);
-        }*/
+
+        }
     }
 }

@@ -32,7 +32,11 @@
                         Color="Color.Default"
                         OnClick="@(async () => await OnEditClick.InvokeAsync(context))"
                     />
-                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error"></MudIconButton>
+                    <MudIconButton 
+                        Icon="@Icons.Material.Filled.Delete" 
+                        Color="Color.Error"
+                        OnClick="DeleteAsync"
+                    />
                  </RowTemplate>
                     <PagerContent>
                         <MudTablePager PageSizeOptions="new int[] { 5, 10, 20, 50, 100, int.MaxValue }" HorizontalAlignment="HorizontalAlignment.Center" HidePageNumber="false" HidePagination="false" HideRowsPerPage="false" />
