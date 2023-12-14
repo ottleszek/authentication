@@ -1,5 +1,4 @@
 ﻿@namespace Authentication.Client.Library.Components
-@inherits ListViewComponentBase<User>
 
 <UILoader State="_state">
     <div class="d-flex ml-2">
@@ -35,7 +34,7 @@
                     <MudIconButton 
                         Icon="@Icons.Material.Filled.Delete" 
                         Color="Color.Error"
-                        
+                        OnClick="@(async () => await OnDeleteClick.InvokeAsync(context))"
                     />
                  </RowTemplate>
                     <PagerContent>

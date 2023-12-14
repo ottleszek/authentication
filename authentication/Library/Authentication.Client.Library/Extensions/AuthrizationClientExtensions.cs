@@ -60,13 +60,14 @@ namespace Authentication.Client.Library.Extensions
             services.AddScoped<IGetDataBroker, GetHttpService>();
             services.AddScoped<IUpdateDataBroker, UpdateHttpService>();
             services.AddScoped<ICrudDataBroker, CrudHttpService>();
+            services.AddScoped<IListAndDeleteDataBroker, ListAndDeleteHttpService>();
             //Broker connectors
             services.AddScoped<IListBrokerConnector<User>, ListBrokerConnector<User>>();
             services.AddScoped<IUpdateBrokerConnector<User>, UpdateBrokerConnector<User>>();
             services.AddScoped<IGetBrokerConnector<User>, GetBrokerConnector<User>>();
             services.AddScoped<IListBrokerConnector<User>, ListBrokerConnector<User>>();
             services.AddScoped<ICrudBrokerConnector<User>,CrudBrokerConnectorr<User>>();
-
+            services.AddScoped<IListAndDeleteBrokerConnector<User>, ListAndDeleteBrokerConnector<User>>();    
 
 		}
 
