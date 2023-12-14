@@ -29,12 +29,12 @@
                     <MudIconButton 
                         Icon="@Icons.Material.Filled.Edit" 
                         Color="Color.Default"
-                        OnClick="@(async () => await OnEditClick.InvokeAsync(context))"
+                        OnClick="@(async () => await EditClick.InvokeAsync(context))"
                     />
                     <MudIconButton 
                         Icon="@Icons.Material.Filled.Delete" 
                         Color="Color.Error"
-                        OnClick="@(async () => await OnDeleteClick.InvokeAsync(context))"
+                        OnClick="@(async () => await DeleteClick.InvokeAsync(context))"
                     />
                  </RowTemplate>
                     <PagerContent>

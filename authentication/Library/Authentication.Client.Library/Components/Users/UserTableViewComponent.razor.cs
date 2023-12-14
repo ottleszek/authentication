@@ -10,14 +10,19 @@ namespace Authentication.Client.Library.Components
         private bool _loading = false;
         private UIComponentState _state => _loading ? UIComponentState.Loading : UIComponentState.Loaded;
 
-        [Parameter] public EventCallback<User> OnEditClick { get; set; }
-        [Parameter] public EventCallback<User> OnDeleteClick { get; set; }
+        [Parameter] public EventCallback FetchData { get; set; }
+        [Parameter] public EventCallback<User> EditClick { get; set; }
+        [Parameter] public EventCallback<User> DeleteClick { get; set; }
+
+        protected override async Task OnInitializedAsync()
+        {
+            await FetchData.InvokeAsync();
+            await base.OnInitializedAsync();
+        }
 
         public async Task<TableData<User>> ReloadDataAsync(TableState state)
         {
-            
-            if (ViewModel is not null)
-            {
+
                 List<User> users = await ReloadDataAsync();
                 TableData<User> data = new()
                 {
@@ -25,8 +30,6 @@ namespace Authentication.Client.Library.Components
                     TotalItems = users.Count,
                 };
                 return data;
-            }
-            return new TableData<User>();
         }
     }
 }

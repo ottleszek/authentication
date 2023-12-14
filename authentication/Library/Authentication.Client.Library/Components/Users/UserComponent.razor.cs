@@ -1,12 +1,13 @@
 ﻿using Authentication.Shared.Models;
 using LibraryBlazorClient.Components;
 using LibraryBlazorClient.Templates;
+using LibraryBlazorClient.Templates.ComponentsBase;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
 namespace Authentication.Client.Library.Components
 {
-    public partial class UserComponent : ListViewComponentBase<User>
+    public partial class UserComponent : ListAndDeleteViewComponentBase<User>
     {
 		[Inject] private NavigationManager? Navigation { get; set; }
         [Inject] private IDialogService? DialogService { get; set; }
@@ -19,6 +20,22 @@ namespace Authentication.Client.Library.Components
 				Navigation.NavigateTo($"/user/form/{user.Id}");
 			}
 		}
+
+        public async Task<TableData<User>> ReloadDataAsync(TableState state)
+        {
+
+            if (ViewModel is not null)
+            {
+                List<User> users = await ReloadDataAsync();
+                TableData<User> data = new()
+                {
+                    Items = users,
+                    TotalItems = users.Count,
+                };
+                return data;
+            }
+            return new TableData<User>();
+        }
 
         private async Task DeleteAsync(User user)
         {
@@ -36,7 +53,7 @@ namespace Authentication.Client.Library.Components
 
                 if (confirmationResult is not null && !confirmationResult.Cancelled)
                 {
-                    await ViewModel.DeleteAsync();
+                    await ViewModel.DeleteAsync(user.Id);
                     if (Snackbar is not null)
                     {
                         Snackbar.Add("A felhasználó törlése sikerült", Severity.Success);
