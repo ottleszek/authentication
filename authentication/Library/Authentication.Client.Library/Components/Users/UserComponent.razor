@@ -1,20 +1,21 @@
 ﻿@namespace Authentication.Client.Library.Components
 
 
+<UIIconViewSelector>
 
-@if (_isTableView)
-{
-    <UserTableViewComponent OnEditClick="GoToEditUser" />
-}
-else
-{
-    <UserGridViewComponent />
-}
+</UIIconViewSelector>
 
 @code {
+    /*
     protected override Task OnParametersSetAsync()
     {
         _isTableView = false;
         return base.OnParametersSetAsync();
     }
+
+    // <UserTableViewComponent OnEditClick="GoToEditUser" />
+
+    //     <UserGridViewComponent />
+    */
+
 }

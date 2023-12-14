@@ -1,0 +1,14 @@
+﻿@namespace LibraryBlazorClient.Components
+
+<h3>UIIconViewSelector</h3>
+
+@if (ChildContent is not null)
+{
+    <CascadingValue Value="this">
+        @ChildContent
+    </CascadingValue>
+}
+
+@code {
+    [Parameter] public RenderFragment? ChildContent { get; set; } 
+}
