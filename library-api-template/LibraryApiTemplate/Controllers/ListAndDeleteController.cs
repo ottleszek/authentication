@@ -1,4 +1,5 @@
 ﻿using LibraryCore.Model;
+using LibraryCore.Responses;
 using LibraryDataBroker;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,9 +14,17 @@ namespace LibraryApiTemplate.Controllers
             _crudDataBroker = crudDataBroker;
         }
 
-        public Task<IActionResult> DeleteAsync(Guid id)
+        public async Task<IActionResult> DeleteAsync(Guid id)
         {
-            return _crudDataBroker.DeleteAsync(id);
+            ControllerResponse result =  await _crudDataBroker.DeleteAsync<TEntity>(id);
+            if (result.HasError )
+            {
+                return BadRequest(result);
+            }
+            else
+            {
+                return Ok(result);
+            }
         }
     }
 }
