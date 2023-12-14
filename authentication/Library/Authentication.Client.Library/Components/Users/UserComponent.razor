@@ -1,25 +1,10 @@
 ﻿@namespace Authentication.Client.Library.Components
 
-<MudIconButton Icon="@Icons.Material.Filled.TableView" Disabled="_isTableViewDisabled" OnClick="SetTableView"></MudIconButton>
-<MudIconButton Icon="@Icons.Material.Filled.GridView" Disabled="_isGridViewDisabled" OnClick="SetGridView"></MudIconButton>
-<UIIconViewSelector>
-    <UIIconViewPage>Grades</UIIconViewPage>
-    <UIIconViewPage>Táblázatos</UIIconViewPage>
+<UIIconViewSelector StartlPageType="UIIconPageType.TablePage">
+    <UIIconViewPage PageType="UIIconPageType.GridPage">
+        <UserGridViewComponent />
+    </UIIconViewPage>
+    <UIIconViewPage PageType="UIIconPageType.TablePage">
+        <UserTableViewComponent />
+    </UIIconViewPage>
 </UIIconViewSelector>
-
-@code {
-    private bool _isTableView = true;
-    private bool _isTableViewDisabled => _isTableView;
-    private bool _isGridViewDisabled => !_isTableView;
-
-    private void SetTableView()
-    {
-        _isTableView = true;
-    }
-
-    private void SetGridView()
-    {
-        _isTableView = false;
-    }
-
-}

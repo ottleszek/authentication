@@ -1,6 +1,7 @@
 ﻿@namespace LibraryBlazorClient.Components
 
-<h3>UIIconViewSelector</h3>
+<MudIconButton Icon="@Icons.Material.Filled.TableView" Disabled="_isTableViewDisabled" OnClick="SetTableView"></MudIconButton>
+<MudIconButton Icon="@Icons.Material.Filled.GridView" Disabled="_isGridViewDisabled" OnClick="SetGridView"></MudIconButton>
 
 @if (ChildContent is not null)
 {
@@ -10,5 +11,51 @@
 }
 
 @code {
-    [Parameter] public RenderFragment? ChildContent { get; set; } 
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public UIIconPageType StartlPageType { get; set; } = UIIconPageType.GridPage;
+    public UIIconViewPage ActualPage { get; set; } = new UIIconViewPage();
+
+    private List<UIIconViewPage> _pages = new List<UIIconViewPage>();    
+    private UIIconPageType _selectedPageType = UIIconPageType.GridPage;
+
+    private bool _isTableViewDisabled => StartlPageType == UIIconPageType.TablePage;
+    private bool _isGridViewDisabled => StartlPageType == UIIconPageType.GridPage;
+
+
+    public void AddPage(UIIconViewPage page)
+    {
+        if (_pages is not null)
+        {
+            _pages.Add(page);
+        }
+        if (page.PageType == StartlPageType)
+        {
+            ActualPage = page;
+            StateHasChanged();
+        }
+    }
+
+    private void SetTableView()
+    {
+        StartlPageType = UIIconPageType.TablePage;
+        UpdateView();
+    }
+
+    private void SetGridView()
+    {
+        StartlPageType = UIIconPageType.GridPage;
+        UpdateView();
+    }
+
+    private void UpdateView()
+    {
+        foreach(UIIconViewPage page in _pages)
+        {
+            if (page.PageType==StartlPageType)
+            {
+                ActualPage = page;
+                StateHasChanged();
+            }
+        }
+    }
 }

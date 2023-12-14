@@ -1,27 +1,11 @@
 ﻿@namespace Authentication.Client.Library.Components
 
-
-
-
-@code {
-
-    /*
-    protected override Task OnParametersSetAsync()
-    {
-        _isTableView = false;
-        return base.OnParametersSetAsync();
-    }
-
-        <MudIconButton Icon="@Icons.Material.Filled.TableView" Disabled="_isTableViewDisabled"  OnClick="SetTableView"></MudIconButton>
-        <MudIconButton Icon="@Icons.Material.Filled.GridView" Disabled="_isGridViewDisabled" OnClick="SetGridView"></MudIconButton>
-
-        @if (_isTableView)
-        {
-            <UserRoleTableViewComponent />
-            }
-            else
-            {
+<UIIconViewSelector StartlPageType="UIIconPageType.TablePage">
+    <UIIconViewPage PageType="UIIconPageType.GridPage">
         <UserRoleGridViewComponent />
-        }
-    */
-}
+    </UIIconViewPage>
+    <UIIconViewPage PageType="UIIconPageType.TablePage">
+        <UserRoleTableViewComponent />
+    </UIIconViewPage>
+</UIIconViewSelector>
+
