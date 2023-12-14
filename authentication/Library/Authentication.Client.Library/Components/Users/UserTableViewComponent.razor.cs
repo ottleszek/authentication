@@ -28,10 +28,5 @@ namespace Authentication.Client.Library.Components
             }
             return new TableData<User>();
         }
-
-        public async Task DeleteAsync()
-        {
-
-        }
     }
 }
