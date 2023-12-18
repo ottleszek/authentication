@@ -1,8 +1,10 @@
-﻿using Authentication.Shared.Models;
+﻿using AKSoftware.Blazor.Utilities;
+using Authentication.Shared.Models;
 using LibraryBlazorClient.Components;
 using LibraryBlazorClient.Templates.ComponentsBase;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using System.Numerics;
 
 namespace Authentication.Client.Library.Components
 {
@@ -42,16 +44,21 @@ namespace Authentication.Client.Library.Components
                 IDialogReference dialog = DialogService.Show<UIConfirmationDialog>("Törlés", parameters, options);
                 DialogResult confirmationResult = await dialog.Result;
 
-                if (confirmationResult is not null && !confirmationResult.Cancelled)
+                if (confirmationResult is not null && confirmationResult.Cancelled)
                 {
+                    return;
+                }
+                else
+                {
+
                     await ViewModel.DeleteAsync(user.Id);
+                    MessagingCenter.Send(this, "user_deleted", user);
                     if (Snackbar is not null)
                     {
                         Snackbar.Add("A felhasználó törlése sikerült", Severity.Success);
                         StateHasChanged();
                         return;
                     }
-
                 }
             }
             if (Snackbar is not null)

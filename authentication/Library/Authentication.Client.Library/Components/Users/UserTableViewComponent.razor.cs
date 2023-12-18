@@ -1,4 +1,5 @@
-﻿using Authentication.Shared.Models;
+﻿using AKSoftware.Blazor.Utilities;
+using Authentication.Shared.Models;
 using LibraryBlazorClient.Components;
 using LibraryClientServiceTemplate.ViewModelsTemplate;
 using Microsoft.AspNetCore.Components;
@@ -8,6 +9,7 @@ namespace Authentication.Client.Library.Components
 {
     public partial class UserTableViewComponent
     {
+        private MudTable<User>? _table;
         private bool _loading = false;
         private UIComponentState _state => _loading ? UIComponentState.Loading : UIComponentState.Loaded;
 
@@ -20,6 +22,14 @@ namespace Authentication.Client.Library.Components
 
         protected override async Task OnInitializedAsync()
         {
+            MessagingCenter.Subscribe<UserComponent, User>(this, "user_deleted", async (sender, args) =>
+            {
+                if (_table is not null)
+                {
+                    await _table.ReloadServerData();
+                    StateHasChanged();
+                }
+            });
             await base.OnInitializedAsync();
         }
 
