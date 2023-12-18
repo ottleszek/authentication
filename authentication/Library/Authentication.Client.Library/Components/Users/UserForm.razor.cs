@@ -28,6 +28,15 @@ namespace Authentication.Client.Library.Components
             await base.OnParametersSetAsync();
         }
 
+        private async Task DeleteAsync()
+        {
+            if (ViewModel is not null)
+            {
+                await ViewModel.DeleteAsync();
+                GoBack();
+            }
+        }
+
         private void GoBack()
         {
             if (Navigation is not null)

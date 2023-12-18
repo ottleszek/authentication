@@ -34,6 +34,8 @@ namespace Authentication.Client.Library.Components
         {
             if (ViewModel is not null && DialogService is not null)
             {
+                string question = $"Valóban törölni akarja a {user.HungarianFullName} nevű felhasználót?";
+
                 var parameters = new DialogParameters();
                 parameters.Add("ContentText", $"Valóban törölni akarja a {user.HungarianFullName} nevű felhasználót?");
                 parameters.Add("ButtonText", "Törlés");
@@ -56,7 +58,6 @@ namespace Authentication.Client.Library.Components
                     if (Snackbar is not null)
                     {
                         Snackbar.Add("A felhasználó törlése sikerült", Severity.Success);
-                        StateHasChanged();
                         return;
                     }
                 }
