@@ -4,16 +4,16 @@
 
 <UIIconViewSelector StartlPageType="UIIconPageType.TablePage">
     <UIIconViewPage PageType="UIIconPageType.GridPage">
-        <CascadingValue Name="ViewModel" Value="ViewModel">
+        <CascadingValue Value="ViewModel">
             <UserGridViewComponent />
         </CascadingValue>
     </UIIconViewPage>
     <UIIconViewPage PageType="UIIconPageType.TablePage">
-        <CascadingValue Name="ViewModel" Value="ViewModel">
+        <CascadingValue Value="@ViewModel">
             <UserTableViewComponent
-                FetchData="FetchData"
+                FetchData="FetchDataToViewModel"
                 DeleteClick="DeleteAsync"
             />
-        </CascadingValue>
+            </CascadingValue>
     </UIIconViewPage>
 </UIIconViewSelector>

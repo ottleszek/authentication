@@ -20,11 +20,11 @@ namespace Authentication.Client.Library.Components
 			}
 		}
 
-        public async Task FetchData()
+        public async Task FetchDataToViewModel()
         {
             if ( ViewModel is not null)
             {
-                await ViewModel.ReloadDataAsync();
+                await ViewModel.GetAllDataToViewModelAsync();
             }
         }
 

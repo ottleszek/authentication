@@ -15,7 +15,7 @@ namespace LibraryClientServiceTemplate.ViewModelsTemplate
         public List<TItem>? Items { get; set; }
         public bool HasItems => Items is not null && Items.Any();
 
-        public virtual async Task GetAllDataToViewModel()
+        public virtual async Task GetAllDataToViewModelAsync()
         {
             Items = await _service.SelectAllRecordAsync();
         }

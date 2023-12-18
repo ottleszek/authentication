@@ -12,7 +12,7 @@ namespace LibraryBlazorClient.Templates
         {
             if (ViewModel is not null)
             {
-                await ViewModel.GetAllDataToViewModel();
+                await ViewModel.GetAllDataToViewModelAsync();
             }                        
         }
 
