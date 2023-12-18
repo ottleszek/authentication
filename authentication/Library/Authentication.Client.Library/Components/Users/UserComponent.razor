@@ -4,11 +4,16 @@
 
 <UIIconViewSelector StartlPageType="UIIconPageType.TablePage">
     <UIIconViewPage PageType="UIIconPageType.GridPage">
-        <UserGridViewComponent />
+        <CascadingValue Name="ViewModel" Value="ViewModel">
+            <UserGridViewComponent />
+        </CascadingValue>
     </UIIconViewPage>
     <UIIconViewPage PageType="UIIconPageType.TablePage">
-        <UserTableViewComponent
-            OnEditClick="GoToEditUser"
+        <CascadingValue Name="ViewModel" Value="ViewModel">
+            <UserTableViewComponent
+                FetchData="FetchData"
+                DeleteClick="DeleteAsync"
             />
+        </CascadingValue>
     </UIIconViewPage>
 </UIIconViewSelector>
