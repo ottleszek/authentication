@@ -20,16 +20,14 @@ namespace Authentication.Client.Library.Components
 
         protected override async Task OnInitializedAsync()
         {
-            await FetchData.InvokeAsync();
             await base.OnInitializedAsync();
         }
 
         public async Task<TableData<User>> ReloadDataAsync(TableState state)
         {
+            await FetchData.InvokeAsync();
             if (ViewModel is not null && ViewModel.Items is not null)
             {
-                await FetchData.InvokeAsync();
-
                 List<User> users = ViewModel.Items.OfType<User>().ToList();
                 TableData<User> data = new()
                 {
