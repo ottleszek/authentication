@@ -4,7 +4,7 @@ using LibraryCore.Responses;
 
 namespace LibraryClientServiceTemplate.ViewModelsTemplate
 {
-    public class ListAndDeleteViewModel<TItem> : ListViewModel<TItem>, IListAndDeleteViewModel where TItem : class, IDbRecord<TItem>, new()
+    public class ListAndDeleteViewModel<TItem> : ListViewModel<TItem>, IListAndDeleteViewModel<TItem> where TItem : class, IDbRecord<TItem>, new()
     {
         public IListAndDeleteBrokerConnector<TItem> _service;
 

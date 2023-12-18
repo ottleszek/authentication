@@ -1,6 +1,9 @@
-﻿namespace LibraryClientServiceTemplate.ViewModelsTemplate
+﻿using LibraryCore.Responses;
+
+namespace LibraryClientServiceTemplate.ViewModelsTemplate
 {
-    internal interface IListAndDeleteViewModel
+    public interface IListAndDeleteViewModel<TItem> : IListViewModel<TItem> where TItem : class
     {
+        public Task<ControllerResponse> DeleteAsync(Guid id);
     }
 }

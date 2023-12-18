@@ -7,7 +7,7 @@ namespace LibraryBlazorClient.Templates.ComponentsBase
 {
     public class ListAndDeleteViewComponentBase<TItem> : ComponentBase where TItem : class, IDbRecord<TItem>, new()
     {
-        [Inject] protected ListAndDeleteViewModel<TItem>? ViewModel { get; set; }
+        [Inject] protected IListAndDeleteViewModel<TItem>? ViewModel { get; set; }
 
         protected async Task<List<TItem>> ReloadDataAsync()
         {
