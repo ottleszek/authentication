@@ -6,12 +6,11 @@ namespace Authentication.Client.Library.Validation
 {
     public class RegistrationValidation : AbstractValidator<RegistrationViewModel>
     {
-        private readonly HttpClient _httpClient;
+        private HttpClient _httpClient { get; set; }
 
         public RegistrationValidation(HttpClient httpClient)
         {
             _httpClient = httpClient;
-
             RuleFor(x => x.LastName)
                 .NotEmpty().WithMessage("A vezetéknév nem lehet üres!")
                 .Matches(@"^[A-ZÍÖÜÓŐÚÉÁŰ][a-zA-ZöüóőúéáűíÍÖÜÓŐÚÉÁŰ]{1,}( {1,2}[A-ZÍÖÜÓŐÚÉÁŰ][a-zA-ZöüóőúéáűíÍÖÜÓŐÚÉÁŰ]{1,}){0,}$")

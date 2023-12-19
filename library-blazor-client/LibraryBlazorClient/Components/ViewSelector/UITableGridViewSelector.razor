@@ -1,0 +1,25 @@
+﻿<MudIconButton Icon="@Icons.Material.Filled.TableView" Disabled="_isTableViewDisabled" OnClick="SetTableView"></MudIconButton>
+<MudIconButton Icon="@Icons.Material.Filled.GridView" Disabled="_isGridViewDisabled" OnClick="SetGridView"></MudIconButton>
+
+<UIViewSelector>
+    <TableContet></TableContet>
+    <GridContent></GridContent>
+</UIViewSelector>
+
+@code {
+    // https://blazor-university.com/templating-components-with-renderfragements/passing-data-to-a-renderfragement/
+
+    private bool _isTableView = true;
+    private bool _isTableViewDisabled => _isTableView;
+    private bool _isGridViewDisabled => !_isTableView;
+
+    private void SetTableView()
+    {
+        _isTableView = true;
+    }
+
+    private void SetGridView()
+    {
+        _isTableView = false;
+    }
+}

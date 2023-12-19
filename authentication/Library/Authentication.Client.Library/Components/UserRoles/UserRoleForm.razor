@@ -1,0 +1,40 @@
+﻿@namespace Authentication.Client.Library.Components
+
+@inherits MvvmItemComponentBase<UserRole, MvvmCrudViewModelBase<UserRole>>
+
+<MudPaper Class="py-4 px-4">
+    @if (ViewModel is not null && ViewModel.SelectedItem is not null && Validation is not null)
+    {
+        <MudForm Model="ViewModel.SelectedItem" @ref="_form" Validation="Validation.ValidateValue">
+            <MudCardContent>
+                @if (ViewModel.ErrorStore.HasError)
+                {
+                    <MudChip class="pt-2 d-flex justify-content-center" Color="Color.Error">
+                        <p>@ViewModel.ErrorStore.Error</p>
+                    </MudChip>
+                }
+                <MudTextField @bind-Value="ViewModel.SelectedItem.Name"
+                              For="@( () => ViewModel.SelectedItem.Name)"
+                              Immediate=true
+                              Required="true"
+                              RequiredError="A vezetéknév szükséges!"
+                              Label="Szerep magyar neve"
+                              HelperText="Szerep magyar neve" />
+                <MudTextField @bind-Value="ViewModel.SelectedItem.EnglishName"
+                              For="@( () => ViewModel.SelectedItem.EnglishName)"
+                              Immediate=true
+                              Required="true"
+                              RequiredError="A keresztnév szükséges!"
+                              Label="Szerep angol neve"
+                              HelperText="Szerep angol neve" />
+
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@ViewModel.IsBusy" OnClick="ViewModel.UpdateAsync">Mentés</MudButton>
+                <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Error" Disabled="@ViewModel.IsBusy" OnClick="DeleteAsync">Törlés</MudButton>
+                <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Secondary" Disabled="@ViewModel.IsBusy" OnClick="ViewModel.ResetData">Visszaállítás</MudButton>
+                <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Secondary" Disabled="@ViewModel.IsBusy" OnClick="GoBack">Vissza</MudButton>
+            </MudCardActions>
+        </MudForm>
+    }
+</MudPaper>

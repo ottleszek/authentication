@@ -1,9 +1,7 @@
 ﻿using Authentication.Client.Library.Validation;
 using Authentication.Client.Library.ViewModels.Accounts;
 using Authentication.Shared.Dtos;
-using Authentication.Shared.Services.Accounts;
-using LibraryCore.Errors;
-using LibraryMvvm.Base;
+using LibraryBlazorMvvm.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
@@ -12,22 +10,17 @@ namespace Authentication.Client.Library.Components
 {
     public partial class RegistrationComponent : MvvmComponentBase<RegistrationViewModel>
     {
+        private MudForm _form = new();
+
         [CascadingParameter] public Task<AuthenticationState>? AuthenticationState { get; set; }
         [Inject] private NavigationManager? NavigationManager { get; set; }
         
-
         [Inject] private HttpClient? HttpClient { get; set; }
 
-        //[Inject] private IRegistrationViewModel? RegistrationViewModel { get; set; }
-
-        private RegistrationValidation? _validation;
-
-        private MudForm _form = new();
+        [Inject] private RegistrationValidation? Validation {get; set;}
 
         protected override Task OnParametersSetAsync()
         {
-            if (HttpClient is not null)
-                _validation = new RegistrationValidation(HttpClient);
             return base.OnParametersSetAsync();
         }
 

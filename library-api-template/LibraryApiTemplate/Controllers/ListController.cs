@@ -1,29 +1,17 @@
 ﻿using LibraryCore.Model;
-using LibraryDataBrokerProject;
+using LibraryDataBroker;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryApiTemplate.Controllers
 {
     [Route("api/[controller]")]
-    public abstract class ListController<TEntity> : ControllerBase, IListController<TEntity> where TEntity : class, IDbRecord<TEntity>, new()
+    public abstract class ListController<TEntity> : GetController<TEntity>, IListController<TEntity> where TEntity : class, IDbRecord<TEntity>, new()
     {
         private readonly IListDataBroker? _repoList;
 
-        public ListController(IListDataBroker repoList)
+        public ListController(IListDataBroker repoList, IGetDataBroker repoGet) : base(repoGet) 
         {
             _repoList = repoList;
-        }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetBy(Guid id)
-        {
-            TEntity entity = new();
-            if (_repoList is not null)
-            {
-                entity = await _repoList.GetBy<TEntity>(id);
-                return Ok(entity);
-            }
-            return BadRequest("Az adatok elérhetetlenek!");
         }
 
         [HttpGet]

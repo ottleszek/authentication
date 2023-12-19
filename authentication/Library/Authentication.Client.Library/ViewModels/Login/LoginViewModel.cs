@@ -2,12 +2,12 @@
 using Authentication.Shared.Services.Accounts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using LibraryCore.Errors;
-using LibraryMvvm.Base;
+using LibraryBlazorMvvm.ViewModels;
 
 
 namespace Authentication.Client.Library.ViewModels.Login
 {
-    public partial class LoginViewModel : ViewModelBase
+    public partial class LoginViewModel : MvvmViewModelBase
     {
         private readonly IAuthenticationService? _authenticationService;
 

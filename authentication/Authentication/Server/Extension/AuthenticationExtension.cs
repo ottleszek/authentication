@@ -3,7 +3,7 @@ using Authentication.Server.Repos;
 using Authentication.Server.Repos.DataBroker;
 using Authentication.Server.Services;
 using AuthenticationLibrary.Settings;
-using LibraryDataBrokerProject;
+using LibraryDataBroker;
 using LibraryLogging;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -70,15 +70,14 @@ namespace Authentication.Server.Extension
             services.AddScoped<IProfilRepo, ProfilRepoInMemoryDataBroker>();
 
             services.AddScoped<IListDataBroker, ListInMemoryDataBroker>();
-
-
-
+			services.AddScoped<IGetDataBroker, GetInMemoryDataBroker>();
+            services.AddScoped<IUpdateDataBroker, UpdateInMemoryDataBroker>();
+            services.AddScoped<ICrudDataBroker, CrudInMemoryDataBroker>();
+            // DeleteAndList = List+Delete -> nem kell
 
 
             services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedEmail = true)
                 .AddEntityFrameworkStores<AuthenticationInMemoryContext>();
-
-
 
             LoggingBroker.LogInformation("In memory repók létrehozva!");
         }

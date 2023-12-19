@@ -1,17 +1,36 @@
 ﻿using Authentication.Shared.Models;
 using LibraryApiTemplate.Controllers;
-using LibraryDataBrokerProject;
-using Microsoft.AspNetCore.Authorization;
+using LibraryDataBroker;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Authentication.Server.Controllers
 {
-    [ApiController]    
-    [Route("api/[controller]")]
+	[ApiController]
+	[Route("api/[controller]")]
+	//[Authorize(Roles = "Administrator")]
+	public class UserController : ListController<User>
+	{
+		public UserController(IListDataBroker repoList, IGetDataBroker repoGet) : base(repoList, repoGet)
+		{
+		}
+	}
+
+    [ApiController]
+    [Route("api/user")]
     //[Authorize(Roles = "Administrator")]
-    public class UserController : ListController<User>
+    public class UserUpdateController : UpdateController<User>
     {
-        public UserController(IListDataBroker repoList) : base(repoList)
+        public UserUpdateController(IUpdateDataBroker repoUpdate) : base(repoUpdate)
+        {
+        }
+    }
+
+    [ApiController]
+    [Route("api/user")]
+    //[Authorize(Roles = "Administrator")]
+    public class UserCrudController : CrudController<User>
+    {
+        public UserCrudController(ICrudDataBroker repoCrud, IUpdateDataBroker repoUpdate) : base(repoCrud, repoUpdate)
         {
         }
     }

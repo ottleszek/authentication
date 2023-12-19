@@ -1,15 +1,21 @@
-﻿using Authentication.Client.Library.ViewModels.User;
-using LibraryCore.Errors;
-using LibraryMvvm.Base;
+﻿using LibraryCore.Errors;
+using LibraryBlazorMvvm.Components;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using Authentication.Client.Library.ViewModels.User;
+using Authentication.Client.Library.Validation;
 
 namespace Authentication.Client.Library.Components
 {
     public partial class ShowProfilForm : MvvmComponentBase<ProfilViewModel>
-    {
+	{
+        private MudForm _form = new();
+
         [Parameter] public string? UserEmail { get; set; }
         [Inject] ISnackbar? Snackbar { get; set; }
+
+        [Inject] private ProfilValidation? Validation { get; set; }
+
 
         private List<BreadcrumbItem> _items = new()
         {
@@ -35,12 +41,15 @@ namespace Authentication.Client.Library.Components
                 Snackbar?.Add("A profil frissítés nem lehetséges!", Severity.Error);
                 return;
             }
-            ErrorStore errorStore = await ViewModel.UpdateProfil();
+            ErrorStore errorStore = await ViewModel.UpdateProfilAsync();
             if (errorStore.HasError)
             {
                 Snackbar?.Add(errorStore.Error, Severity.Error);
             }
-            Snackbar?.Add("A profil frissítés sikerült!", Severity.Success);
+            else
+            {
+                Snackbar?.Add("A profil frissítés sikerült!", Severity.Success);
+            }
         }
     }
 }

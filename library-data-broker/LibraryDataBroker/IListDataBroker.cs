@@ -1,11 +1,9 @@
 ﻿using LibraryCore.Model;
 
-namespace LibraryDataBrokerProject
+namespace LibraryDataBroker
 {
-    public interface IListDataBroker
-    {
+    public interface IListDataBroker : IGetDataBroker
+	{
         public Task<List<TEntity>> SelectAllRecordAsync<TEntity>() where TEntity : class, IDbRecord<TEntity>, new();
-        public Task<TEntity> GetBy<TEntity>(Guid id) where TEntity : class, IDbRecord<TEntity>, new();
-
     }
 }

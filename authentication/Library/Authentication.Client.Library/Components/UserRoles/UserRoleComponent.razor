@@ -1,31 +1,20 @@
 ﻿@namespace Authentication.Client.Library.Components
 
-@inherits TableGridViewSelector
+@inherits ListAndDeleteViewComponentBase<UserRole>
 
-<MudBreadcrumbs Items="_items" Separator=">"></MudBreadcrumbs>
+<UIIconViewSelector StartlPageType="UIIconPageType.TablePage">
+    <UIIconViewPage PageType="UIIconPageType.GridPage">
+        <CascadingValue Value="ViewModel">
+            <UserRoleGridViewComponent />
+        </CascadingValue>
+    </UIIconViewPage>
+    <UIIconViewPage PageType="UIIconPageType.TablePage">
+        <CascadingValue Value="@ViewModel">
+            <UserRoleTableViewComponent
+                FetchData="FetchDataToViewModel"
+                DeleteClick="DeleteAsync"
+                EditClick="GoToEditUserRole" />
+        </CascadingValue>
+    </UIIconViewPage>
+</UIIconViewSelector>
 
-<MudIconButton Icon="@Icons.Material.Filled.TableView" Disabled="_isTableViewDisabled"  OnClick="SetTableView"></MudIconButton>
-<MudIconButton Icon="@Icons.Material.Filled.GridView" Disabled="_isGridViewDisabled" OnClick="SetGridView"></MudIconButton>
-
-@if (_isTableView)
-{
-    <UserRoleTableViewComponent />
-}
-else
-{
-    <UserRoleGridViewComponent />
-}
-
-@code {
-    protected override Task OnParametersSetAsync()
-    {
-        _isTableView = false;
-        return base.OnParametersSetAsync();
-    }
-
-    private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
-    {
-        new BreadcrumbItem("Home", href: "#"),
-        new BreadcrumbItem("Felhasználói szerepek", href: null, disabled: true)
-    };
-}

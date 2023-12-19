@@ -8,12 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
   
   <ItemGroup>
     <ProjectReference Include="..\..\library-core\LibraryCore\LibraryCore.csproj" />
     <ProjectReference Include="..\..\library-data-broker\LibraryDataBroker\LibraryDataBroker.csproj" />
+    <ProjectReference Include="..\..\library-logging\LibraryLogging\LibraryLogging.csproj" />
   </ItemGroup>
 
 </Project>

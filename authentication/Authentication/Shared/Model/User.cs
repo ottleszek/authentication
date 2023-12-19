@@ -1,4 +1,5 @@
-﻿using LibraryCore.Model;
+﻿using LibraryCore.Extensions;
+using LibraryCore.Model;
 
 namespace Authentication.Shared.Models
 {
@@ -7,10 +8,10 @@ namespace Authentication.Shared.Models
         public User()
         {
             Id = Guid.Empty;
-            FirstName=string.Empty; 
-            LastName=string.Empty;
-            Email=string.Empty;
-            UserRoleId=Guid.Empty;
+            FirstName = string.Empty;
+            LastName = string.Empty;
+            Email = string.Empty;
+            UserRoleId = Guid.Empty;
         }
 
         public User(Guid id, string firstName, string lastName, string email)
@@ -24,10 +25,17 @@ namespace Authentication.Shared.Models
 
         public Guid Id { get; set; }
         public string FirstName { get; set; }
-        public string LastName { get; set;}
+        public string LastName { get; set; }
         public string Email { get; set; }
         public Guid UserRoleId { get; set; }
 
+        public string HungarianFullName => $"{LastName} {FirstName}";
         public bool IsValidUser => !string.IsNullOrEmpty(Email);
+
+        public object Clone()
+        {
+            return this.CloneJson<User>();
+        }
+    
     }
 }

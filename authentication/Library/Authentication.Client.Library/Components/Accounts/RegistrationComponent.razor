@@ -18,9 +18,9 @@
         }
         else
         {
-            if (_validation is not null)
+            if (Validation is not null)
             {
-                <MudForm Model="ViewModel" @ref="_form" Validation="_validation.ValidateValue">
+                <MudForm Model="ViewModel" @ref="_form" Validation="Validation.ValidateValue">
                     <MudCardContent>
                         @if (ViewModel.ErrorString.HasError)
                         {
