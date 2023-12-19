@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
 namespace Authentication.Client.Library.Components
-{ 
-    public partial class UserForm : MvvmItemComponentBase<User, MvvmCrudViewModelBase<User>>
+{
+    public partial class UserRoleForm : MvvmItemComponentBase<UserRole, MvvmCrudViewModelBase<UserRole>>
     {
         private MudForm _form = new();
 
@@ -33,7 +33,7 @@ namespace Authentication.Client.Library.Components
         {
             if (ViewModel is not null && ShowConfirmationDialog is not null)
             {
-                ShowConfirmationDialog.Question = $"Valóban törölni akarja a {ViewModel.SelectedItem.HungarianFullName} nevű felhasználót?";
+                ShowConfirmationDialog.Question = $"Valóban törölni akarja a {ViewModel.SelectedItem.Name} nevű felhasználót?";
                 DialogResult confirmationResult = await ShowConfirmationDialog.Show();
 
                 if (confirmationResult.Cancelled)
@@ -43,7 +43,7 @@ namespace Authentication.Client.Library.Components
                 else
                 {
                     await ViewModel.DeleteItemAsync();
-                    Snackbar?.Add("A szerep törlése sikerült", Severity.Success);
+                    Snackbar?.Add("A szerep sikeressen törölve", Severity.Success);
                     GoBack();
                 }
             }
@@ -51,7 +51,9 @@ namespace Authentication.Client.Library.Components
 
         private void GoBack()
         {
-            Navigation?.NavigateTo("/user");
+            Navigation?.NavigateTo("/userrole");
         }
+
+
     }
 }

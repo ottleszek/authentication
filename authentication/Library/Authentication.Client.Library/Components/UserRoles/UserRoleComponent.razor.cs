@@ -7,34 +7,34 @@ using MudBlazor;
 
 namespace Authentication.Client.Library.Components
 {
-    public partial class UserComponent : ListAndDeleteViewComponentBase<User>
+    public partial class UserRoleComponent : ListAndDeleteViewComponentBase<UserRole>
     {
-		[Inject] private NavigationManager? Navigation { get; set; }
+        [Inject] private NavigationManager? Navigation { get; set; }
         [Inject] private ISnackbar? Snackbar { get; set; }
         [Inject] private IShowConfirmationDialog? ShowConfirmationDialog { get; set; }
 
-        private void GoToEditUser(User user)
-		{
-			if (Navigation is not null)
-			{
-				Navigation.NavigateTo($"/user/form/{user.Id}");
-			}
-		}
+        private void GoToEditUserRole(UserRole userRole)
+        {
+            if (Navigation is not null)
+            {
+                Navigation.NavigateTo($"/userrole/form/{userRole.Id}");
+            }
+        }
 
         public async Task FetchDataToViewModel()
         {
-            if ( ViewModel is not null)
+            if (ViewModel is not null)
             {
                 await ViewModel.GetAllDataToViewModelAsync();
             }
         }
 
-        private async Task DeleteAsync(User user)
+        private async Task DeleteAsync(UserRole userRole)
         {
             if (ViewModel is not null && ShowConfirmationDialog is not null)
             {
-                ShowConfirmationDialog.Question = $"Valóban törölni akarja a {user.HungarianFullName} nevű felhasználót?";
-                DialogResult confirmationResult = await ShowConfirmationDialog.Show();                
+                ShowConfirmationDialog.Question = $"Valóban törölni akarja a {userRole.Name} nevű szerepet?";
+                DialogResult confirmationResult = await ShowConfirmationDialog.Show();
 
                 if (confirmationResult.Cancelled)
                 {
@@ -42,11 +42,11 @@ namespace Authentication.Client.Library.Components
                 }
                 else
                 {
-                    await ViewModel.DeleteAsync(user.Id);
-                    MessagingCenter.Send(this, "user_deleted", user);
+                    await ViewModel.DeleteAsync(userRole.Id);
+                    MessagingCenter.Send(this, "userrole_deleted", userRole);
                     if (Snackbar is not null)
                     {
-                        Snackbar.Add("A felhasználó törlése sikerült", Severity.Success);
+                        Snackbar.Add("A szerep sikeressen törölve", Severity.Success);
                     }
                 }
             }

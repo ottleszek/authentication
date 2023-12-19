@@ -39,10 +39,15 @@ namespace Authentication.Client.Library.Extensions
             services.AddScoped<RegistrationViewModel>();
 
             // User managment
+            // User
             services.AddScoped<IListViewModel<User>, ListViewModel<User>>();
             services.AddScoped<IListAndDeleteViewModel<User>, ListAndDeleteViewModel<User>>();
+            services.AddScoped<MvvmCrudViewModelBase<User>>();
+            // UserRole
+            services.AddScoped<IListViewModel<UserRole>, ListViewModel<UserRole>>();
+            services.AddScoped<IListAndDeleteViewModel<UserRole>, ListAndDeleteViewModel<UserRole>>();
+            services.AddScoped<MvvmCrudViewModelBase<UserRole>>();
 
-            services.AddScoped<MvvmCrudViewModelBase<User>>();   
         }
 
         public static void ConfigureAuthenticationServices(this IServiceCollection services)
@@ -66,14 +71,23 @@ namespace Authentication.Client.Library.Extensions
             services.AddScoped<ICrudDataBroker, CrudHttpService>();
             services.AddScoped<IListAndDeleteDataBroker, ListAndDeleteHttpService>();
             //Broker connectors
+            //User
             services.AddScoped<IListBrokerConnector<User>, ListBrokerConnector<User>>();
             services.AddScoped<IUpdateBrokerConnector<User>, UpdateBrokerConnector<User>>();
             services.AddScoped<IGetBrokerConnector<User>, GetBrokerConnector<User>>();
             services.AddScoped<IListBrokerConnector<User>, ListBrokerConnector<User>>();
             services.AddScoped<ICrudBrokerConnector<User>,CrudBrokerConnectorr<User>>();
-            services.AddScoped<IListAndDeleteBrokerConnector<User>, ListAndDeleteBrokerConnector<User>>();    
+            services.AddScoped<IListAndDeleteBrokerConnector<User>, ListAndDeleteBrokerConnector<User>>();
+            //UserRole
+            services.AddScoped<IListBrokerConnector<UserRole>, ListBrokerConnector<UserRole>>();
+            services.AddScoped<IUpdateBrokerConnector<UserRole>, UpdateBrokerConnector<UserRole>>();
+            services.AddScoped<IGetBrokerConnector<UserRole>, GetBrokerConnector<UserRole>>();
+            services.AddScoped<IListBrokerConnector<UserRole>, ListBrokerConnector<UserRole>>();
+            services.AddScoped<ICrudBrokerConnector<UserRole>, CrudBrokerConnectorr<UserRole>>();
+            services.AddScoped<IListAndDeleteBrokerConnector<UserRole>, ListAndDeleteBrokerConnector<UserRole>>();
 
-		}
+
+        }
 
         public static void ConfigureAuthentication(this IServiceCollection services)
         {

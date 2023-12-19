@@ -1,11 +1,20 @@
 ﻿@namespace Authentication.Client.Library.Components
 
+@inherits ListAndDeleteViewComponentBase<UserRole>
+
 <UIIconViewSelector StartlPageType="UIIconPageType.TablePage">
     <UIIconViewPage PageType="UIIconPageType.GridPage">
-        <UserRoleGridViewComponent />
+        <CascadingValue Value="ViewModel">
+            <UserRoleGridViewComponent />
+        </CascadingValue>
     </UIIconViewPage>
     <UIIconViewPage PageType="UIIconPageType.TablePage">
-        <UserRoleTableViewComponent />
+        <CascadingValue Value="@ViewModel">
+            <UserRoleTableViewComponent
+                FetchData="FetchDataToViewModel"
+                DeleteClick="DeleteAsync"
+                EditClick="GoToEditUserRole" />
+        </CascadingValue>
     </UIIconViewPage>
 </UIIconViewSelector>
 
