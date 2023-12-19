@@ -27,7 +27,8 @@ namespace LibraryBlazorClient.Components
             if (_dialogService is not null)
             {
                 IDialogReference dialog = _dialogService.Show<UIConfirmationDialog>("Törlés", parameters, options);
-                return await dialog.Result;
+                DialogResult result = await dialog.Result;
+                return result;
             }
             else
                 return DialogResult.Cancel();

@@ -37,18 +37,14 @@ namespace Authentication.Client.Library.Components
                 ShowConfirmationDialog.Question = $"Valóban törölni akarja a {ViewModel.SelectedItem.HungarianFullName} nevű felhasználót?";
                 DialogResult confirmationResult = await ShowConfirmationDialog.Show();
 
-                if (confirmationResult == DialogResult.Cancel())
+                if (confirmationResult.Cancelled)
                 {
                     return;
                 }
                 else
                 {
                     await ViewModel.DeleteItemAsync();
-                    if (Snackbar is not null)
-                    {
-                        Snackbar.Add("A felhasználó törlése sikerült", Severity.Success);
-                        return;
-                    }
+                    Snackbar?.Add("A felhasználó törlése sikerült", Severity.Success);
                     GoBack();
                 }
             }
