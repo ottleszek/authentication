@@ -19,7 +19,7 @@ namespace Authentication.Server.Controllers
     [ApiController]
     [Route("api/userrole")]
     //[Authorize(Roles = "Administrator")]
-    public class UserRoleUpdateController : UpdateController<User>
+    public class UserRoleUpdateController : UpdateController<UserRole>
     {
         public UserRoleUpdateController(IUpdateDataBroker repoUpdate) : base(repoUpdate)
         {
@@ -27,9 +27,9 @@ namespace Authentication.Server.Controllers
     }
 
     [ApiController]
-    [Route("api/user")]
+    [Route("api/userrole")]
     //[Authorize(Roles = "Administrator")]
-    public class UserRoleCrudController : CrudController<User>
+    public class UserRoleCrudController : CrudController<UserRole>
     {
         public UserRoleCrudController(ICrudDataBroker repoCrud, IUpdateDataBroker repoUpdate) : base(repoCrud, repoUpdate)
         {

@@ -1,29 +1,29 @@
-﻿@page "/user/form"
-@page "/user/form/{id:guid}"
+﻿@page "/userrole/form"
+@page "/userrole/form/{id:guid}"
 
 @attribute [Authorize(Roles = "admin")]
 
 <UIPage Title="@Title" BreadcrumbItems="_items">
-        <MudGrid>
+    <MudGrid>
         <MudItem lg="6" md="8" sm="12">
-            <UserForm Id="@Id"></UserForm>
+            <UserRoleForm Id="@Id"></UserRoleForm>
         </MudItem>
     </MudGrid>
 </UIPage>
 
 
 @code {
-    private string Title => Id == Guid.Empty ? "Új felhasználó adatainak megadása" : "Felhasználói adatok szerkesztése";
+    private string Title => Id == Guid.Empty ? "Új felhasználói szerep megadása" : "Felhasználói szerepek szerkesztése";
     private List<BreadcrumbItem> _items = new();
 
     [Parameter] public Guid Id { get; set; }
 
     protected override void OnInitialized()
     {
-        _items = new() 
+        _items = new()
         {
             new BreadcrumbItem("Home", href: "#"),
-            new BreadcrumbItem("Felhasználók", href: "/user"),
+            new BreadcrumbItem("Felhasználói szerepek", href: "/userrole"),
             new BreadcrumbItem(Title, href: null, disabled: true)
         };
         base.OnInitialized();

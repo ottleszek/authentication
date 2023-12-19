@@ -14,7 +14,6 @@ namespace Authentication.Client.Library.Components
         private UIComponentState _state => _loading ? UIComponentState.Loading : UIComponentState.Loaded;
 
         [CascadingParameter] public IListAndDeleteViewModel<User>? ViewModel {get; set;}
-        [CascadingParameter] public int Adat { get; set;}
 
         [Parameter] public EventCallback FetchData { get; set; }
         [Parameter] public EventCallback<User> EditClick { get; set; }

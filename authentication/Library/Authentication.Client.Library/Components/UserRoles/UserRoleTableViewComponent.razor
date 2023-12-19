@@ -1,19 +1,12 @@
 ﻿@namespace Authentication.Client.Library.Components
 
-@inherits AutomaticListViewComponentBase<UserRole>
-
 <UILoader State="_state">
     <div class="d-flex ml-2">
-        @if (ViewModel is not null && !ViewModel.HasItems)
+        @if (ViewModel is not null)
         {
-            <p>Nincs felhasználói szerep az adatbázisban!</p>
-        }
-        else if (ViewModel is not null && ViewModel.HasItems)
-        {
-
-            <MudTable Items="@ViewModel.Items"
+            <MudTable ServerData="ReloadDataAsync"
                       T="UserRole"
-                      ref="table"
+                      @ref="_table"
                       Dense="true"
                       Hover="true"
                       Breakpoint="Breakpoint.Sm"
@@ -28,13 +21,23 @@
                     <MudTh>Szerep neve</MudTh>
                 </HeaderContent>
                 <RowTemplate>
-                    <MudTd DataLabel="Vezetéknév">@context.EnglishName</MudTd>
-                    <MudTd DataLabel="Keresztnév">@context.Name</MudTd>
+                    <MudTd DataLabel="Szerep angol neve">@context.EnglishName</MudTd>
+                    <MudTd DataLabel="Szerep magyar neve">@context.Name</MudTd>
                     <MudIconButton Icon="@Icons.Material.Filled.Preview" Color="Color.Success"></MudIconButton>
-                    <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Default"></MudIconButton>
-                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error"></MudIconButton>
-                    </RowTemplate>
-                </MudTable>
+                    <MudIconButton Icon="@Icons.Material.Filled.Edit"
+                                   Color="Color.Default"
+                                   OnClick="@(async () => await EditClick.InvokeAsync(context))" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete"
+                                   Color="Color.Error"
+                                   OnClick="@(async () => await DeleteClick.InvokeAsync(context))" />
+                 </RowTemplate>
+                <PagerContent>
+                    <MudTablePager PageSizeOptions="new int[] { 5, 10, 20, 50, 100, int.MaxValue }" HorizontalAlignment="HorizontalAlignment.Center" HidePageNumber="false" HidePagination="false" HideRowsPerPage="false" />
+                </PagerContent>
+             </MudTable>
         }
     </div>
 </UILoader>
+@code {
+    private string infoFormat = "{first_item}-{last_item}, összesen {all_items}";
+}
