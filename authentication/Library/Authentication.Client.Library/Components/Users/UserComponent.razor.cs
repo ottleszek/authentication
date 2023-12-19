@@ -11,7 +11,6 @@ namespace Authentication.Client.Library.Components
     public partial class UserComponent : ListAndDeleteViewComponentBase<User>
     {
 		[Inject] private NavigationManager? Navigation { get; set; }
-        [Inject] private IDialogService? DialogService { get; set; }
         [Inject] private ISnackbar? Snackbar { get; set; }
         [Inject] private IShowConfirmationDialog? ShowConfirmationDialog { get; set; }
 

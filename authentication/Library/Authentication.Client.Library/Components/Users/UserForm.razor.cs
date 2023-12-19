@@ -15,6 +15,7 @@ namespace Authentication.Client.Library.Components
         [Parameter] public Guid Id { get; set; } = Guid.Empty;
         [Inject] private NavigationManager? Navigation { get; set; }
         [Inject] private UserValidation? Validation { get; set; }
+        [Inject] private IShowConfirmationDialog? ShowConfirmationDialog { get; set; }
 
         protected async override Task OnParametersSetAsync()
         {
@@ -30,9 +31,13 @@ namespace Authentication.Client.Library.Components
 
         private async Task DeleteAsync()
         {
-            if (ViewModel is not null)
+            if (ViewModel is not null && ShowConfirmationDialog is not null)
             {
-                await ViewModel.DeleteAsync();
+                ShowConfirmationDialog.Question = $"Valóban törölni akarja a {ViewModel.SelectedItem.HungarianFullName} nevű felhasználót?";
+                DialogResult confirmationResult = await ShowConfirmationDialog.Show();
+
+                if (confirmationResult == DialogResult.Cancel())
+                    await ViewModel.DeleteAsync();
                 GoBack();
             }
         }
