@@ -18,6 +18,7 @@ namespace Authentication.Client.Library.Components
         [Parameter] public EventCallback FetchData { get; set; }
         [Parameter] public EventCallback<UserRole> EditClick { get; set; }
         [Parameter] public EventCallback<UserRole> DeleteClick { get; set; }
+        [Parameter] public EventCallback InsertClick { get; set; }
 
 
         protected override async Task OnInitializedAsync()
@@ -48,6 +49,5 @@ namespace Authentication.Client.Library.Components
             }
             return new TableData<UserRole>();
         }
-
     }
 }
