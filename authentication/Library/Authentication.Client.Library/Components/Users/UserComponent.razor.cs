@@ -13,6 +13,7 @@ namespace Authentication.Client.Library.Components
 		[Inject] private NavigationManager? Navigation { get; set; }
         [Inject] private IDialogService? DialogService { get; set; }
         [Inject] private ISnackbar? Snackbar { get; set; }
+        [Inject] private IShowConfirmationDialog? ShowConfirmationDialog { get; set; }
 
         private void GoToEditUser(User user)
 		{
@@ -32,27 +33,17 @@ namespace Authentication.Client.Library.Components
 
         private async Task DeleteAsync(User user)
         {
-            if (ViewModel is not null && DialogService is not null)
+            if (ViewModel is not null && ShowConfirmationDialog is not null)
             {
-                string question = $"Valóban törölni akarja a {user.HungarianFullName} nevű felhasználót?";
+                ShowConfirmationDialog.Question = $"Valóban törölni akarja a {user.HungarianFullName} nevű felhasználót?";
+                DialogResult confirmationResult = await ShowConfirmationDialog.Show();                
 
-                var parameters = new DialogParameters();
-                parameters.Add("ContentText", $"Valóban törölni akarja a {user.HungarianFullName} nevű felhasználót?");
-                parameters.Add("ButtonText", "Törlés");
-                parameters.Add("Color", Color.Error);
-
-                var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall };
-
-                IDialogReference dialog = DialogService.Show<UIConfirmationDialog>("Törlés", parameters, options);
-                DialogResult confirmationResult = await dialog.Result;
-
-                if (confirmationResult is not null && confirmationResult.Cancelled)
+                if (confirmationResult == DialogResult.Cancel())
                 {
                     return;
                 }
                 else
                 {
-
                     await ViewModel.DeleteAsync(user.Id);
                     MessagingCenter.Send(this, "user_deleted", user);
                     if (Snackbar is not null)
@@ -62,8 +53,8 @@ namespace Authentication.Client.Library.Components
                     }
                 }
             }
-            if (Snackbar is not null)
-                Snackbar.Add("A felhasználó törlése nem sikerült", Severity.Error);
+            /*if (Snackbar is not null)
+                Snackbar.Add("A felhasználó törlése nem sikerült", Severity.Error);*/
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using MudBlazor;
 
-namespace LibraryBlazorClient.Components.Dialogs
+namespace LibraryBlazorClient.Components
 {
     public interface IShowConfirmationDialog
     {

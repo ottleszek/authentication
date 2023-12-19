@@ -9,6 +9,7 @@ using Authentication.Shared.Services.Token;
 using AuthenticationLibrary.LocalStorage;
 using AuthenticationLibrary.Provider;
 using Blazored.LocalStorage;
+using LibraryBlazorClient.Components;
 using LibraryBlazorMvvm.ViewModels;
 using LibraryClientServiceTemplate.HttpServices;
 using LibraryClientServiceTemplate.ModelBrokerConnectors;
@@ -46,6 +47,7 @@ namespace Authentication.Client.Library.Extensions
 
         public static void ConfigureAuthenticationServices(this IServiceCollection services)
         {
+            services.AddTransient<IShowConfirmationDialog, ShowConfirmationDialog>();
             // Services
             services.AddScoped<IRegistrationService, RegistrationService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
