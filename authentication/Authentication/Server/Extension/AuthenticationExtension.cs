@@ -57,7 +57,7 @@ namespace Authentication.Server.Extension
                         ClockSkew = TimeSpan.Zero
                     };
                 });
-                LoggingBroker.LogInformation("JWT regisztrálása megtörtént!");
+                LoggingBroker.LogInformation("JWT regisztrálása megtörtént!"); oldal
             }
         }
 
