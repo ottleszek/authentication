@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Base\**" />
     <Compile Remove="Identification\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Base\TableGridViewSelector.razor.cs" />
+    <Content Remove="Base\**" />
+    <EmbeddedResource Remove="Base\**" />
+    <None Remove="Base\**" />
   </ItemGroup>
 
 
@@ -31,7 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Base\" />
     <Folder Include="Models\" />
   </ItemGroup>
 
