@@ -16,6 +16,7 @@ namespace Authentication.Client.Library.Components
         [Inject] private NavigationManager? Navigation { get; set; }
         [Inject] private UserValidation? Validation { get; set; }
         [Inject] private IShowConfirmationDialog? ShowConfirmationDialog { get; set; }
+        [Inject] private ISnackbar? Snackbar { get; set; }
 
         protected async override Task OnParametersSetAsync()
         {
@@ -37,8 +38,19 @@ namespace Authentication.Client.Library.Components
                 DialogResult confirmationResult = await ShowConfirmationDialog.Show();
 
                 if (confirmationResult == DialogResult.Cancel())
-                    await ViewModel.DeleteAsync();
-                GoBack();
+                {
+                    return;
+                }
+                else
+                {
+                    await ViewModel.DeleteItemAsync();
+                    if (Snackbar is not null)
+                    {
+                        Snackbar.Add("A felhasználó törlése sikerült", Severity.Success);
+                        return;
+                    }
+                    GoBack();
+                }
             }
         }
 

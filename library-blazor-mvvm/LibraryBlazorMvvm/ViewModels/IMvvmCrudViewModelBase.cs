@@ -6,6 +6,6 @@ namespace LibraryBlazorMvvm.ViewModels
     public interface IMvvmCrudViewModelBase<TItem> : IMVVMUpdateViewModelBase<TItem>
     {
         public Task InsertAsync();
-        public Task DeleteAsync(); 
+        public Task DeleteItemAsync(); 
     }
 }

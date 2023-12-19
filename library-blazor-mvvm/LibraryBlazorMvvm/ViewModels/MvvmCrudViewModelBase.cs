@@ -19,7 +19,7 @@ namespace LibraryBlazorMvvm.ViewModels
             await InsertAsync(SelectedItem);
         }
 
-        public async Task DeleteAsync()
+        public async Task DeleteItemAsync()
         {
                 await DeleteAsync(SelectedItem.Id);
         }
