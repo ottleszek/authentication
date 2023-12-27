@@ -29,6 +29,18 @@ namespace Authentication.Client.Library.Components
             await base.OnParametersSetAsync();
         }
 
+        private async Task UpdateAsync()
+        {
+            if (ViewModel is not null)
+            {
+                await ViewModel.UpdateAsync();
+                if (ViewModel.ErrorStore.HasError)
+                    Snackbar?.Add("A felhasználó módosítás nem sikerült", Severity.Error);
+                else
+                    Snackbar?.Add("A felhasználó módosítása sikerült", Severity.Success);
+            }
+        }
+
         private async Task DeleteAsync()
         {
             if (ViewModel is not null && ShowConfirmationDialog is not null)
@@ -43,7 +55,10 @@ namespace Authentication.Client.Library.Components
                 else
                 {
                     await ViewModel.DeleteItemAsync();
-                    Snackbar?.Add("A szerep törlése sikerült", Severity.Success);
+                    if (ViewModel.ErrorStore.HasError)
+                        Snackbar?.Add("A felhasználó törlése nem sikerült", Severity.Error);
+                    else
+                        Snackbar?.Add("A felhasználó törlése sikerült", Severity.Success);
                     GoBack();
                 }
             }
