@@ -1,5 +1,6 @@
 ﻿using Authentication.Client.Library.Validation;
 using Authentication.Shared.Models;
+using FluentValidation.Results;
 using LibraryBlazorClient.Components;
 using LibraryBlazorMvvm.Components;
 using LibraryBlazorMvvm.ViewModels;
@@ -18,6 +19,9 @@ namespace Authentication.Client.Library.Components
         [Inject] private IShowConfirmationDialog? ShowConfirmationDialog { get; set; }
         [Inject] private ISnackbar? Snackbar { get; set; }
 
+        private string _saveButtonText => ViewModel is not null && ViewModel.IsNewItemMode ? "Mentés" : "Módosítás";
+        private string _cancelButtonText => ViewModel is not null && ViewModel.IsNewItemMode ? "Mégsem" : "Visszaállítás";
+
         protected async override Task OnParametersSetAsync()
         {
             if (ViewModel is not null)
@@ -30,13 +34,31 @@ namespace Authentication.Client.Library.Components
 
         private async Task UpdateAsync()
         {
-            if (ViewModel is not null)
+            if (ViewModel is not null && Validation is not null)
             {
-                await ViewModel.UpdateAsync();
-                if (ViewModel.ErrorStore.HasError)
-                    Snackbar?.Add("A felhasználó módosítás nem sikerült", Severity.Error);
+                ValidationResult results = Validation.Validate(ViewModel);
+                if (!results.IsValid)
+                    return;
+
+                if (ViewModel.IsNewItemMode)
+                    await ViewModel.InsertAsync();
                 else
-                    Snackbar?.Add("A felhasználó módosítása sikerült", Severity.Success);
+                    await ViewModel.UpdateAsync();
+
+                if (ViewModel.ErrorStore.HasError)
+                {
+                    if (ViewModel.IsNewItemMode)
+                        Snackbar?.Add("A felhasználó mentése nem sikerült", Severity.Error);
+                    else
+                        Snackbar?.Add("A felhasználó módosítás nem sikerült", Severity.Error);
+                }
+                else
+                {
+                    if (ViewModel.IsNewItemMode)
+                        Snackbar?.Add("A felhasználó mentése sikerült", Severity.Success);
+                    else
+                        Snackbar?.Add("A felhasználó módosítása sikerült", Severity.Success);
+                }
             }
         }
 

@@ -15,7 +15,10 @@ namespace LibraryBlazorMvvm.Components
         protected bool SaveIsDisabled => (ViewModel is not null && ViewModel.IsNotChanged) || (ViewModel is not null && ViewModel.IsBusy);
         protected bool DeleteIsDisabled => (ViewModel is not null && ViewModel.IsChanged) || (ViewModel is not null && ViewModel.IsBusy);
         protected bool ResetIsDisabled => (ViewModel is not null && ViewModel.IsNotChanged) || (ViewModel is not null && ViewModel.IsBusy);
+        protected bool CancelIsDisabled => ResetIsDisabled;
         protected bool GoBackIsDisabled => (ViewModel is not null && ViewModel.IsChanged) || (ViewModel is not null && ViewModel.IsBusy);
+
+
 
         protected override void OnInitialized()
         {

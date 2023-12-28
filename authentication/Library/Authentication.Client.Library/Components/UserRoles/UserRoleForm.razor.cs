@@ -20,8 +20,8 @@ namespace Authentication.Client.Library.Components
         [Inject] private IShowConfirmationDialog? ShowConfirmationDialog { get; set; }
         [Inject] private ISnackbar? Snackbar { get; set; }
 
-        private string _saveButtonText => ViewModel is not null && ViewModel.IsNewItemMode ? "Mentése" : "Módosítás";
-        private string _cancelButtonText => ViewModel is not null && ViewModel.IsNewItemMode ? "Mégsem" : "Vissza";
+        private string _saveButtonText => ViewModel is not null && ViewModel.IsNewItemMode ? "Mentés" : "Módosítás";
+        private string _cancelButtonText => ViewModel is not null && ViewModel.IsNewItemMode ? "Mégsem" : "Visszaállítás";
 
         protected async override Task OnParametersSetAsync()
         {
@@ -56,7 +56,10 @@ namespace Authentication.Client.Library.Components
                 else
                 {
                     if (ViewModel.IsNewItemMode)
+                    {
                         Snackbar?.Add("A szerep mentése sikerült", Severity.Success);
+                        GoBack();
+                    }
                     else
                         Snackbar?.Add("A szerep módosítása sikerült", Severity.Success);
                 }
@@ -90,7 +93,5 @@ namespace Authentication.Client.Library.Components
         {
             Navigation?.NavigateTo("/userrole");
         }
-
-
     }
 }

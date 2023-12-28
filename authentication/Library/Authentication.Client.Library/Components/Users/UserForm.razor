@@ -37,11 +37,14 @@
                               InputType="InputType.Email"
                               Label="Email"
                               HelperText="Email" />
-             </MudCardContent>
-             <MudCardActions>
-                <MudButton Variant="Variant.Filled" Color="Color.Primary"  Disabled="@SaveIsDisabled" OnClick="UpdateAsync">Mentés</MudButton>
-                <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Error" Disabled="@DeleteIsDisabled" OnClick="DeleteAsync">Törlés</MudButton>
-                <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Secondary" Disabled="@ResetIsDisabled" OnClick="ViewModel.ResetData">Visszaállítás</MudButton>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@SaveIsDisabled" OnClick="UpdateAsync">@_saveButtonText</MudButton>
+                @if (!ViewModel.IsNewItemMode)
+                {
+                    <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Error" Disabled="@DeleteIsDisabled" OnClick="DeleteAsync">Törlés</MudButton>
+                    <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Secondary" Disabled="@ResetIsDisabled" OnClick="ViewModel.ResetData">_cancelButtonText</MudButton>
+                }
                 <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Secondary" Disabled="@GoBackIsDisabled" OnClick="GoBack">Vissza</MudButton>
             </MudCardActions>
 		</MudForm>
