@@ -33,6 +33,10 @@ namespace Authentication.Client.Library.Extensions
             services.AddScoped<RegistrationValidation>();
             services.AddScoped<ProfilValidation>();
             services.AddScoped<UserValidation>();
+            services.AddScoped<UserRoleValidation>();
+            services.AddScoped<MvvmItemUserValidation>();
+            services.AddScoped<MvvmItemUserRoleValidation>();
+
             // ViewModels
             services.AddScoped<LoginViewModel>();
             services.AddScoped<ProfilViewModel>();

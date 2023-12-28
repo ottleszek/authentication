@@ -14,7 +14,7 @@ namespace Authentication.Client.Library.Components
 
         [Parameter] public Guid Id { get; set; } = Guid.Empty;
         [Inject] private NavigationManager? Navigation { get; set; }
-        [Inject] private UserValidation? Validation { get; set; }
+        [Inject] private MvvmItemUserRoleValidation? Validation { get; set; }
         [Inject] private IShowConfirmationDialog? ShowConfirmationDialog { get; set; }
         [Inject] private ISnackbar? Snackbar { get; set; }
 
@@ -23,7 +23,6 @@ namespace Authentication.Client.Library.Components
             if (ViewModel is not null)
             {
                 ViewModel.Id = Id;
-                Validation = new UserValidation();
                 await ViewModel.Loading();
             }
             await base.OnParametersSetAsync();

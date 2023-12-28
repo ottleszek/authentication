@@ -5,7 +5,7 @@
 <MudPaper Class="py-4 px-4">
     @if (ViewModel is not null && ViewModel.SelectedItem is not null && Validation is not null)
     {
-        <MudForm Model="ViewModel.SelectedItem" @ref="_form" Validation="Validation.ValidateValue">
+        <MudForm Model="ViewModel" @ref="_form" Validation="Validation.ValidateValue">
             <MudCardContent>
                 @if (ViewModel.ErrorStore.HasError)
                 {

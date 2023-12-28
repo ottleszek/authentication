@@ -4,9 +4,9 @@ using LibraryBlazorMvvm.ViewModels;
 
 namespace Authentication.Client.Library.Validation
 {
-    public class MvvmItemUserValidator : AbstractValidator<MvvmItemViewModelBase<User>>
+    public class MvvmItemUserValidation : AbstractValidator<MvvmItemViewModelBase<User>>
     {
-        public MvvmItemUserValidator()
+        public MvvmItemUserValidation()
         {
             RuleFor(x => x.SelectedItem).SetValidator(new UserValidation());
         }
