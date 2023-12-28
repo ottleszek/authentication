@@ -36,6 +36,14 @@ namespace Authentication.Shared.Models
         {
             return this.CloneJson<User>();
         }
-    
+
+        public bool Equals(User? other)
+        {
+            if (other is null)
+                return false;
+            return (FirstName == other.FirstName)
+                && (LastName == other.LastName)
+                && (Email == other.Email);
+        }
     }
 }

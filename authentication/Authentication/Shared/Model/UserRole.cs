@@ -27,5 +27,13 @@ namespace Authentication.Shared.Models
         {
             return this.CloneJson<UserRole>();
         }
+
+        public bool Equals(UserRole? other)
+        {
+            if (other is null)
+                return false;
+            return (EnglishName == other.EnglishName)
+                && (Name == other.Name);
+        }
     }
 }

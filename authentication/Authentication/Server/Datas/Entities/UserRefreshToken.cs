@@ -14,5 +14,14 @@ namespace Authentication.Server.Datas.Entities
         {
             return this.CloneJson<UserRefreshToken>();
         }
+
+        public bool Equals(UserRefreshToken? other)
+        {
+            if (other is null)
+                return false;
+            return UserId == other.UserId
+                && Token == other.Token
+                && ExpirationDate == other.ExpirationDate;
+        }
     }
 }

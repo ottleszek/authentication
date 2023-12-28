@@ -13,5 +13,13 @@ namespace Authentication.Server.Datas.Entities
         {
             return this.CloneJson<UserIdentification>();
         }
+
+        public bool Equals(UserIdentification? other)
+        {
+            if (other is null)
+                return false;
+            return Password == other.Password
+                && EmailVerified == other.EmailVerified;
+        }
     }
 }
