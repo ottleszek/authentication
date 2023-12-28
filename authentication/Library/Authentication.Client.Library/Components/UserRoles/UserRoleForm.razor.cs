@@ -5,6 +5,8 @@ using LibraryBlazorMvvm.Components;
 using LibraryBlazorMvvm.ViewModels;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using static MudBlazor.Icons;
+using FluentValidation.Results;
 
 namespace Authentication.Client.Library.Components
 {
@@ -18,6 +20,9 @@ namespace Authentication.Client.Library.Components
         [Inject] private IShowConfirmationDialog? ShowConfirmationDialog { get; set; }
         [Inject] private ISnackbar? Snackbar { get; set; }
 
+        private string _saveButtonText => ViewModel is not null && ViewModel.IsNewItemMode ? "Mentése" : "Módosítás";
+        private string _cancelButtonText => ViewModel is not null && ViewModel.IsNewItemMode ? "Mégsem" : "Vissza";
+
         protected async override Task OnParametersSetAsync()
         {
             if (ViewModel is not null)
@@ -30,13 +35,31 @@ namespace Authentication.Client.Library.Components
 
         private async Task UpdateAsync()
         {
-            if (ViewModel is not null)
+            if (ViewModel is not null && Validation is not null)
             {
-                await ViewModel.UpdateAsync();
+                ValidationResult results = Validation.Validate(ViewModel);
+                if (!results.IsValid)
+                    return;
+
+                if (ViewModel.IsNewItemMode)
+                    await ViewModel.InsertAsync();
+                else    
+                    await ViewModel.UpdateAsync();
+
                 if (ViewModel.ErrorStore.HasError)
-                    Snackbar?.Add("A szerep módosítás nem sikerült", Severity.Error);
+                {
+                    if (ViewModel.IsNewItemMode)
+                        Snackbar?.Add("A szerep mentése nem sikerült", Severity.Error);
+                    else
+                        Snackbar?.Add("A szerep módosítás nem sikerült", Severity.Error);
+                }
                 else
-                    Snackbar?.Add("A szerep módosítása sikerült", Severity.Success);
+                {
+                    if (ViewModel.IsNewItemMode)
+                        Snackbar?.Add("A szerep mentése sikerült", Severity.Success);
+                    else
+                        Snackbar?.Add("A szerep módosítása sikerült", Severity.Success);
+                }
             }
         }
 

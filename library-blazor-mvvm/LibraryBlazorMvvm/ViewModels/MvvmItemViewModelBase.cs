@@ -31,6 +31,8 @@ namespace LibraryBlazorMvvm.ViewModels
         [ObservableProperty]
         private ErrorStore _errorStore = new();
 
+		public bool IsNewItemMode => Id == Guid.Empty;
+
         public override async Task Loading()
 		{
 			IsBusy = true;
