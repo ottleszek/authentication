@@ -6,9 +6,9 @@ namespace Authentication.Client.Library.Validation
 {
     public class MvvmItemUserValidation : AbstractValidator<MvvmItemViewModelBase<User>>
     {
-        public MvvmItemUserValidation()
+        public MvvmItemUserValidation(UserValidation userValidation)
         {
-            RuleFor(x => x.SelectedItem).SetValidator(new UserValidation());
+            RuleFor(x => x.SelectedItem).SetValidator(userValidation);
         }
 
         public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model, propertyName) =>
