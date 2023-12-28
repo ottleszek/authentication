@@ -12,7 +12,10 @@ namespace LibraryBlazorMvvm.Components
         [Inject]
         protected TViewModel? ViewModel { get; set; }
 
-
+        protected bool SaveIsDisabled => ViewModel is not null && ViewModel.IsNotChanged && ViewModel.IsBusy;
+        protected bool DeleteIsDisabled => ViewModel is not null && ViewModel.IsChanged && ViewModel.IsBusy;
+        protected bool ResetIsDisabled => ViewModel is not null && ViewModel.IsNotChanged && ViewModel.IsBusy;
+        protected bool GoBackIsDisabled => ViewModel is not null && ViewModel.IsChanged && ViewModel.IsBusy;
 
         protected override void OnInitialized()
         {

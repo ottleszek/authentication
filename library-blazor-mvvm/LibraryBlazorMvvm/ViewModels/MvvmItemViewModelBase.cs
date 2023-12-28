@@ -2,6 +2,7 @@
 using LibraryClientServiceTemplate.ModelBrokerConnectors;
 using LibraryCore.Errors;
 using LibraryCore.Model;
+using System.Reflection.Metadata.Ecma335;
 
 namespace LibraryBlazorMvvm.ViewModels
 {
@@ -11,12 +12,15 @@ namespace LibraryBlazorMvvm.ViewModels
 		
 		protected TItem? _tempItem = null;
 
+		public bool IsNotChanged => _tempItem is not null && _tempItem.Equals(SelectedItem);
+		public bool IsChanged => !IsNotChanged;
+
+
         public MvvmItemViewModelBase(IGetBrokerConnector<TItem> brokerConnector)
         {
             _brokerConnector = brokerConnector;
         }
 		
-
         [ObservableProperty]
         private Guid _id = Guid.Empty;
 
