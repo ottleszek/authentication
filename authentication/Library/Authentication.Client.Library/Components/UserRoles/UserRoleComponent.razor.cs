@@ -15,10 +15,13 @@ namespace Authentication.Client.Library.Components
 
         private void GoToEditUserRole(UserRole userRole)
         {
-            if (Navigation is not null)
-            {
-                Navigation.NavigateTo($"/userrole/form/{userRole.Id}");
-            }
+            Navigation?.NavigateTo($"/userrole/form/{userRole.Id}");
+            
+        }
+
+        private void  GoToInsertUserRole()
+        {
+            Navigation?.NavigateTo("/userrole/form");
         }
 
         public async Task FetchDataToViewModel()
