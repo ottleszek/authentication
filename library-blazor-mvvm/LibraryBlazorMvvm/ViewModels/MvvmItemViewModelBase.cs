@@ -19,6 +19,7 @@ namespace LibraryBlazorMvvm.ViewModels
         public MvvmItemViewModelBase(IGetBrokerConnector<TItem> brokerConnector)
         {
             _brokerConnector = brokerConnector;
+			SaveToTempData();
         }
 		
         [ObservableProperty]
