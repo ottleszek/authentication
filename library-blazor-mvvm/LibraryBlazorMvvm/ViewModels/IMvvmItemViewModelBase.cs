@@ -1,8 +1,7 @@
-﻿using LibraryCore.Errors;
-
-namespace LibraryBlazorMvvm.ViewModels
+﻿namespace LibraryBlazorMvvm.ViewModels
 {
 	public interface IMvvmItemViewModelBase<TItem> : IMvvmViewModelBase
 	{
+
     }
 }

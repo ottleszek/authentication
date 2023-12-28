@@ -15,6 +15,7 @@ namespace LibraryBlazorMvvm.ViewModels
         {
             _brokerConnector = brokerConnector;
         }
+		
 
         [ObservableProperty]
         private Guid _id = Guid.Empty;
