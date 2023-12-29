@@ -43,9 +43,14 @@
                 @if (!ViewModel.IsNewItemMode)
                 {
                     <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Error" Disabled="@DeleteIsDisabled" OnClick="DeleteAsync">Törlés</MudButton>
-                    <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Secondary" Disabled="@ResetIsDisabled" OnClick="ViewModel.ResetData">_cancelButtonText</MudButton>
+                    <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Secondary" Disabled="@GoBackIsDisabled" OnClick="GoBack">Vissza</MudButton>
+
+                    <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Secondary" Disabled="@ResetIsDisabled" OnClick="ViewModel.ResetData">@_cancelButtonText</MudButton>
                 }
-                <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Secondary" Disabled="@GoBackIsDisabled" OnClick="GoBack">Vissza</MudButton>
+                else
+                {
+                    <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Error" Disabled="@CancelIsDisabled" OnClick="GoBack">@_cancelButtonText</MudButton>
+                }
             </MudCardActions>
 		</MudForm>
 	}
