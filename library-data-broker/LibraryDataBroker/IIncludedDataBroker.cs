@@ -4,6 +4,6 @@ namespace LibraryDataBroker
 {
     public interface IIncludedDataBroker
     {
-        public Task<List<TEntity>> SelectAllRecordIncludedAsync<TEntity>() where TEntity : class, IDbRecord<TEntity>, new();
+        public Task<List<TEntity>> SelectAllRecordIncludedToListAsync<TEntity>() where TEntity : class, IDbRecord<TEntity>, new();
     }
 }

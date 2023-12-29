@@ -13,7 +13,7 @@ namespace LibraryApiTemplate.Repos
             _dbContextFactory = dbContextFactory;
         }
 
-        public async Task<List<TEntity>> SelectAllRecordIncludedAsync<TEntity>() where TEntity : class, IDbRecord<TEntity>, new()
+        public async Task<List<TEntity>> SelectAllRecordIncludedToListAsync<TEntity>() where TEntity : class, IDbRecord<TEntity>, new()
         {
             IQueryable<TEntity>? entities = GetAllIncluded<TEntity>();
             List<TEntity> list = new List<TEntity>();
