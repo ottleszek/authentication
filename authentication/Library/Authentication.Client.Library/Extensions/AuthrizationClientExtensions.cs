@@ -45,6 +45,7 @@ namespace Authentication.Client.Library.Extensions
             // User managment
             // User
             services.AddScoped<IListViewModel<User>, ListViewModel<User>>();
+            services.AddScoped<IIncludedListViewModel<User>, IncludedListViewModel<User>>();
             services.AddScoped<IListAndDeleteViewModel<User>, ListAndDeleteViewModel<User>>();
             services.AddScoped<MvvmCrudViewModelBase<User>>();
             // UserRole

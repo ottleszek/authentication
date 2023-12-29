@@ -31,12 +31,14 @@ namespace Authentication.Shared.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+        
         public bool IsRegisteredUser { get; set; }
+        public bool IsSystemUser => !IsRegisteredUser;
+        public string RegisteredString => IsRegisteredUser ? "regisztrált" : "";
         // one - many
         public Guid UserRoleId { get; set; }
         public virtual UserRole UserRole { get; set; }
 
-        public bool IsSystemUser => !IsRegisteredUser;
         public string HungarianFullName => $"{LastName} {FirstName}";
         public bool IsValidUser => !string.IsNullOrEmpty(Email);
 
