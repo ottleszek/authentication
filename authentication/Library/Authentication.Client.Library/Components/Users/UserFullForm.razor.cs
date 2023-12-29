@@ -4,6 +4,7 @@ using FluentValidation.Results;
 using LibraryBlazorClient.Components;
 using LibraryBlazorMvvm.Components;
 using LibraryBlazorMvvm.ViewModels;
+using LibraryClientServiceTemplate.ViewModelsTemplate;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
@@ -12,8 +13,10 @@ namespace Authentication.Client.Library.Components
     public partial class UserFullForm : MvvmItemComponentBase<User, MvvmCrudViewModelBase<User>>
     {
         private MudForm _form = new();
+        private bool _isRegisteredCheckboxDisabled = false;
 
         [Parameter] public Guid Id { get; set; } = Guid.Empty;
+        [Inject] private IListViewModel<UserRole>? UserRoleViewModel { get; set; }
         [Inject] private NavigationManager? Navigation { get; set; }
         [Inject] private MvvmItemUserValidation? Validation { get; set; }
         [Inject] private IShowConfirmationDialog? ShowConfirmationDialog { get; set; }
@@ -24,10 +27,25 @@ namespace Authentication.Client.Library.Components
 
         protected async override Task OnParametersSetAsync()
         {
-            if (ViewModel is not null)
+            if (ViewModel is not null && UserRoleViewModel is not null)
             {
                 ViewModel.Id = Id;
+                await UserRoleViewModel.GetAllDataToViewModelAsync();
                 await ViewModel.Loading();
+                if (ViewModel.IsNewItemMode)
+                {
+                    Guid? newRoleId = null;
+                    if (UserRoleViewModel.Items is not null)
+                    {
+                         newRoleId= UserRoleViewModel.Items.FirstOrDefault()?.Id;
+                    }
+                    if (newRoleId is not null)
+                        ViewModel.SelectedItem.UserRoleId = (Guid) newRoleId ;
+                    ViewModel.SelectedItem.IsRegisteredUser = false;
+                    _isRegisteredCheckboxDisabled = true;
+                }
+                else
+                    await ViewModel.Loading();
             }
             await base.OnParametersSetAsync();
         }
@@ -84,6 +102,14 @@ namespace Authentication.Client.Library.Components
                 }
             }
         }
+
+       /* private void OnSelectedUserRoleChanged(Guid selectedValue)
+        {
+            if (ViewModel is not null)
+            {
+                ViewModel.SelectedItem.UserRole.Id = selectedValue;
+            }
+        }*/
 
         private void GoBack()
         {

@@ -29,14 +29,35 @@
                               HelperText="Keresztnév" />
                 <MudTextField @bind-Value="ViewModel.SelectedItem.Email"
                               For="@( () => ViewModel.SelectedItem.Email)"
-                              Disabled="true"
-                              ReadOnly="true"
                               Immediate=true
                               Required="true"
                               RequiredError="Az email cím szükséges!"
                               InputType="InputType.Email"
                               Label="Email"
                               HelperText="Email" />
+                <MudSelect 
+                    @bind-Value="ViewModel.SelectedItem.UserRoleId"
+                    HelperText="Felhasználói szerep" 
+                    Variant="Variant.Filled" 
+                    AnchorOrigin="Origin.BottomCenter"
+                    T="Guid" 
+                    Label="Felhasználói szerep"                    
+                >
+                @if (UserRoleViewModel is not null && UserRoleViewModel.Items is not null)
+                    {
+                        @foreach (UserRole userRole in UserRoleViewModel.Items)
+                        {
+                            <MudSelectItem T="Guid" Value="@userRole.Id">@($"{userRole.Name} ({userRole.EnglishName})") </MudSelectItem>
+                        }
+                    }
+                </MudSelect>
+                <MudCheckBox 
+                    T="bool" 
+                    @bind-Value="ViewModel.SelectedItem.IsRegisteredUser" 
+                    Label="A felhasználó regisztrációval jön létre (nem módosítható)"
+                    Disabled="@_isRegisteredCheckboxDisabled"
+                    ReadOnly="@_isRegisteredCheckboxDisabled"
+                />
             </MudCardContent>
             <MudCardActions>
                 <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@SaveIsDisabled" OnClick="UpdateAsync">@_saveButtonText</MudButton>

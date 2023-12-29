@@ -28,7 +28,8 @@ namespace Authentication.Client.Library.Components
             if (ViewModel is not null)
             {
                 ViewModel.Id = Id;
-                await ViewModel.Loading();
+                if (!ViewModel.IsNewItemMode)
+                    await ViewModel.Loading();
             }
             await base.OnParametersSetAsync();
         }
