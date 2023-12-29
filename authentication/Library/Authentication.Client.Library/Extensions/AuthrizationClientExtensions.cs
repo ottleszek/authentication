@@ -74,6 +74,7 @@ namespace Authentication.Client.Library.Extensions
             services.AddScoped<IUpdateDataBroker, UpdateHttpService>();
             services.AddScoped<ICrudDataBroker, CrudHttpService>();
             services.AddScoped<IListAndDeleteDataBroker, ListAndDeleteHttpService>();
+            services.AddScoped<IIncludedDataBroker, IncludedHttpService>();
             //Broker connectors
             //User
             services.AddScoped<IListBrokerConnector<User>, ListBrokerConnector<User>>();
@@ -82,6 +83,7 @@ namespace Authentication.Client.Library.Extensions
             services.AddScoped<IListBrokerConnector<User>, ListBrokerConnector<User>>();
             services.AddScoped<ICrudBrokerConnector<User>,CrudBrokerConnectorr<User>>();
             services.AddScoped<IListAndDeleteBrokerConnector<User>, ListAndDeleteBrokerConnector<User>>();
+            services.AddScoped<IIncludedBrokerConnector<User>, InludedBrokerConnector<User>>();
             //UserRole
             services.AddScoped<IListBrokerConnector<UserRole>, ListBrokerConnector<UserRole>>();
             services.AddScoped<IUpdateBrokerConnector<UserRole>, UpdateBrokerConnector<UserRole>>();
