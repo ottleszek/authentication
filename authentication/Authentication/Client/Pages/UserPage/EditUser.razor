@@ -1,12 +1,12 @@
-﻿@page "/user/full/form"
-@page "/user/full/form/{id:guid}"
+﻿@page "/user/form"
+@page "/user/form/{id:guid}"
 
 @attribute [Authorize(Roles = "admin")]
 
 <UIPage Title="@Title" BreadcrumbItems="_items">
-    <MudGrid>
+        <MudGrid>
         <MudItem lg="6" md="8" sm="12">
-            <UserFullForm Id="@Id"></UserFullForm>
+            <UserForm Id="@Id"></UserForm>
         </MudItem>
     </MudGrid>
 </UIPage>
@@ -20,10 +20,10 @@
 
     protected override void OnInitialized()
     {
-        _items = new()
+        _items = new() 
         {
             new BreadcrumbItem("Home", href: "#"),
-            new BreadcrumbItem("Felhasználók", href: "/user/full"),
+            new BreadcrumbItem("Felhasználók", href: "/user"),
             new BreadcrumbItem(Title, href: null, disabled: true)
         };
         base.OnInitialized();

@@ -12,6 +12,7 @@ namespace Authentication.Client.Library.Components
         private bool _loading = false;
         private UIComponentState _state => _loading ? UIComponentState.Loading : UIComponentState.Loaded;
 
+        [Inject] public NavigationManager? Navigation { get; set; }
         [Inject] public IIncludedListViewModel<User>? ViewModel { get; set; }
 
         public async Task<TableData<User>> ReloadDataAsync(TableState state)
@@ -31,6 +32,12 @@ namespace Authentication.Client.Library.Components
                 }
             }
             return new TableData<User>();
+        }
+
+        public void GoToInsert()
+        {
+            if (Navigation is not null)
+                Navigation.NavigateTo("/user/full/form");
         }
     }
 }
