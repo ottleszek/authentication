@@ -11,15 +11,19 @@ namespace Authentication.Shared.Models
             FirstName = string.Empty;
             LastName = string.Empty;
             Email = string.Empty;
+            IsRegisteredUser = true;
+
             UserRoleId = Guid.Empty;
         }
 
-        public User(Guid id, string firstName, string lastName, string email)
+        public User(Guid id, string firstName, string lastName, string email, bool isRegisteredUser)
         {
             Id = id;
             FirstName = firstName;
             LastName = lastName;
             Email = email;
+            IsRegisteredUser = isRegisteredUser;
+
             UserRoleId = Guid.Empty;
         }
 
@@ -27,8 +31,10 @@ namespace Authentication.Shared.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+        public bool IsRegisteredUser { get; set; }
         public Guid UserRoleId { get; set; }
 
+        public bool IsSystemUser => !IsRegisteredUser;
         public string HungarianFullName => $"{LastName} {FirstName}";
         public bool IsValidUser => !string.IsNullOrEmpty(Email);
 
@@ -43,7 +49,8 @@ namespace Authentication.Shared.Models
                 return false;
             return (FirstName == other.FirstName)
                 && (LastName == other.LastName)
-                && (Email == other.Email);
+                && (Email == other.Email)
+                && (IsRegisteredUser=other.IsRegisteredUser);
         }
     }
 }
