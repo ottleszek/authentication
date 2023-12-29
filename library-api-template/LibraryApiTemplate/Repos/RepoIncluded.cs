@@ -13,13 +13,13 @@ namespace LibraryApiTemplate.Repos
             _dbContextFactory = dbContextFactory;
         }
 
-        public Task<List<TEntity>> SelectAllRecordIncludedAsync<TEntity>() where TEntity : class, IDbRecord<TEntity>, new()
+        public async Task<List<TEntity>> SelectAllRecordIncludedAsync<TEntity>() where TEntity : class, IDbRecord<TEntity>, new()
         {
-            IQueryable<TEntity>? entitise = GetAllIncluded<TEntity>();
+            IQueryable<TEntity>? entities = GetAllIncluded<TEntity>();
             List<TEntity> list = new List<TEntity>();
-            if (entitise is not null)
+            if (entities is not null)
             {
-                list=entitise.ToList();
+                list=await entities.ToListAsync();
             }
             return list;
         }
