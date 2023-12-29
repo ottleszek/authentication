@@ -5,15 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Authentication.Server.Controllers
 {
-	[ApiController]
-	[Route("api/[controller]")]
-	//[Authorize(Roles = "Administrator")]
-	public class UserController : ListController<User>
-	{
-		public UserController(IListDataBroker repoList, IGetDataBroker repoGet) : base(repoList, repoGet)
-		{
-		}
-	}
+    [ApiController]
+    [Route("api/[controller]")]
+    //[Authorize(Roles = "Administrator")]
+    public class UserController : IncludedController<User>
+    {
+        public UserController(IIncludedDataBroker repoIncluded, IListDataBroker repoList, IGetDataBroker repoGet) : base(repoIncluded, repoList, repoGet)
+        {
+        }
+    }
 
     [ApiController]
     [Route("api/user")]

@@ -70,11 +70,12 @@ namespace Authentication.Server.Extension
             services.AddScoped<IProfilRepo, ProfilRepoInMemoryDataBroker>();
 
             services.AddScoped<IListDataBroker, ListInMemoryDataBroker>();
-			services.AddScoped<IGetDataBroker, GetInMemoryDataBroker>();
-            services.AddScoped<IIncludedDataBroker, IncludedInMemoryDataBroker>();
+			services.AddScoped<IGetDataBroker, GetInMemoryDataBroker>();            
             
             services.AddScoped<IUpdateDataBroker, UpdateInMemoryDataBroker>();
             services.AddScoped<ICrudDataBroker, CrudInMemoryDataBroker>();
+
+            services.AddScoped<IUserRepo, UserInMemoryDataBroker>();
 
             // DeleteAndList = List+Delete -> nem kell
 

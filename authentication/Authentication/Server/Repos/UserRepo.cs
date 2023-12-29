@@ -2,6 +2,7 @@
 using LibraryApiTemplate.Repos;
 using Microsoft.EntityFrameworkCore;
 using LibraryDatabase.Model;
+using LibraryCore.Model;
 
 namespace Authentication.Server.Repos
 {
@@ -41,7 +42,7 @@ namespace Authentication.Server.Repos
             }
         }
 
-        protected DbSet<TEntity>? DbSet<TEntity>() where TEntity : class, new()
+        protected DbSet<TEntity>? DbSet<TEntity>() where TEntity : class, IDbRecord<TEntity>, new()
         {
             var dbContext = _dbContextFactory.CreateDbContext();
             return dbContext.GetDbSet<TEntity>();
