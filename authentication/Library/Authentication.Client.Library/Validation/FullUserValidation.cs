@@ -21,9 +21,10 @@ namespace Authentication.Client.Library.Validation
             RuleFor(x => x.Email)
                 .NotEmpty().WithMessage("Az email nem lehet üres!")
                 .EmailAddress().WithMessage("Helytelen email cím!")
-                .MustAsync(async (value, CancellationToken) => await UniqueEmailExtension.UniqueEmail(value, httpClient))
                 .When(_ => !string.IsNullOrEmpty(_.Email) && Regex.IsMatch(_.Email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase), ApplyConditionTo.CurrentValidator)
-                .WithMessage("Evvel az emailcímmel már regisztrált felhasználó");
+                .WithMessage("Az email cím nem megfelelő")
+                .MustAsync(async (value, CancellationToken) => await UniqueEmailExtension.UniqueEmail(value, httpClient)).WithMessage("Evvel az emailcímmel már regisztrált felhasználó");
+                
         }
 
         public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model, propertyName) =>
