@@ -22,12 +22,11 @@ namespace LibraryClientServiceTemplate.HttpServices
             if (_httpClient is not null && HaveUrl)
             {
                 HttpResponseMessage? response = await _httpClient.GetAsync($"{_relativUrl}/included");
-                if (response.IsSuccessStatusCode)
+                if (response is not null)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
-                    if (response is not null)
+                    if (response.IsSuccessStatusCode)
                     {
-
+                        var content = await response.Content.ReadAsStringAsync();
                         List<TEntity>? result = JsonConvert.DeserializeObject<List<TEntity>>(content);
                         if (result is not null)
                             return result;

@@ -75,8 +75,9 @@ namespace Authentication.Server.Services
                         }
                         else
                         {
-
+                            Guid userRoleId = (Guid)user.UserRoleId;
                             string userEnglishRoleName = _userRoleRepo.GetEnglishNameBy(user.UserRoleId);
+                            
                             // JWT token
                             string token = await _tokenService.GenerateJwtToken(user, identityUser, userEnglishRoleName);
                             // User refresh token

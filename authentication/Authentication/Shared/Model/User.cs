@@ -1,5 +1,6 @@
 ﻿using LibraryCore.Extensions;
 using LibraryCore.Model;
+using System.ComponentModel.DataAnnotations;
 
 namespace Authentication.Shared.Models
 {
@@ -26,7 +27,7 @@ namespace Authentication.Shared.Models
 
             UserRoleId = Guid.Empty;
         }
-
+        [Key]
         public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -37,7 +38,7 @@ namespace Authentication.Shared.Models
         public string RegisteredString => IsRegisteredUser ? "regisztrált" : "";
         // one - many
         public Guid UserRoleId { get; set; }
-        public virtual UserRole UserRole { get; set; }
+        public virtual UserRole? UserRole { get; set; }
 
         public string HungarianFullName => $"{LastName} {FirstName}";
         public bool IsValidUser => !string.IsNullOrEmpty(Email);

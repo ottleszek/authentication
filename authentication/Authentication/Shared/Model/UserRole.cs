@@ -23,7 +23,7 @@ namespace Authentication.Shared.Models
         public string EnglishName { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
 
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<User>? Users { get; set; }
 
         public object Clone()
         {
