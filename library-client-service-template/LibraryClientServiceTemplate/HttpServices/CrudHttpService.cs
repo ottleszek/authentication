@@ -2,6 +2,7 @@
 using LibraryCore.Model;
 using LibraryCore.Responses;
 using LibraryDataBroker;
+using LibraryLogging;
 using Newtonsoft.Json;
 using System.Net.Http.Json;
 
@@ -27,14 +28,24 @@ namespace LibraryClientServiceTemplate.HttpServices
                 try
                 {
                     HttpResponseMessage httpResponse = await _httpClient.DeleteAsync($"{_relativUrl}/{id}");
-                    string content = await httpResponse.Content.ReadAsStringAsync();
-                    ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
-                    if (response is not null)
-                        return response;
+                    if (httpResponse.IsSuccessStatusCode)
+                    {
+                        string content = await httpResponse.Content.ReadAsStringAsync();
+                        ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
+                        if (response is not null)
+                            return response;
+                    }
+                    else
+                    {
+                        LoggingBroker.LogError("Http kérés hiba!");
+                        LoggingBroker.LogError($"{httpResponse.StatusCode}");
+                        LoggingBroker.LogError($"{httpResponse.Headers}");
+
+                    }
                 }
                 catch (Exception ex)
                 {
-                    LibraryLogging.LoggingBroker.LogError($"{ex.Message}");
+                    LoggingBroker.LogError($"{ex.Message}");
                 }
             }
             defaultResponse.ClearAndAddError("Az adatok frissítés nem lehetséges!");
@@ -58,14 +69,23 @@ namespace LibraryClientServiceTemplate.HttpServices
                     {
                         httpResponse = await _httpClient.PostAsJsonAsync(_relativUrl, entity);
                     }
-                    string content = await httpResponse.Content.ReadAsStringAsync();
-                    ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
-                    if (response is not null)
-                        return response;
+                    if (httpResponse.IsSuccessStatusCode)
+                    {
+                        string content = await httpResponse.Content.ReadAsStringAsync();
+                        ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
+                        if (response is not null)
+                            return response;
+                    }
+                    else
+                    {
+                        LoggingBroker.LogInformation("Http kérés hiba!");
+                        LoggingBroker.LogError($"{httpResponse.StatusCode}");
+                        LoggingBroker.LogError($"{httpResponse.Headers}");
+                    }
                 }
                 catch (Exception ex)
                 {
-                    LibraryLogging.LoggingBroker.LogError($"{ex.Message}");
+                    LoggingBroker.LogError($"{ex.Message}");
                 }
             }
             defaultResponse.ClearAndAddError("Az adatok frissítés nem lehetséges!");

@@ -6,11 +6,8 @@ namespace Authentication.Client.Library.Validation
 {
     public class RegistrationValidation : AbstractValidator<RegistrationViewModel>
     {
-        private HttpClient _httpClient { get; set; }
-
         public RegistrationValidation(HttpClient httpClient)
         {
-            _httpClient = httpClient;
             RuleFor(x => x.LastName)
                 .NotEmpty().WithMessage("A vezetéknév nem lehet üres!")
                 .Matches(@"^[A-ZÍÖÜÓŐÚÉÁŰ][a-zA-ZöüóőúéáűíÍÖÜÓŐÚÉÁŰ]{1,}( {1,2}[A-ZÍÖÜÓŐÚÉÁŰ][a-zA-ZöüóőúéáűíÍÖÜÓŐÚÉÁŰ]{1,}){0,}$")
@@ -22,7 +19,7 @@ namespace Authentication.Client.Library.Validation
             RuleFor(x => x.Email)
                 .NotEmpty().WithMessage("Az email nem lehet üres!")
                 .EmailAddress().WithMessage("Helytelen email cím!")
-                .MustAsync(async (value, CancellationToken) => await UniqueEmailExtension.UniqueEmail(value, _httpClient))
+                .MustAsync(async (value, CancellationToken) => await UniqueEmailExtension.UniqueEmail(value, httpClient))
                 .When(_ => !string.IsNullOrEmpty(_.Email) && Regex.IsMatch(_.Email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase), ApplyConditionTo.CurrentValidator)
                 .WithMessage("Evvel az emailcímmel már regisztrált felhasználó");
             RuleFor(x => x.Password)

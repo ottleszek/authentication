@@ -45,6 +45,15 @@ namespace Authentication.Shared.Models
         public object Clone()
         {
             return this.CloneJson<User>();
+            /*return new User()
+            {
+                Id = Id,
+                FirstName = FirstName,
+                LastName = LastName,
+                Email = Email,
+                IsRegisteredUser = IsRegisteredUser,
+                UserRoleId = UserRoleId
+            };*/
         }
 
         public bool Equals(User? other)

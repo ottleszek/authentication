@@ -18,7 +18,7 @@ namespace Authentication.Client.Library.Components
         [Parameter] public Guid Id { get; set; } = Guid.Empty;
         [Inject] private IListViewModel<UserRole>? UserRoleViewModel { get; set; }
         [Inject] private NavigationManager? Navigation { get; set; }
-        [Inject] private MvvmItemUserValidation? Validation { get; set; }
+        [Inject] private MvvmItemFullUserValidation? Validation { get; set; }
         [Inject] private IShowConfirmationDialog? ShowConfirmationDialog { get; set; }
         [Inject] private ISnackbar? Snackbar { get; set; }
 
@@ -54,8 +54,9 @@ namespace Authentication.Client.Library.Components
         {
             if (ViewModel is not null && Validation is not null)
             {
-                ValidationResult results = Validation.Validate(ViewModel);
-                if (!results.IsValid)
+                //ValidationResult results = Validation.Validate(ViewModel);
+                await _form.Validate();
+                if (!_form.IsValid)
                     return;
 
                 if (ViewModel.IsNewItemMode)
@@ -73,7 +74,10 @@ namespace Authentication.Client.Library.Components
                 else
                 {
                     if (ViewModel.IsNewItemMode)
+                    {
                         Snackbar?.Add("A felhasználó mentése sikerült", Severity.Success);
+                        GoBack();
+                    }
                     else
                         Snackbar?.Add("A felhasználó módosítása sikerült", Severity.Success);
                 }
@@ -102,14 +106,6 @@ namespace Authentication.Client.Library.Components
                 }
             }
         }
-
-       /* private void OnSelectedUserRoleChanged(Guid selectedValue)
-        {
-            if (ViewModel is not null)
-            {
-                ViewModel.SelectedItem.UserRole.Id = selectedValue;
-            }
-        }*/
 
         private void GoBack()
         {
