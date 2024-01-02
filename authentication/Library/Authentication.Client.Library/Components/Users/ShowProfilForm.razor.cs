@@ -11,7 +11,7 @@ namespace Authentication.Client.Library.Components
 	{
         private MudForm _form = new();
         private string _profilFolderName => ViewModel is not null ? ViewModel.ProfilImageDirectory : string.Empty;
-        private bool _canUploadProfilImage => _profilDirecotry != string.Empty;
+        private bool _canUploadProfilImage => _profilFolderName != string.Empty;
 
         [Parameter] public string? UserEmail { get; set; }
         [Inject] ISnackbar? Snackbar { get; set; }
