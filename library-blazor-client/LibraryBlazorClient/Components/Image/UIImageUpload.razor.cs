@@ -15,7 +15,7 @@ namespace LibraryBlazorClient.Components
         [Parameter]
         public EventCallback<string> OnChange { get; set; }        
         [Parameter]
-        public string FolderName { get; set; } = string.Empty;
+        public string Path { get; set; } = string.Empty;
         [Inject] UploadHttpService? UploadHttpService { get; set; }
 
         private async Task UploadImage(InputFileChangeEventArgs eventArgs)
@@ -29,9 +29,19 @@ namespace LibraryBlazorClient.Components
                     using (var ms = resizedFile.OpenReadStream(resizedFile.Size))
                     {
                         var content = new MultipartFormDataContent();
-                        content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data");
+
+                        var playload = new
+                        {
+                            Path = Path,
+                        };
+
+                        content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data");                        
                         content.Add(new StreamContent(ms, Convert.ToInt32(resizedFile.Size)), "image", imageFile.Name);
+                        content.Add(new StringContent(playload.Path),"Data.Path");
+                        
+
                         _imgUrl = await UploadHttpService.UploadImage(content);
+
                         await OnChange.InvokeAsync(_imgUrl);
                     }
                 }

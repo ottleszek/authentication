@@ -65,8 +65,6 @@ namespace Authentication.Client.Library.ViewModels.User
                 if (response.IsSuccess)
                 {
                     await GetProfil();
-                    //userId a profil kép mappa nevéhez
-                    _userId = await _profilService.GetUserIdBy(Email);
                     // profil mentése, hogy változtatás után vissza lehessen állítani
                     SaveProfilToTempData();
                     ChangeToReadOnly();
@@ -93,13 +91,15 @@ namespace Authentication.Client.Library.ViewModels.User
         public async override Task Loading()
         {
             if (!string.IsNullOrEmpty(Email))
-            {
+            {                
                 await GetProfil();
+                //userId a profil kép mappa nevéhez
+                await GetUserId();
                 await base.Loading();
             }
         }
 
-        public async Task GetProfil()
+        private async Task GetProfil()
         {
             if (_profilService is not null)
             {
@@ -107,6 +107,15 @@ namespace Authentication.Client.Library.ViewModels.User
                 FirstName = result.FirstName;
                 LastName = result.LastName;
                 Email = result.Email;
+            }
+        }
+
+
+        private async Task GetUserId()
+        {
+            if (_profilService is not null)
+            {
+                 _userId = await _profilService.GetUserIdBy(Email);
             }
         }
 

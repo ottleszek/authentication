@@ -1,4 +1,5 @@
-﻿using LibraryLogging;
+﻿using Authentication.Server.Datas;
+using LibraryLogging;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
@@ -11,15 +12,15 @@ namespace Authentication.Server.Controllers
     public  class UploadController : ControllerBase
     {
         [HttpPost]
-        public async Task<IActionResult> Upload(string path)
+        public async Task<IActionResult> Upload([FromForm] UploadFileDataDto dto)
         {
             string? fileName = string.Empty;
             try
             {
-                    var formCollection = await Request.ReadFormAsync();
-                    var file = formCollection.Files.First();
-                    var folderName = Path.Combine("StaticFiles", path);
-                    var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                var formCollection = await Request.ReadFormAsync();
+                var file = formCollection.Files.First();
+                var folderName = Path.Combine("StaticFiles", dto.Data.FilePath);
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
                 if (file.Length > 0 && file.ContentDisposition is not null)
                 {
                     fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName?.Trim('"');
