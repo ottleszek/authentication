@@ -6,15 +6,16 @@ namespace Authentication.Client.Library.Validation
 {
     public class RegistrationValidation : AbstractValidator<RegistrationViewModel>
     {
-        public RegistrationValidation(HttpClient httpClient)
+        public RegistrationValidation(IHttpClientFactory httpClientFactory)
         {
+            HttpClient httpClient = httpClientFactory.CreateClient("AuthenticationApi");
             RuleFor(x => x.LastName)
                 .NotEmpty().WithMessage("A vezetéknév nem lehet üres!")
-                .Matches(@"^[A-ZÍÖÜÓŐÚÉÁŰ][a-zA-ZöüóőúéáűíÍÖÜÓŐÚÉÁŰ]{1,}( {1,2}[A-ZÍÖÜÓŐÚÉÁŰ][a-zA-ZöüóőúéáűíÍÖÜÓŐÚÉÁŰ]{1,}){0,}$")
+                .Matches(@"^[A-ZÍÖÜÓŐÚÉÁŰ][a-zöüóőúéáűí]{1,}( {1,2}[A-ZÍÖÜÓŐÚÉÁŰ][a-zöüóőúéáűí]{1,}){0,}$")
                 .WithMessage("Csak szabályos vezetéknév fogadható el!");
             RuleFor(x => x.FirstName)
                 .NotEmpty().WithMessage("A keresztnév nem lehet üres!")
-                .Matches(@"^[A-ZÍÖÜÓŐÚÉÁŰ][a-zA-ZöüóőúéáűíÍÖÜÓŐÚÉÁŰ]{1,}( {1,2}[A-ZÍÖÜÓŐÚÉÁŰ][a-zA-ZöüóőúéáűíÍÖÜÓŐÚÉÁŰ]{1,}){0,}$")
+                .Matches(@"^[A-ZÍÖÜÓŐÚÉÁŰ][a-zöüóőúéáűí]{1,}( {1,2}[A-ZÍÖÜÓŐÚÉÁŰ][a-zöüóőúéáűí]{1,}){0,}$")
                 .WithMessage("Csak szabályos név fogadható el!");
             RuleFor(x => x.Email)
                 .NotEmpty().WithMessage("Az email nem lehet üres!")
