@@ -37,7 +37,7 @@ namespace Authentication.Server.Controllers
             if (_profilService is not null)
             {
                 Guid id= await _profilService.GetUserIdBy(email);
-                return id;
+                return Ok(id);
             }
             return BadRequest();
         }
