@@ -6,7 +6,7 @@ namespace LibraryApiTemplate.Repos
 {
     public class RepoList<TDbContext> : RepoGet<TDbContext>, IListDataBroker where TDbContext : DbContext
     {
-        IDbContextFactory<TDbContext> _dbContextFactory;
+        private readonly IDbContextFactory<TDbContext> _dbContextFactory;
 
         public RepoList(IDbContextFactory<TDbContext> dbContextFactory) : base(dbContextFactory)
         {

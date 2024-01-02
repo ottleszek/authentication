@@ -2,6 +2,7 @@ using Authentication.Server.Context;
 using Authentication.Server.Extension;
 using Microsoft.AspNetCore.Identity;
 using Serilog;
+using System.Text.Json.Serialization;
 using Toolbelt.Extensions.DependencyInjection;
 
 Log.Logger = new LoggerConfiguration()
@@ -20,7 +21,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddJsonOptions(x =>
+   x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve); ;
 builder.Services.AddRazorPages();
 
 // Cors

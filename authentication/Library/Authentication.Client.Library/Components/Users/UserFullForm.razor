@@ -3,9 +3,9 @@
 @inherits MvvmItemComponentBase<User, MvvmCrudViewModelBase<User>>
 
 <MudPaper Class="py-4 px-4">
-	@if (ViewModel is not null && ViewModel.SelectedItem is not null && Validation is not null)
-	{
-		<MudForm Model="ViewModel" @ref="_form" Validation="Validation.ValidateValue">
+    @if (ViewModel is not null && ViewModel.SelectedItem is not null && Validation is not null)
+    {
+        <MudForm Model="ViewModel" @ref="_form" Validation="Validation.ValidateValue">
             <MudCardContent>
                 @if (ViewModel.ErrorStore.HasError)
                 {
@@ -23,24 +23,45 @@
                 <MudTextField @bind-Value="ViewModel.SelectedItem.FirstName"
                               For="@( () => ViewModel.SelectedItem.FirstName)"
                               Immediate=true
-                              Required="true"                              
+                              Required="true"
                               RequiredError="A keresztnév szükséges!"
                               Label="Keresztnév"
                               HelperText="Keresztnév" />
                 <MudTextField @bind-Value="ViewModel.SelectedItem.Email"
                               For="@( () => ViewModel.SelectedItem.Email)"
-                              Disabled="true"
-                              ReadOnly="true"
                               Immediate=true
                               Required="true"
                               RequiredError="Az email cím szükséges!"
                               InputType="InputType.Email"
                               Label="Email"
                               HelperText="Email" />
+                <MudSelect 
+                    @bind-Value="ViewModel.SelectedItem.UserRoleId"
+                    HelperText="Felhasználói szerep" 
+                    Variant="Variant.Filled" 
+                    AnchorOrigin="Origin.BottomCenter"
+                    T="Guid" 
+                    Label="Felhasználói szerep"                    
+                >
+                @if (UserRoleViewModel is not null && UserRoleViewModel.Items is not null)
+                    {
+                        @foreach (UserRole userRole in UserRoleViewModel.Items)
+                        {
+                            <MudSelectItem T="Guid" Value="@userRole.Id">@($"{userRole.Name} ({userRole.EnglishName})") </MudSelectItem>
+                        }
+                    }
+                </MudSelect>
+                <MudCheckBox 
+                    T="bool" 
+                    @bind-Value="ViewModel.SelectedItem.IsRegisteredUser" 
+                    Label="A felhasználó regisztrációval jön létre (nem módosítható)"
+                    Disabled="@_isRegisteredCheckboxDisabled"
+                    ReadOnly="@_isRegisteredCheckboxDisabled"
+                />
             </MudCardContent>
             <MudCardActions>
                 <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@SaveIsDisabled" OnClick="UpdateAsync">@_saveButtonText</MudButton>
-                @if (!ViewModel.IsNewItemMode)
+                    @if (!ViewModel.IsNewItemMode)
                 {
                     <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Error" Disabled="@DeleteIsDisabled" OnClick="DeleteAsync">Törlés</MudButton>
                     <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Secondary" Disabled="@GoBackIsDisabled" OnClick="GoBack">Vissza</MudButton>
@@ -52,6 +73,6 @@
                     <MudButton Class="ml-2" Variant="Variant.Filled" Color="Color.Error" Disabled="@CancelIsDisabled" OnClick="GoBack">@_cancelButtonText</MudButton>
                 }
             </MudCardActions>
-		</MudForm>
-	}
+        </MudForm>
+    }
 </MudPaper>

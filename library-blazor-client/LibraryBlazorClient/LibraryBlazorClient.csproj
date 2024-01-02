@@ -9,9 +9,13 @@
   <ItemGroup>
     <Compile Remove="Base\**" />
     <Compile Remove="Identification\**" />
+    <Compile Remove="Models\**" />
     <Content Remove="Base\**" />
+    <Content Remove="Models\**" />
     <EmbeddedResource Remove="Base\**" />
+    <EmbeddedResource Remove="Models\**" />
     <None Remove="Base\**" />
+    <None Remove="Models\**" />
   </ItemGroup>
 
 
@@ -28,10 +32,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\library-client-service-template\LibraryClientServiceTemplate\LibraryClientServiceTemplate.csproj" />
     <ProjectReference Include="..\..\library-core\LibraryCore\LibraryCore.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>

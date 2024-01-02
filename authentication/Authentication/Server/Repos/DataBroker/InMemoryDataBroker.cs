@@ -47,7 +47,7 @@ namespace Authentication.Server.Repos.DataBroker
         }
     }
 
-	public class GetInMemoryDataBroker : RepoGet<AuthenticationInMemoryContext>, IGetDataBroker
+    public class GetInMemoryDataBroker : RepoGet<AuthenticationInMemoryContext>, IGetDataBroker
 	{
 		public GetInMemoryDataBroker(IDbContextFactory<AuthenticationInMemoryContext> dbContextFactory) : base(dbContextFactory)
 		{
@@ -64,6 +64,13 @@ namespace Authentication.Server.Repos.DataBroker
     public class CrudInMemoryDataBroker : RepoCrud<AuthenticationInMemoryContext>, ICrudDataBroker
     {
         public CrudInMemoryDataBroker(IDbContextFactory<AuthenticationInMemoryContext> dbContextFactory) : base(dbContextFactory)
+        {
+        }
+    }
+
+    public class UserInMemoryDataBroker : UserRepo<AuthenticationInMemoryContext>, IIncludedDataBroker
+    {
+        public UserInMemoryDataBroker(IDbContextFactory<AuthenticationInMemoryContext> dbContextFactory) : base(dbContextFactory)
         {
         }
     }

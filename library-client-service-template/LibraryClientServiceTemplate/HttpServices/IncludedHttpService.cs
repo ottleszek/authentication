@@ -2,27 +2,26 @@
 using LibraryCore.Model;
 using LibraryDataBroker;
 using Newtonsoft.Json;
-using System.Net.Http.Json;
 
 namespace LibraryClientServiceTemplate.HttpServices
 {
-    public class ListHttpService : GetHttpService,  IListDataBroker
+    public class IncludedHttpService : ListHttpService, IIncludedDataBroker
     {
         private readonly HttpClient? _httpClient;
         private string _relativUrl = string.Empty;
         private bool HaveUrl => _relativUrl is object && _relativUrl != string.Empty;
 
-        public ListHttpService(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
+        public IncludedHttpService(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
         {
             _httpClient = httpClientFactory.CreateClient("AuthenticationApi");
         }
 
-        public async Task<List<TEntity>> SelectAllRecordAsync<TEntity>() where TEntity : class, IDbRecord<TEntity>, new()
+        public async Task<List<TEntity>> SelectAllRecordIncludedToListAsync<TEntity>() where TEntity : class, IDbRecord<TEntity>, new()
         {
             _relativUrl = RelativeUrlExtension.SetRelativeUrl<TEntity>();
             if (_httpClient is not null && HaveUrl)
             {
-                HttpResponseMessage? response = await _httpClient.GetAsync(_relativUrl);
+                HttpResponseMessage? response = await _httpClient.GetAsync($"{_relativUrl}/included");
                 if (response is not null)
                 {
                     if (response.IsSuccessStatusCode)

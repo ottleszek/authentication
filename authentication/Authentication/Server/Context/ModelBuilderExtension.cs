@@ -70,7 +70,8 @@ namespace Authentication.Server.Context
                     LastName = "Teszt",
                     FirstName = "Admin",
                     Email = "admin@teszt.hu",
-                    UserRoleId = testAdminRoleId
+                    UserRoleId = testAdminRoleId,
+                    IsRegisteredUser=false
                 },
                 new User
                 {
@@ -78,7 +79,8 @@ namespace Authentication.Server.Context
                     LastName = "Teszt",
                     FirstName = "Elek",
                     Email = "teszt@teszt.hu",
-                    UserRoleId = testViewerRoleId
+                    UserRoleId = testViewerRoleId,
+                    IsRegisteredUser=false
                 },
                 new User
                 {
@@ -86,7 +88,8 @@ namespace Authentication.Server.Context
                     LastName = "User1",
                     FirstName = "User1",
                     Email = "user1@teszt.hu",
-                    UserRoleId = testViewerRoleId
+                    UserRoleId = testViewerRoleId,
+                    IsRegisteredUser=true
                 },
                 new User
                 {
@@ -94,7 +97,8 @@ namespace Authentication.Server.Context
                     LastName = "User2",
                     FirstName = "User2",
                     Email = "user2@teszt.hu",
-                    UserRoleId = testViewerRoleId
+                    UserRoleId = testViewerRoleId,
+                    IsRegisteredUser=true
                 },
                 new User
                 {
@@ -102,7 +106,8 @@ namespace Authentication.Server.Context
                     LastName = "User3",
                     FirstName = "User3",
                     Email = "user3@teszt.hu",
-                    UserRoleId = testViewerRoleId
+                    UserRoleId = testViewerRoleId,
+                    IsRegisteredUser=true
                 },
                 new User
                 {
@@ -110,7 +115,8 @@ namespace Authentication.Server.Context
                     LastName = "User4",
                     FirstName = "User4",
                     Email = "user4@teszt.hu",
-                    UserRoleId = testViewerRoleId
+                    UserRoleId = testViewerRoleId,
+                    IsRegisteredUser=true
                 },
                 new User
                 {
@@ -118,7 +124,8 @@ namespace Authentication.Server.Context
                     LastName = "User5",
                     FirstName = "User5",
                     Email = "user5@teszt.hu",
-                    UserRoleId = testViewerRoleId
+                    UserRoleId = testViewerRoleId,
+                    IsRegisteredUser=true
                 }
 
             };

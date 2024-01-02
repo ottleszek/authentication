@@ -1,0 +1,16 @@
+﻿@page "/user/full"
+@page "/user/full/index"
+
+@attribute [Authorize(Roles = "admin")]
+
+<UIPage Title="Felhasználók összes adata" BreadcrumbItems="_items">
+    <UserTableFullDataViewComponent></UserTableFullDataViewComponent>
+</UIPage>
+
+@code {
+    private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
+    {
+        new BreadcrumbItem("Home", href: "#"),
+        new BreadcrumbItem("Felhasználók összes adata", href: null, disabled: true)
+    };
+}

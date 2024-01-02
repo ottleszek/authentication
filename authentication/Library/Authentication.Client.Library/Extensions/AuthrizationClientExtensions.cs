@@ -33,9 +33,11 @@ namespace Authentication.Client.Library.Extensions
             services.AddScoped<RegistrationValidation>();
             services.AddScoped<ProfilValidation>();
             services.AddScoped<UserValidation>();
+            services.AddScoped<FullUserValidation>();
             services.AddScoped<UserRoleValidation>();
             services.AddScoped<MvvmItemUserValidation>();
             services.AddScoped<MvvmItemUserRoleValidation>();
+            services.AddScoped<MvvmItemFullUserValidation>();
 
             // ViewModels
             services.AddScoped<LoginViewModel>();
@@ -45,6 +47,7 @@ namespace Authentication.Client.Library.Extensions
             // User managment
             // User
             services.AddScoped<IListViewModel<User>, ListViewModel<User>>();
+            services.AddScoped<IIncludedListViewModel<User>, IncludedListViewModel<User>>();
             services.AddScoped<IListAndDeleteViewModel<User>, ListAndDeleteViewModel<User>>();
             services.AddScoped<MvvmCrudViewModelBase<User>>();
             // UserRole
@@ -74,6 +77,7 @@ namespace Authentication.Client.Library.Extensions
             services.AddScoped<IUpdateDataBroker, UpdateHttpService>();
             services.AddScoped<ICrudDataBroker, CrudHttpService>();
             services.AddScoped<IListAndDeleteDataBroker, ListAndDeleteHttpService>();
+            services.AddScoped<IIncludedDataBroker, IncludedHttpService>();
             //Broker connectors
             //User
             services.AddScoped<IListBrokerConnector<User>, ListBrokerConnector<User>>();
@@ -82,6 +86,7 @@ namespace Authentication.Client.Library.Extensions
             services.AddScoped<IListBrokerConnector<User>, ListBrokerConnector<User>>();
             services.AddScoped<ICrudBrokerConnector<User>,CrudBrokerConnectorr<User>>();
             services.AddScoped<IListAndDeleteBrokerConnector<User>, ListAndDeleteBrokerConnector<User>>();
+            services.AddScoped<IIncludedBrokerConnector<User>, InludedBrokerConnector<User>>();
             //UserRole
             services.AddScoped<IListBrokerConnector<UserRole>, ListBrokerConnector<UserRole>>();
             services.AddScoped<IUpdateBrokerConnector<UserRole>, UpdateBrokerConnector<UserRole>>();

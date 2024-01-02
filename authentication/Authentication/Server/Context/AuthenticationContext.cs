@@ -22,6 +22,11 @@ namespace Authentication.Server.Context
         {
             modelBuilder.Seed();               
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<User>()
+                .HasOne<UserRole>(u => u.UserRole)
+                .WithMany(ur => ur.Users)
+                .HasForeignKey(u => u.UserRoleId);
         }
     }
 }

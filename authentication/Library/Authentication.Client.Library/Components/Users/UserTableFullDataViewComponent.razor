@@ -1,0 +1,54 @@
+﻿@namespace Authentication.Client.Library.Components
+
+<UILoader State="_state">
+    <div class="d-flex ml-2">
+        @if (ViewModel is not null)
+        {
+            <MudTable ServerData="ReloadDataAsync"
+                      T="User"
+                      @ref="_table"
+                      Dense="true"
+                      Hover="true"
+                      Breakpoint="Breakpoint.Sm"
+                      Loading="@_loading"
+                      LoadingProgressColor="Color.Info">
+                <ToolBarContent>
+                    <MudButton OnClick="GoToInsert" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Add" Color="Color.Primary">Hozzáadás</MudButton>
+                    <MudSpacer />
+                    <MudTextField T="string" Placeholder="Keresés..." Adornment="Adornment.Start" Adornment.Icon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0" />
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh>Vezetéknév</MudTh>
+                    <MudTh>Keresztnév</MudTh>
+                    <MudTh>Email</MudTh>
+                    <MudTh>Regisztrált</MudTh>
+                    <MudTh>Szerep</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Vezetéknév">@context.LastName</MudTd>
+                    <MudTd DataLabel="Keresztnév">@context.FirstName</MudTd>
+                    <MudTd DataLabel="Email">@context.Email</MudTd>
+                    <MudTd DataLabel="Regisztrált">@context.RegisteredString</MudTd>
+                    <MudTd DataLabel="Szerep">@context.UserRole.Name</MudTd>
+                    <MudIconButton Icon="@Icons.Material.Filled.Preview" Color="Color.Success"></MudIconButton>
+                    <MudIconButton 
+                        Icon="@Icons.Material.Filled.Edit" 
+                        Color="Color.Default"
+                    />
+                    <MudIconButton 
+                        Icon="@Icons.Material.Filled.Delete" 
+                        Color="Color.Error"
+                    />
+
+                 </RowTemplate>
+                <PagerContent>
+                    <MudTablePager PageSizeOptions="new int[] { 5, 10, 20, 50, 100, int.MaxValue }" HorizontalAlignment="HorizontalAlignment.Center" HidePageNumber="false" HidePagination="false" HideRowsPerPage="false" />
+                </PagerContent>
+            </MudTable>
+        }
+    </div>
+</UILoader>
+
+@code{
+     private string infoFormat = "{first_item}-{last_item}, összesen {all_items}";
+}

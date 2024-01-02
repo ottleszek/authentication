@@ -8,12 +8,14 @@ namespace Authentication.Client.Library.Validation
         {
             try
             {
-                string url = $"/api/Account/check-unique-user-email?email={email}";
+                string url = $"/api/Registration/check-unique-user-email?email={email}";
                 bool result = await httpClient.GetFromJsonAsync<bool>(url);
                 return result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                LibraryLogging.LoggingBroker.LogError(ex.Message);
+                LibraryLogging.LoggingBroker.LogError("Egyedi email cím ellenőrzés nem működik!");
             }
             return true;
         }

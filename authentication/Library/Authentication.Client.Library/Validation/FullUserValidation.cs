@@ -1,12 +1,13 @@
-﻿using Authentication.Client.Library.ViewModels.Accounts;
+﻿using Authentication.Shared.Models;
 using FluentValidation;
+using FluentValidation.Validators;
 using System.Text.RegularExpressions;
 
 namespace Authentication.Client.Library.Validation
 {
-    public class RegistrationValidation : AbstractValidator<RegistrationViewModel>
+    public class FullUserValidation : AbstractValidator<User>
     {
-        public RegistrationValidation(IHttpClientFactory httpClientFactory)
+        public FullUserValidation(IHttpClientFactory httpClientFactory)
         {
             HttpClient httpClient = httpClientFactory.CreateClient("AuthenticationApi");
             RuleFor(x => x.LastName)
@@ -24,20 +25,11 @@ namespace Authentication.Client.Library.Validation
             RuleFor(x => x.Email)
                 .MustAsync(async (value, CancellationToken) => await UniqueEmailExtension.UniqueEmail(value, httpClient))
                 .When(_ => !string.IsNullOrEmpty(_.Email) && Regex.IsMatch(_.Email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase), ApplyConditionTo.CurrentValidator).WithMessage("Az email cím már létezik!");
-            RuleFor(x => x.Password)
-                .NotEmpty().WithMessage("A jelszó nem lehet üres!")
-                .MinimumLength(6).WithMessage("A jelszó nem lehet rövidebb 6 karakternél!")
-                .MaximumLength(16).WithMessage("A jelszó nem lehet hosszabb 16 karakternél!")
-                .Matches(@"[A-Z]+").WithMessage("A jelszóban nagybetünek lenni kell!")
-                .Matches(@"[a-z]+").WithMessage("A jelszóban kisbetünk lenni kell!")
-                .Matches(@"[0-9]+").WithMessage("A jelszóban számnak lenni kell!")
-                .Matches(@"[\@\!\?\*\.\+\-\:]+").WithMessage("A jelszóban lenni kell legalább egynek a következők közül: @!?.*+-:");
-            RuleFor(x => x.ConfirmPassword).Equal(_ => _.Password).WithMessage("A két jelszó meg kell egyezzen!");
         }
 
         public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model, propertyName) =>
         {
-            var result = await ValidateAsync(ValidationContext<RegistrationViewModel>.CreateWithOptions((RegistrationViewModel)model, x => x.IncludeProperties(propertyName)));
+            var result = await ValidateAsync(ValidationContext<User>.CreateWithOptions((User)model, x => x.IncludeProperties(propertyName)));
             if (result.IsValid)
                 return Array.Empty<string>();
             return result.Errors.Select(e => e.ErrorMessage);

@@ -35,6 +35,11 @@ namespace Authentication.Client.Library.Components
                         NavigationManager.NavigateTo("/");
                 }
             }
+            else
+            {
+                ViewModel.Email = string.Empty;
+                ViewModel.Password = string.Empty;                    
+            }
             await base.OnInitializedAsync();
         }
 
