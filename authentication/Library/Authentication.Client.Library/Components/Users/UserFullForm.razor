@@ -43,6 +43,8 @@
                     T="Guid" 
                     Label="Felhasználói szerep"                    
                 >
+
+
                 @if (UserRoleViewModel is not null && UserRoleViewModel.Items is not null)
                     {
                         @foreach (UserRole userRole in UserRoleViewModel.Items)
@@ -58,6 +60,7 @@
                     Disabled="@_isRegisteredCheckboxDisabled"
                     ReadOnly="@_isRegisteredCheckboxDisabled"
                 />
+                <UIImageUpload></UIImageUpload>
             </MudCardContent>
             <MudCardActions>
                 <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@SaveIsDisabled" OnClick="UpdateAsync">@_saveButtonText</MudButton>

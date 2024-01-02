@@ -1,6 +1,5 @@
 ﻿using Authentication.Server.Services;
 using Authentication.Shared.Dtos;
-using Authentication.Shared.Models;
 using LibraryCore.Responses;
 using LibraryDatabase.Model;
 using Microsoft.AspNetCore.Mvc;

@@ -107,6 +107,11 @@ namespace Authentication.Client.Library.Components
             }
         }
 
+        private void SetImgUrl(string imgUrl)
+        {
+            if (ViewModel is not null) ViewModel.SelectedItem.ProfileUrl = imgUrl;
+        }
+
         private void GoBack()
         {
             Navigation?.NavigateTo("/user/full");

@@ -1,6 +1,7 @@
 using Authentication.Server.Context;
 using Authentication.Server.Extension;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.FileProviders;
 using Serilog;
 using System.Text.Json.Serialization;
 using Toolbelt.Extensions.DependencyInjection;
@@ -86,5 +87,13 @@ app.UseAuthorization();
 app.MapRazorPages();
 app.MapControllers();
 app.MapFallbackToFile("index.html");
+
+//Static Files
+app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"StaticFiles")),
+    RequestPath = new PathString("/StaticFiles")
+});
 
 app.Run();
