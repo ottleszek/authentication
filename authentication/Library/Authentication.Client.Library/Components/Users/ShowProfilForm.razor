@@ -54,6 +54,13 @@ else
                                         InputType="InputType.Email"
                                         Label="Email" 
                                         />
+                        @if (_canUploadProfilImage)
+                        {
+                            <UIImageUpload 
+                                ButtonText="Profil kép feltöltés"
+                                FolderName="@_profilFolderName">
+                        </UIImageUpload>
+                        }
                     </MudCardContent>
                     <MudCardActions>
                         @if (ViewModel.IsReadOnly)

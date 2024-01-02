@@ -6,5 +6,6 @@ namespace Authentication.Server.Repos.Base
     {
         public Task<bool> IsUserExsist(string email);
         public Task<User?> GetUserBy(string email);
+        public Task<Guid?> GetIdBy(string email);
     }
 }

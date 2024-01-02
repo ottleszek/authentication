@@ -19,7 +19,7 @@ namespace LibraryApiTemplate.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
-            ControllerResponse response = new ControllerResponse();
+            ControllerResponse response = new();
             if (_dataBroker is not null)
             {
                 response = await _dataBroker.DeleteAsync<TEntity>(id);
@@ -40,7 +40,7 @@ namespace LibraryApiTemplate.Controllers
         [HttpPost()]
         public async Task<IActionResult> InsertAsync(TEntity entity)
         {
-            ControllerResponse response = new ControllerResponse();
+            ControllerResponse response = new();
             if (_dataBroker is not null)
             {
                 response = await _dataBroker.InsertAsync(entity);

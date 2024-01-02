@@ -31,6 +31,21 @@ namespace Authentication.Client.Library.Services.Profil
             return new ProfilDto();
         }
 
+        public async Task<Guid> GetUserIdBy(string email)
+        {
+            Guid response = Guid.Empty;
+            if (_httpClient is not null)
+            {
+                try
+                {
+                    response = await _httpClient.GetFromJsonAsync<Guid>($"api/Profil/userid/{email}");
+                }
+                catch (Exception)
+                { }
+            }
+            return response;
+        }
+
         public async  Task<ControllerResponse> UpdateProfil(ProfilDto profil)
         {
             ControllerResponse defaultResponse = new ();

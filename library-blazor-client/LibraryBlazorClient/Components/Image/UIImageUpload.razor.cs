@@ -7,9 +7,15 @@ namespace LibraryBlazorClient.Components
 {
     public partial class UIImageUpload : ComponentBase
     {
+
+        private string _imgUrl = string.Empty;
+
         [Parameter]
-        public EventCallback<string> OnChange { get; set; }
-        public string ImgUrl { get; set; }
+        public string? ButtonText { get; set; } = "Kép felöltése";
+        [Parameter]
+        public EventCallback<string> OnChange { get; set; }        
+        [Parameter]
+        public string FolderName { get; set; } = string.Empty;
         [Inject] UploadHttpService? UploadHttpService { get; set; }
 
         private async Task UploadImage(InputFileChangeEventArgs eventArgs)
@@ -25,8 +31,8 @@ namespace LibraryBlazorClient.Components
                         var content = new MultipartFormDataContent();
                         content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data");
                         content.Add(new StreamContent(ms, Convert.ToInt32(resizedFile.Size)), "image", imageFile.Name);
-                        ImgUrl = await UploadHttpService.UploadImage(content);
-                        await OnChange.InvokeAsync(ImgUrl);
+                        _imgUrl = await UploadHttpService.UploadImage(content);
+                        await OnChange.InvokeAsync(_imgUrl);
                     }
                 }
             }

@@ -28,6 +28,22 @@ namespace Authentication.Server.Services
             
         }
 
+        public async Task<Guid> GetUserIdBy(string email)
+        {
+            Guid? result = Guid.Empty;
+            if (_profilRepo is not null)
+                result = await _profilRepo.GetIdBy(email);
+            if (result == null)
+            {
+                return Guid.Empty;
+            }
+            else
+            {
+                return (Guid) result;
+            }
+
+        }
+
         public async Task<ServiceResponse> UpdateProfil(ProfilDto profilDto)
         {
             ServiceResponse response = new ServiceResponse();

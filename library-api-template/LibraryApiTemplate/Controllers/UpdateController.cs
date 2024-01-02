@@ -18,7 +18,7 @@ namespace LibraryApiTemplate.Controllers
         [HttpPut()]
         public async Task<ActionResult> UpdateAsync(TEntity entity)
         {
-            ControllerResponse response = new ControllerResponse();
+            ControllerResponse response = new();
             if (_repoUpdate is not null)
             {
                 response = await _repoUpdate.UpdateAsync(entity);

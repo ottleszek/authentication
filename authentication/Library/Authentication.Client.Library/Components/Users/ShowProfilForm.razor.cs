@@ -10,6 +10,8 @@ namespace Authentication.Client.Library.Components
     public partial class ShowProfilForm : MvvmComponentBase<ProfilViewModel>
 	{
         private MudForm _form = new();
+        private string _profilFolderName => ViewModel is not null ? ViewModel.ProfilImageDirectory : string.Empty;
+        private bool _canUploadProfilImage => _profilDirecotry != string.Empty;
 
         [Parameter] public string? UserEmail { get; set; }
         [Inject] ISnackbar? Snackbar { get; set; }

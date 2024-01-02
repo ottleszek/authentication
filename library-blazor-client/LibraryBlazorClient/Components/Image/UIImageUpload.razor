@@ -7,13 +7,13 @@
         HtmlTag="label"
         Variant="Variant.Filled"
         Color="Color.Primary"
-        StartIcon="@Icons.Filled.CloudUpload"
+        StartIcon="Icons.Filled.CloudUpload"
         for="fileInput">
-        Kép feltöltése
+    @ButtonText
 </MudButton>
-@if (ImgUrl is not null && ImgUrl!=string.Empty)
+@if (_imgUrl is not null && _imgUrl!=string.Empty)
 {
     <div>
-        <img src="@ImgUrl" style="width:300px" />
+        <img src="@_imgUrl" style="width:300px" />
     </div>
 }

@@ -4,13 +4,13 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using LibraryCore.Errors;
 using LibraryCore.Responses;
 using LibraryBlazorMvvm.ViewModels;
-using System.Xml.Linq;
 
 namespace Authentication.Client.Library.ViewModels.User
 {
     public partial class ProfilViewModel : MvvmViewModelBase
     {
-        private IProfilService? _profilService;        
+        private IProfilService? _profilService;
+        private Guid? _userId = null;
 
         public ProfilViewModel(IProfilService profilService)
         {
@@ -27,6 +27,18 @@ namespace Authentication.Client.Library.ViewModels.User
         private ErrorStore _errorString = new();
         [ObservableProperty]
         private bool _isBusy = false;
+
+        public string ProfilImageDirectory
+        {
+            get
+            {
+                if (_userId is null)
+                    return string.Empty;
+                else
+                    return $"/profil/{_userId}";
+            }
+        }
+
 
         public bool IsValidUser => !string.IsNullOrEmpty(Email);
         public bool IsReadOnly { get; set; } = true;
@@ -53,6 +65,9 @@ namespace Authentication.Client.Library.ViewModels.User
                 if (response.IsSuccess)
                 {
                     await GetProfil();
+                    //userId a profil kép mappa nevéhez
+                    _userId = await _profilService.GetUserIdBy(Email);
+                    // profil mentése, hogy változtatás után vissza lehessen állítani
                     SaveProfilToTempData();
                     ChangeToReadOnly();
                 }

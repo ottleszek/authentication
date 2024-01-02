@@ -20,11 +20,7 @@ namespace LibraryBlazorClient.Components.Image
             {
                 var postResult = await _httpClient.PostAsync($"{_relativUrl}/api/upload", content);
                 var postContent = await postResult.Content.ReadAsStringAsync();
-                if (!postResult.IsSuccessStatusCode)
-                {
-                    throw new ApplicationException(postContent);
-                }
-                else
+                if (postResult.IsSuccessStatusCode)
                 {
                     var imgUrl = Path.Combine($"{_relativUrl}", postContent);
                     return imgUrl;

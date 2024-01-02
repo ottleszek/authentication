@@ -44,5 +44,16 @@ namespace Authentication.Server.Repos.Base
             }
             return null;
         }
+
+        public async Task<Guid?> GetIdBy(string email)
+        {
+            if (_userSet is not null)
+            {
+                User? user = await _userSet.Where(user => user.Email.ToLower() == email.ToLower()).FirstOrDefaultAsync();
+                if (user is not null)
+                    return user.Id;
+            }
+            return null;
+        }
     }
 }

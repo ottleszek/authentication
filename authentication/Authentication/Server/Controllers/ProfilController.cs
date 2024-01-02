@@ -31,6 +31,17 @@ namespace Authentication.Server.Controllers
             return BadRequest();
         }
 
+        [HttpGet("userid/{email}")]
+        public async Task<IActionResult> GetUserIdBy(string email)
+        {
+            if (_profilService is not null)
+            {
+                Guid id= await _profilService.GetUserIdBy(email);
+                return id;
+            }
+            return BadRequest();
+        }
+
         [HttpPost]
         public async Task<IActionResult> UpdateProfil([FromBody] ProfilDto profil)
         {
