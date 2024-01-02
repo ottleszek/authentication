@@ -1,6 +1,6 @@
 ﻿@namespace LibraryBlazorClient.Components
 
-<InputFile id="fileInput" OnChange="UploadImage" hidden multiple />
+<InputFile id="fileInput" OnChange="UploadImage" hidden />
 
 <MudButton 
         Class="my-3"
@@ -8,8 +8,8 @@
         Variant="Variant.Filled"
         Color="Color.Primary"
         StartIcon="@Icons.Filled.CloudUpload"
-        Label="Kép betöltése"
-        for="fileInut">
+        for="fileInput">
+        Kép feltöltése
 </MudButton>
 @if (ImgUrl is not null && ImgUrl!=string.Empty)
 {
