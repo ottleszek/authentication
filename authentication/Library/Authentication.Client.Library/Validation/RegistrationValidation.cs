@@ -20,9 +20,10 @@ namespace Authentication.Client.Library.Validation
             RuleFor(x => x.Email)
                 .NotEmpty().WithMessage("Az email nem lehet üres!")
                 .EmailAddress().WithMessage("Helytelen email cím!")
+                .Matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$").WithMessage("Az email cím helytelen");
+            RuleFor(x => x.Email)
                 .MustAsync(async (value, CancellationToken) => await UniqueEmailExtension.UniqueEmail(value, httpClient))
-                .When(_ => !string.IsNullOrEmpty(_.Email) && Regex.IsMatch(_.Email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase), ApplyConditionTo.CurrentValidator)
-                .WithMessage("Evvel az emailcímmel már regisztrált felhasználó");
+                .When(_ => !string.IsNullOrEmpty(_.Email) && Regex.IsMatch(_.Email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase), ApplyConditionTo.CurrentValidator).WithMessage("Az email cím már létezik!");
             RuleFor(x => x.Password)
                 .NotEmpty().WithMessage("A jelszó nem lehet üres!")
                 .MinimumLength(6).WithMessage("A jelszó nem lehet rövidebb 6 karakternél!")

@@ -20,8 +20,7 @@ namespace Authentication.Client.Library.Validation
                 .WithMessage("Csak szabályos név fogadható el!");
             RuleFor(x => x.Email)
                 .NotEmpty().WithMessage("Az email nem lehet üres!")
-                .EmailAddress().WithMessage("Helytelen email cím!");
-            RuleFor(x => x.Email)
+                .EmailAddress().WithMessage("Helytelen email cím!")
                 .Matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$").WithMessage("Az email cím helytelen");
             RuleFor(x => x.Email)
                 .MustAsync(async (value, CancellationToken) => await UniqueEmailExtension.UniqueEmail(value, httpClient))
