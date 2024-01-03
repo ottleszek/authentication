@@ -27,7 +27,7 @@ namespace LibraryApiTemplate.Repos
             catch (Exception e)
             {
                 response.AppendNewError(e.Message);
-                response.AppendNewError($"{nameof(RepoUpdate<TDbContext>)} osztály, {UpdateAsync<TEntity>} metódusban hiba keletkezett");
+                response.AppendNewError($"{nameof(RepoUpdate<TDbContext>)} osztály, {nameof(UpdateAsync)} metódusban hiba keletkezett");
                 response.AppendNewError($"{entity} frissítése nem sikerült!");
 
             }
