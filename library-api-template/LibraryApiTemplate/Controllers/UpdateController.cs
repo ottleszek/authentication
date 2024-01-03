@@ -23,13 +23,13 @@ namespace LibraryApiTemplate.Controllers
             {
                 response = await _repoUpdate.UpdateAsync(entity);
 
-                if (!response.HasError)
+                if (response.HasError)
                 {
-                    return Ok(response);
+                    return BadRequest(response);
                 }
                 else
                 {
-                    return BadRequest(response);
+                    return Ok(response);
                 }
             }
             response.ClearAndAddError("Az adatok frissítés nem lehetséges!");
