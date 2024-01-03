@@ -22,7 +22,7 @@
 
         public void AppendNewError(string error)
         {
-            Error = $"{Error} {error}";
+            Error = $"{Error}\n{error}";
         }
     }
 }
