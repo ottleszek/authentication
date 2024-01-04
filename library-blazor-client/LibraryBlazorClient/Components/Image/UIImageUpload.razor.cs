@@ -28,16 +28,16 @@ namespace LibraryBlazorClient.Components
                     var resizedFile = await imageFile.RequestImageFileAsync("image/jpg", 300, 500);
                     using (var ms = resizedFile.OpenReadStream(resizedFile.Size))
                     {
-                        var content = new MultipartFormDataContent();
-
                         var playload = new
                         {
                             Path = Path,
                         };
 
+
+                        var content = new MultipartFormDataContent();
                         content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data");                        
                         content.Add(new StreamContent(ms, Convert.ToInt32(resizedFile.Size)), "image", imageFile.Name);
-                        content.Add(new StringContent(playload.Path),"Data.Path");
+                        content.Add(new StringContent(playload.Path),"Data.FilePath");
                         
 
                         _imgUrl = await UploadHttpService.UploadImage(content);
