@@ -47,13 +47,18 @@ namespace LibraryBlazorClient.Components
 
                     //var resizedFile = await imageFile.RequestImageFileAsync("image/jpg", 300, 500);
                     //using (var ms = resizedFile.OpenReadStream(resizedFile.Size))
+
+                    //imageFileExtension-ben van "." az elején
+
+                    if (imageFileExtenson.FirstOrDefault() == '.')
+                        imageFileExtenson=imageFileExtenson.Substring(1);
                     using (var ms=imageFile.OpenReadStream(imageFile.Size)) 
                     {
                         var playload = new
                         {
                             FilePath = FilePath,
-                            FileName = FileName
-                            FileExtension = imageFileExtenson
+                            FileName = FileName,
+                            FileExtension = imageFileExtenson.Substring(0)
                         };
 
 
@@ -62,6 +67,7 @@ namespace LibraryBlazorClient.Components
                         content.Add(new StreamContent(ms, Convert.ToInt32(imageFile.Size)), "image", imageFile.Name);
                         content.Add(new StringContent(playload.FilePath),"Data.FilePath");
                         content.Add(new StringContent(playload.FileName), "Data.FileName");
+                        content.Add(new StringContent(playload.FileExtension), "Data.FileExtension");
 
                         _imgUrl = await UploadHttpService.UploadImage(content);
 
