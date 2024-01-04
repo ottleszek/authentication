@@ -11,6 +11,12 @@
         for="fileInput">
     @ButtonText
 </MudButton>
+@if (Error.HasError)
+{
+    <MudChip class="pt-2 d-flex justify-content-center" Color="Color.Error">
+        <p>@Error</p>
+    </MudChip>
+}
 @if (_imgUrl is not null && _imgUrl!=string.Empty)
 {
     <div>

@@ -36,9 +36,17 @@ namespace Authentication.Client.Library.ViewModels.User
                 if (_userId is null)
                     return string.Empty;
                 else
-                    return _userId.ToString();
+                {
+                    string? result = _userId.ToString();
+                    if (result is null)
+                        return string.Empty;
+                    else
+                        return result;
+                }
             }
         }
+
+        public bool IsProfilImageFileNameValidName => ProfilImageFileName is not null;
 
         public bool IsValidUser => !string.IsNullOrEmpty(Email);
         public bool IsReadOnly { get; set; } = true;
