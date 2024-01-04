@@ -53,6 +53,7 @@ namespace LibraryBlazorClient.Components
                         {
                             FilePath = FilePath,
                             FileName = FileName
+                            FileExtension = imageFileExtenson
                         };
 
 
