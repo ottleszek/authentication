@@ -58,8 +58,8 @@ namespace LibraryBlazorClient.Components
 
                         var content = new MultipartFormDataContent();
                         content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data");                        
-                        content.Add(new StreamContent(ms, Convert.ToInt32(resizedFile.Size)), "image", imageFile.Name);
-                        content.Add(new StringContent(playload.Path),"Data.FilePath");
+                        content.Add(new StreamContent(ms, Convert.ToInt32(imageFile.Size)), "image", imageFile.Name);
+                        content.Add(new StringContent(playload.FilePath),"Data.FilePath");
                         content.Add(new StringContent(playload.FileName), "Data.FileName");
 
                         _imgUrl = await UploadHttpService.UploadImage(content);
