@@ -16,6 +16,10 @@ namespace LibraryBlazorClient.Components
         public EventCallback<string> OnChange { get; set; }        
         [Parameter]
         public string Path { get; set; } = string.Empty;
+        [Parameter]
+        public string FileName { get; set; } = string.Empty;
+
+
         [Inject] UploadHttpService? UploadHttpService { get; set; }
 
         private async Task UploadImage(InputFileChangeEventArgs eventArgs)

@@ -28,17 +28,17 @@ namespace Authentication.Client.Library.ViewModels.User
         [ObservableProperty]
         private bool _isBusy = false;
 
-        public string ProfilImageDirectory
+        public string ProfilImageFoleder => $"/profil/";
+        public string ProfilImageFileName
         {
             get
             {
                 if (_userId is null)
                     return string.Empty;
                 else
-                    return $"/profil/{_userId}";
+                    return _userId.ToString();
             }
         }
-
 
         public bool IsValidUser => !string.IsNullOrEmpty(Email);
         public bool IsReadOnly { get; set; } = true;
