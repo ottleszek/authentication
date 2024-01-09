@@ -32,7 +32,7 @@ namespace LibraryClientServiceTemplate.HttpServices
                     ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
                     if (response is not null)
                     {
-                        if (!response.HasError)
+                        if (response.IsSuccess)
                         {
                             return defaultResponse;
                         }
