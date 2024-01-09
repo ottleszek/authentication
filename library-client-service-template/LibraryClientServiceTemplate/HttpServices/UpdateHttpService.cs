@@ -23,11 +23,7 @@ namespace LibraryClientServiceTemplate.HttpServices
         {
             _relativUrl = RelativeUrlExtension.SetRelativeUrl<TEntity>();
             ControllerResponse defaultResponse = new();
-            if (_httpClient is null)
-            {
-                defaultResponse = new ControllerResponse();
-            }
-            else
+            if (_httpClient is not null)
             {
                 try
                 {
@@ -35,7 +31,16 @@ namespace LibraryClientServiceTemplate.HttpServices
                     string content = await httpResponse.Content.ReadAsStringAsync();
                     ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
                     if (response is not null)
-                        return response;
+                    {
+                        if (!response.HasError)
+                        {
+                            return defaultResponse;
+                        }
+                        else
+                        {
+                            LibraryLogging.LoggingBroker.LogError($"{response.Error}");
+                        }
+                    }
                 }
                 catch(Exception ex)
                 {
