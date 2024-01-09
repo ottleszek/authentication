@@ -18,7 +18,7 @@ namespace LibraryBlazorClient.Components.Image
         {
             if (_httpClient is not null)
             {
-                var postResult = await _httpClient.PostAsync($"{_relativUrl}/api/upload", content);
+                var postResult = await _httpClient.PostAsync($"{_relativUrl}/api/uploadprofile", content);
                 var postContent = await postResult.Content.ReadAsStringAsync();
                 if (postResult.IsSuccessStatusCode)
                 {

@@ -3,56 +3,56 @@ using LibraryLogging;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
 
-namespace Authentication.Server.Controllers
+namespace LibraryApiTemplate.Upload
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public  class UploadController : ControllerBase
+    public abstract class UploadController : ControllerBase
     {
         [HttpPost]
-        public async Task<IActionResult> Upload([FromForm] UploadFileDataDto dto)
+        public async Task<IActionResult> Upload([FromForm] UploadFileDto uploadFileDto)
         {
+            UploadFile uploadFile = uploadFileDto.ToUploadFile();
             string? fileName = string.Empty;
-            if (!dto.IsValidData)
+            if (!uploadFile.IsValidData)
                 return BadRequest();
             try
             {
                 var formCollection = await Request.ReadFormAsync();
-                var file = formCollection.Files.First();
-                var folderName = Path.Combine("StaticFiles", dto.Data.FilePath);
-                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                var file = formCollection.Files.First();                
+                var folderName = Path.Combine("StaticFiles", uploadFile.Data.FilePath);
+                string currentDirectory = Directory.GetCurrentDirectory();
+                var pathToSave = Path.Combine(currentDirectory, folderName);
                 if (file.Length > 0 && file.ContentDisposition is not null)
                 {
-                    if (dto.IsNewFileName && dto.IsNewExtension)
+                    if (uploadFile.IsNewFileName && uploadFile.IsNewExtension)
                     {
-                        fileName = dto.NewFileName;
+                        fileName = uploadFile.NewFileName;
                     }
-                    else if (!dto.IsNewFileName && !dto.IsNewExtension)
+                    else if (!uploadFile.IsNewFileName && !uploadFile.IsNewExtension)
                     {
                         fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName?.Trim('"');
                     }
-                    else if (dto.IsNewFileName && !dto.IsNewExtension)
+                    else if (uploadFile.IsNewFileName && !uploadFile.IsNewExtension)
                     {
                         string? tempFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName?.Trim('"');
                         if (tempFileName is not null)
                         {
-                            fileName = $"{dto.Data.FileName}.{Path.GetExtension(tempFileName)}";
+                            fileName = $"{uploadFile.Data.FileName}.{Path.GetExtension(tempFileName)}";
                         }
                         else
                         {
-                            fileName = $"{dto.Data.FileName}";
+                            fileName = $"{uploadFile.Data.FileName}";
                         }
                     }
-                    else 
+                    else
                     {
                         string? tempFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName?.Trim('"');
                         if (tempFileName is not null)
                         {
-                            fileName= $"{Path.GetFileNameWithoutExtension(tempFileName)}.{dto.Data.FileName}";
+                            fileName = $"{Path.GetFileNameWithoutExtension(tempFileName)}.{uploadFile.Data.FileName}";
                         }
                         else
                         {
-                            fileName = $"{Guid.NewGuid().ToString()}.{dto.Data.FileName}";
+                            fileName = $"{Guid.NewGuid().ToString()}.{uploadFile.Data.FileName}";
                         }
                     }
                     if (fileName is not null)
@@ -65,7 +65,7 @@ namespace Authentication.Server.Controllers
                         }
                         return Ok(dbPath);
                     }
-                }                
+                }
             }
             catch (Exception ex)
             {

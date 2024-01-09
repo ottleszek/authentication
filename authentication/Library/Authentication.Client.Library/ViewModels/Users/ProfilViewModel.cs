@@ -28,7 +28,7 @@ namespace Authentication.Client.Library.ViewModels.User
         [ObservableProperty]
         private bool _isBusy = false;
 
-        public string ProfilImageFoleder => $"/profil/";
+        public string ProfilImageFoleder => $"profil";
         public string ProfilImageFileName
         {
             get
