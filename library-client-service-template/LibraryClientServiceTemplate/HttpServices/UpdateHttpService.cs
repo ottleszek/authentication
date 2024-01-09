@@ -27,7 +27,7 @@ namespace LibraryClientServiceTemplate.HttpServices
             {
                 try
                 {
-                    HttpResponseMessage httpResponse = await _httpClient.PostAsJsonAsync(_relativUrl, entity);
+                    HttpResponseMessage httpResponse = await _httpClient.PutAsJsonAsync(_relativUrl, entity);
                     string content = await httpResponse.Content.ReadAsStringAsync();
                     ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
                     if (response is not null)
