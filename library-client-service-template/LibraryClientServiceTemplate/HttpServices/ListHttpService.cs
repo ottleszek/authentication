@@ -2,7 +2,6 @@
 using LibraryCore.Model;
 using LibraryDataBroker;
 using Newtonsoft.Json;
-using System.Net.Http.Json;
 
 namespace LibraryClientServiceTemplate.HttpServices
 {
@@ -22,16 +21,23 @@ namespace LibraryClientServiceTemplate.HttpServices
             _relativUrl = RelativeUrlExtension.SetRelativeUrl<TEntity>();
             if (_httpClient is not null && HaveUrl)
             {
-                HttpResponseMessage? response = await _httpClient.GetAsync(_relativUrl);
-                if (response is not null)
+                try
                 {
-                    if (response.IsSuccessStatusCode)
+                    HttpResponseMessage? response = await _httpClient.GetAsync(_relativUrl);
+                    if (response is not null)
                     {
-                        var content = await response.Content.ReadAsStringAsync();
-                        List<TEntity>? result = JsonConvert.DeserializeObject<List<TEntity>>(content);
-                        if (result is not null)
-                            return result;
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var content = await response.Content.ReadAsStringAsync();
+                            List<TEntity>? result = JsonConvert.DeserializeObject<List<TEntity>>(content);
+                            if (result is not null)
+                                return result;
+                        }
                     }
+                }
+                catch (Exception ex)
+                {
+                    LibraryLogging.LoggingBroker.LogError(nameof(ListHttpService), nameof(SelectAllRecordAsync), ex.Message);
                 }
             }
             return new List<TEntity>();

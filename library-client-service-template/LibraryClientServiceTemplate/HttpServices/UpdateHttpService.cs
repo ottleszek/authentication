@@ -44,7 +44,7 @@ namespace LibraryClientServiceTemplate.HttpServices
                 }
                 catch(Exception ex)
                 {
-                    LibraryLogging.LoggingBroker.LogError($"{ex.Message}");
+                    LibraryLogging.LoggingBroker.LogError(nameof(UpdateHttpService),nameof(UpdateAsync),ex.Message);
                 }
             }
             defaultResponse.ClearAndAddError("Az adatok frissítés nem lehetséges!");

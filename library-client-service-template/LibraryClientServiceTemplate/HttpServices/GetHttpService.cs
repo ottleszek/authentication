@@ -22,13 +22,20 @@ namespace LibraryClientServiceTemplate.HttpServices
             _relativUrl = RelativeUrlExtension.SetRelativeUrl<TEntity>();
             if (_httpClient is object && HaveUrl)
             {
-                result = await _httpClient.GetFromJsonAsync<TEntity>($"{_relativUrl}/{id}");
-                if (result is object)
-                    return result;
-                else
-                    result = new TEntity();
+                try
+                {
+                    result = await _httpClient.GetFromJsonAsync<TEntity>($"{_relativUrl}/{id}");
+                    if (result is object)
+                        return result;
+                    else
+                        result = new TEntity();
+                }
+                catch (Exception ex)
+                {
+                    LibraryLogging.LoggingBroker.LogError(nameof(GetHttpService), nameof(GetByAsnyc), ex.Message);
+                }
             }
-            return result;
+            return new TEntity();
         }
     }
 }

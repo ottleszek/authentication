@@ -33,19 +33,28 @@ namespace LibraryClientServiceTemplate.HttpServices
                         string content = await httpResponse.Content.ReadAsStringAsync();
                         ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
                         if (response is not null)
-                            return response;
+                        {
+                            if (response.IsSuccess)
+                            {
+                                return defaultResponse;
+                            }
+                            else
+                            {
+                                LibraryLogging.LoggingBroker.LogError($"{response.Error}");
+                            }
+                        }
                     }
                     else
                     {
+                        LoggingBroker.LogError(nameof(CrudHttpService), nameof(DeleteAsync),string.Empty);
                         LoggingBroker.LogError("Http kérés hiba!");
                         LoggingBroker.LogError($"{httpResponse.StatusCode}");
                         LoggingBroker.LogError($"{httpResponse.Headers}");
-
                     }
                 }
                 catch (Exception ex)
                 {
-                    LoggingBroker.LogError($"{ex.Message}");
+                    LoggingBroker.LogError(nameof(CrudHttpService), nameof(DeleteAsync), ex.Message);
                 }
             }
             defaultResponse.ClearAndAddError("Az adatok frissítés nem lehetséges!");
