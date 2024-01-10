@@ -35,8 +35,7 @@ namespace Authentication.Client.Library.Components
                 // Adatok betöltése
                 await ViewModel.Loading();
                 // Profil kép megjelenítése ha létezik
-                ViewModel.IsProfilImageExsist = FileSystemExtension.IsUrlExist(ViewModel.ProfilImageUrl);
-
+                await ViewModel.CheckIsProfileImageExist(ViewModel.ProfilImageUrl);
             }
             await base.OnParametersSetAsync();
         }

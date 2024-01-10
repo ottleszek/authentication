@@ -4,7 +4,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using LibraryCore.Errors;
 using LibraryCore.Responses;
 using LibraryBlazorMvvm.ViewModels;
-using LibraryClientServiceTemplate.FileServerService;
 using Authentication.Shared.Model;
 
 namespace Authentication.Client.Library.ViewModels.User
@@ -52,7 +51,7 @@ namespace Authentication.Client.Library.ViewModels.User
             }
         }
 
-        public string ProfilImageUrl => Path.Combine(ProfilImageFoleder, ProfilImageFileName);
+        public string ProfilImageUrl => Path.Combine("StaticFiles",ProfilImageFoleder, ProfilImageFileName);
 
         public bool IsProfilImageFileNameValidName => ProfilImageFileName is not null;
 
@@ -113,6 +112,15 @@ namespace Authentication.Client.Library.ViewModels.User
                 await GetUserId();
                 await base.Loading();
             }
+        }
+
+        public async Task<bool> CheckIsProfileImageExist(string url)
+        {
+            bool isExsist = false;
+            if (_profilService is not null)
+                isExsist= await _profilService.IsProfileImageExist(url);
+            IsProfilImageExsist = isExsist;
+            return IsProfilImageExsist;
         }
 
         private async Task GetProfil()

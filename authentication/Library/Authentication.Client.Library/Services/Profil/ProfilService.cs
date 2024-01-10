@@ -1,6 +1,8 @@
 ﻿using Authentication.Shared.Dtos;
 using LibraryCore.Responses;
+using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
+using System.Net;
 using System.Net.Http.Json;
 
 namespace Authentication.Client.Library.Services.Profil
@@ -44,6 +46,18 @@ namespace Authentication.Client.Library.Services.Profil
                 { }
             }
             return response;
+        }
+
+        public async Task<bool> IsProfileImageExist(string url)
+        {
+            string newUrl = Path.Combine("StaticFiles", url);
+            if (_httpClient is null)
+                return false;
+            else
+            {                
+                var response = await _httpClient.GetAsync(newUrl);
+                return response.StatusCode == System.Net.HttpStatusCode.OK;
+            }
         }
 
         public async  Task<ControllerResponse> UpdateProfil(ProfilDto profil)

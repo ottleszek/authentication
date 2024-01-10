@@ -54,9 +54,13 @@ else
                                         InputType="InputType.Email"
                                         Label="Email" 
                                         />
+                        <p>Kép 1</p>
+                        <MudImage Src="profil/admin.teszt.hu-26de36b7-76f5-4f17-8f9d-44eb429f151b.jpg" Width="200" Height="150" Alt="Profil kép" Elevation="25" Class="rounded-lg ma-4" />
+                        <p>Kép 2</p>
+                        <MudImage Src="https://localhost:7220/StaticFiles//profil//admin.teszt.hu-26de36b7-76f5-4f17-8f9d-44eb429f151b.jpg" Width="200" Height="150" Alt="Profil kép" Elevation="25" Class="rounded-lg ma-4" />
                         @if (ViewModel.IsProfilImageExsist)
                         {
-                            <MudImage Src="@ViewModel.ProfilImageUrl" Width="200" Height="150" Alt="Profil kép" Elevation="25" Class="rounded-lg ma-4"/>
+                            <MudImage Src="@ViewModel.ProfilImageUrl" Width="200" Height="150" Alt="Profil kép" Elevation="25" Class="rounded-lg ma-4"/>                            
                         }
                         @if (_canUploadProfilImage)
                         {
