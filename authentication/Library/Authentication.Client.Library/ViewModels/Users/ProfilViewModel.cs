@@ -5,6 +5,7 @@ using LibraryCore.Errors;
 using LibraryCore.Responses;
 using LibraryBlazorMvvm.ViewModels;
 using Authentication.Shared.Model;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace Authentication.Client.Library.ViewModels.User
 {
@@ -53,8 +54,14 @@ namespace Authentication.Client.Library.ViewModels.User
         }
 
         
-        public string ProfilImageUrl => Path.Combine("StaticFiles", ProfilImageFoleder, ProfilImageFileName);
-
+        public string ProfilImageUrl
+        {
+            get
+            {
+                string url = Path.Combine("StaticFiles", ProfilImageFoleder, $"{ProfilImageFileName}.jpg");
+                return url;
+            }
+        }
         public bool IsProfilImageFileNameValidName => ProfilImageFileName is not null;
 
         public bool IsValidUser => !string.IsNullOrEmpty(Email);
