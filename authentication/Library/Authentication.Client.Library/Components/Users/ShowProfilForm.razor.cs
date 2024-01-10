@@ -10,7 +10,7 @@ namespace Authentication.Client.Library.Components
     public partial class ShowProfilForm : ComponentBase
 	{
         private MudForm _form = new();
-        [CascadingParameter] public ProfilViewModel? ViewModel { get; set; }
+        [Inject] public ProfilViewModel? ViewModel { get; set; }
         [Parameter] public string? UserEmail { get; set; }
         [Inject] ISnackbar? Snackbar { get; set; }
 
@@ -24,8 +24,6 @@ namespace Authentication.Client.Library.Components
                 ViewModel.Email = UserEmail;
                 // Adatok betöltése
                 await ViewModel.Loading();
-                // Profil kép megjelenítése ha létezik
-                await ViewModel.CheckIsProfileImageExist(ViewModel.ProfilImageUrl);
             }
             await base.OnParametersSetAsync();
         }
