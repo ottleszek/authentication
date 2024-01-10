@@ -30,9 +30,10 @@ else
                                         Immediate=true
                                         Required="true"
                                         RequiredError="A vezetéknév szükséges!"
-                                        Label="Vezetéknév" 
+                                        Label="Vezetéknév"
                                         ReadOnly="@ViewModel.IsReadOnly"
-                                        />
+                                        Disabled="@ViewModel.IsReadOnly"
+                                      />
                         <MudTextField @bind-Value="ViewModel.FirstName"
                                         For="@( () => ViewModel.FirstName)"
                                         Immediate=true
@@ -40,6 +41,7 @@ else
                                         RequiredError="A keresztnév szükséges!"
                                         Label="Keresztnév"
                                         ReadOnly="@ViewModel.IsReadOnly"
+                                        Disabled="@ViewModel.IsReadOnly" 
                                         />
                         <MudTextField @bind-Value="ViewModel.Email"
                                         Immediate=true

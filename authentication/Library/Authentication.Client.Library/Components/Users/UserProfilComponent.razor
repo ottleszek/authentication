@@ -11,20 +11,16 @@ else
     <MudBreadcrumbs Items="_items" Separator=">"></MudBreadcrumbs>
     <MudGrid Spacing="1">
         <MudItem xs="6">
-            <CascadingValue Value="@ViewModel">
-                <MudPaper Class="d-flex">
-                    <ShowProfilForm UserEmail="@_userEmail">
-                    </ShowProfilForm>
-                </MudPaper>
-            </CascadingValue>
+            <MudPaper Class="d-flex">
+                <ShowProfilForm UserEmail="@_userEmail">
+                </ShowProfilForm>
+            </MudPaper>
         </MudItem>
         <MudItem xl="3">
-            <CascadingValue Value="@ViewModel">
-                <MudPaper Class="d-flex flex-column">
-                    <ShowProfilImageForm UserEmail="@_userEmail">
-                    </ShowProfilImageForm>
-                </MudPaper>
-            </CascadingValue>
+            <MudPaper Class="d-flex flex-column">
+                <ShowProfilImageForm UserEmail="@_userEmail">
+                </ShowProfilImageForm>
+            </MudPaper>
         </MudItem>
      </MudGrid>
     
