@@ -4,7 +4,16 @@ namespace LibraryClientServiceTemplate.FileServerService
 {
     public static class FileSystemExtension
     {
-        public static bool IsUrlExist(string url, int timeOutMs = 1000)
+        public static bool IsUrlExist(string url)
+        {
+            if (File.Exists(url))
+                return true;
+            else
+                return false;
+        }
+
+
+        /*public static bool IsUrlExist(string url, int timeOutMs = 1000)
         {
             bool exists = false;
             HttpWebResponse response = null;
@@ -29,9 +38,9 @@ namespace LibraryClientServiceTemplate.FileServerService
                     response.Close();
             }
             return exists;
-        }
-
-        /*private readonly HttpClient? _httpClient
+        }*/
+        /*
+        private readonly HttpClient? _httpClient
         public FileSystemExtension(IHttpClientFactory httpClientFactory)
         {
             _httpClient = httpClientFactory.CreateClient("AuthenticationApi");

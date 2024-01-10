@@ -41,7 +41,6 @@ namespace Authentication.Server.Services
             {
                 return (Guid) result;
             }
-
         }
 
         public async Task<ServiceResponse> UpdateProfil(ProfilDto profilDto)
