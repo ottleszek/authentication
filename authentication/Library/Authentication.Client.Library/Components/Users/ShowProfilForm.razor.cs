@@ -4,27 +4,17 @@ using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using Authentication.Client.Library.ViewModels.User;
 using Authentication.Client.Library.Validation;
-using LibraryClientServiceTemplate.FileServerService;
 
 namespace Authentication.Client.Library.Components
 {
-    public partial class ShowProfilForm : MvvmComponentBase<ProfilViewModel>
+    public partial class ShowProfilForm : ComponentBase
 	{
         private MudForm _form = new();
-        private string _profilFolderName => ViewModel is not null ? ViewModel.ProfilImageFoleder : string.Empty;
-        private bool _canUploadProfilImage => ViewModel is not null ? _profilFolderName != string.Empty && ViewModel.IsProfilImageFileNameValidName : false;
-
+        [CascadingParameter] public ProfilViewModel? ViewModel { get; set; }
         [Parameter] public string? UserEmail { get; set; }
         [Inject] ISnackbar? Snackbar { get; set; }
 
         [Inject] private ProfilValidation? Validation { get; set; }
-
-
-        private List<BreadcrumbItem> _items = new()
-        {
-            new("Home", href: "#"),
-            new("Profil adatok", href: null, disabled: true)
-        };
 
         protected async override Task OnParametersSetAsync()
         {
