@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="StaticFiles\Images\**" />
+    <Content Remove="StaticFiles\Images\**" />
+    <EmbeddedResource Remove="StaticFiles\Images\**" />
+    <None Remove="StaticFiles\Images\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.13" />
@@ -26,10 +33,6 @@
     <ProjectReference Include="..\..\..\library-password\LibraryPassword\LibraryPassword.csproj" />
     <ProjectReference Include="..\Client\Authentication.Client.csproj" />
     <ProjectReference Include="..\Shared\Authentication.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="StaticFiles\Images\" />
   </ItemGroup>
 
 
