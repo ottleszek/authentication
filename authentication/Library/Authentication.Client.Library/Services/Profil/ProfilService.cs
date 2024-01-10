@@ -50,12 +50,12 @@ namespace Authentication.Client.Library.Services.Profil
 
         public async Task<bool> IsProfileImageExist(string url)
         {
-            string newUrl = Path.Combine("StaticFiles", url);
+            //string newUrl = Path.Combine("StaticFiles", url);
             if (_httpClient is null)
                 return false;
             else
             {                
-                var response = await _httpClient.GetAsync(newUrl);
+                var response = await _httpClient.GetAsync(url);
                 return response.StatusCode == System.Net.HttpStatusCode.OK;
             }
         }

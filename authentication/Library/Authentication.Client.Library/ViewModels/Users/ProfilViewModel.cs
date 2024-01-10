@@ -31,6 +31,7 @@ namespace Authentication.Client.Library.ViewModels.User
         [ObservableProperty]
         public bool _isProfilImageExsist = false;
 
+        public string ProfileImageUploadButtonText => IsProfilImageExsist ? "Profil kép módosítása" : "Profil kép feltöltése";
         public string ProfilImageFoleder => $"profil";
         public string ProfilImageFileName
         {
@@ -51,7 +52,8 @@ namespace Authentication.Client.Library.ViewModels.User
             }
         }
 
-        public string ProfilImageUrl => Path.Combine("StaticFiles",ProfilImageFoleder, ProfilImageFileName);
+        
+        public string ProfilImageUrl => Path.Combine("StaticFiles", ProfilImageFoleder, ProfilImageFileName);
 
         public bool IsProfilImageFileNameValidName => ProfilImageFileName is not null;
 
