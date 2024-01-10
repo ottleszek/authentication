@@ -7,5 +7,6 @@ namespace Authentication.Server.Repos
     public interface IProfilRepo : IIUserGetRepoBase
     {
         public Task<RepositoryResponse> UpdateProfil(User user);
+        //public Task<RepositoryResponse> UpdateProfilImage(string email, string profilImageUrl);
     }
 }

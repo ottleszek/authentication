@@ -1,6 +1,5 @@
 ﻿using LibraryCore.Extensions;
 using LibraryCore.Model;
-using System.ComponentModel.DataAnnotations;
 
 namespace Authentication.Shared.Models
 {

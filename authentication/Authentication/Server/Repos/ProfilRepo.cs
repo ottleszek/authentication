@@ -10,7 +10,7 @@ namespace Authentication.Server.Repos
         private readonly DbSet<User>? _userSet;
         private readonly TDbContext _dbContext;
 
-        public ProfilRepo(IDbContextFactory<TDbContext> dbContextFactory) 
+        public ProfilRepo(IDbContextFactory<TDbContext> dbContextFactory)
             : base(dbContextFactory)
         {
             TDbContext dbContext = dbContextFactory.CreateDbContext();
@@ -28,7 +28,7 @@ namespace Authentication.Server.Repos
 
         public async Task<RepositoryResponse> UpdateProfil(User user)
         {
-            RepositoryResponse response = new RepositoryResponse();
+            RepositoryResponse response = new();
 
             _dbContext.ChangeTracker.Clear();
             _dbContext.Entry(user).State = EntityState.Modified;
@@ -42,5 +42,43 @@ namespace Authentication.Server.Repos
             }
             return response;
         }
+
+        /*public async Task<RepositoryResponse> UpdateProfilImage(string email, string profilImageUrl)
+        {
+            RepositoryResponse response = new();
+            User user;
+            try
+            {
+                User? foundedUser = await GetUserBy(email);
+                if (foundedUser is null)
+                {
+                    response.AppendNewError("A felhasználó nem létezik.");
+                    return response;
+                }
+                else
+                {
+                    user = foundedUser;
+                    user.ProfileUrl = profilImageUrl;
+                }
+
+            }
+            catch (Exception e)
+            {
+                response.AppendNewError(e.Message);
+                return response;
+            }
+
+            try
+            {
+                _dbContext.ChangeTracker.Clear();
+                _dbContext.Update(user);
+                await _dbContext.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                response.AppendNewError(e.Message);
+            }
+            return response;
+        }*/
     }
 }

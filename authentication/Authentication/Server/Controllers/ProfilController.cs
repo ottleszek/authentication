@@ -62,7 +62,6 @@ namespace Authentication.Server.Controllers
             }
             response.ClearAndAddError("A profil frissítés nem lehetséges!");
             return BadRequest(response);
-        }
-
+        }      
     }
 }
