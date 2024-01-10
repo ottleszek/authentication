@@ -4,6 +4,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using LibraryCore.Errors;
 using LibraryCore.Responses;
 using LibraryBlazorMvvm.ViewModels;
+using LibraryClientServiceTemplate.FileServerService;
+using Authentication.Shared.Model;
 
 namespace Authentication.Client.Library.ViewModels.User
 {
@@ -27,24 +29,30 @@ namespace Authentication.Client.Library.ViewModels.User
         private ErrorStore _errorString = new();
         [ObservableProperty]
         private bool _isBusy = false;
+        [ObservableProperty]
+        public bool _isProfilImageExsist = false;
 
         public string ProfilImageFoleder => $"profil";
         public string ProfilImageFileName
         {
             get
             {
-                if (_userId is null)
+                if (_userId is null || _userId==Guid.Empty)
                     return string.Empty;
                 else
                 {
-                    string? result = _userId.ToString();
-                    if (result is null)
-                        return string.Empty;
-                    else
-                        return result;
+                    
+                    ProfilImageUrl profilImageUrl = new ProfilImageUrl
+                    {
+                        Email = Email,
+                        Id = _userId.Value
+                    };
+                    return profilImageUrl.GetProfilImageUrlName();
                 }
             }
         }
+
+        public string ProfilImageUrl => Path.Combine(ProfilImageFoleder, ProfilImageFileName);
 
         public bool IsProfilImageFileNameValidName => ProfilImageFileName is not null;
 

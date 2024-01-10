@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using Authentication.Client.Library.ViewModels.User;
 using Authentication.Client.Library.Validation;
+using LibraryClientServiceTemplate.FileServerService;
 
 namespace Authentication.Client.Library.Components
 {
@@ -29,8 +30,13 @@ namespace Authentication.Client.Library.Components
         {
             if (!string.IsNullOrEmpty(UserEmail) && ViewModel is not null)
             {
+                // Kezdőérték
                 ViewModel.Email = UserEmail;
+                // Adatok betöltése
                 await ViewModel.Loading();
+                // Profil kép megjelenítése ha létezik
+                ViewModel.IsProfilImageExsist = FileSystemExtension.IsUrlExist(ViewModel.ProfilImageUrl);
+
             }
             await base.OnParametersSetAsync();
         }

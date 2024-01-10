@@ -2,9 +2,9 @@
 
 namespace LibraryClientServiceTemplate.FileServerService
 {
-    public class FileSystemExtension
+    public static class FileSystemExtension
     {
-        public bool IsUrlExist(string url, int timeOutMs = 1000)
+        public static bool IsUrlExist(string url, int timeOutMs = 1000)
         {
             bool exists = false;
             HttpWebResponse response = null;

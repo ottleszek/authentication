@@ -5,7 +5,7 @@
         public static string GetProfilImageUrlName(this ProfilImageUrl profilImageUrl)
         {
             string email = profilImageUrl.Email.Replace("@", ".");
-            return $"{email}-{profilImageUrl.Id}";
+            return $"{email}-{profilImageUrl.Id}.jpg";
         }
     }
 }

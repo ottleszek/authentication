@@ -37,7 +37,7 @@ namespace LibraryBlazorClient.Components
                         Error.AppendNewError("Megengedett file méret 2 MB");
                         return;
                     }
-                    string[] allowedExtensions = new[] { ".jpg", ".png",".svg" };
+                    string[] allowedExtensions = new[] { ".jpg" };
                     string imageFileExtenson = Path.GetExtension(imageFile.Name).ToLower();
                     if (!allowedExtensions.Contains(imageFileExtenson))
                     {
