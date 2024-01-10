@@ -1,5 +1,4 @@
-﻿using AngleSharp.Io;
-using Authentication.Server.Repos;
+﻿using Authentication.Server.Repos;
 using Authentication.Shared.Dtos;
 using Authentication.Shared.Models;
 using LibraryDatabase.Model;
@@ -80,7 +79,7 @@ namespace Authentication.Server.Services
             }
             return response;
         }
-
+        /*
         public async Task<ServiceResponse> UpdateProfilImage(string email, string profilImageUrl)
         {
             ServiceResponse response = new ServiceResponse();
@@ -115,6 +114,6 @@ namespace Authentication.Server.Services
                 }
             }
             return response;
-        }
+        }*/
     }
 }
