@@ -31,7 +31,7 @@ WebAssemblyHost app = builder.Build();
 
 //await builder.Build().RunAsync();
 
-var levelSwitch = new LoggingLevelSwitch();
+/*var levelSwitch = new LoggingLevelSwitch();
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.ControlledBy(levelSwitch)
     .Enrich.WithProperty("InstanceId", Guid.NewGuid().ToString("n"))
@@ -48,6 +48,6 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 Log.Information("Serilog elindult.");
-Log.Information("Authentication kliens elindult.");
+Log.Information("Authentication kliens elindult.");*/
 
 await app.RunAsync();
