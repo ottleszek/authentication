@@ -22,7 +22,13 @@ namespace LibraryApiTemplate.Repos
             var dbSet = dbContext.GetDbSet<TEntity>();
             TEntity entityToDelete = await GetByIdAsnyc<TEntity>(id);
 
-            if (entityToDelete != null && entityToDelete != default)
+            if (entityToDelete == null || entityToDelete == default)
+            {
+                LibraryLogging.LoggingBroker.LogError($"{nameof(RepoCrud<TDbContext>)}\nA törlendő adat nem található:\nAdat id:{id}");
+                response.ClearAndAddError($"Az adat nem törölhető!");
+
+            }
+            else
             {
                 try
                 {
@@ -33,14 +39,8 @@ namespace LibraryApiTemplate.Repos
                 catch (Exception ex)
                 {
                     LibraryLogging.LoggingBroker.LogError($"{nameof(RepoCrud<TDbContext>)}\nSql utasítás nem hajtható végre!\n{ex.Message}");
-                    response.ClearAndAddError($"Az adat nem törölhető!");
+                    response.ClearAndAddError("Az adat nem törölhető!");
                 }
-
-            }
-            else
-            {
-                LibraryLogging.LoggingBroker.LogError($"{nameof(RepoCrud<TDbContext>)}\nA törlendő adat nem található:\nAdat id:{id}");
-                response.ClearAndAddError($"Az adat nem törölhető!");
             }
             return response;
         }
