@@ -24,7 +24,7 @@ namespace LibraryApiTemplate.Repos
 
             if (entityToDelete == null || entityToDelete == default)
             {
-                LibraryLogging.LoggingBroker.LogError($"{nameof(RepoCrud<TDbContext>)}\nA törlendő adat nem található:\nAdat id:{id}");
+                LibraryLogging.LoggingBroker.LogError($"{nameof(RepoCrud<TDbContext>)}",$"{nameof(DeleteAsync)}","A törlendő adat nem található:\nAdat id:{id}");
                 response.ClearAndAddError($"Az adat nem törölhető!");
 
             }
@@ -38,7 +38,7 @@ namespace LibraryApiTemplate.Repos
                 }
                 catch (Exception ex)
                 {
-                    LibraryLogging.LoggingBroker.LogError($"{nameof(RepoCrud<TDbContext>)}\nSql utasítás nem hajtható végre!\n{ex.Message}");
+                    LibraryLogging.LoggingBroker.LogError($"{nameof(RepoCrud<TDbContext>)}",$"{nameof(DeleteAsync)}",$"Sql utasítás nem hajtható végre!\n{ex.Message}");
                     response.ClearAndAddError("Az adat nem törölhető!");
                 }
             }
@@ -70,7 +70,7 @@ namespace LibraryApiTemplate.Repos
             }
             catch (Exception ex)
             {
-                LibraryLogging.LoggingBroker.LogError($"{nameof(RepoCrud<TDbContext>)}\nSql utasítás nem hajtható végre!\n{ex.Message}");
+                LibraryLogging.LoggingBroker.LogError($"{nameof(RepoCrud<TDbContext>)}", $"{nameof(InsertNewItemAsync)}", "Sql utasítás nem hajtható végre!\n{ex.Message}");
                 response.ClearAndAddError($"Az új adat nem menthető!");
             }
             return response;
