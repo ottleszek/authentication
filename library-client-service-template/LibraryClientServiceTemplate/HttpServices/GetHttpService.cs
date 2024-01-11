@@ -16,7 +16,7 @@ namespace LibraryClientServiceTemplate.HttpServices
             _httpClient = httpClientFactory.CreateClient("AuthenticationApi");
         }
 
-        public async Task<TEntity> GetByAsnyc<TEntity>(Guid id) where TEntity : class, IDbRecord<TEntity>, new()
+        public async Task<TEntity> GetByIdAsnyc<TEntity>(Guid id) where TEntity : class, IDbRecord<TEntity>, new()
         {
             TEntity? result = new();
             _relativUrl = RelativeUrlExtension.SetRelativeUrl<TEntity>();
@@ -32,7 +32,7 @@ namespace LibraryClientServiceTemplate.HttpServices
                 }
                 catch (Exception ex)
                 {
-                    LibraryLogging.LoggingBroker.LogError(nameof(GetHttpService), nameof(GetByAsnyc), ex.Message);
+                    LibraryLogging.LoggingBroker.LogError(nameof(GetHttpService), nameof(GetByIdAsnyc), ex.Message);
                 }
             }
             return new TEntity();

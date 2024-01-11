@@ -20,7 +20,7 @@ namespace LibraryApiTemplate.Repos
             ControllerResponse response = new ControllerResponse();
             var dbContext = _dbContextFactory.CreateDbContext();
             var dbSet = dbContext.GetDbSet<TEntity>();
-            TEntity entityToDelete = await GetByAsnyc<TEntity>(id);
+            TEntity entityToDelete = await GetByIdAsnyc<TEntity>(id);
 
             if (entityToDelete != null && entityToDelete != default)
             {

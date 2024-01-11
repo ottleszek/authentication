@@ -15,12 +15,12 @@ namespace LibraryApiTemplate.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetBy(Guid id)
+        public async Task<IActionResult> GetById(Guid id)
         {
             TEntity entity = new();
             if (_repo is not null)
             {
-                entity = await _repo.GetByAsnyc<TEntity>(id);
+                entity = await _repo.GetByIdAsnyc<TEntity>(id);
                 return Ok(entity);
             }
             return BadRequest("Az adatok elérhetetlenek!");
