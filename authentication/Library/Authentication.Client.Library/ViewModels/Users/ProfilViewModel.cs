@@ -48,7 +48,7 @@ namespace Authentication.Client.Library.ViewModels.User
                         Email = Email,
                         Id = _userId.Value
                     };
-                    return profilImageUrl.GetProfilImageUrlName();
+                    return profilImageUrl.GetProfilImageFilelName();
                 }
             }
         }
