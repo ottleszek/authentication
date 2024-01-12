@@ -17,7 +17,7 @@ namespace Authentication.Server.Controllers
         [HttpPost("deleteprofil")]
         public async Task<IActionResult> DeleteProfil(ProfilImageFilenNameDataDto profilImageUrl)
         {
-            ProfilImageUrl fileToDelete = profilImageUrl.ToProfilImageUrl();
+            ProfilImageFileName fileToDelete = profilImageUrl.ToProfilImageUrl();
             string fileName = fileToDelete.GetProfilImageUrlName();
 
         }

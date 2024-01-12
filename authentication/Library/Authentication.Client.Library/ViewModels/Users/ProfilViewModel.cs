@@ -43,7 +43,7 @@ namespace Authentication.Client.Library.ViewModels.User
                 else
                 {
                     
-                    ProfilImageUrl profilImageUrl = new ProfilImageUrl
+                    ProfilImageFileName profilImageUrl = new ProfilImageFileName
                     {
                         Email = Email,
                         Id = _userId.Value
