@@ -17,12 +17,7 @@ namespace Authentication.Client.Shared
 
         protected override async Task OnInitializedAsync()
         {
-            string themeName = "light";
-            if ((LocalStorage is not null) && (await LocalStorage.ContainKeyAsync("theme")))
-            {
-                themeName = await LocalStorage.GetItemAsStringAsync("theme");
-            }
-            _isCurrentLightTheme = themeName == "light" ? true : false;
+            await SetCurrentThemeFromLocalStorage();
             InitializeLightTheme();
             InitializeDarkTheme();
 
@@ -123,6 +118,16 @@ namespace Authentication.Client.Shared
                 return "light";
             else
                 return "dark";
+        }
+
+        private async Task SetCurrentThemeFromLocalStorage()
+        {
+            string themeName = "light";
+            if ((LocalStorage is not null) && (await LocalStorage.ContainKeyAsync("theme")))
+            {
+                themeName = await LocalStorage.GetItemAsStringAsync("theme");
+            }
+            _isCurrentLightTheme = themeName == "light" ? true : false;
         }
     }
 }
