@@ -18,7 +18,7 @@ namespace LibraryApiTemplate.Upload
             {
                 var formCollection = await Request.ReadFormAsync();
                 var file = formCollection.Files.First();                
-                var folderName = Path.Combine("StaticFiles", uploadFile.Data.FilePath);
+                var folderName = Path.Combine("staticfiles", uploadFile.Data.FilePath);
                 string currentDirectory = Directory.GetCurrentDirectory();
                 var pathToSave = Path.Combine(currentDirectory, folderName);
                 if (file.Length > 0 && file.ContentDisposition is not null)

@@ -7,5 +7,10 @@ namespace LibraryCore.Responses
         public bool IsSuccess => !HasError;
 
         public ControllerResponse() : base() { }
+
+        public ControllerResponse(string Error)
+        {
+            ClearAndAddError(Error);
+        }
     }
 }

@@ -7,10 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="StaticFiles\Images\**" />
-    <Content Remove="StaticFiles\Images\**" />
-    <EmbeddedResource Remove="StaticFiles\Images\**" />
-    <None Remove="StaticFiles\Images\**" />
+    <Compile Remove="staticfiles\Images\**" />
+    <Content Remove="staticfiles\Images\**" />
+    <EmbeddedResource Remove="staticfiles\Images\**" />
+    <None Remove="staticfiles\Images\**" />
   </ItemGroup>
 
   <ItemGroup>

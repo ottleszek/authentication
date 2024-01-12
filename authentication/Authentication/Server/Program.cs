@@ -92,7 +92,7 @@ app.MapFallbackToFile("index.html");
 app.UseStaticFiles();
 app.UseStaticFiles(new StaticFileOptions()
 {
-    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"StaticFiles")),
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"staticfiles")),
     RequestPath = new PathString("/StaticFiles")
 });
 
