@@ -107,15 +107,6 @@ namespace Authentication.Client.Shared
 
         private void SetCurrentTheme()
         {
-          /*  if (_lightMudTheme is null) 
-            {
-                SetLightTheme();
-            }
-            if (_darkMudTheme is null)
-            {
-                SetDarkTheme();
-            }
-            */
             if (_isCurrentLightTheme)
             {
                 _currentTheme = _lightMudTheme;
