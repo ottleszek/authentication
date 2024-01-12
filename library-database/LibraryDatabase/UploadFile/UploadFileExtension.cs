@@ -11,9 +11,9 @@
             };
         }
 
-        public static FileUploadData ToFileUploadData(this FileUploadDataDto dtoFileData)
+        public static UploadFileData ToFileUploadData(this UploadFileDataDto dtoFileData)
         {
-            return new FileUploadData
+            return new UploadFileData
             {
                 FilePath = dtoFileData.FilePath,
                 FileExtension = dtoFileData.FileExtension,
