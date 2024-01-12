@@ -31,23 +31,4 @@ WebAssemblyHost app = builder.Build();
 
 //await builder.Build().RunAsync();
 
-/*var levelSwitch = new LoggingLevelSwitch();
-Log.Logger = new LoggerConfiguration()
-    .MinimumLevel.ControlledBy(levelSwitch)
-    .Enrich.WithProperty("InstanceId", Guid.NewGuid().ToString("n"))
-    .Enrich.FromLogContext()
-    .WriteTo.BrowserHttp(controlLevelSwitch: levelSwitch)
-    .WriteTo.BrowserConsole
-    (
-        restrictedToMinimumLevel: LogEventLevel.Information,
-        outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}",
-        CultureInfo.InvariantCulture,
-        jsRuntime: app.Services.GetRequiredService<IJSRuntime>()
-    )
-    .WriteTo.File("d:/logs/client/mylog.txt", rollingInterval: RollingInterval.Day)
-    .CreateLogger();
-
-Log.Information("Serilog elindult.");
-Log.Information("Authentication kliens elindult.");*/
-
 await app.RunAsync();
