@@ -12,7 +12,7 @@
         <MudText Align="Align.Center" Class="p-2">        
             @if (ViewModel.IsProfilImageExsist)
             {
-                <MudImage Src="@ViewModel.ProfilImageUrl"
+                <MudImage Src="@ViewModel.UrlToShowingProfilImage"
                           Width="100" Height="100" Alt="Profil kép" Elevation="25" Class="rounded-circle ma-4" />
             }
             else
@@ -24,9 +24,11 @@
          <MudText Class="p-3">
             @if (_canUploadProfilImage)
             {
-                <UIImageUpload ButtonText="@ViewModel.ProfileImageUploadButtonText"
+                <UIImageUpload ApiEndpointName="profilimage"
+                                ButtonText="@ViewModel.ProfileImageUploadButtonText"
                                 FilePath="@ViewModel.ProfilImageFoleder"
-                                FileName="@ViewModel.ProfilImageFileName">
+                                FileName="@ViewModel.ProfilImageFileName"
+                >
                 </UIImageUpload>
             }
         </MudText>    

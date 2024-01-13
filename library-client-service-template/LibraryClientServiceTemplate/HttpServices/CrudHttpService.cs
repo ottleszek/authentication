@@ -4,6 +4,7 @@ using LibraryCore.Responses;
 using LibraryDataBroker;
 using LibraryLogging;
 using Newtonsoft.Json;
+using System.Net;
 using System.Net.Http.Json;
 
 namespace LibraryClientServiceTemplate.HttpServices
@@ -21,6 +22,8 @@ namespace LibraryClientServiceTemplate.HttpServices
 
         public async Task<ControllerResponse> DeleteAsync<TEntity>(Guid id) where TEntity : class, IDbRecord<TEntity>, new()
         {
+            // https://stackoverflow.com/questions/45739753/correct-use-of-ensuresuccessstatuscode-and-issuccessstatuscode
+
             _relativUrl = RelativeUrlExtension.SetRelativeUrl<TEntity>();
             ControllerResponse defaultResponse = new();
             if (_httpClient is object && HaveUrl)
@@ -28,28 +31,23 @@ namespace LibraryClientServiceTemplate.HttpServices
                 try
                 {
                     HttpResponseMessage httpResponse = await _httpClient.DeleteAsync($"{_relativUrl}/{id}");
-                    if (httpResponse.IsSuccessStatusCode)
+                    if (httpResponse.StatusCode==HttpStatusCode.BadRequest)
                     {
                         string content = await httpResponse.Content.ReadAsStringAsync();
                         ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
-                        if (response is not null)
+                        if (response is null)
                         {
-                            if (response.IsSuccess)
-                            {
-                                return defaultResponse;
-                            }
-                            else
-                            {
-                                LibraryLogging.LoggingBroker.LogError($"{response.Error}");
-                            }
+                            return new ControllerResponse("A törlés http kérés hibát okozott!");
                         }
+                        else return response;
+                    }
+                    else if (!httpResponse.IsSuccessStatusCode)
+                    {
+                        httpResponse.EnsureSuccessStatusCode();
                     }
                     else
                     {
-                        LoggingBroker.LogError(nameof(CrudHttpService), nameof(DeleteAsync),string.Empty);
-                        LoggingBroker.LogError("Http kérés hiba!");
-                        LoggingBroker.LogError($"{httpResponse.StatusCode}");
-                        LoggingBroker.LogError($"{httpResponse.Headers}");
+                        return defaultResponse;
                     }
                 }
                 catch (Exception ex)
@@ -57,7 +55,7 @@ namespace LibraryClientServiceTemplate.HttpServices
                     LoggingBroker.LogError(nameof(CrudHttpService), nameof(DeleteAsync), ex.Message);
                 }
             }
-            defaultResponse.ClearAndAddError("Az adatok frissítés nem lehetséges!");
+            defaultResponse.ClearAndAddError("A törlés nem lehetséges!");
             return defaultResponse;
         }
 

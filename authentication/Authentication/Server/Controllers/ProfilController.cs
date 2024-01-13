@@ -31,7 +31,7 @@ namespace Authentication.Server.Controllers
             return BadRequest();
         }
 
-        [HttpGet("userid/{email}")]
+        [HttpGet("get-user-id/{email}")]
         public async Task<IActionResult> GetUserIdBy(string email)
         {
             if (_profilService is not null)

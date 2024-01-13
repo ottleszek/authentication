@@ -20,12 +20,20 @@ namespace LibraryBlazorClient.Components
         public string FilePath { get; set; } = string.Empty;
         [Parameter]
         public string FileName { get; set; } = string.Empty;
+        [Parameter]
+        public string ApiEndpointName { get; set; } = string.Empty;
 
+        public bool IsExsistApiEndpointName => ApiEndpointName != string.Empty;
 
         [Inject] UploadHttpService? UploadHttpService { get; set; }
 
         private async Task UploadImage(InputFileChangeEventArgs eventArgs)
         {
+            if (! IsExsistApiEndpointName)
+            {
+                Error.ClearAndAddError("A feltöltési rendszer nem működik!");
+                return;
+            }
             var imageFiles = eventArgs.GetMultipleFiles();
             foreach (var imageFile in imageFiles)
             {
@@ -57,7 +65,7 @@ namespace LibraryBlazorClient.Components
                         var playload = new
                         {
                             FilePath = FilePath,
-                            FileName = FileName,
+                            FileName = FileName == string.Empty ? Path.GetFileName(imageFile.Name) : FileName,
                             FileExtension = imageFileExtenson.Substring(0)
                         };
 
@@ -69,7 +77,11 @@ namespace LibraryBlazorClient.Components
                         content.Add(new StringContent(playload.FileName), "Data.FileName");
                         content.Add(new StringContent(playload.FileExtension), "Data.FileExtension");
 
-                        _imgUrl = await UploadHttpService.UploadImage(content);
+                        _imgUrl = await UploadHttpService.UploadImage(ApiEndpointName, content);
+                        if (_imgUrl == string.Empty)
+                        {
+                            Error.ClearAndAddError("A feltöltés sikertelen!");
+                        }
 
                         await OnChange.InvokeAsync(_imgUrl);
                     }
