@@ -39,7 +39,7 @@ namespace Authentication.Client.Library.Components
             ErrorStore errorStore = await ViewModel.UpdateProfilAsync();
             if (errorStore.HasError)
             {
-                Snackbar?.Add(errorStore.Error, Severity.Error);
+                Snackbar?.Add(errorStore.Message, Severity.Error);
             }
             else
             {

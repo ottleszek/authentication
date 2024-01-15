@@ -56,7 +56,7 @@ namespace Authentication.Server.Controllers
                 }
                 else
                 {
-                    response.Error = serviceResponse.Error;
+                    response.Message = serviceResponse.Message;
                     return BadRequest(response);
                 }
             }

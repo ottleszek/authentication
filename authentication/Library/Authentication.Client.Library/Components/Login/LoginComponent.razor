@@ -26,7 +26,7 @@
                     @if (ViewModel.ErrorString.HasError)
                     {
                         <MudChip Class="pt-2 d-flex justify-content-center" Color="Color.Error">
-                            <p>@ViewModel.ErrorString.Error</p>
+                            <p>@ViewModel.ErrorString.Message</p>
                         </MudChip>
                     }
                     <MudCardContent>

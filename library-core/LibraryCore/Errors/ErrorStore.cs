@@ -4,25 +4,25 @@
     {
         public ErrorStore()
         {
-            Error = string.Empty;
+            Message = string.Empty;
         }
 
-        public string Error { get; set; } = string.Empty;
-        public bool HasError => !string.IsNullOrEmpty(Error);
+        public string Message { get; set; } = string.Empty;
+        public bool HasError => !string.IsNullOrEmpty(Message);
 
         public void ClearErrorStore()
         { 
-            Error = string.Empty; 
+            Message = string.Empty; 
         }
 
         public void ClearAndAddError(string error)
         {
-            Error = error;
+            Message = error;
         }
 
         public void AppendNewError(string error)
         {
-            Error = $"{Error}\n{error}";
+            Message = $"{Message}\n{error}";
         }
     }
 }

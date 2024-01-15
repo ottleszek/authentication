@@ -25,7 +25,7 @@
                         @if (ViewModel.ErrorString.HasError)
                         {
                             <MudChip class="pt-2 d-flex justify-content-center" Color="Color.Error">
-                                <p>@ViewModel.ErrorString.Error</p>
+                                <p>@ViewModel.ErrorString.Message</p>
                             </MudChip>
                         }
                         <MudTextField @bind-Value="ViewModel.LastName"

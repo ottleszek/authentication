@@ -71,7 +71,7 @@ namespace Authentication.Server.Services
                 RepositoryResponse repoResponse = await _profilRepo.UpdateProfil(user);
                 if (response.HasError)
                 {
-                    LoggingBroker.LogError(nameof(ProfilService),nameof(UpdateProfil), response.Error);
+                    LoggingBroker.LogError(nameof(ProfilService),nameof(UpdateProfil), response.Message);
                     response.ClearAndAddError("A felhasználó profil frissítés nem lehetséges!");
                     return response;
                 }

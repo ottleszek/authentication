@@ -38,7 +38,7 @@ namespace LibraryClientServiceTemplate.HttpServices
                         }
                         else
                         {
-                            LibraryLogging.LoggingBroker.LogError($"{response.Error}");
+                            LibraryLogging.LoggingBroker.LogError($"{response.Message}");
                         }
                     }
                 }
