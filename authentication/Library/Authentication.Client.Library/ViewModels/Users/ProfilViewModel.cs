@@ -13,6 +13,25 @@ namespace Authentication.Client.Library.ViewModels.User
     {
         private IProfilService? _profilService;
         private Guid? _userId = null;
+        private ProfilImageFileName _profilImageFileData
+        {
+            get
+            {
+                if (_userId is null)
+                {
+                    return new ProfilImageFileName();
+                }
+                else
+                {
+                    ProfilImageFileName profilImageFileData = new ProfilImageFileName
+                    {
+                        Email = Email,
+                        Id = _userId.Value
+                    };
+                    return profilImageFileData;
+                }
+            }
+        }
 
         public ProfilViewModel(IProfilService profilService)
         {
@@ -34,31 +53,18 @@ namespace Authentication.Client.Library.ViewModels.User
 
         public string ProfileImageUploadButtonText => IsProfilImageExsist ? "Profil kép módosítása" : "Profil kép feltöltése";
         public string ProfilImageFoleder => $"profil";
-        public string ProfilImageFileName
-        {
-            get
-            {
-                if (_userId is null || _userId==Guid.Empty)
-                    return string.Empty;
-                else
-                {
-                    
-                    ProfilImageUrl profilImageUrl = new ProfilImageUrl
-                    {
-                        Email = Email,
-                        Id = _userId.Value
-                    };
-                    return profilImageUrl.GetProfilImageUrlName();
-                }
-            }
-        }
 
+        public string ProfilImageFileName => _profilImageFileData.FileName;
         
-        public string ProfilImageUrl
+        public string UrlToShowingProfilImage
         {
             get
             {
-                string url = Path.Combine("StaticFiles", ProfilImageFoleder, $"{ProfilImageFileName}.jpg");
+                string url = string.Empty;
+                if (ProfilImageFileName != string.Empty)
+                {
+                    url = Path.Combine("StaticFiles", ProfilImageFoleder, $"{ProfilImageFileName}");
+                }
                 return url;
             }
         }
@@ -117,19 +123,21 @@ namespace Authentication.Client.Library.ViewModels.User
             if (!string.IsNullOrEmpty(Email))
             {                
                 await GetProfil();
-                //userId a profil kép mappa nevéhez
+                // a profil kép neve userid-ből készül, kell a userid
                 await GetUserId();
                 await base.Loading();
             }
         }
 
-        public async Task<bool> CheckIsProfileImageExist(string url)
+        public async Task<bool> CheckIsProfileImageExist()
         {
             bool isExsist = false;
-            if (_profilService is not null)
-                isExsist= await _profilService.IsProfileImageExist(url);
+            if (_profilService is not null && _profilImageFileData.IsValid)
+            {
+                isExsist = await _profilService.IsProfileImageExist(_profilImageFileData);
+            }
             IsProfilImageExsist = isExsist;
-            return IsProfilImageExsist;
+            return isExsist;
         }
 
         private async Task GetProfil()

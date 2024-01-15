@@ -14,11 +14,11 @@ namespace LibraryBlazorClient.Components.Image
             _httpClient = httpClientFactory.CreateClient("AuthenticationApi");
         }
 
-        public async Task<string> UploadImage(MultipartFormDataContent content)
+        public async Task<string> UploadImage(string apiEndpointName, MultipartFormDataContent content)
         {
             if (_httpClient is not null)
             {
-                var postResult = await _httpClient.PostAsync($"{_relativUrl}/api/uploadprofile", content);
+                var postResult = await _httpClient.PostAsync($"{_relativUrl}/{apiEndpointName}", content);
                 var postContent = await postResult.Content.ReadAsStringAsync();
                 if (postResult.IsSuccessStatusCode)
                 {

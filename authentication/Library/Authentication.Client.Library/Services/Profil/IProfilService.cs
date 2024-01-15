@@ -1,4 +1,5 @@
 ﻿using Authentication.Shared.Dtos;
+using Authentication.Shared.Model;
 using LibraryCore.Responses;
 
 namespace Authentication.Client.Library.Services.Profil
@@ -9,6 +10,7 @@ namespace Authentication.Client.Library.Services.Profil
         public Task<Guid> GetUserIdBy(string email);
         public Task<ControllerResponse> UpdateProfil(ProfilDto profil);
 
-        public Task<bool> IsProfileImageExist(string url);
+        public Task<bool> IsProfileImageExist(ProfilImageFileName profilImageFileName);
+        public Task<ControllerResponse> DeleteProfilImage(ProfilImageFileName profilImageFileName);
     }
 }

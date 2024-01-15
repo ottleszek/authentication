@@ -19,7 +19,8 @@ namespace Authentication.Client.Library.Components
                 ViewModel.Email = UserEmail;
                 // Adatok betöltése
                 await ViewModel.Loading();
-                await ViewModel.CheckIsProfileImageExist(ViewModel.ProfilImageUrl);
+                // Profilkép létezésének ellenőrzése
+                await ViewModel.CheckIsProfileImageExist();
             }
             await base.OnParametersSetAsync();
         }
