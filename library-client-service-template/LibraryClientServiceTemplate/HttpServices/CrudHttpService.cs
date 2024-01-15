@@ -22,8 +22,6 @@ namespace LibraryClientServiceTemplate.HttpServices
 
         public async Task<ControllerResponse> DeleteAsync<TEntity>(Guid id) where TEntity : class, IDbRecord<TEntity>, new()
         {
-            // https://stackoverflow.com/questions/45739753/correct-use-of-ensuresuccessstatuscode-and-issuccessstatuscode
-
             _relativUrl = RelativeUrlExtension.SetRelativeUrl<TEntity>();
             ControllerResponse defaultResponse = new();
             if (_httpClient is object && HaveUrl)
