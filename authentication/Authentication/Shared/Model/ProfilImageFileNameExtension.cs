@@ -18,7 +18,9 @@ namespace Authentication.Shared.Model
             if (profilImageFileName.Id == Guid.Empty || !profilImageFileName.IsValid)
                 return string.Empty;
             string email = profilImageFileName.Email.Replace("@", ".");
-            return $"{email}-{profilImageFileName.Id}.jpg";
+            //return $"{email}.jpg";
+            return $"{email}.{profilImageFileName.Id}.jpg";
+            //return "admin.jpg";
         }
     }
 }

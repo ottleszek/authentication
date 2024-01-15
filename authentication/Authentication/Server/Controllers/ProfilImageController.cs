@@ -22,12 +22,11 @@ namespace Authentication.Server.Controllers
         public IActionResult IsProfilImageExsist([FromBody] ProfilImageFileNameDto profilImageFileNameDto)
         {
             ProfilImageFileName fileNameData = profilImageFileNameDto.ToProfilImageFileName();
-            string fileToDeleteFullPath = GetProfilImageFullPath(fileNameData);
+            string fileNameToCheck = GetProfilImageFullPath(fileNameData);
             try
             {
-                if (System.IO.File.Exists(fileToDeleteFullPath))
+                if (System.IO.File.Exists(fileNameToCheck))
                 {
-                    System.IO.File.Delete(fileToDeleteFullPath);
                     return Ok(true);
                 }                
             }
