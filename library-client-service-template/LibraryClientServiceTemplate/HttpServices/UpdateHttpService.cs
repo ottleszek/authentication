@@ -3,6 +3,7 @@ using LibraryCore.Model;
 using LibraryCore.Responses;
 using LibraryDataBroker;
 using Newtonsoft.Json;
+using System.Net;
 using System.Net.Http.Json;
 
 namespace LibraryClientServiceTemplate.HttpServices
@@ -28,18 +29,24 @@ namespace LibraryClientServiceTemplate.HttpServices
                 try
                 {
                     HttpResponseMessage httpResponse = await _httpClient.PutAsJsonAsync(_relativUrl, entity);
-                    string content = await httpResponse.Content.ReadAsStringAsync();
-                    ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
-                    if (response is not null)
+
+                    if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
                     {
-                        if (response.IsSuccess)
+                        string content = await httpResponse.Content.ReadAsStringAsync();
+                        ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
+                        if (response is null)
                         {
-                            return defaultResponse;
+                            defaultResponse.ClearAndAddError("A módosítás http kérés hibát okozott!");
                         }
-                        else
-                        {
-                            LibraryLogging.LoggingBroker.LogError($"{response.Message}");
-                        }
+                        else return response;
+                    }
+                    else if (!httpResponse.IsSuccessStatusCode)
+                    {
+                        httpResponse.EnsureSuccessStatusCode();
+                    }
+                    else
+                    {
+                        return defaultResponse;
                     }
                 }
                 catch(Exception ex)
