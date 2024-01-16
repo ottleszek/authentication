@@ -53,7 +53,7 @@ namespace LibraryClientServiceTemplate.HttpServices
                     LoggingBroker.LogError(nameof(CrudHttpService), nameof(DeleteAsync), ex.Message);
                 }
             }
-            defaultResponse.ClearAndAddError("A törlés nem lehetséges!");
+            defaultResponse.ClearAndAddError("Az adatok törlés nem lehetséges!");
             return defaultResponse;
         }
 
