@@ -139,6 +139,11 @@ namespace Authentication.Client.Library.ViewModels.User
             return isExsist;
         }
 
+        public void OnProfilImageUploadSucceeded(string url)
+        {
+            IsProfilImageExsist = true;
+        }
+
         private async Task GetProfil()
         {
             if (_profilService is not null)

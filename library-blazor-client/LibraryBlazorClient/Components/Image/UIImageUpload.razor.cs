@@ -15,7 +15,7 @@ namespace LibraryBlazorClient.Components
         [Parameter]
         public string? ButtonText { get; set; } = "Kép felöltése";
         [Parameter]
-        public EventCallback<string> OnChange { get; set; }        
+        public EventCallback<string> OnUploadSucceededd { get; set; }        
         [Parameter]
         public string FilePath { get; set; } = string.Empty;
         [Parameter]
@@ -81,9 +81,9 @@ namespace LibraryBlazorClient.Components
                         if (_imgUrl == string.Empty)
                         {
                             Error.ClearAndAddError("A feltöltés sikertelen!");
+                            return;
                         }
-
-                        await OnChange.InvokeAsync(_imgUrl);
+                        await OnUploadSucceededd.InvokeAsync(_imgUrl);
                     }
                 }
             }

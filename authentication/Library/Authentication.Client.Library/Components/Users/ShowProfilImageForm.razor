@@ -25,9 +25,10 @@
             @if (_canUploadProfilImage)
             {
                 <UIImageUpload ApiEndpointName="profilimage"
-                                ButtonText="@ViewModel.ProfileImageUploadButtonText"
-                                FilePath="@ViewModel.ProfilImageFoleder"
-                                FileName="@ViewModel.ProfilImageFileName"
+                               OnUploadSucceededd="@ViewModel.OnProfilImageUploadSucceeded"
+                               ButtonText="@ViewModel.ProfileImageUploadButtonText"
+                               FilePath="@ViewModel.ProfilImageFoleder"
+                               FileName="@ViewModel.ProfilImageFileName"
                 >
                 </UIImageUpload>
             }
