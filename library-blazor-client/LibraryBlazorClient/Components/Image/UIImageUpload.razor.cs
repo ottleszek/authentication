@@ -65,7 +65,7 @@ namespace LibraryBlazorClient.Components
                         var playload = new
                         {
                             FilePath = FilePath,
-                            FileName = FileName == string.Empty ? Path.GetFileName(imageFile.Name) : FileName,
+                            FileName = FileName == string.Empty ? Path.GetFileNameWithoutExtension(imageFile.Name) : FileName,
                             FileExtension = imageFileExtenson.Substring(0)
                         };
 

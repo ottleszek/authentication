@@ -12,6 +12,7 @@ namespace Authentication.Shared.Model
         public Guid Id { get; set; }
 
         public string FileName => this.GetProfilImageFilelName();
+        public string FileNameWithoutExtension =>this.GetProfilImageFilelNameWithoutExtension();
         public bool IsValid => _isEmailValid && _isIdValid;
     }
 }

@@ -15,12 +15,16 @@ namespace Authentication.Shared.Model
 
         public static string GetProfilImageFilelName(this ProfilImageFileName profilImageFileName)
         {
+            string fileName = profilImageFileName.GetProfilImageFilelNameWithoutExtension();
+            return $"{fileName}.jpg";
+        }
+
+        public static string GetProfilImageFilelNameWithoutExtension(this ProfilImageFileName profilImageFileName)
+        {
             if (profilImageFileName.Id == Guid.Empty || !profilImageFileName.IsValid)
                 return string.Empty;
             string email = profilImageFileName.Email.Replace("@", ".");
-            //return $"{email}.jpg";
-            return $"{email}.{profilImageFileName.Id}.jpg";
-            //return "admin.jpg";
+            return $"{email}.{profilImageFileName.Id}";
         }
     }
 }

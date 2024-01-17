@@ -5,7 +5,6 @@ using LibraryCore.Errors;
 using LibraryCore.Responses;
 using LibraryBlazorMvvm.ViewModels;
 using Authentication.Shared.Model;
-using Microsoft.AspNetCore.Components.Web;
 
 namespace Authentication.Client.Library.ViewModels.User
 {
@@ -54,7 +53,7 @@ namespace Authentication.Client.Library.ViewModels.User
         public string ProfileImageUploadButtonText => IsProfilImageExsist ? "Profil kép módosítása" : "Profil kép feltöltése";
         public string ProfilImageFoleder => $"profil";
 
-        public string ProfilImageFileName => _profilImageFileData.FileName;
+        public string ProfilImageFileName => _profilImageFileData.FileNameWithoutExtension;
         
         public string UrlToShowingProfilImage
         {
@@ -63,7 +62,7 @@ namespace Authentication.Client.Library.ViewModels.User
                 string url = string.Empty;
                 if (ProfilImageFileName != string.Empty)
                 {
-                    url = Path.Combine("StaticFiles", ProfilImageFoleder, $"{ProfilImageFileName}");
+                    url = Path.Combine("StaticFiles", ProfilImageFoleder, $"{_profilImageFileData.FileName}");
                 }
                 return url;
             }

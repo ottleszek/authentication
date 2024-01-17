@@ -1,11 +1,8 @@
 ﻿using Authentication.Shared.Dtos;
 using Authentication.Shared.Model;
-using LibraryApiTemplate.Repos;
 using LibraryApiTemplate.Upload;
 using LibraryCore.Responses;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 
 namespace Authentication.Server.Controllers
 {

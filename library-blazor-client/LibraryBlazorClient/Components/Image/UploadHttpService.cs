@@ -1,4 +1,5 @@
 ﻿
+using LibraryClientServiceTemplate.Extensions;
 using System.Net.Http;
 
 namespace LibraryBlazorClient.Components.Image
@@ -18,7 +19,7 @@ namespace LibraryBlazorClient.Components.Image
         {
             if (_httpClient is not null)
             {
-                var postResult = await _httpClient.PostAsync($"{_relativUrl}/{apiEndpointName}", content);
+                var postResult = await _httpClient.PostAsync($"api/{apiEndpointName}", content);
                 var postContent = await postResult.Content.ReadAsStringAsync();
                 if (postResult.IsSuccessStatusCode)
                 {
