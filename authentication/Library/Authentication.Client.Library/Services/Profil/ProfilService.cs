@@ -89,7 +89,7 @@ namespace Authentication.Client.Library.Services.Profil
             {
                 try
                 {
-                    HttpResponseMessage httpResponse = await _httpClient.PostAsJsonAsync("api/ProfilImage/is-profil-image-exsist", profilImageFileName);
+                    HttpResponseMessage httpResponse = await _httpClient.PostAsJsonAsync("api/ProfilImage/is-profil-image-exsist", profilImageFileName.ToDto());
                     if (httpResponse.IsSuccessStatusCode || httpResponse.StatusCode == HttpStatusCode.BadRequest)
                     {
                         string content = await httpResponse.Content.ReadAsStringAsync();
@@ -117,7 +117,7 @@ namespace Authentication.Client.Library.Services.Profil
             {
                 try
                 {
-                    HttpResponseMessage httpResponse = await _httpClient.PostAsJsonAsync("delete-profil",profilImageFileName.ToDto);
+                    HttpResponseMessage httpResponse = await _httpClient.PostAsJsonAsync("api/ProfilImage/delete-profil", profilImageFileName.ToDto());
                     if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
                     {
                         string content = await httpResponse.Content.ReadAsStringAsync();

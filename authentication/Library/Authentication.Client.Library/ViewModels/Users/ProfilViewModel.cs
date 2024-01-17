@@ -5,6 +5,7 @@ using LibraryCore.Errors;
 using LibraryCore.Responses;
 using LibraryBlazorMvvm.ViewModels;
 using Authentication.Shared.Model;
+using System.Reflection.Emit;
 
 namespace Authentication.Client.Library.ViewModels.User
 {
@@ -137,6 +138,18 @@ namespace Authentication.Client.Library.ViewModels.User
             }
             IsProfilImageExsist = isExsist;
             return isExsist;
+        }
+
+        public async Task DeleteProfilImage()
+        {
+            if (IsProfilImageExsist && _profilService is not null)
+            {
+                ControllerResponse response = await _profilService.DeleteProfilImage(_profilImageFileData);
+                if (response.IsSuccess)
+                {
+                    IsProfilImageExsist= false;
+                }
+            }
         }
 
         public void OnProfilImageUploadSucceeded(string url)

@@ -1,7 +1,7 @@
 ﻿@namespace Authentication.Client.Library.Components
 
 
-    <MudStack>
+ <MudStack>
     <MudText Typo="Typo.h5" Class="p-4"> Profilkép</MudText>
     @if (ViewModel is null)
     {
@@ -13,7 +13,7 @@
             @if (ViewModel.IsProfilImageExsist)
             {
                 <MudImage Src="@ViewModel.UrlToShowingProfilImage"
-                          Width="100" Height="100" Alt="Profil kép" Elevation="25" Class="rounded-circle ma-4" />
+                          Width="100" Height="100" Alt="Profil kép" Elevation="25" Class="rounded-circle ma-4" />                
             }
             else
             {
@@ -21,7 +21,7 @@
                             Width="100" Height="100" Alt="Profil kép" Elevation="25" Class="rounded-circle ma-4" />
             }
          </MudText>
-         <MudText Class="p-3">
+         <MudText Class="pt-2 ml-4 mr-4">
             @if (_canUploadProfilImage)
             {
                 <UIImageUpload ApiEndpointName="profilimage"
@@ -32,6 +32,12 @@
                 >
                 </UIImageUpload>
             }
-        </MudText>    
+        </MudText>
+        <MudText Class="pb-3" Align="Align.Center">
+            @if (ViewModel.IsProfilImageExsist)
+            {
+                <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@ViewModel.DeleteProfilImage">Profil kép törlése</MudButton>
+            }
+        </MudText>
     }
 </MudStack>

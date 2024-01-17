@@ -9,7 +9,7 @@ namespace Authentication.Shared.Model
             return new ProfilImageFileNameDto
             {
                 Id = file.Id,
-                Email = file.Email,
+                Email = file.Email
             };
         }
 
