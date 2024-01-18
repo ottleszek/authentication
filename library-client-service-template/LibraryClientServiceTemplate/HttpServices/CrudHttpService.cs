@@ -74,26 +74,31 @@ namespace LibraryClientServiceTemplate.HttpServices
                     {
                         httpResponse = await _httpClient.PostAsJsonAsync(_relativUrl, entity);
                     }
-                    if (httpResponse.IsSuccessStatusCode)
+                    if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
                     {
                         string content = await httpResponse.Content.ReadAsStringAsync();
                         ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
-                        if (response is not null)
-                            return response;
+                        if (response is null)
+                        {
+                            return new ControllerResponse("A mentés http kérés hibát okozott!");
+                        }
+                        else return response;
+                    }
+                    else if (!httpResponse.IsSuccessStatusCode)
+                    {
+                        httpResponse.EnsureSuccessStatusCode();
                     }
                     else
                     {
-                        LoggingBroker.LogInformation("Http kérés hiba!");
-                        LoggingBroker.LogError($"{httpResponse.StatusCode}");
-                        LoggingBroker.LogError($"{httpResponse.Headers}");
-                    }
+                        return defaultResponse;
+                    }                    
                 }
                 catch (Exception ex)
                 {
-                    LoggingBroker.LogError($"{ex.Message}");
+                    LoggingBroker.LogError(nameof(CrudHttpService), nameof(InsertAsync), ex.Message);
                 }
             }
-            defaultResponse.ClearAndAddError("Az adatok frissítés nem lehetséges!");
+            defaultResponse.ClearAndAddError("Az adatok mentése nem lehetséges!");
             return defaultResponse;
         }
     }
