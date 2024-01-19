@@ -9,7 +9,7 @@ namespace Authentication.Server.Test.Repos
                 .UseInMemoryDatabase(databaseName: "AuthenticationTest" + Guid.NewGuid().ToString())
                 .Options;
 
-        private AuthenticationContext authenticationContext = new AuthenticationContext(contextOptions);
+        private AuthenticationInMemoryContext authenticationContext = new AuthenticationInMemoryContext(contextOptions);
 
         public void Dispose()
         {
