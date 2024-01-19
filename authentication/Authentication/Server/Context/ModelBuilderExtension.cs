@@ -54,13 +54,13 @@ namespace Authentication.Server.Context
             Guid testAdminRoleId = userRoles.Where(role => role.EnglishName == "admin").Select(role => role.Id).First();
             Guid testViewerRoleId=userRoles.Where(role => role.EnglishName == "viewer").Select(role => role.Id).First();
 
-            Guid testAdminId = Guid.NewGuid();
-            Guid testViewerId = Guid.NewGuid();
-            Guid testUser1= Guid.NewGuid();
-            Guid testUser2 = Guid.NewGuid();
-            Guid testUser3 = Guid.NewGuid();
-            Guid testUser4 = Guid.NewGuid();
-            Guid testUser5 = Guid.NewGuid();
+            Guid testAdminId = new Guid("26de36b7-76f5-4f17-8f9d-44eb429f151b");
+            Guid testViewerId = new Guid("a25f5bad-f18a-4640-978b-0103709338d5");
+            Guid testUser1= new Guid("16165c01-2233-4cf4-a26a-05c954c1c7eb");
+            Guid testUser2 = new Guid("ed1d0da9-402f-47d9-a7f1-2acbc734804f");
+            Guid testUser3 = new Guid("25123c14-562d-48fe-bd37-9b9c35ee8902");
+            Guid testUser4 = new Guid("52242f76-2cd6-4892-bb62-4f8db50e9669");
+            Guid testUser5 = new Guid("3bb60287-4615-4aef-bbda-94d867d38445");
 
             List<User> users = new List<User>
             {

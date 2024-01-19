@@ -18,18 +18,18 @@ namespace LibraryApiTemplate.Controllers
         [HttpPut()]
         public async Task<ActionResult> UpdateAsync(TEntity entity)
         {
-            ControllerResponse response = new ControllerResponse();
+            ControllerResponse response = new();
             if (_repoUpdate is not null)
             {
                 response = await _repoUpdate.UpdateAsync(entity);
 
-                if (!response.HasError)
+                if (response.HasError)
                 {
-                    return Ok(response);
+                    return BadRequest(response);
                 }
                 else
                 {
-                    return BadRequest(response);
+                    return Ok(response);
                 }
             }
             response.ClearAndAddError("Az adatok frissítés nem lehetséges!");

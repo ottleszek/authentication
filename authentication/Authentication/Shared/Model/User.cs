@@ -1,6 +1,5 @@
 ﻿using LibraryCore.Extensions;
 using LibraryCore.Model;
-using System.ComponentModel.DataAnnotations;
 
 namespace Authentication.Shared.Models
 {
@@ -15,9 +14,10 @@ namespace Authentication.Shared.Models
             IsRegisteredUser = true;
 
             UserRoleId = Guid.Empty;
+            ProfileUrl = string.Empty;
         }
 
-        public User(Guid id, string firstName, string lastName, string email, bool isRegisteredUser)
+        public User(Guid id, string firstName, string lastName, string email, bool isRegisteredUser, string profileUrl)
         {
             Id = id;
             FirstName = firstName;
@@ -26,16 +26,18 @@ namespace Authentication.Shared.Models
             IsRegisteredUser = isRegisteredUser;
 
             UserRoleId = Guid.Empty;
+            ProfileUrl = profileUrl;
         }
-        [Key]
         public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        
+        // IsRegisteredUser, IsSystemUser
         public bool IsRegisteredUser { get; set; }
         public bool IsSystemUser => !IsRegisteredUser;
         public string RegisteredString => IsRegisteredUser ? "regisztrált" : "";
+        // profile picture
+        public string ProfileUrl { get; set; }
         // one - many
         public Guid UserRoleId { get; set; }
         public virtual UserRole? UserRole { get; set; }
@@ -46,15 +48,6 @@ namespace Authentication.Shared.Models
         public object Clone()
         {
             return this.CloneJson<User>();
-            /*return new User()
-            {
-                Id = Id,
-                FirstName = FirstName,
-                LastName = LastName,
-                Email = Email,
-                IsRegisteredUser = IsRegisteredUser,
-                UserRoleId = UserRoleId
-            };*/
         }
 
         public bool Equals(User? other)

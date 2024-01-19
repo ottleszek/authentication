@@ -1,20 +1,16 @@
 ﻿@namespace Authentication.Client.Library.Components
 
-@inherits MvvmComponentBase<ProfilViewModel>
-
 @if (string.IsNullOrEmpty(UserEmail))
 {
     <MudText>A felhasználó meghatározása még nem sikerült!</MudText>
 }
 else
 {
-    <MudBreadcrumbs Items="_items" Separator=">"></MudBreadcrumbs>
-
-    <MudCard>
+    <MudCard Class="p-4">
         @if (ViewModel is null || ! ViewModel.IsValidUser)
         {
             <MudChip Class="pt-2 d-flex justify-content-center" Color="Color.Error">
-                <p>>A profil adatok megjelenítése nem lehetséges!</p>
+                <p>A profil adatok megjelenítése nem lehetséges!</p>
             </MudChip>
         }
         else
@@ -26,7 +22,7 @@ else
                         @if (ViewModel.ErrorString.HasError)
                         {
                             <MudChip class="pt-2 d-flex justify-content-center" Color="Color.Error">
-                                <p>@ViewModel.ErrorString.Error</p>
+                                <p>@ViewModel.ErrorString.Message</p>
                             </MudChip>
                         }
                         <MudTextField @bind-Value="ViewModel.LastName"
@@ -34,9 +30,10 @@ else
                                         Immediate=true
                                         Required="true"
                                         RequiredError="A vezetéknév szükséges!"
-                                        Label="Vezetéknév" 
+                                        Label="Vezetéknév"
                                         ReadOnly="@ViewModel.IsReadOnly"
-                                        />
+                                        Disabled="@ViewModel.IsReadOnly"
+                                      />
                         <MudTextField @bind-Value="ViewModel.FirstName"
                                         For="@( () => ViewModel.FirstName)"
                                         Immediate=true
@@ -44,6 +41,7 @@ else
                                         RequiredError="A keresztnév szükséges!"
                                         Label="Keresztnév"
                                         ReadOnly="@ViewModel.IsReadOnly"
+                                        Disabled="@ViewModel.IsReadOnly" 
                                         />
                         <MudTextField @bind-Value="ViewModel.Email"
                                         Immediate=true
@@ -53,7 +51,7 @@ else
                                         RequiredError="Az email cím szükséges!"
                                         InputType="InputType.Email"
                                         Label="Email" 
-                                        />
+                                        />                      
                     </MudCardContent>
                     <MudCardActions>
                         @if (ViewModel.IsReadOnly)

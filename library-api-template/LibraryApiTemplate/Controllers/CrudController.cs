@@ -19,18 +19,18 @@ namespace LibraryApiTemplate.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
-            ControllerResponse response = new ControllerResponse();
+            ControllerResponse response = new();
             if (_dataBroker is not null)
             {
                 response = await _dataBroker.DeleteAsync<TEntity>(id);
 
-                if (!response.HasError)
+                if (response.HasError)
                 {
-                    return Ok(response);
+                    return BadRequest(response);
                 }
                 else
                 {
-                    return BadRequest(response);
+                    return Ok(response);
                 }
             }
             response.ClearAndAddError("Az adatok törlése nem lehetséges!");
@@ -40,21 +40,21 @@ namespace LibraryApiTemplate.Controllers
         [HttpPost()]
         public async Task<IActionResult> InsertAsync(TEntity entity)
         {
-            ControllerResponse response = new ControllerResponse();
+            ControllerResponse response = new();
             if (_dataBroker is not null)
             {
                 response = await _dataBroker.InsertAsync(entity);
 
-                if (!response.HasError)
-                {
-                    return Ok(response);
-                }
-                else
+                if (response.HasError)
                 {
                     return BadRequest(response);
                 }
+                else
+                {
+                    return Ok(response);
+                }
             }
-            response.ClearAndAddError("Új adatok mentése nem lehetséges!");
+            response.ClearAndAddError("Az új adatok mentése nem lehetséges!");
             return BadRequest(response);
         }
     }

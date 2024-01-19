@@ -1,0 +1,43 @@
+﻿@namespace Authentication.Client.Library.Components
+
+
+ <MudStack>
+    <MudText Typo="Typo.h5" Class="p-4"> Profilkép</MudText>
+    @if (ViewModel is null)
+    {
+        <MudText Class="p-2">A profil kép megjelenítése nem lehetséges.</MudText>
+    }
+    else
+    {
+        <MudText Align="Align.Center" Class="p-2">        
+            @if (ViewModel.IsProfilImageExsist)
+            {
+                <MudImage Src="@ViewModel.UrlToShowingProfilImage"
+                          Width="100" Height="100" Alt="Profil kép" Elevation="25" Class="rounded-circle ma-4" />                
+            }
+            else
+            {
+                <MudImage Src="/StaticFiles//profil//blank-user-profile.png"
+                            Width="100" Height="100" Alt="Profil kép" Elevation="25" Class="rounded-circle ma-4" />
+            }
+         </MudText>
+         <MudText Class="pt-2 ml-4 mr-4">
+            @if (_canUploadProfilImage)
+            {
+                <UIImageUpload ApiEndpointName="profilimage"
+                               OnUploadSucceededd="@ViewModel.OnProfilImageUploadSucceeded"
+                               ButtonText="@ViewModel.ProfileImageUploadButtonText"
+                               FilePath="@ViewModel.ProfilImageFoleder"
+                               FileName="@ViewModel.ProfilImageFileName"
+                >
+                </UIImageUpload>
+            }
+        </MudText>
+        <MudText Class="pb-3" Align="Align.Center">
+            @if (ViewModel.IsProfilImageExsist)
+            {
+                <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@ViewModel.DeleteProfilImage">Profil kép törlése</MudButton>
+            }
+        </MudText>
+    }
+</MudStack>

@@ -8,10 +8,31 @@
 }
 else
 {
-    <ShowProfilForm UserEmail="@_userEmail">
-    </ShowProfilForm>
+    <MudBreadcrumbs Items="_items" Separator=">"></MudBreadcrumbs>
+    <MudGrid Spacing="1">
+        <MudItem xs="6">
+            <MudPaper Class="d-flex">
+                <ShowProfilForm UserEmail="@_userEmail">
+                </ShowProfilForm>
+            </MudPaper>
+        </MudItem>
+        <MudItem xl="3">
+            <MudPaper Class="d-flex flex-column">
+                <ShowProfilImageForm UserEmail="@_userEmail">
+                </ShowProfilImageForm>
+            </MudPaper>
+        </MudItem>
+     </MudGrid>
+    
 }
 @code {
+    [Inject] public ProfilViewModel? ViewModel { get; set; }
+
+    private List<BreadcrumbItem> _items = new()
+        {
+            new("Home", href: "#"),
+            new("Profil adatok", href: null, disabled: true)
+    };
     private string _userEmail = string.Empty;
 
     protected async override Task OnInitializedAsync()

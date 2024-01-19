@@ -53,7 +53,7 @@ namespace Authentication.Server.Services
                     {
                         return new AuthenticationResponseDto
                         {
-                            Error = saveUserResponse.Error
+                            Message = saveUserResponse.Message
                         };
                     }
                     RepositoryResponse savePasswordResponse = await _userIdentificationRepo.SaveNewUserPassword(newUser.Id, password);
@@ -61,7 +61,7 @@ namespace Authentication.Server.Services
                     {
                         return new AuthenticationResponseDto
                         {
-                            Error = savePasswordResponse.Error
+                            Message = savePasswordResponse.Message
                         };
                     }
 

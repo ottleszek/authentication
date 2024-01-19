@@ -1,11 +1,12 @@
-﻿using Authentication.Shared.Models;
+﻿using Authentication.Server.Repos.Base;
+using Authentication.Shared.Models;
 using LibraryDatabase.Model;
 
 namespace Authentication.Server.Repos
 {
-    public interface IProfilRepo
+    public interface IProfilRepo : IIUserGetRepoBase
     {
-        public Task<User?> GetUserBy(string email);
         public Task<RepositoryResponse> UpdateProfil(User user);
+        //public Task<RepositoryResponse> UpdateProfilImage(string email, string profilImageUrl);
     }
 }

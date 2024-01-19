@@ -7,24 +7,21 @@ namespace Authentication.Client.Shared
     public partial class AuthenticationLayout
     {
         private bool _drawerOpen = true;
-        private MudTheme? _darkMudTheme=null;
-        private MudTheme? _lightMudTheme = null;
-        private MudTheme? _currentTheme = null;
-        private bool _isLightTheme = true;
+        private MudTheme _darkMudTheme=new MudTheme();
+        private MudTheme _lightMudTheme = new MudTheme();
+        private MudTheme _currentTheme = new MudTheme();
+        private bool _isCurrentLightTheme = true;
 
 
         [Inject] public ILocalStorageService? LocalStorage { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            string themeName = "light";
-            if ((LocalStorage is not null) && (await LocalStorage.ContainKeyAsync("theme")))
-            {
-                themeName = await LocalStorage.GetItemAsStringAsync("theme");
-            }
-            _isLightTheme = themeName == "light" ? true : false;
+            await SetCurrentThemeFromLocalStorage();
+            InitializeLightTheme();
+            InitializeDarkTheme();
 
-            SetTheme();
+            SetCurrentTheme();
             await base.OnInitializedAsync();
         }
 
@@ -33,7 +30,7 @@ namespace Authentication.Client.Shared
             _drawerOpen = !_drawerOpen;            
         }
 
-        private void SetDarkTheme()
+        private void InitializeDarkTheme()
         {
             _darkMudTheme = new MudTheme()
             {
@@ -63,7 +60,7 @@ namespace Authentication.Client.Shared
             };
         }
 
-        private void SetLightTheme()
+        private void InitializeLightTheme()
         {
             _lightMudTheme = new MudTheme()
             {
@@ -94,8 +91,8 @@ namespace Authentication.Client.Shared
 
         private async Task ChangeThemeAsync()
         {
-            _isLightTheme = !_isLightTheme;
-            SetTheme();
+            _isCurrentLightTheme = !_isCurrentLightTheme;
+            SetCurrentTheme();
 
             if (LocalStorage is not null)
             {
@@ -103,18 +100,9 @@ namespace Authentication.Client.Shared
             }
         }
 
-        private void SetTheme()
+        private void SetCurrentTheme()
         {
-            if (_lightMudTheme is null) 
-            {
-                SetLightTheme();
-            }
-            if (_darkMudTheme is null)
-            {
-                SetDarkTheme();
-            }
-            
-            if (_isLightTheme)
+            if (_isCurrentLightTheme)
             {
                 _currentTheme = _lightMudTheme;
             }
@@ -126,10 +114,20 @@ namespace Authentication.Client.Shared
 
         private string GetThemeName()
         {
-            if (_isLightTheme)
+            if (_isCurrentLightTheme)
                 return "light";
             else
                 return "dark";
+        }
+
+        private async Task SetCurrentThemeFromLocalStorage()
+        {
+            string themeName = "light";
+            if ((LocalStorage is not null) && (await LocalStorage.ContainKeyAsync("theme")))
+            {
+                themeName = await LocalStorage.GetItemAsStringAsync("theme");
+            }
+            _isCurrentLightTheme = themeName == "light" ? true : false;
         }
     }
 }

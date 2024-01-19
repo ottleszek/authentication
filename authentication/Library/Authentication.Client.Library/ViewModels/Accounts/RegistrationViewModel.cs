@@ -45,7 +45,7 @@ namespace Authentication.Client.Library.ViewModels.Accounts
 
                 if (authenticationResponse.HasError)
                 {
-                    ErrorString.ClearAndAddError(authenticationResponse.Error);
+                    ErrorString.ClearAndAddError(authenticationResponse.Message);
                 }
                 else
                 {

@@ -10,7 +10,7 @@
                 @if (ViewModel.ErrorStore.HasError)
                 {
                     <MudChip class="pt-2 d-flex justify-content-center" Color="Color.Error">
-                        <p>@ViewModel.ErrorStore.Error</p>
+                        <p>@ViewModel.ErrorStore.Message</p>
                     </MudChip>
                 }
                 <MudTextField @bind-Value="ViewModel.SelectedItem.Name"

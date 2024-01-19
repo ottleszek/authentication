@@ -3,6 +3,7 @@ using LibraryCore.Model;
 using LibraryCore.Responses;
 using LibraryDataBroker;
 using Newtonsoft.Json;
+using System.Net;
 using System.Net.Http.Json;
 
 namespace LibraryClientServiceTemplate.HttpServices
@@ -23,23 +24,34 @@ namespace LibraryClientServiceTemplate.HttpServices
         {
             _relativUrl = RelativeUrlExtension.SetRelativeUrl<TEntity>();
             ControllerResponse defaultResponse = new();
-            if (_httpClient is null)
-            {
-                defaultResponse = new ControllerResponse();
-            }
-            else
+            if (_httpClient is not null)
             {
                 try
                 {
-                    HttpResponseMessage httpResponse = await _httpClient.PostAsJsonAsync(_relativUrl, entity);
-                    string content = await httpResponse.Content.ReadAsStringAsync();
-                    ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
-                    if (response is not null)
-                        return response;
+                    HttpResponseMessage httpResponse = await _httpClient.PutAsJsonAsync(_relativUrl, entity);
+
+                    if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
+                    {
+                        string content = await httpResponse.Content.ReadAsStringAsync();
+                        ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
+                        if (response is null)
+                        {
+                            defaultResponse.ClearAndAddError("A módosítás http kérés hibát okozott!");
+                        }
+                        else return response;
+                    }
+                    else if (!httpResponse.IsSuccessStatusCode)
+                    {
+                        httpResponse.EnsureSuccessStatusCode();
+                    }
+                    else
+                    {
+                        return defaultResponse;
+                    }
                 }
                 catch(Exception ex)
                 {
-                    LibraryLogging.LoggingBroker.LogError($"{ex.Message}");
+                    LibraryLogging.LoggingBroker.LogError(nameof(UpdateHttpService),nameof(UpdateAsync),ex.Message);
                 }
             }
             defaultResponse.ClearAndAddError("Az adatok frissítés nem lehetséges!");

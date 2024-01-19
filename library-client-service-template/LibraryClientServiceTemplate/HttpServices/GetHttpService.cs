@@ -16,19 +16,26 @@ namespace LibraryClientServiceTemplate.HttpServices
             _httpClient = httpClientFactory.CreateClient("AuthenticationApi");
         }
 
-        public async Task<TEntity> GetByAsnyc<TEntity>(Guid id) where TEntity : class, IDbRecord<TEntity>, new()
+        public async Task<TEntity> GetByIdAsnyc<TEntity>(Guid id) where TEntity : class, IDbRecord<TEntity>, new()
         {
             TEntity? result = new();
             _relativUrl = RelativeUrlExtension.SetRelativeUrl<TEntity>();
             if (_httpClient is object && HaveUrl)
             {
-                result = await _httpClient.GetFromJsonAsync<TEntity>($"{_relativUrl}/{id}");
-                if (result is object)
-                    return result;
-                else
-                    result = new TEntity();
+                try
+                {
+                    result = await _httpClient.GetFromJsonAsync<TEntity>($"{_relativUrl}/{id}");
+                    if (result is object)
+                        return result;
+                    else
+                        result = new TEntity();
+                }
+                catch (Exception ex)
+                {
+                    LibraryLogging.LoggingBroker.LogError(nameof(GetHttpService), nameof(GetByIdAsnyc), ex.Message);
+                }
             }
-            return result;
+            return new TEntity();
         }
     }
 }

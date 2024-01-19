@@ -1,0 +1,19 @@
+﻿@namespace LibraryBlazorClient.Components
+
+<InputFile id="fileInput" OnChange="UploadImage" hidden />
+
+<MudButton 
+        Class="my-3"
+        HtmlTag="label"
+        Variant="Variant.Filled"
+        Color="Color.Primary"
+        StartIcon="@Icons.Material.Filled.CloudUpload"
+        for="fileInput">
+    @ButtonText
+</MudButton>
+@if (Error.HasError)
+{
+    <MudChip class="pt-2 d-flex justify-content-center" Color="Color.Error">
+        <p>@Error.Message</p>
+    </MudChip>
+}

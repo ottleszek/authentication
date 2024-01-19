@@ -13,7 +13,7 @@ namespace LibraryApiTemplate.Repos
             _dbContextFactory = dbContextFactory;
         }
 
-        public async Task<TEntity> GetByAsnyc<TEntity>(Guid id) where TEntity : class, IDbRecord<TEntity>, new()
+        public async Task<TEntity> GetByIdAsnyc<TEntity>(Guid id) where TEntity : class, IDbRecord<TEntity>, new()
         {
             return await GetById<TEntity>(id);
         }

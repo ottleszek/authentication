@@ -10,6 +10,7 @@ using AuthenticationLibrary.LocalStorage;
 using AuthenticationLibrary.Provider;
 using Blazored.LocalStorage;
 using LibraryBlazorClient.Components;
+using LibraryBlazorClient.Components.Image;
 using LibraryBlazorMvvm.ViewModels;
 using LibraryClientServiceTemplate.HttpServices;
 using LibraryClientServiceTemplate.ModelBrokerConnectors;
@@ -17,6 +18,7 @@ using LibraryClientServiceTemplate.ViewModelsTemplate;
 using LibraryDataBroker;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
+using Tewr.Blazor.FileReader;
 
 namespace Authentication.Client.Library.Extensions
 {
@@ -95,6 +97,9 @@ namespace Authentication.Client.Library.Extensions
             services.AddScoped<ICrudBrokerConnector<UserRole>, CrudBrokerConnectorr<UserRole>>();
             services.AddScoped<IListAndDeleteBrokerConnector<UserRole>, ListAndDeleteBrokerConnector<UserRole>>();
 
+            services.AddScoped<UploadHttpService>();
+
+            services.AddFileReaderService(o => o.UseWasmSharedBuffer = true);
 
         }
 

@@ -20,9 +20,15 @@ namespace LibraryApiTemplate.Repos
             ControllerResponse response = new ControllerResponse();
             var dbContext = _dbContextFactory.CreateDbContext();
             var dbSet = dbContext.GetDbSet<TEntity>();
-            TEntity entityToDelete = await GetByAsnyc<TEntity>(id);
+            TEntity entityToDelete = await GetByIdAsnyc<TEntity>(id);
 
-            if (entityToDelete != null && entityToDelete != default)
+            if (entityToDelete == null || entityToDelete == default)
+            {
+                LibraryLogging.LoggingBroker.LogError($"{nameof(RepoCrud<TDbContext>)}",$"{nameof(DeleteAsync)}","A törlendő adat nem található:\nAdat id:{id}");
+                response.ClearAndAddError($"Az adat nem törölhető!");
+
+            }
+            else
             {
                 try
                 {
@@ -32,15 +38,9 @@ namespace LibraryApiTemplate.Repos
                 }
                 catch (Exception ex)
                 {
-                    LibraryLogging.LoggingBroker.LogError($"{nameof(RepoCrud<TDbContext>)}\nSql utasítás nem hajtható végre!\n{ex.Message}");
-                    response.ClearAndAddError($"Az adat nem törölhető!");
+                    LibraryLogging.LoggingBroker.LogError($"{nameof(RepoCrud<TDbContext>)}",$"{nameof(DeleteAsync)}",$"Sql utasítás nem hajtható végre!\n{ex.Message}");
+                    response.ClearAndAddError("Az adat nem törölhető!");
                 }
-
-            }
-            else
-            {
-                LibraryLogging.LoggingBroker.LogError($"{nameof(RepoCrud<TDbContext>)}\nA törlendő adat nem található:\nAdat id:{id}");
-                response.ClearAndAddError($"Az adat nem törölhető!");
             }
             return response;
         }
@@ -70,7 +70,7 @@ namespace LibraryApiTemplate.Repos
             }
             catch (Exception ex)
             {
-                LibraryLogging.LoggingBroker.LogError($"{nameof(RepoCrud<TDbContext>)}\nSql utasítás nem hajtható végre!\n{ex.Message}");
+                LibraryLogging.LoggingBroker.LogError($"{nameof(RepoCrud<TDbContext>)}", $"{nameof(InsertNewItemAsync)}", "Sql utasítás nem hajtható végre!\n{ex.Message}");
                 response.ClearAndAddError($"Az új adat nem menthető!");
             }
             return response;

@@ -27,7 +27,7 @@ namespace LibraryBlazorClient.Templates.ComponentsBase
 
             return new ControllerResponse
             {
-                Error = "Az elem nem törölhető"
+                Message = "Az elem nem törölhető"
             };
         }
     }
