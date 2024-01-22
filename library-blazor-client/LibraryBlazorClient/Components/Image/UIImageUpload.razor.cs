@@ -1,5 +1,6 @@
 ﻿using LibraryBlazorClient.Components.Image;
 using LibraryCore.Errors;
+using LibraryCore.Responses;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using System.Net.Http.Headers;
@@ -15,7 +16,7 @@ namespace LibraryBlazorClient.Components
         [Parameter]
         public string? ButtonText { get; set; } = "Kép felöltése";
         [Parameter]
-        public EventCallback<string> OnUploadSucceededd { get; set; }        
+        public EventCallback<FileUploadResponse> OnUploadSucceededd { get; set; }        
         [Parameter]
         public string FilePath { get; set; } = string.Empty;
         [Parameter]
@@ -62,10 +63,16 @@ namespace LibraryBlazorClient.Components
                         imageFileExtenson=imageFileExtenson.Substring(1);
                     using (var ms=imageFile.OpenReadStream(imageFile.Size)) 
                     {
+                        
+                        string fileName = FileName == string.Empty ? Path.GetFileNameWithoutExtension(imageFile.Name) : FileName;
+                        string fileNameTimeStamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString();
+                        
+                        string fileNameWithTimeStamp = $"{fileName}.{fileNameTimeStamp}";
+
                         var playload = new
                         {
                             FilePath = FilePath,
-                            FileName = FileName == string.Empty ? Path.GetFileNameWithoutExtension(imageFile.Name) : FileName,
+                            FileName = fileNameWithTimeStamp,
                             FileExtension = imageFileExtenson.Substring(0)
                         };
 
@@ -83,7 +90,13 @@ namespace LibraryBlazorClient.Components
                             Error.ClearAndAddError("A feltöltés sikertelen!");
                             return;
                         }
-                        await OnUploadSucceededd.InvokeAsync(_imgUrl);
+                        FileUploadResponse fileUploadResponse = new FileUploadResponse
+                        {
+                            Url = _imgUrl,
+                            TimeStamp = fileNameTimeStamp
+
+                        };
+                        await OnUploadSucceededd.InvokeAsync(fileUploadResponse);
                     }
                 }
             }

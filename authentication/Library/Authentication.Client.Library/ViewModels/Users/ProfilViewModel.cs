@@ -152,9 +152,10 @@ namespace Authentication.Client.Library.ViewModels.User
             }
         }
 
-        public void OnProfilImageUploadSucceeded(string url)
+        public async Task OnProfilImageUploadSucceeded(FileUploadResponse fileUploadResponse)
         {
-            IsProfilImageExsist = true;
+            bool isUploadedFileExsist = await CheckIsProfileImageExist();
+            // a profil kép TimeStamp-jét eltároljuk a felhasználó profiljába
         }
 
         private async Task GetProfil()
