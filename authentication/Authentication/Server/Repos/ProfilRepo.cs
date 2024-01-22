@@ -26,6 +26,20 @@ namespace Authentication.Server.Repos
             }
         }
 
+        public async Task<string> GetProfilImageTimeStamp(string email)
+        {
+            string profilImageTimeStamp = string.Empty;
+            if (_userSet is not null)
+            {
+                User? user = await _userSet.Where(user => user.Email.ToLower() == email.ToLower()).FirstOrDefaultAsync();
+                if (user is not null)
+                {
+                    return user.ProfilImageTimeStamp;
+                }
+            }
+            return string.Empty;
+        }
+
         public async Task<RepositoryResponse> UpdateProfil(User user)
         {
             RepositoryResponse response = new();
@@ -43,7 +57,7 @@ namespace Authentication.Server.Repos
             return response;
         }
 
-        /*public async Task<RepositoryResponse> UpdateProfilImage(string email, string profilImageUrl)
+        public async Task<RepositoryResponse> UpdateProfilImageTimeStamp(string email, string profilImageTimeStamp)
         {
             RepositoryResponse response = new();
             User user;
@@ -58,9 +72,8 @@ namespace Authentication.Server.Repos
                 else
                 {
                     user = foundedUser;
-                    user.ProfileUrl = profilImageUrl;
+                    user.ProfilImageTimeStamp = profilImageTimeStamp;
                 }
-
             }
             catch (Exception e)
             {
@@ -79,6 +92,6 @@ namespace Authentication.Server.Repos
                 response.AppendNewError(e.Message);
             }
             return response;
-        }*/
+        }
     }
 }

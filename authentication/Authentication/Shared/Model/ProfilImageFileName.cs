@@ -10,6 +10,8 @@ namespace Authentication.Shared.Model
 
         public string Email { get; set; } = string.Empty;
         public Guid Id { get; set; }
+        
+        public string ProfilImageTimeStamp = string.Empty;
 
         public string FileName => this.GetProfilImageFilelName();
         public string FileNameWithoutExtension =>this.GetProfilImageFilelNameWithoutExtension();

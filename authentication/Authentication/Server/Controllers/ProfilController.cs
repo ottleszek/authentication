@@ -62,6 +62,29 @@ namespace Authentication.Server.Controllers
             }
             response.ClearAndAddError("A profil frissítés nem lehetséges!");
             return BadRequest(response);
-        }      
+        }
+
+        [HttpPost("profil-image-update")]
+        public async Task<IActionResult> ProfilImageTimeStampUpdate([FromBody] ProfilImageTimeStampUpdateDto profilImageTimeStampUpdateDto)
+        {
+            ControllerResponse response = new ControllerResponse();
+            if (_profilService is not null)
+            {
+                ServiceResponse serviceResponse = await _profilService.UpdateProfilImageTimeStamp(profilImageTimeStampUpdateDto.Email, profilImageTimeStampUpdateDto.ProfilImageTimeStamp);
+
+                if (!serviceResponse.HasError)
+                {
+                    return Ok(response);
+                }
+                else
+                {
+                    response.Message = serviceResponse.Message;
+                    return BadRequest(response);
+                }
+            }
+            response.ClearAndAddError("A profil kép frissítés nem lehetséges!");
+            return BadRequest(response);
+
+        }
     }
 }

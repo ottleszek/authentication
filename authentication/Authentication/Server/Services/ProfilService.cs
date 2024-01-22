@@ -15,17 +15,28 @@ namespace Authentication.Server.Services
             _profilRepo = profilRepo;
         }
 
+        public async Task<string> GetProfilImageTimeStamp(string email)
+        {
+            string profilImageTimeStamp = string.Empty;
+            if (_profilRepo is not null)
+            {
+                profilImageTimeStamp= await _profilRepo.GetProfilImageTimeStamp(email);
+            }
+            return profilImageTimeStamp;
+
+        }
+
         public async Task<ProfilDto> GetUserBy(string email)
         {
-            User? user=null;
+            User? user = null;
             if (_profilRepo is not null)
-                 user=await _profilRepo.GetUserBy(email);
+                user = await _profilRepo.GetUserBy(email);
             if (user is not null)
             {
                 return ProfilDto.ConvertToDto(user);
             }
             return new ProfilDto();
-            
+
         }
 
         public async Task<Guid> GetUserIdBy(string email)
@@ -39,7 +50,7 @@ namespace Authentication.Server.Services
             }
             else
             {
-                return (Guid) result;
+                return (Guid)result;
             }
         }
 
@@ -71,23 +82,22 @@ namespace Authentication.Server.Services
                 RepositoryResponse repoResponse = await _profilRepo.UpdateProfil(user);
                 if (response.HasError)
                 {
-                    LoggingBroker.LogError(nameof(ProfilService),nameof(UpdateProfil), response.Message);
+                    LoggingBroker.LogError(nameof(ProfilService), nameof(UpdateProfil), response.Message);
                     response.ClearAndAddError("A felhasználó profil frissítés nem lehetséges!");
                     return response;
                 }
             }
             return response;
         }
-        /*
-        public async Task<ServiceResponse> UpdateProfilImage(string email, string profilImageUrl)
+
+        public async Task<ServiceResponse> UpdateProfilImageTimeStamp(string email, string profilImageTimeStamp)
         {
             ServiceResponse response = new ServiceResponse();
             if (_profilRepo is null)
             {
-                response.ClearAndAddError("A felhasználó profil frissítése nem lehetséges!");
+                response.ClearAndAddError("A felhasználó profil kép frissítése nem lehetséges!");
                 return response;
             }
-            await _profilRepo.UpdateProfilImage(email, profilImageUrl);
             if (email == string.Empty)
             {
                 response.ClearAndAddError("A felhasználó profil adatai hibásak, a profil kép frissítés nem lehetséges!");
@@ -103,16 +113,16 @@ namespace Authentication.Server.Services
                 }
                 else
                 {
-                    RepositoryResponse repoResponse=await _profilRepo.UpdateProfilImage(email, profilImageUrl);
+                    RepositoryResponse repoResponse = await _profilRepo.UpdateProfilImageTimeStamp(email, profilImageTimeStamp);
                     if (repoResponse.HasError)
                     {
-                        LoggingBroker.LogError(nameof(ProfilService), nameof(UpdateProfil), response.Error);
+                        LoggingBroker.LogError(nameof(ProfilService), nameof(UpdateProfilImageTimeStamp), response.Message);
                         response.ClearAndAddError("A felhasználó profil kép frissítés nem lehetséges!");
                         return response;
                     }
                 }
             }
             return response;
-        }*/
+        }
     }
 }

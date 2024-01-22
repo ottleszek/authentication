@@ -109,7 +109,7 @@ namespace Authentication.Client.Library.Components
 
         private void SetImgUrl(string imgUrl)
         {
-            if (ViewModel is not null) ViewModel.SelectedItem.ProfileUrl = imgUrl;
+            if (ViewModel is not null) ViewModel.SelectedItem.ProfilImageTimeStamp = imgUrl;
         }
 
         private void GoBack()

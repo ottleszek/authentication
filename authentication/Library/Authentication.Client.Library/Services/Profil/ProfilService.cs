@@ -64,15 +64,29 @@ namespace Authentication.Client.Library.Services.Profil
                 try
                 {
                     HttpResponseMessage httpResponse = await _httpClient.PostAsJsonAsync("api/Profil/", profil);
-                    
-                    string content = await httpResponse.Content.ReadAsStringAsync();
-                    ControllerResponse? response= JsonConvert.DeserializeObject<ControllerResponse>(content);
-                    if (response is not null)
-                        return response;
+
+                    if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
+                    {
+                        string content = await httpResponse.Content.ReadAsStringAsync();
+                        ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
+                        if (response is null)
+                        {
+                            return new ControllerResponse("A profil frissítése http kérés hibát okozott!");
+                        }
+                        else return response;
+                    }
+                    else if (!httpResponse.IsSuccessStatusCode)
+                    {
+                        httpResponse.EnsureSuccessStatusCode();
+                    }
+                    else
+                    {
+                        return defaultResponse;
+                    }
                 }
                 catch(Exception ex)
                 {
-                    LibraryLogging.LoggingBroker.LogError($"{ex.Message}");
+                    LoggingBroker.LogError($"{ex.Message}");
                 }
             }
             defaultResponse.ClearAndAddError("A profil frissítés nem lehetséges!");
@@ -143,6 +157,52 @@ namespace Authentication.Client.Library.Services.Profil
                 }
             }
             defaultResponse.ClearAndAddError("Profil kép törlése nem lehetséges!");
+            return defaultResponse;
+        }
+
+        public async Task<ControllerResponse> ProfilImageTimeStampUpdate(string email, string profilImageTimeStamp)
+        {
+            ControllerResponse defaultResponse = new();
+            if (_httpClient is null)
+            {
+                defaultResponse.ClearAndAddError("A profil kép frissítés nem lehetséges!");
+            }
+            else
+            {
+                try
+                {
+                    ProfilImageTimeStampUpdateDto profilImageTimeStampUpdateDto = new ProfilImageTimeStampUpdateDto
+                    {
+                        Email = email,
+                        ProfilImageTimeStamp = profilImageTimeStamp
+                    };
+                    HttpResponseMessage httpResponse = await _httpClient.PostAsJsonAsync("api/Profil/profil-image-update", profilImageTimeStampUpdateDto);
+
+                    if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
+                    {
+                        string content = await httpResponse.Content.ReadAsStringAsync();
+                        ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
+                        if (response is null)
+                        {
+                            return new ControllerResponse("A profil kép frissítése http kérés hibát okozott!");
+                        }
+                        else return response;
+                    }
+                    else if (!httpResponse.IsSuccessStatusCode)
+                    {
+                        httpResponse.EnsureSuccessStatusCode();
+                    }
+                    else
+                    {
+                        return defaultResponse;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LoggingBroker.LogError($"{ex.Message}");
+                }
+            }
+            defaultResponse.ClearAndAddError("A profil kép frissítés nem lehetséges!");
             return defaultResponse;
         }
     }

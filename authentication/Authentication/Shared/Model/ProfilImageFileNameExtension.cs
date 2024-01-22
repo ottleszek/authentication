@@ -21,7 +21,7 @@ namespace Authentication.Shared.Model
 
         public static string GetProfilImageFilelNameWithoutExtension(this ProfilImageFileName profilImageFileName)
         {
-            if (profilImageFileName.Id == Guid.Empty || !profilImageFileName.IsValid)
+            if (! profilImageFileName.IsValid)
                 return string.Empty;
             string email = profilImageFileName.Email.Replace("@", ".");
             return $"{email}.{profilImageFileName.Id}";

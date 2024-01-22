@@ -12,5 +12,6 @@ namespace Authentication.Client.Library.Services.Profil
 
         public Task<bool> IsProfileImageExist(ProfilImageFileName profilImageFileName);
         public Task<ControllerResponse> DeleteProfilImage(ProfilImageFileName profilImageFileName);
+        public Task<ControllerResponse> ProfilImageTimeStampUpdate(string email, string profilImageFileName);
     }
 }

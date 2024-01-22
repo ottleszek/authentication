@@ -68,7 +68,7 @@ namespace Authentication.Client.Library.ViewModels.User
                 return url;
             }
         }
-        public bool IsProfilImageFileNameValidName => ProfilImageFileName is not null;
+        public bool IsProfilImageFileNameValidName => _profilImageFileData.IsValid;
 
         public bool IsValidUser => !string.IsNullOrEmpty(Email);
         public bool IsReadOnly { get; set; } = true;
@@ -156,6 +156,28 @@ namespace Authentication.Client.Library.ViewModels.User
         {
             bool isUploadedFileExsist = await CheckIsProfileImageExist();
             // a profil kép TimeStamp-jét eltároljuk a felhasználó profiljába
+            if (!isUploadedFileExsist)
+            {
+                ErrorString.AppendNewError("A profil kép feltöltése nem sikerült!");
+            }
+            if ( _profilService is not null)
+            {
+                ControllerResponse responseProfilImageTimeStampUpdate=await _profilService.ProfilImageTimeStampUpdate(Email, fileUploadResponse.TimeStamp);
+                if (responseProfilImageTimeStampUpdate.HasError)
+                {
+                    ErrorString.AppendNewError("A profil kép feltöltési rendszer nem működik!");
+                    await DeleteProfilImage();                    
+                }
+                else
+                {
+                    IsProfilImageExsist= true;
+                }
+            }
+            else
+            {
+                ErrorString.AppendNewError("A profil kép feltöltési erendszer nem működik!");
+            }
+            IsProfilImageExsist = false;
         }
 
         private async Task GetProfil()
@@ -168,7 +190,6 @@ namespace Authentication.Client.Library.ViewModels.User
                 Email = result.Email;
             }
         }
-
 
         private async Task GetUserId()
         {

@@ -7,6 +7,7 @@ namespace Authentication.Shared.Dtos
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
+        public string ProfilImageTimeStamp { get; set; } = string.Empty;
 
         public bool IsValidUser => !string.IsNullOrEmpty(Email);
 
@@ -15,6 +16,7 @@ namespace Authentication.Shared.Dtos
             FirstName = profilDto.FirstName;
             LastName = profilDto.LastName;
             Email = profilDto.Email;
+            ProfilImageTimeStamp = profilDto.ProfilImageTimeStamp;
         }
 
         public static ProfilDto ConvertToDto(User user)
@@ -23,7 +25,8 @@ namespace Authentication.Shared.Dtos
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Email = user.Email
+                Email = user.Email,
+                ProfilImageTimeStamp = user.ProfilImageTimeStamp
             };
         }
     }

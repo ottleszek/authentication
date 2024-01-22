@@ -63,11 +63,19 @@ namespace LibraryBlazorClient.Components
                         imageFileExtenson=imageFileExtenson.Substring(1);
                     using (var ms=imageFile.OpenReadStream(imageFile.Size)) 
                     {
-                        
-                        string fileName = FileName == string.Empty ? Path.GetFileNameWithoutExtension(imageFile.Name) : FileName;
+                        string fileNameWithTimeStamp=string.Empty;
                         string fileNameTimeStamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString();
-                        
-                        string fileNameWithTimeStamp = $"{fileName}.{fileNameTimeStamp}";
+                        if (FileName == string.Empty)
+                        {
+                            // a fájl nevét a felhasználó nem adta meg
+                            string fileName = Path.GetFileNameWithoutExtension(imageFile.Name);
+                            fileNameWithTimeStamp = $"{fileName}.{fileNameTimeStamp}";
+                        }
+                        else
+                        {
+                            // a fájl nevét a felhasználó megadta, csak timestamp kell
+                            fileNameWithTimeStamp = $"{FileName}.{fileNameTimeStamp}";
+                        }
 
                         var playload = new
                         {

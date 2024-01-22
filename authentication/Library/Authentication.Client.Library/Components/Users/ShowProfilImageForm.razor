@@ -31,6 +31,12 @@
                                FileName="@ViewModel.ProfilImageFileName"
                 >
                 </UIImageUpload>
+                @if (ViewModel.ErrorString.HasError)
+                {
+                    <MudChip class="pt-2 d-flex justify-content-center" Color="Color.Error">
+                        <p>@ViewModel.ErrorString.Message</p>
+                    </MudChip>
+                }
             }
         </MudText>
         <MudText Class="pb-3" Align="Align.Center">

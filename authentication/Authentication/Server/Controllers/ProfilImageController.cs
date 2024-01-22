@@ -1,4 +1,5 @@
-﻿using Authentication.Shared.Dtos;
+﻿using Authentication.Server.Services;
+using Authentication.Shared.Dtos;
 using Authentication.Shared.Model;
 using LibraryApiTemplate.Upload;
 using LibraryCore.Responses;
@@ -10,16 +11,17 @@ namespace Authentication.Server.Controllers
     [Route("api/[controller]")]
     public class ProfilImageController : UploadController
     {
-        public ProfilImageController()
+        private readonly IProfilService? _profilService;
+        public ProfilImageController(IProfilService profilService)
         {
-                
+            _profilService = profilService;
         }
 
         [HttpPost("is-profil-image-exsist")]
-        public IActionResult IsProfilImageExsist([FromBody] ProfilImageFileNameDto profilImageFileNameDto)
+        public async Task<IActionResult> IsProfilImageExsist([FromBody] ProfilImageFileNameDto profilImageFileNameDto)
         {
             ProfilImageFileName fileNameData = profilImageFileNameDto.ToProfilImageFileName();
-            string fileNameToCheck = GetProfilImageFullPath(fileNameData);
+            string fileNameToCheck = await GetProfilImageFullPath(fileNameData);
             try
             {
                 if (System.IO.File.Exists(fileNameToCheck))
@@ -37,10 +39,10 @@ namespace Authentication.Server.Controllers
         }
 
         [HttpPost("delete-profil")]
-        public IActionResult DeleteProfil([FromBody] ProfilImageFileNameDto profilImageFileNameDto)
+        public async Task<ActionResult> DeleteProfil([FromBody] ProfilImageFileNameDto profilImageFileNameDto)
         {
             ProfilImageFileName fileNameData = profilImageFileNameDto.ToProfilImageFileName();
-            string fileToDeleteFullPath = GetProfilImageFullPath(fileNameData);
+            string fileToDeleteFullPath = await GetProfilImageFullPath(fileNameData);
             try
             {
                 if (System.IO.File.Exists(fileToDeleteFullPath))
@@ -57,14 +59,23 @@ namespace Authentication.Server.Controllers
             return BadRequest(new ControllerResponse("Profil kép törlése nem lehetséges!"));
         }
 
-        private string GetProfilImageFullPath(ProfilImageFileName profilImageFileName)
+        private async Task<string> GetProfilImageFullPath(ProfilImageFileName profilImageFileName)
         {
-            string fileName = profilImageFileName.FileName;
-            string folderName = Path.Combine("staticfiles", "profil");
-            string currentDirectory = Directory.GetCurrentDirectory();
-            string filepath = Path.Combine(currentDirectory, folderName);
+            if (_profilService is null)
+            {
+                return string.Empty;
+            }
+            else
+            {
+                profilImageFileName.ProfilImageTimeStamp = await _profilService.GetProfilImageTimeStamp(profilImageFileName.Email);
 
-            return Path.Combine(filepath, fileName);
+                string fileName = profilImageFileName.FileName;
+                string folderName = Path.Combine("staticfiles", "profil");
+                string currentDirectory = Directory.GetCurrentDirectory();
+                string filepath = Path.Combine(currentDirectory, folderName);
+
+                return Path.Combine(filepath, fileName);
+            }
         }
     }
 }

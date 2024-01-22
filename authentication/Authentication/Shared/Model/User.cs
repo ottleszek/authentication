@@ -14,10 +14,10 @@ namespace Authentication.Shared.Models
             IsRegisteredUser = true;
 
             UserRoleId = Guid.Empty;
-            ProfileUrl = string.Empty;
+            ProfilImageTimeStamp = string.Empty;
         }
 
-        public User(Guid id, string firstName, string lastName, string email, bool isRegisteredUser, string profileUrl)
+        public User(Guid id, string firstName, string lastName, string email, bool isRegisteredUser, string profilImageTimeStamp)
         {
             Id = id;
             FirstName = firstName;
@@ -26,7 +26,7 @@ namespace Authentication.Shared.Models
             IsRegisteredUser = isRegisteredUser;
 
             UserRoleId = Guid.Empty;
-            ProfileUrl = profileUrl;
+            ProfilImageTimeStamp = profilImageTimeStamp;
         }
         public Guid Id { get; set; }
         public string FirstName { get; set; }
@@ -37,7 +37,7 @@ namespace Authentication.Shared.Models
         public bool IsSystemUser => !IsRegisteredUser;
         public string RegisteredString => IsRegisteredUser ? "regisztrált" : "";
         // profile picture
-        public string ProfileUrl { get; set; }
+        public string ProfilImageTimeStamp { get; set; }
         // one - many
         public Guid UserRoleId { get; set; }
         public virtual UserRole? UserRole { get; set; }
