@@ -14,6 +14,8 @@ namespace Authentication.Shared.Model
         public string ProfilImageTimeStamp = string.Empty;
 
         public string FileName => this.GetProfilImageFilelName();
+        
+        public string FileNameExtension =>Path.GetExtension(this.FileName).Substring(1);
         public string FileNameWithoutExtension =>this.GetProfilImageFilelNameWithoutExtension();
         public bool IsValid => _isEmailValid && _isIdValid;
     }

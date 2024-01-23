@@ -71,7 +71,8 @@ namespace Authentication.Server.Context
                     FirstName = "Admin",
                     Email = "admin@teszt.hu",
                     UserRoleId = testAdminRoleId,
-                    IsRegisteredUser=false
+                    IsRegisteredUser=false,
+                    ProfilImageTimeStamp="1705944872"
                 },
                 new User
                 {

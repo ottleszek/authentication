@@ -35,6 +35,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryBlazorMvvm", "..\..\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{22BD49B0-31B5-4084-865D-24C863F33492}"
 	ProjectSection(SolutionItems) = preProject
+		Server\StaticFiles\Profil\admin.teszt.hu.26de36b7-76f5-4f17-8f9d-44eb429f151b.1705944872.jpg = Server\StaticFiles\Profil\admin.teszt.hu.26de36b7-76f5-4f17-8f9d-44eb429f151b.1705944872.jpg
 		..\..\temp\man-2.jpg = ..\..\temp\man-2.jpg
 		..\..\temp\man-3.jpg = ..\..\temp\man-3.jpg
 		..\..\temp\man.jpg = ..\..\temp\man.jpg

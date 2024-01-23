@@ -69,7 +69,7 @@ namespace Authentication.Server.Controllers
             {
                 profilImageFileName.ProfilImageTimeStamp = await _profilService.GetProfilImageTimeStamp(profilImageFileName.Email);
 
-                string fileName = profilImageFileName.FileName;
+                string fileName = $"{profilImageFileName.FileNameWithoutExtension}.{profilImageFileName.ProfilImageTimeStamp}.{profilImageFileName.FileNameExtension}";
                 string folderName = Path.Combine("staticfiles", "profil");
                 string currentDirectory = Directory.GetCurrentDirectory();
                 string filepath = Path.Combine(currentDirectory, folderName);
